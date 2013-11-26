@@ -1,0 +1,27 @@
+:plain
+  <style>
+  .background{display:none;}
+  .columns .static_right .static_content .description {font-size:30pt;line-height:30px;}
+  .main {
+  padding-top: 0px;
+  }
+  .header .logo {
+  padding-top: 0px;
+  }
+  </style>
+- @nav_class = :about
+.columns
+  .static_right{style:"margin-left:180px;"}
+    .static_header
+      小题大作北京四中站
+    .static_content
+      .description
+        已答对 <font color="red">
+        =@correct_count
+        </font>道题目
+      .description
+        将捐出 <font color="green">
+        =@correct_count/20 
+        </font>棵树
+  .clear
+  = link_to image_tag(asset_path("organizations/sizhong_pingan.png"), :alt => "立人图书馆",style:"margin-left: 195px;"), "http://www.xctsg.org/?out=dazuoxiaoti", :target => "_blank"

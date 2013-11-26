@@ -1,0 +1,15 @@
+.columns
+  = render :partial => 'projects/left'
+  .right
+    - if user_signed_in?
+      = render "users/info"
+    - else
+      = render "users/sessions/login"
+    = render :partial => 'projects/progress'
+  .center
+    .center_box
+      .content
+        = render :partial => 'survey', :locals => {:survey => @survey, :choices => @choices}
+      = render :partial => 'projects/bottom_bar', :locals => {:project => current_project}
+      = render :partial => 'projects/intro', :locals => {:project => current_project}
+  .clear

@@ -1,0 +1,15 @@
+!!! html
+%html
+  %head
+    %title
+      = @title ? @title : "小题大作微公益"
+    = stylesheet_link_tag    "sina_app"
+    /[if IE]
+      <script type="text/javascript" src="/PNG/iepngfix_tilebg.js"></script>
+    = javascript_include_tag "sina_app"
+    :plain
+      <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=748865031" type="text/javascript" charset="utf-8"></script>
+      <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+    = csrf_meta_tags
+  = yield
+

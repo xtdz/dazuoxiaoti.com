@@ -1,0 +1,53 @@
+@import "common";
+
+.columns .static_right{
+  @include shadow(0px, 0px, 3px, #e0e0e0);
+  display: block;
+  float: left;
+  margin-left: 40px;
+  width: 600px;
+  .static_header {
+    height: 68px;
+    font-size: 18pt;
+    color: $black;
+    padding:5px 20px 5px 30px;
+    line-height: 68px;
+    background: url("<%= asset_path "static/project_header_bg.png" %>") 0px 0px repeat-x;
+  }
+  .static_content{
+    background: $white;
+    padding: 15px 15px 40px;
+    .description {
+      padding: 12px 7px 10px 10px;
+      color: $grey;
+      font-size: 10pt;
+      line-height: 18px;
+      .top_q {
+        margin-bottom: 5px;
+        color: $blue;
+        a {
+          color: $grey; 
+          &:hover { color: $blue; }
+        }
+      }
+      .q {
+        color: $blue;
+        margin-bottom: 10px;
+      }
+      .a {
+        font-size:9pt;
+      }
+    }
+    .logos {
+      padding-left: 10px;
+      font-size:10pt;
+      font-weight:bold;
+      color:$grey;
+      .label {
+        height: 25px;
+        padding-top: 15px;
+      }
+      img{border:1px solid $light_grey}
+    }
+  }
+}

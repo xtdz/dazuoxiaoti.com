@@ -1,0 +1,52 @@
+<h1 class="title">
+ <span class="title_left">用户列表</span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+
+<table class="search">
+    <tbody>
+        <tr>
+            <%= form_tag '', {:method=>:get} do %>
+            <td width="15%">
+              昵称：
+              <%= text_field_tag "nickname", params[:nickname], :size=>10 %>
+            </td>
+            <td width="50%">
+                <label>
+                    <input type="submit" name="button" id="button" value="搜索" />
+                </label>
+            </td>
+            <% end -%>
+        </tr>
+    </tbody>
+</table>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">用户名</th>
+            <th width="10%">昵称</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+            <td width="5%"><%= user.id %> </td>
+            <td width="10%"><%=user.name%></td>
+            <td width="10%"><%= user.nickname %></td>
+           
+        </tr>
+      <% end -%>
+      <% if @users.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @users %>
+<%#=page_info(@categories)%>

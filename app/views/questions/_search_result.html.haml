@@ -1,0 +1,13 @@
+- @questions.each do |q|
+  .q
+    = q.title
+    = q.c1
+    = q.c2
+    = q.c3
+    = q.c4
+    = q.correct_index
+    = link_to '链接', question_path(q.token), :target => '_blank'
+    = link_to '修改', edit_question_path(q), :target => '_blank'
+    所属题集：
+    - q.question_sets.each do |s|
+      = s.name

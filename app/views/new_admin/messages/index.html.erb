@@ -1,0 +1,60 @@
+<h1 class="title">
+ <span class="title_left">站内信列表</span>
+  <span class="title_right">
+    <%= link_to "添加",new_new_admin_message_path %>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">主题</th>
+            <th width="10%">名称</th>
+            <th width="10%">状态</th>
+            <th width="10%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @messages.each do |message| %>
+        <tr>
+            <td width="5%"><%= message.id %> </td>
+            <td width="10%"><%= message.topic%></td>
+            <td width="10%"><%= message.title %></td>
+            <td width="10%"><%= message.kind==2 ? "群发" : "指定用户" %></td>
+            <td width="10%">
+              <a href="javascript:void(0);" value="<%=message.id%>"  class="popup">  查看详情</a>
+              <%= link_to "查看发送用户", list_new_admin_messages_path(:message_id=>message) %>
+              
+            </td>
+        </tr>
+      <% end -%>
+      <% if @messages.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @messages %>
+<%#=page_info(@messages)%>
+<script>
+ $(function(){
+    $(".popup").click(function(){
+        var id = $(this).attr("value");
+        $.layer({
+          type : 2,
+          title : ['查看详情',true],
+          iframe : {src : '/new_admin/messages/'+id},
+          area : ['750px' , '466px'],
+         offset : ['100px','']
+        });
+
+    })
+
+ })
+</script>

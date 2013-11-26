@@ -1,0 +1,21 @@
+%table{:style => "text-align:center;"}
+  %tr
+    %td{:width => 452} 题目
+    %td{:width => 332} 反馈
+    %td 提交用户
+    %td 提交时间
+    %td 链接
+  - @feedbacks.each do |f|
+    %tr
+      %td
+        = f.question.title
+      %td 
+        = f.content
+      %td
+        = f.user.nil? ? 'nobody' : f.user.nickname 
+      %td
+        = f.created_at.nil? ? '' : f.created_at.to_date
+      %td
+        = link_to '链接', question_path(f.question.token), :target => '_blank'
+    %tr{:height => 35}
+      %td{:colspan => 3} ---------------------------------------------------------------------------------

@@ -1,0 +1,18 @@
+%table.viewport
+  %tr
+    %td#left_column
+      #question
+      #question_sets
+      #controls
+        %a#share#publish
+        %a#tiji
+        %a#dati.hidden
+        %a#chuti.fancy{:name => "/pending_questions/new"}
+      #progress
+    %td#right_column
+      #project
+      .logo
+        %a{href: 'http://t.cn/z0DslTI', target: '_blank'}
+          %img{src: PATHS.logo_text, style: 'width: 50px;'}
+          %img{src: PATHS.logo_image, style: 'width: 40px;'}
+          %img{src: PATHS.motto, style: 'width: 140px;'}

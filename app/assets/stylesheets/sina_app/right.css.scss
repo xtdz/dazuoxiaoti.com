@@ -1,0 +1,63 @@
+@import "common";
+
+#right_column {
+  zoom: 1.0;
+  position: relative;
+  .label {
+    margin: 10px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background: #4595e5;
+    @include gradient(#4ca6ff, #4595e5);
+    @include shadow(3px, 3px, 0px, #dadada);
+  }
+  .wrapped_label {
+    padding: 0px 5px;
+  }
+  .image {
+    width: 150px;
+    overflow:hidden;
+    margin: 10px 20px;
+    img {
+      width: 180px;
+    }
+  }
+  .links{
+    a {
+      font-size: 13px;
+      color: #4595e5;
+      font-weight: bold;
+    }
+    .llink {
+      margin-left: 20px;
+    }
+    .rlink {
+      float: right;
+      margin-right: 20px;
+    }
+  }
+  .info {
+    font-size: 14px;
+    line-height: 30px;
+    padding: 5px 10px 0px 30px;
+    color: #333333;
+    span {
+      padding: 0px;
+      font-size: 18px;
+      color: $orange;
+    }
+  }
+  .logo {
+    zoom: 1.0;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    img {
+      @extend .ie_transparent_png;
+      margin-bottom: 10px;
+    }
+  }
+}

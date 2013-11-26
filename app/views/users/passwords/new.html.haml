@@ -1,0 +1,17 @@
+.columns
+  .user_left
+    .user_header
+      .type
+        忘记了密码?
+    .edit
+      .box
+        - flash.each do |name, msg|
+          .error= content_tag :div, msg, :id => "flash_#{name}"
+        = semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name)) do |f|
+          = devise_error_messages!
+          = f.inputs :email
+          = f.submit "发送密码重置的步骤到我的邮箱"
+  .user_right
+    .text 您可以用以下方式登录
+    = render "users/sessions/login"
+  .clear

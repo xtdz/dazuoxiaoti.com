@@ -1,0 +1,32 @@
+<div class="home_notice">
+  <div class="home_notice_title"><ul><li class="xiaozhanxinwen">小题博客</li><!--<li class="more"><a href="http://xiaotidazuoweigongyi.diandian.com/">查看更多</a></li>--></ul>
+  <div class="clear"></div>
+  </div>
+  <div class="clear"></div>
+   <div  id="slideBox" class="slideBox">
+   	   <div class="hd">
+				<ul><%(0...@pics.size).each do |i|%><li><%=i+1%></li><%end%></ul>
+	    </div>
+        <div class="bd">
+            <ul>
+    	    <%@pics.each do |pic|%>
+               <li><a href="<%=pic.link%>" taget="blank"><img src="<%=pic.upload_image.url%>"/></a></li>
+            <%end%>
+           </ul>
+           <div class="clear"></div>
+        </div>
+
+    </div>
+
+   <div class="notice_content">
+      <ul>
+      	<%@notices.each do |notice|%>
+          <li><a href="<%=notice.url%>" target="blank"><%=notice.title%></a>
+      	<%end%>
+      </ul>
+   </div>
+   <div class="clear"></div>
+</div>
+<script type="text/javascript">
+	jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true,delayTime:0,interTime:5000});
+</script>

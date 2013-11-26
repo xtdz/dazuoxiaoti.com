@@ -1,0 +1,2 @@
+module NewAdmin::ProjectsHelper
+end

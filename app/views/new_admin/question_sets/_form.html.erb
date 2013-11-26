@@ -1,0 +1,50 @@
+<%= form_for [:new_admin,@question_set],:html => { :multipart => true } do |f|%>
+
+    <div class="order_number">
+        <table class="grid_order">
+            <tbody>
+                <tr height="35">
+                    <td class="td01"><b>*</b>名称:</td>
+                    <td>
+                       <%= f.text_field :name, :size=>60 %>
+                    </td>
+                </tr>
+                
+                <tr height="35">
+                    <td class="td01"><b>*</b>所属类别：</td>
+                    <td>
+                       <%= f.select :category_id,Category.shown.map{|c|[c.name,c.id]}, :size=>60 %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="td01 td03"><b>*</b>&nbsp;图片：</td>
+                    <td class="td02"> 
+                         <%= f.file_field :upload_image, :size=>60 %> <img src="<%=@question_set.upload_image.url(:thumb)%>" />
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01">描述:</td>
+                    <td>
+                       <%= f.text_area :description%>
+                    </td>
+                </tr>
+
+                <tr height="35">
+                    <td class="td01">状态</td>
+                    <td>
+                     
+                      是否热门 <%= f.check_box :is_hot %>
+                    
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01"></td>
+                    <td>
+                    <input name="commit" value="修改" type="submit">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end -%>

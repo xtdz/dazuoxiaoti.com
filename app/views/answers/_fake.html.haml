@@ -1,0 +1,74 @@
+.question
+  .skip_button
+    %a.next.remote{:href => random_questions_path(:question_set => params[:question_set], :project_id => params[:project_id])}
+  = @question.title
+.share
+  .correct_rate
+    - if user_signed_in?
+      %a.fancy{:href => new_question_feedback_path(@question), :onclick=>"_gaq.push(['_trackEvent', 'Modal', 'new_feedback', 'solution_partial']);"}
+        题目反馈
+    正确率：#{@question.correct_rate}%
+  考考朋友，分享到:
+  - @message = "【这题有意思"
+  - @message += "】#{@question.title} [a]#{@choices[0]} [b]#{@choices[1]} [c]#{@choices[2]} [d]#{@choices[3]}," 
+  - if @project.id==12
+    - @message += "一起来答题支持 @大爱清尘：" 
+  - elsif @project.id==14
+    - @message += "一起来趣味答题，答对20题即可获得@宜农贷 5元爱心助农卡." 
+  - elsif @project.id==18
+    - @message += "一起来趣味答题，每答对30题，小题大作微公益即向湖南省鲁坑小学捐赠1两大米，用于学生营养餐项目"
+  - else
+    - @message += "一起来趣味答题捐#{@project.benefit.short_name}："   
+  - @path = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+  = render :partial => 'questions/social_links', :locals => {:message => @message, :path => @path}
+#solution
+  %a.remote{:href => random_questions_path(:question_set => params[:question_set], :project_id => params[:project_id]), :onclick => "return false;"}
+    %span.cursor_next
+  - @question.choices.each_with_index do |choice, index|
+    .choice_row
+      .mark
+        -if question.correct_index == index
+          .correct
+        -elsif selected_index == index
+          .wrong
+      = choice
+  -if !question.explanation.empty?
+    .explanation
+      .ex_title= t(:'answer.explanation')
+      = question.explanation
+.progress
+  - if false
+  -else
+    您为本活动答对了
+    %span.orange= user_correct_count
+    题。
+    - if @project.rate < 1000 && !([12,14].include? @project.id.to_i)
+      还差
+      %span.orange= @project.rate - user_correct_count % @project.rate
+      题就可以独立助捐
+      %span.orange= user_correct_count/@project.rate + 1
+      #{@project.benefit.unit}#{@project.benefit.short_name}。
+      .progress_bar_outter
+        .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 450 / @project.rate}px"}
+      .clear
+   - elsif !([12,14].include? @project.id.to_i)
+      还差
+      %span.orange= @project.rate - user_correct_count % @project.rate
+      题才能独立助捐
+      %span.orange= user_correct_count/@project.rate + 1
+      #{@project.benefit.unit}#{@project.benefit.short_name}.
+    - else
+      只凭您个人的力量很难,还是邀请您的好友一起来答题做公益吧! 
+      分享到：
+      - if @project.id==12
+        - @share_message = "【趣味微公益】我的爱心[心]爆棚了！刚刚在“小题大作微公益”网站参与趣味公益问答，支持@大爱清尘 ！目前累计答对#{user_correct_count}题。一[din推撞]个人[围观]的力量有限，快来帮帮我吧!"
+      - elsif @project.id==14
+        - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
+      - elsif @project.id.to_i == 18
+        - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对30题，小题大作微公益即向湖南鲁坑小学捐赠1两大米，用于学生营养餐项目，一起来帮助山里娃吃上健康午餐吧！"
+      - @paths = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+      = render :partial => 'questions/social_buttom_links', :locals => {:message => @share_message , :path => @paths}
+     
+
+
+

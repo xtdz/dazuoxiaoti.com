@@ -1,0 +1,9 @@
+/*
+ * Manifest file for sina app
+ *= require reset
+ *= require defaults
+ *= require fancybox
+ *= require_tree ./sina_app
+ *= require ./application/pending_questions
+ *= require_self
+*/

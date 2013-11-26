@@ -1,0 +1,80 @@
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+<table class="search">
+    <tbody>
+        <tr>
+            <%= form_tag '',{:method=>:get} do %>
+            <td width="15%">
+              用户ID：
+              <%= text_field_tag "user_id", params[:user_id], :size=>10 %>
+            </td>
+            <td>
+              站内信ID
+              <%= text_field_tag "message_id", params[:message_id], :size=>10 %>
+            </td>
+            <td width="30%">
+                <label>
+                    <input type="submit" name="button" id="button" value="搜索" />
+                </label>
+            </td>
+            <td>
+              <label>
+                    <a href="/new_admin/messages/list">查看全部</a>
+                </label>
+            </td>
+            <% end -%>
+        </tr>
+    </tbody>
+</table>
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">发送者</th>
+            <th width="5%">接收ID</th>
+            <th width="5%">接收者</th>
+            <th width="10%">消息主题</th>
+            <th width="10%">消息标题</th>
+            <th width="10%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @messages.each do |msg| %>
+        <tr>
+            <td width="5%"><%= msg.try(:sender).try(:name) %> </td>
+            <td width="5%"><%= msg.user_id %> </td>
+            <td width="5%"><%= msg.try(:user).try(:name) ||  msg.try(:user).try(:nickname) %> </td>
+            <td width="10%"><%= msg.message.topic%></td>
+            <td width="10%"><%= msg.message.title %></td>
+            <td width="10%">
+              <a href="javascript:void(0);" value="<%=msg.message.id%>"  class="popup">  查看详情</a>
+              <%#= link_to "查看发送用户", list_new_admin_messages_path(:messsage_id=>message) %>
+              
+            </td>
+        </tr>
+      <% end -%>
+      <% if @messages.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @messages %>
+<%#=page_info(@messages)%>
+<script>
+ $(function(){
+    $(".popup").click(function(){
+        var id = $(this).attr("value");
+        $.layer({
+          type : 2,
+          title : ['查看详情',true],
+          iframe : {src : '/new_admin/messages/'+id},
+          area : ['750px' , '466px'],
+         offset : ['100px','']
+        });
+
+    })
+
+ })
+</script>

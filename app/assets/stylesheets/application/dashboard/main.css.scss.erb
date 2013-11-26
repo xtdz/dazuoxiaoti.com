@@ -1,0 +1,92 @@
+@import 'common';
+
+.dashboard .dashboard_left {
+  .project_list {
+    .project {
+      zoom: 1.0;
+      position: relative;
+      margin-bottom: 20px;
+      @include shadow(0px, 0px, 5px, #e0e0e0);
+      background: $white;
+      width: 590px;
+      height: 170px;
+
+      .project_wrapped {
+        padding: 10px 10px 10px 10px;
+      }
+
+      .project_image, .screen, .project_overview {
+        zoom: 1.0;
+        position: absolute;
+        height: 120px;
+        width: 570px;
+      }
+
+      .project_image {
+        z-index: 10;
+        overflow: hidden;
+        img {
+          width: 100%;
+          zoom: 1.0;
+          position: relative;
+          top: -40px;
+        }
+      }
+      .share img{text-align:center;  vertical-align:middle;}
+      .screen {
+        z-index: 20;
+        background: $black;
+        @include opacity(0.5);
+      }
+
+      .project_overview {
+        z-index: 30;
+      }
+
+      .label {
+        width: 40%;
+        float: left;
+        margin-left: 10pt;
+        font-size: 16pt;
+        color: $white;
+        .name {
+          line-height: 60px;
+        }
+        .equation {
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          width: 260px;
+          background: $orange;
+        }
+      }
+
+      .buttons {
+        margin: 20px;
+        float: right;
+        a.continue {
+          display: block;
+          height: 40px;
+          width: 109px;
+          background: url(<%= asset_path 'static/continue.png' %>);
+        }
+        a.info {
+          display: block;
+          height: 36px;
+          width: 105px;
+          background: url(<%= asset_path 'static/detail_blue.png' %>) no-repeat;
+        }
+      }
+
+      .description {
+        margin-top: 130px;
+        color: #606060;
+        font-size: 10pt;
+        .last_participated {
+          font-size: 10pt;
+          float: right;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+zh-cn:
+  xiaotidazuo: "小题大作"
+  project: 
+    finished: "此项目已结束。"
+    not_finished: "此项目还未结束。"
+  user:
+    session:
+      login: "登陆"
+      logout: "退出"
+      remember_me: "记住用户"
+      failed: "账户或者密码错误"
+    registration:
+      register: "注册"
+      update: "更新"
+      edit: "修改资料"
+      notice: "您已经答对了10道题，请您点击右侧的新浪微博, 人人帐号或QQ帐号登录，方能继续答题。如无以上帐号，也可在下方注册。感谢您的参与！"
+    password:
+      edit: "修改密码"
+      password: "密码"
+      password_confirmation: "确认密码"
+    info:
+      email: "电子邮箱"
+      name: "用户名"
+    type:
+      sina: "新浪微博用户"
+      renren: "人人网用户"
+      qq: "腾讯微博用户"
+      dazuoxiaoti: "小题大作用户"
+  answer:
+    correct: "恭喜您，答对了!!!!"
+    wrong: "对不起，您答错了..."
+    explanation: "解释"
+  question:
+    sponsor_category: "捐赠方题目"
+    liked: "赞过"
+    equation: "道题="
+    no_question: "你所选择的题集已经被你答完了。你可以选择或收藏一些没有答完题集继续答题。"
+    source: 
+      sponsor: "这道题来自我们的合作方："
+      source_first_half: "这道题目是根据"
+      source_second_half: "的内容编辑而成的。"
+      xiaotidazuo_des: "这道题目来自小题大作团队的题目编辑们。"
+      xiaotidazuo: "小题大作"
+  pending_question:
+    link: "链接"
+    accepted: "已通过"
+    rejected: "已拒绝"
+  question_set:
+    unsubscribe: "取消收藏了"
+    subscribe: "成功收藏了"
+  feedback:
+    created: "您的反馈已被提交，感谢您的反馈！"
+  time:
+    seconds_ago: "秒前"
+    minutes_ago: "分钟前"
+    hours_ago: "小时前"
+    days_ago: "天前"

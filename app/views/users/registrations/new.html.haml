@@ -1,0 +1,11 @@
+.columns(style="margin-top:30px")
+  .user_left
+    .user_header
+      .type
+        小题大作新用户注册
+    .edit
+      - if flash[:notice]
+        .notice= flash[:notice]
+      .text 您可以用以下方式登录
+      = render "users/sessions/login"
+  .clear

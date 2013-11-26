@@ -1,0 +1,223 @@
+@import 'common';
+
+.index_nav{
+ margin-top:30px;
+}
+.index_nav {
+   a.logo_small{
+    background: url(<%= asset_path 'static/header/new_logo.png' %>) no-repeat;
+    margin: -29px 20px 0px 0px;
+    display:block;
+    height: 101px;
+    width: 190px;
+    float: left;
+    margin-left:160px;
+    background-color:#fffff0;
+ }
+}
+.top_nav {
+  position:fixed;
+  a.logo_small{
+    background: url(<%= asset_path 'static/header/logo_small.png' %>) no-repeat;
+    margin: 2px 20px 0px 0px;
+    display:block;
+    height: 38px;
+    width: 130px;
+    margin-left:160px;
+    float: left;
+  }
+}
+.user_informantion{
+  width:350px;
+  float:left;
+  margin-left:50px;
+}
+.top_nav,.index_nav {
+  .subscribe {
+    @include rounded_corner(2px);
+    background: $white;
+    margin-top: 7px;
+    padding: 2px;
+    height: 22px;
+    float: left;
+
+    a.mail {
+      margin: 0px 2px;
+      font-size: 10pt;
+      color: $brown;
+      background: #f0f0f0;
+      padding: 2px 5px 3px;
+      border: 1px solid #cccccc;
+      @include gradient(#fcfcfc, #e0e0e0);
+      @include rounded_corner(2px);
+    }
+
+    iframe {
+      float: left;
+    }
+  }
+
+  ul li {
+    float: left;
+    a {
+      color: $white;
+      display: block;
+      height: 40px;
+      padding: 0px 10px;
+      line-height: 40px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    a.selected, a:hover {
+      background: #ff6000;
+    }
+  }
+  .user_sign_in{
+    float: left;
+    margin-top: 10px;
+    font-size: 10pt;
+    .auth{background:#FF9933;margin-left:-8px;margin-bottom:5px;}
+    .login{color:white;padding-right:15px;font-size:weight;}
+    a{
+       &:hover{
+          background-color: transparent;
+        }
+    }
+
+
+  }
+  .control_links { 
+    .control_link {
+      padding: 2px 5px;      
+      font-size: 10pt;
+      a {
+        color: $orange;
+        display: block;
+        padding: 0px 5px;
+        line-height: 25px;
+        &:hover{
+          background: $blue;
+          color: $white;
+        }
+      }
+      input {
+        color: $orange;
+        display: block;
+        width: 100%;
+        padding: 0px 5px;
+        line-height: 25px;
+        &:hover{
+          background: $blue;
+          color: $white;
+        }
+      }
+    }
+    input {
+      color: $orange;
+      font-size: 10pt;
+      height: 25px;
+      width: 118px;
+      text-align: left;
+    }
+    input.hover {
+      color: $white;
+      background: $blue;
+    }
+  }
+
+  .user_controls {
+    float: left; 
+    position:relative;
+    overflow:hidden;
+    white-space:nowrap;
+    margin-top: 5px;
+    .control_links {
+      display: none;
+    }
+    .user_name {
+      color: $white;
+      padding: 5px 5px 3px 5px;
+      cursor: pointer;
+      a {
+        color: $white;
+      }
+    }
+    .user_correct_count {
+      zoom: 1.0;
+
+      @include rounded_corner(2px);
+      background: $white;
+      display: inline-block;
+      text-align: center;
+      height: 20px;
+      
+      color: $orange;
+      *display: inline;
+    }
+  }
+
+  .user_controls.hover {
+    background: $white;
+    zoom: 1.0;
+    min-width:100px;
+    max_width:350px;
+    
+    margin-left:60px;
+    display:block;
+    top:0;
+    position:absolute;
+    z-index:999px;
+    border: 1px solid #FF8000;
+    height:150px;
+    @include rounded_corner(3px);
+    color: $orange;
+    padding-bottom: 3px;
+    .user_name { a { color: $orange } }
+    .user_correct_count {
+      zoom: 1.0;
+      @include rounded_corner(2px);
+      background: $orange;
+      display: inline-block;
+      text-align: center;
+      height: 20px;
+      color: $white;
+      *display: inline;
+    }
+  }
+}
+.index_nav .user_controls.hover{
+ margin-top:35px;
+
+}
+.head_message{
+   width:50px;
+   margin:0px 10px;
+   float: left;
+ li {
+position:relative;
+}
+
+ul ul{
+position:absolute;
+
+top:-999em;
+}
+
+ul li:hover{ 
+ a{
+  background: $white;
+  color: $orange;
+  border:1px solid #FF8000;
+ }
+ul li a:hover{
+   background: $blue;
+   color: $white;
+}
+ ul{
+position:absolute; 
+top:0em; 
+width:170px;
+margin-top:39px;
+}
+}
+}

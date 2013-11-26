@@ -1,0 +1,97 @@
+@import "common";
+
+.new_pending_question {
+  .title {
+    background: $blue;
+    color: $white;
+    font-size: 14pt;
+    padding: 10px;
+  }
+  form {
+    padding: 20px 20px 60px;
+    textarea, .input_text {
+      zoom: 1;
+      position: relative;
+      font-size: 12pt;
+      line-height: 24pt;
+      height: 30px;
+      border: 2px solid $light_grey;
+      color: $grey;
+      margin: 0px 0px 20px 0px;
+    }
+
+    .input_on_focus {
+      border: 2px solid $blue;
+      color: $dark_grey;
+    }
+
+    .input_submit{
+      border-width: 0px;
+      color: $white;
+      font-size: 12pt;
+      padding: 5pt 10pt;
+      cursor: pointer;
+      float: right;
+      background: $blue
+    }
+  }
+  input:focus {
+    outline: none!important;
+  }
+
+  .question {
+    textarea {
+      width: 554px;
+      height: 32px;
+    }
+  }
+
+  .answer_choices {
+    label {
+      font-family: "Helvetica", "Arial", sans-serif;
+      font-size: 12pt;
+      color: $blue;
+      border-left: 5px solid $blue;
+      padding-left: 10px;
+      float: left;
+      clear: left;
+      display: block;
+      width: 85px;
+      line-height: 28pt;
+    }
+    input {
+      width: 325px;
+    }
+    .correct_choice {
+      label {
+        color: $green;
+        border-left: 5px solid $green;
+      }
+      input {
+        border-color: $green;
+        background: #F0FFF0
+      }
+    }
+  }
+
+  .question_set_select {
+    margin-bottom: 15px;
+    label {
+      font-size: 12pt;
+      color: $blue;
+    }
+    select {
+      font-family: "Helvetica", "Arial", sans-serif;
+      font-size: 10pt;
+      text-align: center;
+      margin-left: 10px;
+    }
+  }
+
+  .explanation {
+    textarea {
+      width: 554px;
+      height: 32px;
+    }
+  }
+}

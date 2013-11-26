@@ -1,0 +1,13 @@
+- @nav_class = :past
+= stylesheet_link_tag "project_style"
+%div{:id => "project_theme_#{@project.id}"}
+.columns
+  - if flash[:notice]
+    .notice= flash[:notice]
+  .project_left
+    .project_info
+      = render :partial => "past_project", :locals => {:project => @project}
+    = render :partial => 'projects/others', :locals => {:projects => @projects}
+  .project_right
+    = render :partial => 'projects/tab', :locals => {:project => @project, :on_question_page => false}
+  .clear

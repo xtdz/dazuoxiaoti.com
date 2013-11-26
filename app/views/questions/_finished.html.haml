@@ -1,0 +1,32 @@
+.title 感谢您的参与！
+#finished
+  %p
+    恭喜！您的答对题数已经到了您今天的爱心上限
+    %span= current_user.answer_limit
+    题。
+  %p
+    :plain
+      目前用户每天有<span>50</span>次的答对限制。还请明天继续参与到我们的行动中来吧！
+  您还可以点击
+  - if @project.id.to_i == 14
+    - @message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
+  - elsif @project.id.to_i == 18
+    - @message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对30题，小题大作微公益即向湖南鲁坑小学捐赠1两大米，用于学生营养餐项目，一起来帮助山里娃吃上健康午餐吧！"
+  - else  
+    - @message = current_project.rate>2000 ? "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答。目前累计答对#{user_correct_count}题。很难凭一个人的力量捐助1#{current_project.benefit.unit}#{current_project.benefit.name}，快来帮帮我吧！" : "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答。目前累计答对#{user_correct_count}题，为“#{current_project.name}”项目捐助了#{user_correct_count/current_project.rate}#{current_project.benefit.unit}#{current_project.benefit.name}。"
+    - @at = current_project.id==8 ? "@希望厨房" : ""
+    - @message = @at + @message 
+  - @path = "#{project_path(@project, :in => 'snf', :referer_id => current_user.id)}"
+  = render :partial => 'social_links', :locals => {:message => @message, :path => @path}
+  分享你的爱心纪录，鼓励更多朋友一起答题献爱心！
+  %p
+    您想到更有趣好玩的题目吗? 赶快点击
+    %a.fancy{:href => new_pending_question_path}
+      我要出题
+    吧～
+  .subscription{:style => "padding:15px 0px;height:70px;"}
+    :plain
+      <script>
+        var nId = "2c5b2e73d1a674b51d2ada87879f5320f7a5f38c96c589e5",nWidth="auto",sColor="light",sText="分享的同时，也请留下您的邮箱。我们会及时为您呈递最新的项目动态。";;
+      </script>
+      <script src="http://list.qq.com/zh_CN/htmledition/js/qf/page/qfcode.js" charset="gb18030"></script>

@@ -1,0 +1,69 @@
+.columns
+  .project_list_left
+    = render :partial => "static/notice"
+    = render :partial => "static/projects"
+    .projects_slides
+      = render :partial => "static/project_slides",:locals=>{:projects=>@projects,:default_project=>@default_project,:past_projects=>@past_projects}
+    - if params[:v].to_i==1
+      .project_image(style="margin:-15px 0px -4px 0px;")
+        = image_tag(asset_path("static/jiantou.png"),:style=>"padding-left:50px")
+      .project_info(style="border:1px solid #ee9400;background:#ee9400;color:#fff;font-size:12px;padding:5px 5px;")
+        活动信息:您可以答题支持大爱清尘“寻救尘肺病农民工大行动”，了解中国的尘肺问题和大爱清尘团队的不懈努力，您的支持也许会换来企业的捐赠支持
+      
+    
+    .question_set_list
+      .question_set_bar
+        = link_to '更多题集', question_sets_path
+        热门题集
+      - @question_sets.each do |qs|
+        .question_set_narrow{id: "question_set_#{qs.id}"}
+          .question_set_wrap
+            .image= image_tag question_set_image_path(qs)
+            .name= qs.name
+            .description= qs.description
+            .links
+              %a{href: random_questions_path(:question_set => qs.id)} 单独回答此题集
+  .project_right
+    = render :partial => "static/add_follow"
+    .introduction
+      .first_step
+        .wrapped
+          小题大作能干啥？
+      .first_description
+        小题大作可以让你通过趣味答题的方式参与公益献爱心。
+      .second_step
+        .wrapped
+          怎样答题献爱心？
+      .second_description
+        .sub_title
+          A  答题支持公益项目：
+        .sub_content
+          选择您感兴趣的公益项目，通过答题了解其公益理念和行动，为其攒足人气，吸引企业通过捐赠来认捐公益人气.
+        .sub_title.last_column
+          B  答题进行爱心捐赠：
+        .sub_content
+          选择您感兴趣的企业捐助项目，您每答对一定数量题目，我们的合作企业便向特定公益受赠方捐出所需物资.
+      .total_stats
+        已经有
+        %span.orange_big #{total_participation_count}人
+        参与了答题
+        %br
+        他们共同答对了
+        %span.orange_big #{total_correct_count}题
+        %br
+        累计促成了
+        %span.orange_big #{total_items_count}件
+        物品的捐赠
+      .posts
+  .clear
+:javascript
+  //$.ajax({
+    //url: '/diandian',
+    //datatype: 'json',
+    //success: function(data){
+   // html = ''
+   // for(key in data)
+       // html += '<a href="'+data[key]+'">'+key+'</a></br>'
+    //$('.posts').html(html)
+   // }
+//  })

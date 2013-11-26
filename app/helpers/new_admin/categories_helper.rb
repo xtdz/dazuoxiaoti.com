@@ -1,0 +1,2 @@
+module NewAdmin::CategoriesHelper
+end

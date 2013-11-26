@@ -1,0 +1,53 @@
+<%=javascript_include_tag :kindeditor%>
+<h1 class="title">
+<span class="title_left">创建分类</span>
+<span class="title_right">
+    <a href="/new_admin">返回列表</a>
+</span>
+</h1>
+<div class="menu_bar">
+    <div class="menu">
+    </div>
+</div>
+
+<%= form_for [:new_admin,@message],:html => { :multipart => true } do |f|%>
+
+    <div class="order_number">
+        <table class="grid_order">
+            <tbody>
+            	<tr height="35">
+                    <td class="td01"><b>*</b>发行类型:</td>
+                    <td>
+                        <%= radio_button_tag "kind","all",true %> 群发
+                        <span style="padding-left:20px"><%= radio_button_tag "kind","users" %> 用户ID <%=text_field_tag "users","",:size=>45%>多用户以;隔开</span>
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01">主题:</td>
+                    <td>
+                       <%= f.text_field :topic, :size=>60 %>
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01">标题:</td>
+                    <td>
+                       <%= f.text_field :title, :size=>60 %>
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01">内容</td>
+                    <td>
+                       <%= f.kindeditor :content, {:width=>"500px",:minWidth=>"200px", :simple_mode => true }%>
+                    </td>
+                </tr>
+                
+                <tr height="35">
+                    <td class="td01"></td>
+                    <td>
+                    <input name="commit" value="修改" type="submit">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end -%>

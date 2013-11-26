@@ -1,0 +1,51 @@
+jQuery(($) ->
+  $('div.new_pending_question').live('loaded', ->
+    $(this).find('input[type="text"]').addClass("input_text")
+    $(this).find('input[type="submit"]').addClass("input_submit")
+
+    setBlurText = (element, text) ->
+      if $(element).attr('value') == ''
+        $(element).attr({'value': text})
+
+    setFocusText = (element, text) ->
+      if $(element).attr('value') == text
+        $(element).attr({'value': ''})
+
+    blurText = {
+      'pending_question_title' : '请输入你的题目。。。',
+      'pending_question_c1' : '此选项为正确选项',
+      'pending_question_c2' : '此选项为错误选项',
+      'pending_question_c3' : '此选项为错误选项',
+      'pending_question_c4' : '此选项为错误选项',
+      'pending_question_explanation' : '你可以为答案的作出解释(可不填）'
+    }
+
+
+    $(this).find('textarea, input[type="text"]').on('blur', ->
+      setBlurText(this, blurText[this.id])
+      $(this).removeClass('input_on_focus')
+    ).on('focus', ->
+      setFocusText(this, blurText[this.id])
+      $(this).addClass('input_on_focus')
+      $(this).css('border-color', '#C8C8C8') 
+    )
+
+    $(this).find('input[type="submit"]').on('click', ->
+    )
+
+    $('.new_pending_question form').submit( ->
+      valid = true
+      $('div.new_pending_question form').find('textarea, input[type="text"]').each( ->
+        if $(this).attr('value') == blurText[this.id] and this.id != 'pending_question_explanation'
+          valid = false
+          $(this).css('border-color', '#ff0000')
+      )
+      if valid
+        $('div.new_pending_question #pending_question_explanation').each( ->
+          setFocusText(this, blurText[this.id])
+        )
+        $(this).append('<img src="<%= asset_path 'static/spinner.gif' %>" style="float:left"/>')
+      return valid
+    )
+  )
+)

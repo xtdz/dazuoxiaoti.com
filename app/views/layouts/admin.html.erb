@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>小题大作管理系统</title>
+		<%= stylesheet_link_tag "admin" %>
+		<%= javascript_include_tag "admin" %>
+    <%= yield :header %>
+	</head>
+	<body>
+		<div id="wapper">
+			<div id="head">
+				<div class="top_menu">
+					<a href="/" title="返回www.dazuoxiaoti.com" target="_blank" style="float: left;margin-left: 10px;">返回www.dazuoxiaoti.com</a>
+				</div>
+				<div class="logo">
+					小题大做后台管理系统
+				</div>
+			</div>
+			<div id="middle">
+				<%= render '/new_admin/shared/sidebar' %>
+				<div id="css_mainbody">
+					<%= yield %>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="foot">
+				<div class="foot_list">
+			  </div>
+				<div id="foot1">
+					<span class="infor">Copyright © 2010-2012　current version: <%= Rails.cache.read("current_site_version") %></span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

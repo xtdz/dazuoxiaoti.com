@@ -1,0 +1,25 @@
+<%if current_user%>
+<div class="head_message">
+  <ul>
+  	<%if current_user.unread_messages.count>0%>
+    <li>
+     	<a href="/messages">
+     		<%=image_tag "/images/message/msg.png",:class=>"message_image",:alt=>"msg"%>
+     	</a>
+       <ul>
+       	  <li><a href="/messages">您有<%=current_user.unread_messages.count%>封未读邮件</a></li>
+       	</ul>
+    </li>
+   <%else%>
+     <li>
+     	<a href="/messages">
+     		<%=image_tag "/images/message/n_msg.png",:class=>"message_image",:alt=>"n_msg"%>
+     	</a>
+       <ul>
+       	  <li><a href="/messages">您有0封未读邮件</a></li>
+       	</ul>
+     </li>
+   <%end%>
+  </ul>
+</div>
+<%end%>

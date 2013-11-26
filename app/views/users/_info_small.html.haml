@@ -1,0 +1,26 @@
+.user_stats_small
+  .stats
+    .photo
+      -if current_user.avatar_url
+        = image_tag current_user.avatar_url, :alt => current_user.nickname
+      - else
+        = image_tag asset_path('static/auth/default.jpg'), :alt => current_user.nickname
+    %table
+      %tr.labels
+        %td.bordered 答对
+        %td.bordered 爱心值
+        %td 出题
+      %tr.numbers
+        %td.bordered.user_correct_count= current_user.correct_count
+        %td.bordered.user_contribution= current_user.rank_score
+        %td= link_to current_user.questions.count, '/dashboard/questions'
+      %tr.subscripts
+        %td.bordered
+          剩余
+          .answer_limit= current_user.answer_quota
+        %td.bordered
+          %a.jiathis.jiathis_txt
+            我要分享
+        %td
+          %a.fancy{:href => new_pending_question_path, :onclick=>"_gaq.push(['_trackEvent', 'Modal', 'New Question', 'info_small_new_question']);"}
+            我要出题

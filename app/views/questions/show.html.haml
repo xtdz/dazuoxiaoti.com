@@ -1,0 +1,41 @@
+= stylesheet_link_tag "project_style"
+.columns
+  .question_left
+    .content
+      - if @project.project_kind.to_i==2
+        = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
+      - else
+        - if session[:show_share] and session[:show_share][current_project.id]
+          - session[:show_share].delete current_project.id
+          = render :partial => 'questions/share'
+        - elsif user_quota < 1
+          = render :partial => 'questions/finished'
+        - else
+          = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
+    = render :partial => 'projects/others', :locals => {:projects => @projects}
+  .question_right
+    = render :partial => @project.id==12 ? 'projects/new_tab' : 'projects/tab', :locals => {:project => @project, :on_question_page => true}
+    .question_tab.tab.hidden= render :partial => 'questions/tab', :locals => {:question => @question, :project => @project}
+    .tab_menu
+      = link_to '活动信息', "#", :name => ".project_tab", :class => "project_tab_label tab_label selected", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Project Tab', 'question_show']);"
+      = link_to '题目信息', "#", :name => ".question_tab", :class => "question_tab_label tab_label", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Question Tab', 'question_show']);"
+      .clear
+    - if @project.project_kind==2
+      .information(style="font-size:12px;padding-top:5px;color:#666")
+        如果有企业来认捐网友为大爱清尘赞的公益人气，捐款给大爱清尘，我们会通过私信，邮件等方式通知您哦
+    - if @project.id==14
+      .information(style="font-size:12px;padding-top:5px;color:#666")
+        宜农贷如何保证农民归还借款？A、只给女性借贷资金，农村女性的信用相对较高；B、采取5户信用联保，前2户归还贷款后，后续农户才能获得借贷资金
+    - if @project.id==16
+      .information(style="font-size:12px;padding-top:5px;color:#666")
+        满天星青少年公益发展中心的儿童阅读推广计划包括建立公益图书馆、开展乡村阅读•教师先行计划和青年公益领袖计划，期望通过物资建设支持、教师、志愿者能力培训支持，最终实现培养更多乡村孩子的阅读兴趣和阅读习惯的目标。
+    - if @project.id==18
+      .information(style="font-size:12px;padding-top:5px;color:#666")
+        您每回答对30题，小题大作微公益将向湖南省炎陵县澎溪村鲁坑小学的希望厨房捐赠1两大米，促进该校学生营养餐实施。
+      %br
+      %iframe(width="360" height="190" src="http://www.taobao.com/go/rgn/union/link_tmall.php?size=360x190&pid=mm_47354439_0_0" frameborder="0" marginheight="0" marginwidth="0" border="0" scrolling="no" name="alimamaifrm")
+
+  .clear
+- if current_user
+  = render :partial => "jiathis"  , :locals => {:count => user_correct_count, :project => @project}
+

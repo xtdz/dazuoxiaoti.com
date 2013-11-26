@@ -1,0 +1,60 @@
+- @nav_class = :thanks
+.columns(style="margin-top:60px")
+  .static_left
+    .static_links
+      .link= link_to '关于我们', about_us_path
+      .link= link_to '企业合作', donate_path
+      .link= link_to '常见问题', faq_path
+      .link= link_to '联系我们', contact_path
+      .link= link_to '致谢', thanks_path, :class => 'selected'
+  .static_right
+    .static_header
+      感谢所有参与公益答题奉献爱心的你们
+    .static_content
+      .description
+        感谢以下“小题大作”网站的合作伙伴：
+      .logos
+        .label 捐助合作方：
+        .pic
+          = link_to image_tag(asset_path("organizations/sinohydro.png"), :height => 40, :alt => "中国水电"), "http://www.sinohydro.com/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/pingan.png"), :height => 40, :alt => "中国平安"), "http://www.pingan.com/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/taijiniu.jpg"), :height => 40, :alt => "太极牛网"), "http://www.taijiniu.com/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/avlight.jpg"), :height => 40, :alt => "爱浪音响"), "http://www.avlight.com/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/1kg.png"), :height => 40, :alt => "多背一公斤"), "http://www.1kg.org/?out=dazuoxiaoti", :target => "_blank"
+      .logos 
+        .label 项目合作方：
+        .pic
+          = link_to image_tag(asset_path("organizations/teachforchina.png"), :height => 40, :alt => "中国教育行动"), "http://www.tfchina.org/zh?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/qingjihui.jpg"), :height => 40, :alt => "中国青基会"), "http://www.cydf.org.cn/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/shixia.jpg"), :height => 40, :alt => "石下希望小学"), "http://www.1kg.org/schools/1004420/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/million_forest.png"), :height => 40, :alt => "百万森林"), "http://www.millionforest.org/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("organizations/liren.png"), :height => 40, :alt => "立人图书馆"), "http://www.xctsg.org/?out=dazuoxiaoti", :target => "_blank"
+      .logos
+        .label 内容合作方：
+        .pic
+          = link_to image_tag(asset_path("organizations/guokr.png"), :height => 41, :alt => "果壳网"), "http://www.guokr.com/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("static/partners/hudong.jpg"), :height => 41, :alt => "互动百科"), "http://www.hudong.com/?out=dazuoxiaoti", :target => "_blank"
+      .logos
+        .label 推广合作方：
+        .pic
+          = link_to image_tag(asset_path("static/partners/chinaz.png"), :height => 40, :alt => "站长之家"), "http://chinaz.com/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("static/partners/vjoin.png"), :height => 40, :alt => "同益学生圈"), "http://www.vjoinunion.org/?out=dazuoxiaoti", :target => "_blank"
+          = link_to image_tag(asset_path("static/partners/new_younger.png"), :height => 40, :alt => "扭秧歌杂志"), "http://www.my1980.cn/?out=dazuoxiaoti", :target => "_blank"
+      .description
+      .description
+        同时感谢下述组织及个人对于小题大作微公益的帮助，没有各方的慷慨支持，这个微公益项目不可能顺利发展（排名不分先后）： 
+      .description
+        = link_to "邓飞", "http://weibo.com/u/1642326133?out=dazuoxiaoti", :target => "_blank"
+        ，
+        = link_to "何智权", "http://weibo.com/brianho?out=dazuoxiaoti", :target => "_blank"
+        ，
+        = link_to "曾少强", "http://weibo.com/zengshaoqiang?out=dazuoxiaoti", :target => "_blank" 
+        ，
+        = link_to "赵老工人", "http://weibo.com/goodideas?out=dazuoxiaoti", :target => "_blank"
+        ，
+        = link_to "姬十三", "http://weibo.com/jshisan?out=dazuoxiaoti", :target => "_blank"
+        ，
+        = link_to "安猪", "http://weibo.com/andrewyu0222?out=dazuoxiaoti", :target => "_blank"
+        ，
+        = link_to "SIFE中国及各地团队", "http://www.sifechina.org/chi/index.asp?out=dazuoxiaoti", :target => "_blank"
+  .clear

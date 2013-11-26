@@ -1,0 +1,62 @@
+<div class="message_notice"><%=flash[:notice]%></div>
+<table width="100%"  class="xiaoxiform" cellpadding="0" cellspacing="0" >
+  <tr class="trnav">
+    <td width="17%">主题</td>
+    <td width="65%">标题</td>
+    <td width="17%">日期</td>
+  </tr>
+  <%=form_for Message.new,:url=>delete_messages_path,:html=>{:method=>"post",:class=>"message_form"}  do |f|%>
+  <%@messages.each do |message|%>
+  <tr class="trnr">
+    <td><input  type="checkbox" name="msg_id[]" value="<%=message.id%>" />
+      <%= message.topic%></td>
+    <td><%=link_to message.title,message%> </td>
+    <td  align="right"><%=message.created_at.to_date%></td>
+  </tr>
+  <%end%>
+
+  <tr>
+    <td colspan="3">
+      <div class="chekdel">
+        <input type="button" class="back"  value="全选" />
+         <input type="button" class="del"   value="删除"/>
+      
+      </div>
+      <%=paginate @messages%>
+      <!--
+      <div class="page">
+        <a  href="" class="prv"></a>
+        <a  href=""  class="pagesupdown">上一页</a>
+        <a  href="">1</a>
+        <a  href="">2</a>
+        <a  href="">3</a>
+       <span> ······</span>
+        <a  href=""class="pagesupdown">下一页</a>
+        <a  href="" class="next"></a>
+         <input  type="text"/>
+         <a href="" class="tiao">跳转</a>
+      </div>
+    -->
+    
+    
+    </td>
+    </tr>
+    <%end%>
+</table>
+<script>
+$(".del").click(function() {
+    var n = $( "input:checked" ).length;
+    if(n<1){
+      alert("请选择您要删除的信息！");
+      return false;
+    }
+    $(".message_form").submit();
+
+});
+$(".back").click(function() {
+      $("input[type='checkbox']").each(function() {
+        $(this).attr("checked", true);
+       })
+    
+    });
+</script>

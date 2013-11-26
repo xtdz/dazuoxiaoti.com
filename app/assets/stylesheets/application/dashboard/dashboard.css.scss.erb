@@ -1,0 +1,64 @@
+// Place all the styles related to the Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import 'common';
+ 
+.dashboard_left {
+  width: 590px;
+  float: left;
+
+  .edit_header {
+    height: 68px;
+    font-size: 18pt;
+    color: $orange;
+    padding:5px 20px 5px 30px;
+    line-height: 68px;
+    background: url("<%= asset_path "static/project_header_bg.png" %>") 0px 0px repeat-x;
+  }
+  .edit {
+    min-height: 340px;
+    .title {
+      padding-top: 20px;
+      color: $black;
+      font-size: 18pt;
+      text-align: center;
+    }
+    .box {
+      padding: 40px;
+      color: $grey;
+    }
+  }
+  .hidden {
+    display:none;
+  }
+
+  ul.dashboard_tabs {
+    height: 40px;
+    font-size: 12pt;
+    background: #f8f8f8;
+    margin-bottom: 20px;
+    li {
+      float: left;
+      a {
+        color: $blue;
+        border-top: 2px solid $blue;
+        line-height: 38px;
+        display: block;
+        text-align: center;
+        width: 100px;
+        margin-right: 2px;
+      }
+      a.selected, a:hover{
+        background: $white;
+        color: $orange;
+        border-color: $orange;
+      }
+    }
+  }
+}
+
+.dashboard_right {
+  width: 260px;
+  float: right;
+}
+

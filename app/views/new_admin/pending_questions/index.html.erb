@@ -1,0 +1,113 @@
+<h1 class="title">
+ <span class="title_left"> <%= link_to "上传题集列表",new_admin_pending_questions_path %></span>
+  <span class="title_right">
+    <a href="/new_admin/pending_questions/uploading">上传题集</a>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+<table class="search">
+    <tbody>
+        <tr>
+            <%= form_tag '',{:method=>:get} do %>
+            <td width="15%">
+              上传题目问题：
+              <%= text_field_tag "title", params[:title], :size=>10 %>
+              
+               <%= hidden_field_tag "status", params[:status], :size=>10 %>
+
+            </td>
+            <td width="50%">
+                <label>
+                    <input type="submit" name="button" id="button" value="搜索" />
+                </label>
+            </td>
+            <% end -%>
+        </tr>
+    </tbody>
+</table>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">问题</th>
+            <th width="10%">题目选项(红色为答案)</th>
+            <th width="10%">解释</th>
+            <%case params["status"]%>
+            <%when "accept"%>
+            <th width="10%">题目链接</th>
+            <%when "reject"%>
+            <th width="10%">拒绝原因</th>
+            <%end%>
+            <%if ["accept","reject"].include? params["status"]%>
+            <th width="10%">操作时间</th>
+            <%else%>
+            <th width="10%">拒绝操作</th>
+            <th width="10%">通过操作</th>
+            <%end%>
+        </tr>
+    </thead>
+    <tbody>
+      <% @pending_questions.each_with_index do |question,index| %>
+        <tr id = "action_row_<%=question.id%>">
+            <td width="5%"><%= question.id %> </td>
+            <td width="10%"><%= link_to question.title ,[:new_admin,question]%></td>
+            <td width="10%" style="padding-left:0px">
+                  <ul>
+                       <%(1..4).to_a.each do |i|%>
+                         <li style="border-bottom:1px solid #DDDDDD; text-align:left; padding-left:10px;<%='color:red' if question.correct_index==i-1%>"><%=i%> : <%=question.send("c#{i}")%></li>
+                       <%end -%>
+                    </ul>
+            </td>
+            <td width="10%"><%= question.explanation%></td>
+
+            <%case params["status"]%>
+            <%when "accept"%>
+            <%q=Question.where("title=?",question.title).first%>
+            <td width="10%"><a target=_blank href=<%=question_path(q.try(:token)) if q%>> 请点击</a></td>
+            <%when "reject"%>
+            <td width="10%"><%=question.comment%></td>
+            <%end%>
+            <%if ["accept","reject"].include? params["status"]%>
+            <td width="10%"><%=question.updated_at.to_s(:db)%></td>
+            <%else%>
+            
+            
+
+
+             <td width="10%"><%=  form_tag(reject_new_admin_pending_question_path(question), :method => "post", :remote => true) do |f|%>
+                 <ul>
+                     <li><label>否决原因：</label><%=text_field_tag :comment%></li>
+                                      
+                     <li><%=submit_tag "拒绝", :confirm => "你确定此操作吗？？？", :class => "btn btn-success"%></li>
+                     
+                 </ul>
+               <%end%>
+             </td>
+
+              <td width="10%"><%= form_tag( accept_new_admin_pending_question_path(question), :method => "post", :remote => true) do |f|%>
+                 <ul>
+                    <li><label> 关键词:</label><%=text_field_tag :keyword,"",:size=>23%></li>
+                    <li><label> 选题集:</label><%= select_tag(:question_set_id, options_for_select(QuestionSet.all.map{|q|[q.name,q.id]}), {:selected=> true})%></li>
+                     <li><label>用户ID:</label><%=text_field_tag :user_id%></li>
+                     <li><%=submit_tag "通过", :confirm => "你确定此操作吗？？？", :class => "btn btn-success"%></li>
+                     
+                 </ul>
+               <%end%>
+             </td>
+
+            <%end%>
+        </tr>
+      <% end -%>
+      <% if @pending_questions.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @pending_questions %>
+<%#=page_info(@categories)%>

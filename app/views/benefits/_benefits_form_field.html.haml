@@ -1,0 +1,22 @@
+.margin_top{:style => "margin-top:150px;"}
+= form_for benefit,:html => { :multipart => true }  do |f| 
+  .p
+    = f.label :名称
+    = f.text_field :name
+  .p
+    = f.label :单位
+    = f.text_field :unit
+  .p
+    = f.label :价值
+    = f.text_field :cost
+  .p
+    = f.label :steps
+    = f.text_field :steps
+  .p
+    = f.label :解释
+    = f.text_area :description
+  .p
+    = f.label :图片
+    = f.file_field :upload_image
+  .p
+    = f.submit '提交'

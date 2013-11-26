@@ -1,0 +1,21 @@
+.columns
+  = render :partial => 'projects/left', :locals => {:project => current_project}
+  .right
+    = render "users/info"
+  .center
+    .center_box
+      .content
+        .top_bar
+          .type
+            选择题型
+        .question
+          在答题之前，请先选择题目类型（多选）：
+          %br
+          %br
+          .select
+            = render :partial => 'questions/categories', :locals => {:categories => @user.get_categories}
+          .next_button
+            %a.next{:href => random_questions_path + '?project_id=' + current_project.id.to_s}
+      = render :partial => 'projects/bottom_bar', :locals => {:project => current_project}
+      = render :partial => 'projects/intro', :locals => {:project => current_project}
+

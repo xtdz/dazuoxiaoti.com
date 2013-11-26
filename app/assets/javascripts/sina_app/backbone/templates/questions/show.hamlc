@@ -1,0 +1,45 @@
+- if ! @question.get('id')
+  .center 下载中...
+- else if @question.get('id') == -1
+  .center 你所选择的题集已经答完了, 请选择其他题集再继续。
+- else if @question.get('id') == -2
+  .center 您今天已经答满了50道题。请休息休息，明天再继续吧。
+- else
+  .question
+    .skip_button
+      - if @question.get('selected_answer')
+        %a.next{style: "cursor: pointer"}
+      - else
+        %a.skip{style: "cursor: pointer"}
+    = @question.get('title')
+  #solution
+    - if @question.get('selected_answer')
+      %span.cursor_next
+    - for element, index in @question.get('choices')
+      - if @question.get('selected_answer')
+        .choice_row
+          .mark
+            - if element == @question.get('correct_answer')
+              .correct
+            - else if @question.get('selected_answer') == element
+              .wrong
+          = element
+      - else
+        %a{class: "choice", id: "choice_#{index}", style: "cursor: pointer"}= element
+    - if @question.get('selected_answer') && @question.get('explanation')
+      .explanation
+        .ex_title 解释
+        = @question.get('explanation')
+
+- if @question.get('id') && @question.get('id') > 0
+  :javascript
+    params = {'id': 'publish'}
+    params['default_text'] = "【这题有意思 @小题大作微公益】#{@question.get('title')}"
+    params['default_text'] += " A)#{@question.get('choices')[0]}"
+    params['default_text'] += " B)#{@question.get('choices')[1]}"
+    params['default_text'] += " C)#{@question.get('choices')[2]}"
+    params['default_text'] += " D)#{@question.get('choices')[3]}"
+    WB2.anyWhere(function(W){W.widget.publish(params)})
+- else
+  :javascript
+    WB2.anyWhere(function(W){W.widget.publish({'id': 'publish'})})

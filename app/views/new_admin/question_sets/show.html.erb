@@ -1,0 +1,53 @@
+
+<h1 class="title">
+ <span class="title_left"><a href="/new_admin/question_sets">全部题集</a></span>
+  <span class="title_right">
+    <%= link_to "添加题集",new_new_admin_question_set_path %>
+  
+  </span>   
+</h1>
+
+
+    <div class="order_number">
+        <table class="grid_order">
+            <tbody>
+                <tr height="35">
+                    <td class="td01"><b>*</b>名称:</td>
+                    <td>
+                       <%= @question_set.name%>
+                    </td>
+                </tr>
+                
+                <tr height="35">
+                    <td class="td01"><b>*</b>所属类别：</td>
+                    <td>
+                       <%= @question_set.try(:category).try(:name)%>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="td01 td03"><b>*</b>&nbsp;图片：</td>
+                    <td class="td02"> 
+                        <img src="<%=@question_set.image_path%>" />
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01">描述:</td>
+                    <td>
+                       <%= @question_set.description%>
+                    </td>
+                </tr>
+
+                <tr height="35">
+                    <td class="td01">状态</td>
+                    <td>
+                     
+                      是否热门 <%= @question_set.is_hot ? "Yes" : "No"%>
+                    
+                    </td>
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+

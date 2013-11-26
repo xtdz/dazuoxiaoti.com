@@ -1,0 +1,22 @@
+管理题目：
+= link_to '点击这里', pending_questions_path
+%br
+%br
+%br
+查看题目反馈：
+= link_to '点击这里', feedbacks_path
+%br
+%br
+%br
+管理题集：
+= link_to '点击这里', question_sets_path
+%br
+%br
+%br
+管理项目：
+- @projects.each do |p|
+  %br
+  %br
+  = p.name
+  = link_to '点击管理', edit_project_path(p)
+  

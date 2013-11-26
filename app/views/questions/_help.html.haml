@@ -1,0 +1,19 @@
+.help
+  = link_to image_tag(asset_path("static/question_mark.gif"), :class => "question_mark", :title => "徽章是什么？", :alt => "徽章是什么？"), '#', :onclick => "$('#nf_#{notice_id}').toggle();"
+  .new_function{:id => "nf_#{notice_id}", :style => "display:#{(current_user.notice == notice_id)? 'block' : 'none'}"}
+    %table
+      %tr
+        %td.notice_left_top
+        %td.notice_top
+        %td.notice_right_top
+      %tr
+        %td.notice_left
+          = image_tag asset_path('static/notice/arrow_left.png'), :alt => '新功能', :style=>"margin-top:15px;"
+        %td.notice_center
+          .close= link_to "x", close_notice_path(:id => notice_id), :remote => true
+          .text= notice_content
+          %td.notice_right
+        %tr
+          %td.notice_left_bottom
+          %td.notice_bottom
+          %td.notice_right_bottom

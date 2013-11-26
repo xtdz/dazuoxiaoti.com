@@ -1,0 +1,57 @@
+
+<h1 class="title">
+ <span class="title_left"><a href="/new_admin/question_sets">全部题集</a></span>
+  <span class="title_right">
+    <%= link_to "添加题集",new_new_admin_question_set_path %>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">名称</th>
+            <th width="10%">分类</th>
+            <th width="5%">是否热门</th>
+            <th width="15%">数据统计</th>
+            <th width="20%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @sets.each do |set| %>
+        <tr>
+            <td ><%= set.id %> </td>
+            <td ><%= link_to set.name ,[:new_admin,set]%></td>
+            <td ><%= link_to_if set.category, set.try(:category).try(:name),new_admin_question_sets_path("category_id"=>set.category_id)  %></td>
+            <td><%= set.is_hot ? "Yes" : "No" %></td>
+           
+            <td>
+               <ul>
+                      <li style="border-bottom:1px solid #DDDDDD; text-align:left; padding-left:10px;color:red">回答正确数:<%=set. question_traces.map(&:corrent_num).sum%></li>
+                      <li style="border-bottom:1px solid #DDDDDD; text-align:left;padding-left:10px;padding-top:10px;color:blue">跳过数:<%= set. question_traces.map(&:skip_num).sum%></li>
+                     <li style=" text-align:left; padding-left:10px;color:orange">总数: <%=set. question_traces.map(&:total_num).sum%></li>
+                     
+                </ul>
+
+            </td>
+            <td>
+              <%= link_to "修改", [:edit,:new_admin, set], :title=>"修改", :class=>"delete" %>
+              <%= link_to "删除", [:new_admin,set], :method=>:delete, :title=>"删除", data: {:confirm=>"确定删除此条信息吗？"}, :class=>"delete" %>
+              <%= link_to "查看该题集下的答题","/new_admin/questions?question_set_id=#{set.id}", :class=>"delete" %>
+            </td>
+        </tr>
+      <% end -%>
+      <% if @sets.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @sets %>
+<%#=page_info(@categories)%>

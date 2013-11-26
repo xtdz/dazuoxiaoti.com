@@ -1,0 +1,2 @@
+module NewAdmin::HomeNoticesHelper
+end

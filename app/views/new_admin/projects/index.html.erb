@@ -1,0 +1,36 @@
+<h1 class="title">
+ <span class="title_left">项目列表</span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">项目名称</th>
+            <th width="10%">内容</th>
+            <th width="10%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |notice| %>
+        <tr>
+            <td width="5%"><%= notice.id %> </td>
+            <td width="10%"><%=notice.name%></td>
+            <td width="10%"><%= notice.description[0..20] %></td>
+            <td width="10%">
+              <%= link_to notice.project_kind==1 ? "申请为答题赞人气" : "申请为答题得捐赠", toggle_new_admin_project_path(notice), :title=>"申请  ", data: {:confirm=>"确定此操作吗？"}, :class=>"delete" %>
+            </td>
+        </tr>
+      <% end -%>
+      <% if @projects.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%#= paginate @notices %>
+<%#=page_info(@categories)%>

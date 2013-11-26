@@ -1,0 +1,13 @@
+/*
+*这个CSS是在application CSS + bootstrap 的CSS 
+*= require bootstrap_and_overrides 
+*= require reset
+*= require defaults
+*= require_tree ./application/layout
+*= require fancybox
+*= require_self
+*= require_tree ./application
+*= require formtastic
+*= require formtastic_ie6
+*= require formtastic_ie7
+*/

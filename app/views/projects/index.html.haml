@@ -1,0 +1,33 @@
+.columns(style="margin-top:60px;")
+  .project_list_left
+    .projects_list
+      - @projects.each do |p|
+        .project_block
+          = render :partial => 'project_block', :locals => {project: p, show: true}
+      - @past_projects.each do |pp|
+        .project_block
+          = render :partial => 'past_project_block', :locals => {project: pp, show: true}
+  .project_right
+    .introduction
+      .first_step
+        .wrapped
+          小题大作能干啥？
+      .first_description
+        小题大作可以让你通过趣味答题的方式参与公益献爱心。
+      .second_step
+        .wrapped
+          怎样答题献爱心？
+      .second_description
+        选择你感兴趣的捐献活动，和其他用户一起参与答题。大伙每共同答对一定数量的问题，我们的合作伙伴将会向指定的公益机构捐赠所需的物品。
+      .total_stats
+        已经有
+        %span.orange_big #{total_participation_count}人
+        参与了答题
+        %br
+        他们共同答对了
+        %span.orange_big #{total_correct_count}题
+        %br
+        累计促成了
+        %span.orange_big #{total_items_count}件
+        物品的捐赠
+  .clear

@@ -1,0 +1,64 @@
+%a.fancy{:href => new_pending_question_path}
+  我要出题
+= form_tag( search_questions_path, :method => "get", :remote => true) do
+  = label_tag(:q, "Search for:") 
+  = text_field_tag(:q) 
+  = submit_tag("Search",:class => "btn btn-primary") 
+= form_tag( pending_questions_import_path, :method => "post", :multipart => true) do
+  = file_field_tag('file')
+  = submit_tag("Import")
+- if flash[:notice]
+  = flash[:notice]
+
+#search_result{:style => "padding: 10px"}
+未审核的题目：
+%table{:class => "table table-striped  table-bordered"}
+  %tr
+    %td{:width => 152} 题目
+    %td 选项一
+    %td{:width => 152} 选项二
+    %td 选项三
+    %td 选项四
+    %td{:width => 40} 正确选项
+    %td 解释
+  - @pending_questions.each do |p|
+    %tr
+      %td 
+        = p.title
+      %td 
+        = p.c1
+      %td 
+        = p.c2
+      %td 
+        = p.c3
+      %td 
+        = p.c4
+      %td 
+        = p.correct_index
+      %td 
+        = p.explanation
+    %tr{:id => "action_row_#{p.id}"}
+      = form_tag( reject_pending_question_path(p), :method => "post", :remote => true) do
+        %td
+          = label_tag(:comment, "否决原因：") 
+          = text_field_tag(:comment) 
+        %td
+          = submit_tag "否决", :confirm => "你确定吗？？？", :class => "btn btn-warning"
+      = form_tag( accept_pending_question_path(p), :method => "post", :remote => true) do
+        %td
+          = label_tag(:keyword, "关键词：") 
+          = text_field_tag(:keyword) 
+        %td
+          = label_tag(:keyword, "选择题集：")
+          = select_tag(:question_set_id, options_from_collection_for_select(QuestionSet.all, :id, :name, p.intended_for_set), {:include_blank => true})
+        %td
+          = submit_tag "通过", :confirm => "你确定通过吗？？？", :class => "btn btn-success"
+        %td
+          = p.created_at.to_date
+        %td
+          - if p.user
+            = p.user.nickname
+            = t p.user.type
+    %tr{:height => 35}
+      / %td{:colspan => 7} -------------------------------------------------------------------------------------------------------------   
+

@@ -1,0 +1,42 @@
+.dashboard
+  .dashboard_left
+    = render :partial=>"dashboard_menu"
+    .project_list
+      - @participations.each_with_index do |participation,index|
+        .project
+          .project_wrapped
+            .project_image= image_tag asset_path(participation.project.image_path :main)
+            .screen
+            .project_overview
+              .label
+                .name= participation.project.name[0..9]
+                .equation= participation.project.equation
+              .buttons
+                - if participation.project.expired?
+                  - @path = past_project_path(participation.project) 
+                  %a.info{href: @path}
+                - else
+                  - @path = random_questions_path(:project_id => participation.project_id)
+                  %a.continue{href: @path}
+            .description
+              - @message = "你已经答对了#{participation.correct_count}道题目"
+              - if  participation.project_id.to_i == 14
+                -  @message = @message + "获得“宜农贷”5元助农卡#{participation.correct_count/20}张"
+                -  @message1 = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{participation.correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
+              - elsif participation.project_id.to_i == 12
+                - @message1 = "我的爱心[心]爆棚了！刚刚在“小题大作微公益”网站参与趣味公益问答，支持@大爱清尘 ！目前累计答对#{participation.correct_count}题。一[din推撞]个人[围观]的力量有限，快来帮帮我吧"
+              - else 
+                - @message = @message + ",共助捐了#{participation.correct_count / participation.project.rate}#{participation.project.benefit.unit}#{participation.project.benefit.name}" if participation.correct_count / participation.project.rate>0
+                - @message1 = "我的爱心[心]爆棚了！刚刚在“小题大作微公益”网站参与趣味公益问答！目前累计答对#{participation.correct_count}题。"
+                - @message1 = @message1 + ",共助捐了#{participation.correct_count / participation.project.rate}#{participation.project.benefit.unit}#{participation.project.benefit.name}" if participation.correct_count / participation.project.rate>0
+                - @message1 = @message1 + "一[din推撞]个人[围观]的力量有限，快来帮帮我吧"
+              .last_participated
+                上次参与：#{participation.last_update}，分享到：
+                = render :partial => 'questions/new_social_link', :locals => {:message => @message1 , :path => @path,:i=>index,:project=>participation.project}
+              %span.share_title   
+                = @message
+             
+                
+
+  .dashboard_right
+    = render :partial => 'users/info'
