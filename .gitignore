@@ -3,6 +3,7 @@ db/schema.rb
 log/*.log
 config/database.yml
 config/initializers/devise.rb*
+config/deploy.rb
 tmp/
 .bundle
 .sass-cache/
