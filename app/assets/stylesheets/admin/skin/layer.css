@@ -4,11 +4,11 @@
  @Date: 2012.09.15
  @Author: 贤心
  @blog： sentsin.com
- 
+
 **/
 
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,input,button,textarea,p,blockquote,th,td,form{margin:0; padding:0;}
-*html{background-image:url(about:blank);background-attachment:fixed;}
+* html{background-image:url(about:blank);background-attachment:fixed;}
 
 /** common **/
 .xubox_shade, .xubox_layer{position:fixed; _position:absolute;}
