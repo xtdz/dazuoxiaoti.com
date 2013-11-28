@@ -37,7 +37,7 @@ gem 'omniauth-oauth2'
 gem 'omniauth-qq'
 gem 'omniauth-renren'
 gem 'omniauth-weibo-oauth2'
-
+gem 'nokogiri'
 gem 'execjs'                 # javascript runtime
 gem 'therubyracer'
 gem 'devise'                 # authentication system

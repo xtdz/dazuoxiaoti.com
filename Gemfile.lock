@@ -303,6 +303,7 @@ DEPENDENCIES
   kaminari
   less-rails
   mysql2
+  nokogiri
   omniauth
   omniauth-oauth
   omniauth-oauth2
