@@ -45,11 +45,9 @@ class ProjectsController < ApplicationController
   private
   def project_layout
     if params[:action] == "show" and [5,7,8,9,10,11,12,14,16,18].include?(params[:id].to_i)
-      "project_#{params[:id]}"  
-     # "project_special_12" if params[:id].to_i==12
-
+      "legacy/project_#{params[:id]}"
     else
-      (["index", "list", "new"].include? params[:action]) ? "index" : "project" 
+      (["index", "list", "new"].include? params[:action]) ? "index" : "project"
     end
   end
 end

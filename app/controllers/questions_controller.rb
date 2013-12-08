@@ -154,7 +154,7 @@ class QuestionsController < ApplicationController
 
   def project_layout
     if [5,7,8,9,10,11,12,14,16,18].include? current_project.id
-      "project_#{current_project.id}"
+      "legacy/project_#{current_project.id}"
     else
       "project"
     end
