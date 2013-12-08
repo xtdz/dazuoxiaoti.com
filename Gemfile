@@ -21,7 +21,6 @@ group :test, :development do
   gem 'guard-livereload', '~> 0.3.1'
   gem 'twitter-bootstrap-rails'
   gem 'debugger'
-  gem 'simple_form'
 end
 
 group :test do
@@ -54,3 +53,4 @@ gem 'rails_kindeditor'
 gem 'mysql2'
 gem 'yaml_db'
 gem 'spreadsheet'
+gem 'simple_form'
