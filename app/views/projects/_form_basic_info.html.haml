@@ -1,0 +1,6 @@
+= f.input :name, label: '项目名称'
+= f.input :rate, label: '题目换算标准'
+= f.simple_fields_for :benefit do |benefit|
+  = benefit.input :unit, label: '单位'
+  = benefit.input :name, label: '名称'
+= f.input :upload_image_main, label: '首页活动图片', as: :file

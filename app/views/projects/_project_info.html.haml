@@ -1,57 +1,20 @@
-= form_for(@project, :html => { :multipart => true }) do |f| 
+= simple_form_for(@project, :html => { :multipart => true }) do |f|
+  %h3
+    基本信息
   .p
-    = f.label :标题
-    = f.text_field :name
-  .p
-    = f.label :捐赠方
-    = f.select("sponsor_id", Organization.all.collect {|p| [ p.name, p.id ] })
-    - unless @project.sponsor.nil?
-      = link_to "修改", edit_organization_path(@project.sponsor)
-    = link_to "添加",new_organization_path
+    = render partial: :f_basic_info, locals: {'f' => f}
 
+  %h3
+    项目详情
   .p
-    = f.label :受助方
-    = f.select("coordinator_id", Organization.all.collect {|p| [ p.name, p.id ] })
-    - unless @project.coordinator.nil?
-      = link_to "修改", edit_organization_path(@project.coordinator)
-    = link_to "添加",new_organization_path
+    = render partial: :f_project_info, locals: {'f' => f}
 
+  %h3
+    答题页
   .p
-    = f.label :捐赠物品
-    = f.select("benefit_id", Benefit.all.collect {|p| [ p.name, p.id ] })
-    - unless @project.benefit.nil?
-      = link_to "修改", edit_benefit_path(@project.benefit)
-    = link_to "添加",new_benefit_path
+    = render partial: :f_question, locals: {'f' => f}
 
+  %h3
+    分享信息
   .p
-    = f.label :上限
-    = f.text_field :limit
-  .p
-    = f.label :单个物品所需题目数
-    = f.text_field :rate
-  .p
-    = f.label :一句话
-    = f.text_field :tagline
-  .p
-    = f.label :开始时间
-    = f.text_field :start_time
-  .p
-    = f.label :结束时间
-    = f.text_field :end_time
-  .p
-    = f.label :解释
-    = f.text_area :description
-
-  .p
-    = f.label :主页图片
-    = f.file_field :upload_image_main
-
-  .p
-    = f.label :介绍图片
-    = f.file_field :upload_image_about
-  .p
-    = f.label :隐藏
-    = f.check_box :hidden
-
-  .p
-    = f.submit '提交'
+    = render partial: :f_share, locals: {'f' => f}

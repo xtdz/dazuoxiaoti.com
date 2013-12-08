@@ -1,0 +1,33 @@
+%h4
+  项目简介
+
+= f.input :start_time, label: '开始答题时间'
+= f.input :end_time, label: '结束答题时间'
+= f.input :limit, label: '题目数上限'
+= f.input :description, label: '项目描述', as: :text
+
+%h4
+  捐赠方
+
+= f.simple_fields_for :sponsor do |sponsor|
+  = sponsor.input :name, label: '名字'
+  = sponsor.input :upload_image, label: 'Logo图片', as: :file
+  = sponsor.input :url, label: '网站链接'
+  = sponsor.input :description, label: '简介', as: :text
+
+%h4
+  接收方
+
+= f.simple_fields_for :coordinator do |coordinator|
+  = coordinator.input :name, label: '名字'
+  = coordinator.input :upload_image, label: 'Logo图片', as: :file
+  = coordinator.input :url, label: '网站链接'
+  = coordinator.input :description, label: '简介', as: :text
+
+%h4
+  物资详情
+
+= f.simple_fields_for :benefit do |benefit|
+  = benefit.input :cost, label: '价值'
+  = benefit.input :upload_image, label: '物资图片', as: :file
+  = benefit.input :description, label: '简介', as: :text
