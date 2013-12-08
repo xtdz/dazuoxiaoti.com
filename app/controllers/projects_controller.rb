@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @project.build_nested_models
   end
 
   def create
@@ -29,6 +30,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    @project.build_nested_models
   end
 
   def update

@@ -2,20 +2,31 @@
 class Project < ActiveRecord::Base
   belongs_to :coordinator, :class_name => 'Organization'
   belongs_to :sponsor, :class_name => 'Organization'
- 
   belongs_to :benefit
   has_many :participations
   has_many :weibos
   has_many :updates
   has_many :users, :through => :participations
 
-  #attr_accessible :rate, :limit, :coordinator, :benefit, :sponsor
+  accepts_nested_attributes_for :benefit, :sponsor, :coordinator
 
   validates_presence_of :benefit, :coordinator, :sponsor, :rate, :limit
 
   has_attached_file :upload_image_main
-
   has_attached_file :upload_image_about
+  has_attached_file :upload_image_small
+  has_attached_file :upload_image_banner
+
+  has_attached_file :upload_image_share_question1
+  has_attached_file :upload_image_share_question2
+  has_attached_file :upload_image_share_finish1
+  has_attached_file :upload_image_share_finish2
+
+  def build_nested_models
+    build_benefit unelss benefit
+    build_sponsor unless sponsor
+    build_coordinator unless coordinator
+  end
 
   def item_count
     correct_count / rate
@@ -83,34 +94,5 @@ class Project < ActiveRecord::Base
   def equation
     return "答题支持大爱清尘" if project_kind==2
     @equestion ||= "#{rate}#{I18n.t 'question.equation'}1#{benefit.unit}#{benefit.short_name}"
-  end
-
-  private
-  def send_counter_message counter
-    if counter == :participation_count
-      Project.send_status_message "{participation:#{participation_count}}"
-    elsif counter == :correct_count
-      Project.send_status_message "{correct:#{correct_count},item:#{correct_count/rate}}"
-    end
-  end
-
-  def self.connected_bunny
-    @bunny ||= Bunny.new
-    if !@bunny.connected?
-      @bunny.start
-    end
-    @bunny
-  end
-
-  def self.exchange
-    if @exchange.nil? || @exchange.client.nil? || !@exchange.client.connected?
-      @exchange = connected_bunny.exchange('xtdz.status', :type => :fanout)
-    else
-      @exchange
-    end
-  end
-
-  def self.send_status_message msg
-    exchange.publish(msg)
   end
 end
