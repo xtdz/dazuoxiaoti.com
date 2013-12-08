@@ -2,19 +2,19 @@
   %h3
     基本信息
   .p
-    = render partial: :f_basic_info, locals: {'f' => f}
+    = render partial: 'form_basic_info', locals: {form: f}
 
   %h3
     项目详情
   .p
-    = render partial: :f_project_info, locals: {'f' => f}
+    = render partial: 'form_project_info', locals: {form: f}
 
   %h3
     答题页
   .p
-    = render partial: :f_question, locals: {'f' => f}
+    = render partial: 'form_question', locals: {form: f}
 
   %h3
     分享信息
   .p
-    = render partial: :f_share, locals: {'f' => f}
+    = render partial: 'form_share', locals: {form: f}

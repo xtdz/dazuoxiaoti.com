@@ -4,16 +4,16 @@
 .p
   例如: 【这题有意思】古时的“上元节”是指现代生活的哪个节日 [a]元宵节 [b]清明节 [c]中秋节 [d]端午节 __补充文字__ (分享自 @小题大作微公益)
 
-= f.input :share_question_text, label: '补充文字'
-= f.input :upload_image_share_question1, label: '配图1', as: :file
-= f.input :upload_image_share_question2, label: '配图2', as: :file
+= form.input :share_question_text, label: '补充文字'
+= form.input :upload_image_share_question1, label: '配图1', as: :file
+= form.input :upload_image_share_question2, label: '配图2', as: :file
 
-%4
+%h4
   答满数量后微博分享
 
 .p
   例如: 【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对30题，小题大作微公益即向湖南鲁坑小学捐赠1两大米，用于学生营养餐项目，一起来帮助山里娃吃上健康午餐吧 (分享自 @小题大作微公益)
 
-= f.input :upload_image_share_finish_text, label: '文字'
-= f.input :upload_image_share_finish1, label: '配图1', as: :file
-= f.input :upload_image_share_finish2, label: '配图2', as: :file
+= form.input :share_finish_text, label: '文字'
+= form.input :upload_image_share_finish1, label: '配图1', as: :file
+= form.input :upload_image_share_finish2, label: '配图2', as: :file

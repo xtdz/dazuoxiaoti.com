@@ -20,6 +20,8 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'guard-livereload', '~> 0.3.1'
   gem 'twitter-bootstrap-rails'
+  gem 'debugger'
+  gem 'simple_form'
 end
 
 group :test do

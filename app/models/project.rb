@@ -23,7 +23,7 @@ class Project < ActiveRecord::Base
   has_attached_file :upload_image_share_finish2
 
   def build_nested_models
-    build_benefit unelss benefit
+    build_benefit unless benefit
     build_sponsor unless sponsor
     build_coordinator unless coordinator
   end
