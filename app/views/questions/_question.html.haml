@@ -9,20 +9,7 @@
         题目反馈
     正确率：#{@question.correct_rate}%
   考考朋友，分享到:
-  - @message = "【这题有意思"
-  - @message += "】#{@question.title} [a]#{@choices[0]} [b]#{@choices[1]} [c]#{@choices[2]} [d]#{@choices[3]},"
-  
-  - if @project.id==12
-    - @message += "一起来答题支持 @大爱清尘："
-  - elsif @project.id==14
-    - @message += "一起来趣味答题，答对20题即可获得@宜农贷 5元爱心助农卡." 
-  - elsif @project.id==16
-    - @message += "一起来答题支持@满天星公益 的儿童阅读推广计划！@与人公益基金会"
-  - elsif @project.id==18
-    - @message += "一起来趣味答题，每答对30题，小题大作微公益即向湖南省鲁坑小学捐赠1两大米，用于学生营养餐项目"
-  - else
-    - @message += "一起来趣味答题捐#{@project.benefit.short_name}："
-
+  - @message = share_question_message @question, @project
   - @path = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
   = render :partial => 'social_links', :locals => {:message => @message, :path => @path}
 #solution
