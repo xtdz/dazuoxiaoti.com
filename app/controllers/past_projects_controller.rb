@@ -10,8 +10,8 @@ class PastProjectsController < ApplicationController
   end
 
   def project_layout
-    if params[:action] == "show" and [5,7,8,9,10,11,12,14,16].include?(params[:id].to_i)
-      "project_#{params[:id]}"
+    if params[:action] == "show" and [5,7,8,9,10,11,12,14,16,18].include?(params[:id].to_i)
+      "legacy/project_#{params[:id]}"
     else
       "project"
     end
