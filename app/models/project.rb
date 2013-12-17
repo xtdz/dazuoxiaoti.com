@@ -44,7 +44,11 @@ class Project < ActiveRecord::Base
   end
 
   def expired?
-    end_time < Time.now || item_count >= limit
+    if end_time
+      end_time < Time.now || item_count >= limit
+    else
+      false
+    end
   end
 
 
