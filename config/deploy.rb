@@ -15,7 +15,7 @@ set :bundle_flags, '--no-deployment --quiet'
 
 set :rails_env, "production"
 set :rake, "bundle exec rake"
-set :bundle_cmd, 'source $HOME/.bashrc && bundle'
+#set :bundle_cmd, 'source $HOME/.bashrc && bundle'
 
 set :scm, "git"
 set :repository, "git@github.com:shiguodong/dazuoxiaoti.com.git"
@@ -46,18 +46,7 @@ namespace :deploy do
      run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
-  before "deploy:cold",  "deploy:install_bundler"
-
-  task :install_bundler, :roles => :app do
-    run "type -P bundle &>/dev/null || { gem install bundler --no-rdoc --no-ri; }"
-   end
-
-
-  task :migrate,roles: :db do
-      run "cd #{current_path} && #{rake} db:mongoid:create_indexes " if exists?(:index)
-  end
-
-
+  
   task :setup_config, roles: :app do
     #su "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
