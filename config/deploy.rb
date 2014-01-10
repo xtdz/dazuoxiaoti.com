@@ -15,7 +15,6 @@ set :bundle_flags, '--no-deployment --quiet'
 
 set :rails_env, "production"
 set :rake, "bundle exec rake"
-#set :bundle_cmd ,"/home/work/.rbenv/versions/2.0.0-rc2/gemsets/dazuoxiaoti/bin/"
 set :bundle_cmd, 'source $HOME/.bashrc && bundle'
 
 set :scm, "git"
@@ -28,8 +27,6 @@ set :default_environment, {
 #before 'deploy:setup', 'rvm:install_rvm'
 
 
-
-
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
@@ -37,17 +34,7 @@ after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :bundle do
     task :install,roles: :app do
-      run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
-    end
-end
-
-
-
-
-
-namespace :bundle do
-    task :install,roles: :app do
-   #   run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
+    #  run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
     end
 end
 
