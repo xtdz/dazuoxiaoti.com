@@ -15,18 +15,16 @@ set :bundle_flags, '--no-deployment --quiet'
 
 set :rails_env, "production"
 set :rake, "bundle exec rake"
-set :bundle_cmd ,"/home/work/.rbenv/versions/2.0.0-rc2/gemsets/dazuoxiaoti/bin/"
-
-#set :rvm_ruby_string, '1.9.3-head'
-#set :rvm_type, :user
-#set :rvm_type, :system
-#set :ruby_dir, "/usr/local/rvm/rubies/ruby-1.9.3-head/bin/ruby"
+#set :bundle_cmd ,"/home/work/.rbenv/versions/2.0.0-rc2/gemsets/dazuoxiaoti/bin/"
+set :bundle_cmd, 'source $HOME/.bashrc && bundle'
 
 set :scm, "git"
 set :repository, "git@github.com:shiguodong/dazuoxiaoti.com.git"
 set :branch, "master"
 
-
+set :default_environment, {
+  'PATH' => "$HOME/.rbenv/shims:$HOME/.rbenv/bin:$PATH"
+}
 #before 'deploy:setup', 'rvm:install_rvm'
 
 
@@ -39,7 +37,7 @@ after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :bundle do
     task :install,roles: :app do
-   #   run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
+      run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
     end
 end
 
@@ -47,11 +45,11 @@ end
 
 
 
-#namespace :bundle do
-#    task :install,roles: :app do
-     # run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
-#    end
-#end
+namespace :bundle do
+    task :install,roles: :app do
+      run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
+    end
+end
 
 
 namespace :deploy do
