@@ -47,7 +47,7 @@ end
 
 namespace :bundle do
     task :install,roles: :app do
-      run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
+   #   run "cd #{release_path} && bundle install --gemfile #{current_path}/Gemfile  --no-deployment --quiet --without development test"
     end
 end
 
@@ -56,7 +56,7 @@ namespace :deploy do
   %w[start stop restart].each do |command|
     desc "#{command} unicorn server"
     task command, roles: :app, except: {no_release: true} do
-    #  run "/etc/init.d/unicorn_#{application} #{command}"
+     run "/etc/init.d/unicorn_#{application} #{command}"
     end
   end
   before "deploy:cold",  "deploy:install_bundler"
@@ -80,7 +80,6 @@ namespace :deploy do
  # after "deploy:setup", "deploy:setup_config"
 
   task :symlink_config, roles: :app do
-  	puts "dddd"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{shared_path}/.rbenv-gemsets #{release_path}/.rbenv-gemsets"
     run "ln -nfs #{shared_path}/.ruby-version #{release_path}/.ruby-version"

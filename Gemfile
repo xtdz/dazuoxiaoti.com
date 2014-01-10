@@ -19,7 +19,7 @@ group :test, :development do
   gem 'rvm-capistrano'
   gem 'rspec-rails'
   gem 'guard-livereload', '~> 0.3.1'
-  gem 'twitter-bootstrap-rails'
+  #gem 'twitter-bootstrap-rails'
 end
 
 group :test do
