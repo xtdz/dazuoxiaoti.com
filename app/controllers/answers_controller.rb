@@ -11,7 +11,9 @@ class AnswersController < ApplicationController
       if user_signed_in?
         current_user.add_answer_for_project @answer, current_project, session_manager.referer
       else
+      #  binding.pry
         if session_manager.referer
+
           @participation = Participation.get_participation(session_manager.referer, @project)
           if @answer.correct?
             @participation.increment_contribution

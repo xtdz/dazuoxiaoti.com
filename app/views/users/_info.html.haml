@@ -8,7 +8,6 @@
   .info
     .name= current_user.nickname
     .type= t current_user.type
-    .settings_link= link_to '用户设置', edit_user_registration_path, :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'setting', 'info']);"
     .logout_link= button_to t(:'user.session.logout'), destroy_user_session_path, :method => :delete
 
   .question_mark

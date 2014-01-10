@@ -35,7 +35,7 @@
   - @choices.each_with_index do |choice, index|
     = link_to choice, "#", :onclick=>"$.submit_answer('#{choice}', #{index});return false;", :class => "choice"
   - if user_signed_in? && @project.id!=12
-    %a.change_question_set{:href => question_sets_path} 题目太难？换个你感兴趣的题集
+    %a.change_question_set{:href => classifies_path} 题目太难？换个你感兴趣的题集
 
 .progress
   - if false

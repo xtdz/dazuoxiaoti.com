@@ -27,9 +27,9 @@
         = f.text_field :c4, :value => "此选项为错误选项"
       .question_set_select
         = f.label "所属题集（可不选）"
-        = select_tag(:intended_for_set, options_from_collection_for_select(QuestionSet.all, :id, :name), {:include_blank => true})
+        = f.select(:intended_for_set, QuestionSet.all.collect{|q|[q.name, q.id]}, {:selected => "62"})
       .explanation
-        = f.text_area :explanation, :placeholder => "你可以为答案的作出解释(可不填）"
+        = f.text_area :explanation, :placeholder => "你可以为答案的作出解释"
       = f.submit '提交'
 
 :javascript

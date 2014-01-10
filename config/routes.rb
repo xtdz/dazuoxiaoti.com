@@ -25,7 +25,12 @@ Dazuoxiaoti::Application.routes.draw do
       resources  :assets
       resources :categories
       resources :question_sets
-      resources :questions
+      resources :questions do 
+         collection do
+            get :upload
+            post :upload_sponsor
+         end
+      end
       root :to =>"categories#index"
 
       resources :pending_questions do
@@ -34,6 +39,7 @@ Dazuoxiaoti::Application.routes.draw do
           post 'reject'
         end
         collection do
+          post "batch_update"
           get 'list'
           get 'uploading'
           post "import"

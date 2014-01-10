@@ -92,10 +92,10 @@ class User < ActiveRecord::Base
 
   def get_next_question question_set_id=nil
     if question_set_id
-      Question.from_set(question_set_id).for_user(id).random.first
+      Question.from_set(question_set_id).for_user(id).shuffle.first
     else
       question_sets.shuffle.each do |set|
-        unless (question = set.questions.for_user(id).random.first).nil?
+        unless (question = set.questions.for_user(id).shuffle.first).nil?
           return question
         end
       end

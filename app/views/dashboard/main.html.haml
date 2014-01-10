@@ -5,14 +5,14 @@
       - @participations.each_with_index do |participation,index|
         .project
           .project_wrapped
-            .project_image= image_tag asset_path(participation.project.image_path :main)
+            .project_image= image_tag asset_path(participation.project.try(:image_path, :main))
             .screen
             .project_overview
               .label
-                .name= participation.project.name[0..9]
-                .equation= participation.project.equation
+                .name= participation.project.name[0..9] if participation.project.try(:name)
+                .equation= participation.project.equation  if participation.project
               .buttons
-                - if participation.project.expired?
+                - if participation.project && participation.project .expired?
                   - @path = past_project_path(participation.project) 
                   %a.info{href: @path}
                 - else

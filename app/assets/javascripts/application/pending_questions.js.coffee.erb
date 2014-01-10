@@ -17,7 +17,7 @@ jQuery(($) ->
       'pending_question_c2' : '此选项为错误选项',
       'pending_question_c3' : '此选项为错误选项',
       'pending_question_c4' : '此选项为错误选项',
-      'pending_question_explanation' : '你可以为答案的作出解释(可不填）'
+      'pending_question_explanation' : '你可以为答案的作出解释'
     }
 
 
@@ -36,7 +36,8 @@ jQuery(($) ->
     $('.new_pending_question form').submit( ->
       valid = true
       $('div.new_pending_question form').find('textarea, input[type="text"]').each( ->
-        if $(this).attr('value') == blurText[this.id] and this.id != 'pending_question_explanation'
+     
+        if $(this).attr('value') == blurText[this.id] || $(this).attr('value')==""
           valid = false
           $(this).css('border-color', '#ff0000')
       )

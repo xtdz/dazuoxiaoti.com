@@ -1,4 +1,5 @@
 class ClassifiesController < ApplicationController
+ # before_filter :redirect_to_registration
  
   def index
   	 @user_question_sets = current_user ? current_user.recent_sets : []
@@ -12,5 +13,5 @@ class ClassifiesController < ApplicationController
     end
     @notices = session_manager.notices
   end
-
+ 
 end
