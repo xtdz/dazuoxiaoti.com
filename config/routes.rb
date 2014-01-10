@@ -1,6 +1,6 @@
 Dazuoxiaoti::Application.routes.draw do
 
-
+  get "/question_sets" ,to: "classifies#index"
   resources :classifies 
   resources :messages,:only=>[:index,:show,:destroy] do
     collection do 
@@ -133,7 +133,7 @@ Dazuoxiaoti::Application.routes.draw do
   end
   
   resources :projects, :past_projects, :organizations, :benefits, :question_sets, :feedbacks
-
+  
   match 'fillup', :controller => 'surveys', :action => 'fillup'
   match 'update_category', :controller => 'categories', :action => 'update_categories_to_user'
   match 'about_us', :controller => 'static', :action => 'about_us'
