@@ -70,7 +70,7 @@ class QuestionsController < ApplicationController
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
     if user_signed_in?
-      return redirect_to_question_sets if current_user.question_sets.size<1
+      return redirect_to_question_sets if current_user.question_sets.size==0
       if count_down == 0 and session_manager.is_show_sponsored?
         @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(params[:question_set])
       else
