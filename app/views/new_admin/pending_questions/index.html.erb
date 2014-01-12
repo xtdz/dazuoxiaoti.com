@@ -56,7 +56,7 @@
              <th width="4%">操作</th>
         </tr>
     </thead>
-    <%=form_tag batch_update_new_admin_pending_questions_path,{"class"=>"batch_update",:multiple => true} do%>
+    <%#=form_tag batch_update_new_admin_pending_questions_path,{"class"=>"batch_update",:multiple => true} do%>
     <tbody>
       <% @pending_questions.each_with_index do |question,index| %>
         <tr id = "action_row_<%=question.id%>">
@@ -88,14 +88,14 @@
             
 
 
-             <td width="10%"><%#=  form_tag(reject_new_admin_pending_question_path(question), :method => "post", :remote => true) do |f|%>
+             <td width="10%"><%=  form_tag(reject_new_admin_pending_question_path(question), :method => "post", :remote => true) do |f|%>
                  <ul>
                      <li><label>否决原因：</label><%=text_field_tag :comment%></li>
                                       
                      <li><%=submit_tag "拒绝", :confirm => "你确定此操作吗？？？", :class => "btn btn-success"%></li>
                      
                  </ul>
-               <%#end%>
+               <%end%>
              </td>
 
               <td width="10%"><%= form_tag( accept_new_admin_pending_question_path(question), :method => "post", :remote => true) do |f|%>
@@ -118,7 +118,7 @@
         <tr>
             <td colspan="9">暂无相关数据</td>
         </tr>
-      <% end -%>
+      <%# end -%>
     </tbody>
     <tr><td colspan="2" style="text-align:left;cursor:pointer"><%= check_box_tag 'check_all'%>  全选</td>
       <td colspan="5" style="text-align:left;cursor:pointer" class="check_go">通过</td>
