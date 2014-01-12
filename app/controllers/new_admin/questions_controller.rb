@@ -44,7 +44,7 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
 
     respond_to do |format|
       if @question.update_attributes(params[:question]) 
-        @question.question_sets<<(QuestionSet.find params["question_set_id"]) unless @question.question_sets.find params["question_set_id"]
+        @question.question_sets<<(QuestionSet.find params["question_set_id"]) unless @question.question_set_ids.include? params["question_set_id"]
         format.html { redirect_to new_admin_questions_path, notice: '修改成功' }
         format.json { render json: @question, status: :created, location: @question }
       else
