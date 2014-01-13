@@ -1,15 +1,11 @@
 <style>
 body{ background:#fffff0;}
 </style>
-<%unless user_signed_in?%>
-<div style="margin-top:60px;text-align:center">登录后可以选择更多题集~</div>
-
+<%content = flash[:notice] ? flash[:notice] : (user_signed_in? ? "" : "登录后可以选择更多题集")%>
+<%if content.present?%>
+<div style="margin-top:60px;text-align:center"><%=content%></div>
 <%end%>
-<div class="hdnr" style="margin-top:<%=user_signed_in? ? '60px' : '10px'%>;">
-<%if flash[:notice] %>
-<div style="text-align:center"><%=flash[:notice]%></div>
-<%end%>
-
+<div class="hdnr" style="margin-top:<%=content.blank? ? '60px' : '10px'%>;">
   <div class="hdleft">
     <div class="hdflnav">
       <h2><a href="?">全部分类</a></h2>
