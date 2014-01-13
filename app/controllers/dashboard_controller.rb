@@ -1,8 +1,10 @@
+# coding: UTF-8
 class DashboardController < ApplicationController
   before_filter :authenticate_user!
 
   def main
     @participations = current_user.recent_participations
+
   end
 
   def questions

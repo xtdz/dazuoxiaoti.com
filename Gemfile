@@ -1,13 +1,13 @@
 # source 'http://rubygems.org'
 source 'http://ruby.taobao.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.2.14'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '  ~> 3.1.0'
-  gem 'coffee-rails', '~> 3.1.0'
+  gem 'sass-rails'
+  gem 'coffee-rails'
   gem 'uglifier'
   gem 'haml_coffee_assets'
   gem "less-rails"
@@ -15,12 +15,16 @@ group :assets do
 end
 
 group :test, :development do
-  gem 'capistrano'
+ # gem 'capistrano'
   gem 'rvm-capistrano'
   gem 'rspec-rails'
   gem 'guard-livereload', '~> 0.3.1'
+<<<<<<< HEAD
   gem 'twitter-bootstrap-rails'
   gem 'debugger'
+=======
+  #gem 'twitter-bootstrap-rails'
+>>>>>>> shiguodong/master
 end
 
 group :test do
@@ -41,7 +45,7 @@ gem 'omniauth-weibo-oauth2'
 gem 'nokogiri'
 gem 'execjs'                 # javascript runtime
 gem 'therubyracer'
-gem 'devise'                 # authentication system
+gem 'devise'  ,'2.2.3'               # authentication system
 gem 'rails-backbone'
 gem 'jquery-rails'
 gem 'fancybox-rails'
@@ -52,5 +56,12 @@ gem 'kaminari'
 gem 'rails_kindeditor'
 gem 'mysql2'
 gem 'yaml_db'
+<<<<<<< HEAD
 gem 'spreadsheet'
 gem 'simple_form'
+=======
+gem 'spreadsheet',"0.8.5"
+gem 'capistrano','2.15.5'
+gem 'unicorn'
+gem 'pry'
+>>>>>>> shiguodong/master

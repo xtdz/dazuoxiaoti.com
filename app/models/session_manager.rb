@@ -88,6 +88,14 @@ class SessionManager
     session[:expires_at] = time
   end
 
+  def set_show_sponsored
+    session[:is_showed] = true
+  end
+
+  def is_show_sponsored?
+    session[:is_showed]
+  end
+
   def correct_count
     session[:correct_count] ||= 0
   end

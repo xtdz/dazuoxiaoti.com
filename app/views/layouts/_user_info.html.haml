@@ -5,14 +5,13 @@
       .user_correct_count{:title => '答对题数'} #{current_user.correct_count}题
     .control_links
       .control_link= link_to '最近参与', '/dashboard/main'
-      .control_link= link_to '用户设置', edit_user_registration_path
       .control_link= link_to '已出题目', '/dashboard/questions'
       .control_link= button_to "退出", destroy_user_session_path, :method => :delete, :class => 'log_out'
       .clear
 - else
   .user_sign_in
     %ul
-      %li.login 登陆
+      %li.login 登录
       %li
         %a.link_auth{:href => user_omniauth_authorize_path(:tsina)}
           = image_tag(asset_path('static/auth/sina_auth.png'),:class=>"auth")

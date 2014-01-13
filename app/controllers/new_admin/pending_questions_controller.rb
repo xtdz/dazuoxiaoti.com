@@ -9,11 +9,27 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
     cons.push(" state = 0 ") if params["status"].blank?
     cons.push(" state=2 ") if params["status"]=="reject"
     cons.push(" state=1 ") if params["status"]=="accept"
-    @pending_questions = PendingQuestion.where(cons.join(" and ")).order("id desc").page(params[:page])
+    @pending_questions = PendingQuestion.where(cons.join(" and ")).includes([:user]).order("id desc").page(params[:page])
   end
 
   def uploading
    
+  end
+
+  def edit
+    @question = PendingQuestion.find params[:id]
+
+  end
+
+  def update
+       @pending_question = PendingQuestion.find params[:id]
+   
+    if @pending_question.update_attributes(params["pending_question"])
+      respond_to do |format|
+        format.html { redirect_to action: :index,notice: "通过成功" }
+      end
+    end
+
   end
 
   def list
@@ -32,6 +48,7 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
   end
 
   def import
+
     begin
       sheet = Spreadsheet.open(params[:file].tempfile.path).worksheet(0)
     rescue
@@ -39,7 +56,8 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
       flash[:notice] = "文件读取错误。请确认文件格式是否正确后再上传" 
       return nil
     end
-    @new_questions = []
+    intend_for_set = params["pending_question"]["intended_for_set"]
+    user_id = params["user_id"]
     sheet.each do |row|
       question = PendingQuestion.new
       next if row[0] == nil
@@ -52,18 +70,17 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
       # Are there any methods like [var1,var2,var3] = [1,2,3]
       question.title = row[0]
       question.explanation = row[5]
+      question.intended_for_set = intend_for_set
       question.keyword = row[6]
-      question.user_id = params["user_id"] || current_user.id
+      question.user_id = user_id || current_user.id
       question.correct_index = 1
       question.save
-      @new_questions.push question
-      flash[:notice] = "导入成功"
     end
-    @pending_questions = @new_questions
-    render :tempfile=>"index"
     respond_to do |format|
-      format.html { redirect_to :action => 'index' }
+      format.html { redirect_to :action => 'index' ,notice: "导入成功"}
     end
+
+    
   end
   
   def create
@@ -98,6 +115,12 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
         format.js {render :js => "$('#action_row_#{@pending_question.id}').html('<td>#{t('pending_question.accepted')}</td><td><a target=_blank href=#{question_path(@question.token)}>#{t('pending_question.link')}</a></td>');"}
       end
     end
+  end
+
+  def batch_update
+    ids = params["ids"].split(",")
+    PendingQuestion.update(ids,[{state: "1"}]*ids.size)
+    render :text=>"ok"
   end
 
   def reject

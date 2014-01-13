@@ -3,12 +3,13 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
   def index
   	if params["question_set_id"]
   		set = QuestionSet.find params["question_set_id"]
-  		@questions = set.questions.includes(:question_trace,:question_sets).page(params[:page])
+  		@questions = set.questions.includes(:question_trace,:question_sets,:user).page(params[:page])
   	elsif params["title"]
-      @questions = Question.includes(:question_trace).where("title like '%#{params[:title]}%'").page(params[:page])
-    else
-
-  		@questions = Question.includes(:question_trace).page(params[:page])
+      @questions = Question.includes(:question_trace,:user).where("title like '%#{params[:title]}%'").page(params[:page])
+    elsif params["show"]
+       @questions = Question.includes(:question_trace,:user).where("sponsor_id>0").page(params[:page])
+    else 
+  		@questions = Question.includes(:question_trace,:user).page(params[:page])
   	end  
   end
 
@@ -43,14 +44,59 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
 
     respond_to do |format|
       if @question.update_attributes(params[:question]) 
-        @question.question_sets<<(QuestionSet.find params["question_set_id"]) unless @question.question_sets.find params["question_set_id"]
-        format.html { redirect_to new_admin_questions_path, notice: '创建成功' }
+        @question.question_sets<<(QuestionSet.find params["question_set_id"]) unless @question.question_set_ids.include? params["question_set_id"]
+        format.html { redirect_to new_admin_questions_path, notice: '修改成功' }
         format.json { render json: @question, status: :created, location: @question }
       else
         format.html { render action: "new" }
         format.json { render json: @question.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def upload
+
+  end
+  def upload_sponsor
+   
+     begin
+      sheet =  Spreadsheet.open(params[:file].tempfile.path).worksheet(0)
+    rescue
+      redirect_to :action => 'upload'
+      flash[:notice] = "文件读取错误。请确认文件格式是否正确后再上传" 
+      return nil
+    end
+    intended_for_set = params["question"]["intended_for_set"]
+    question_set = QuestionSet.find(intended_for_set)
+   # @new_questions = []
+    sheet.each do |row|
+      question = Question.new
+      next if row[0] == nil
+      # This is magic
+      (1..4).each do |n|
+        eval "question.c#{n} = row[#{n}]"
+      end
+      #
+      row[5] = "" if row[5].nil?
+      # Are there any methods like [var1,var2,var3] = [1,2,3]
+      question.title = row[0]
+      question.explanation = row[5]
+     # question.keyword = row[6]
+      question.sponsor_id = params["question"]["sponsor_id"]
+      #question.intended_for_set = intended_for_set || 62
+      question.user_id = params["user_id"] || current_user.try(:id)
+      question.correct_index = 1
+      question.save
+      question.question_sets << question_set
+     # @new_questions.push question
+     
+    end
+   # @pending_questions = @new_questions
+    #render :tempfile=>"index"
+    respond_to do |format|
+      format.html { redirect_to :action => 'index',:notice=>"导入成功" }
+    end
+
   end
 
  def destroy

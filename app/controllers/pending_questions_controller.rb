@@ -24,7 +24,7 @@ class PendingQuestionsController < ApplicationController
 
   def import
     begin
-      sheet = Spreadsheet.open(params[:file].tempfile.path).worksheet(0)
+      sheet = ::Spreadsheet.open(params[:file].tempfile.path).worksheet(0)
     rescue
       redirect_to :action => 'index'
       flash[:notice] = "文件读取错误。请确认文件格式是否正确后再上传" 
@@ -59,7 +59,7 @@ class PendingQuestionsController < ApplicationController
   def create
     @pending_question = PendingQuestion.new(params[:pending_question])
     @pending_question.correct_index = 0
-    @pending_question.intended_for_set = params[:intended_for_set]
+   # @pending_question.intended_for_set = params[:intended_for_set]
     if user_signed_in?
       @pending_question.user_id = current_user.id
     end

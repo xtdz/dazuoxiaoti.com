@@ -4,12 +4,12 @@ class SinaApp::QuestionsController < SinaApp::ApplicationController
 
   def random
     count_down = session_manager.count_down
-    if count_down == 0 and rand() < 0.3
+    if count_down == 0 and session_manager.is_show_sponsored?  and rand() < 0.3
       @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(params[:question_set])
     else
       @question = current_user.get_next_question(params[:question_set])
     end
-
+    session_manager.set_show_sponsored if @question.sponsor_id>0
     if current_user.answer_quota <= 0
       json_hash = {
         id: -2
