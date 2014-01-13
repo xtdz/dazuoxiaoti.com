@@ -1,0 +1,35 @@
+.question_sets(style="margin-top:60px;")
+  .question_sets_left
+    - while !@notices.empty?
+      .notice
+        = @notices.pop
+    .sets_label
+      可选题集
+    .question_set_table
+      - @featured_question_sets.each do |question_set|
+        .question_set_narrow{id: "question_set_#{question_set.id}"}
+          .question_set_wrap
+            %input.subscribe(type="checkbox" value="#{question_set.id}")
+            .image= image_tag(question_set_image_path question_set)
+            .name= question_set.name
+            .description= question_set.description
+            .links
+              %a{href: random_questions_path(:question_set => question_set.id)} 单独回答此题集
+
+  .question_sets_right
+    .sets_label
+      已选题集
+      .sets_button
+        = link_to image_tag(asset_path('static/random_question.png')), random_questions_path
+      .clear
+    .question_set_table
+      - @user_question_sets.each do |question_set|
+        .question_set_narrow{id: "question_set_#{question_set.id}"}
+          .question_set_wrap
+            %input.unsubscribe(type="checkbox" checked value="#{question_set.id}")
+            .image= image_tag(question_set_image_path question_set)
+            .name= question_set.name
+            .description= question_set.description
+            .links
+              %a{href: random_questions_path(:question_set => question_set.id)} 单独回答此题集
+

@@ -1,0 +1,40 @@
+- @nav_class = :about
+.columns(style="margin-top:60px")
+  .static_left
+    .static_links
+      .link= link_to '关于我们', about_us_path, :class => 'selected'
+      .link= link_to '企业合作', donate_path
+      .link= link_to '常见问题', faq_path
+      .link= link_to '联系我们', contact_path
+      .link= link_to '致谢', thanks_path
+  .static_right
+    .static_header
+      关于我们
+    .static_content
+      .description
+        每个网民的力量微不足道，能为千千万万需要帮助的人奉献什么？
+      .description
+        官方捐赠渠道备受质疑，公益捐助是否只能通过传统途径？
+      .description
+        怎样的公益参与，既能有效地利用零碎时间，又能创造真正的价值？
+      .description
+        “小题大作”网站是中国第一个趣味性公益问答网站，旨在解决上述种种现存的问题：通过简单、有趣、透明的方式让尽可能多的人能够参与公益、贡献爱心、 收获知识。
+      .description
+        我们有“答题做捐赠”与“答题攒人气”这2种答题模式：
+      .description
+        一、答题做捐赠
+      .image
+        = image_tag asset_path("static/chart.png"), :width => 510, :alt => "三方共赢的创新公益机制"
+      .description
+        我们创造了一个三方共赢的创新公益机制：用户每答对一定数量的趣味百科问题，就能使公益项目得到相应数额的物资捐助。捐赠物资不经过小题大作团队，直接由企业捐助方捐给项目。通过我们悉心建立的反馈机制，用户同时可以全面、透明地了解公益项目的执行情况。
+      .description
+        小题大作团队希望通过这个平台，改变以往传统公益捐赠枯燥、官僚、繁琐的印象，以一种轻松、透明、亲切的方式推广人人都可以做公益的微公益理念。在“小题大作”上，每个人都可以利用自己的片刻时间，快乐轻松地为公益出一份力。
+      .description
+        二、答题攒人气
+      .description
+        公益组织不仅需要获得物资和资金援助，也需要将自己的理念与专业知识进行传播。当网友选择参与“答题攒人气“的活动，可以回答公益组织出的各类专业题集，了解尘肺病、动物保护、气候环境变化等知识；可以通过答题页面的各类链接到达公益组织的官方网站、微博或者公益淘宝店；可以将活动进行分享，让您在社交网络上的朋友看到公益组织的相关信息。
+      .description
+        更重要的是，您为公益组织积攒的人气，可能会吸引企业认捐公益项目；公益组织获得企业捐赠后，也有您的功劳哦！届时我们会通过私信和邮件通知您
+      .description(style="color:#f80")
+        小题大作团队始终坚信：小题目，也能有大作为
+  .clear

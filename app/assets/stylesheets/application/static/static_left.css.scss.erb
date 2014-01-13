@@ -1,0 +1,27 @@
+@import "common";
+
+.columns .static_left{
+  display: block;
+  float: left;
+  width: 180px;
+  .static_links {
+  }
+  .link {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 5px;
+    a {
+      line-height: 35px;
+      color: $orange;
+      display: block;
+      &:hover {
+      background: $orange;
+      color: $white;
+      }
+    }
+    a.selected {
+      background: $orange;
+      color: $white;
+    }
+  }
+}

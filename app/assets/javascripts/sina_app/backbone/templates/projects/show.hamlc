@@ -1,0 +1,25 @@
+- if @project.get('id')
+  .label
+    .wrapped_label
+      = @project.get('name')
+  .image
+    %img{src: @project.get('image_path')}
+  .links
+    %a.rlink{href: "http://t.cn/zWPyNuX", target: '_blank'} 更多活动
+    %a.llink{href: "http://t.cn/zW4HPLP", target: '_blank'} 活动详情
+  .label
+    .wrapped_label
+      = @project.get('equation')
+  .info
+    %p
+      已有
+      %span= @project.get('participation_count')
+      人参与
+    %p
+      共答对
+      %span=  @project.get('correct_count')
+      道题
+    %p
+      累计#{@project.get('benefit_name')}
+      %span= @project.get('item_count')
+      = @project.get('benefit_unit')

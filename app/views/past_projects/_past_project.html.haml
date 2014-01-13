@@ -1,0 +1,66 @@
+.project_header
+  =project.name
+.block_label
+  项目简介
+.block_content
+  .right_image= image_tag asset_path(project.image_path :about), :alt => project.name
+  答题开始时间：#{project.start_time.strftime "%m月%d日"}
+  %br
+  :plain
+    #{project.description}
+  .clear
+.block_label
+  捐赠与接收方简介
+.block_content
+  .left_image= link_to image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name), project.sponsor.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'past_project_show']);"
+  - project.sponsor.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+.block_content
+  .right_image= link_to image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name), project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'past_project_show']);"
+  - project.coordinator.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+.block_label
+  物资详情
+.block_content
+  .left_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
+  - project.benefit.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+.block_label
+  微博墙
+.block_content
+  - if project.weibos.empty?
+    暂无微博
+  - else
+    %span.list
+      - project.weibos.each_with_index do |weibo, index|
+        - if index == 0
+          %a.selected{:href => "#board", :onclick => "$.change_selected($(this));$.change_content('iframe_wb#{weibo.id}');"}= weibo.tag
+        - else
+          %a{:href => "#board", :onclick => "$.change_selected($(this));$.change_content('iframe_wb#{weibo.id}');"}= weibo.tag
+    .iframe
+      - project.weibos.each_with_index do |weibo, index|
+        %iframe(class="iframe_wb#{weibo.id}" width="460" height="520" frameborder="0" scrolling="no" src="#{weibo.src}")
+.block_label
+  执行记录
+.block_content
+  - if project.updates.empty?
+    小题大作会及时向您反馈本次项目的进行情况
+  - else
+    - project.updates.each do |update|
+      = update.content
+      %br
+    %br
+    - if project.feedback_image_count
+      - project.feedback_image_count.times do |i|
+        .feedback_image
+          = link_to image_tag(asset_path(project.feedback_image_path(i))), asset_path(project.feedback_image_path(i)), :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Image', 'Past_project', 'past_project_show']);"
+        %br

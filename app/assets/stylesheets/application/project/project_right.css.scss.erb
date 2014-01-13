@@ -1,0 +1,144 @@
+@import "common";
+
+
+.home_follow{
+  float: right;
+  width: 280px;
+  font-size: 9pt;
+  color: $grey;
+  background: $white;
+  margin-right: 10px;
+  @include shadow(0px, 0px, 3px, #e0e0e0);
+ 
+   
+    height:100px;
+    border:1px solid #ddd;
+  }
+.home_follow .home_logo,.home_follow .home_follow_right{float:left;}
+.home_follow .home_logo{width:90px;margin:5px 5px 5px 25px;}
+.home_follow .home_logo img{width:90px;float:left;height:90px;}
+
+
+.home_follow .home_follow_right{width:160px;height:60px;margin:20px 0px;}
+.home_follow .home_follow_right  h3{font-size:14px;font-weight:bold;padding-top:2px;padding-left:3px;height:22px;width:90px;float:left;}
+.home_follow .home_follow_right  h3 img{height:20px;width:20px;float:right;padding-right:10px;}
+.home_follow .home_follow_right li span{float:left;width:65px;}
+.home_follow .home_follow_right .last_cloumn{padding-top:40px;padding-left:3px;font-size:12px;}
+
+.sub_title{font-size:14px;font-weight:18px;color:#FF8000;}
+.last_column{margin-top:10px;}
+.sub_content{text-indent:20px;margin-top:5px;}
+
+.columns .project_right {
+float: right;
+width: 330px;
+
+.tab {
+  font-size: 10pt;
+  color: $grey;
+  .project_tag {
+    font-size: 20px;
+    background-color: $orange;
+    color: $white;
+    line-height: 23px;
+    padding: 12px 10px 12px 20px;
+    .project_button {
+      height: 23px;
+      width: 82px;
+      float: right;
+      line-height:0px;
+    }
+  }
+}
+
+.project_tab {
+  .project_explanation {
+    padding: 15px 20px;
+  }
+  .project_numbers {
+    margin-top: 20px;
+    .project_coordinator {
+      text-align: center;
+      float:left;
+      width: 120px;
+      border: 1px solid $grey_border;
+      .coordinator_label {
+        background-color: $orange;
+        padding: 7px 0px;
+        color: $white;
+      }
+      .coordinator_logo {
+        padding: 10px 5px;
+        background: $white;
+      }
+      img {width: 110px}
+    }
+    .project_stats {
+      float:right;
+      .numbers {
+        color: $orange;
+        font-size: 18pt;
+        letter-spacing: -1px;
+      }
+      .stat_row {
+        height: 35px;
+        width: 175px;
+        line-height: 35px;
+        border-bottom: 1px solid #e5e5e5;
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+.introduction {
+  float: right;
+  width: 280px;
+  font-size: 9pt;
+  color: $grey;
+  background: $white;
+  margin-right: 10px;
+  @include shadow(0px, 0px, 3px, #e0e0e0);
+  .first_step, .second_step{
+    .wrapped {
+      padding-left: 65px;
+      line-height: 60px;
+      color: $white;
+    }
+    zoom: 1.0;
+    position: relative;
+    top: -13px;
+    left: -10px;
+    width: 300px;
+    font-size: 11pt;
+    font-weight: bold;
+  }
+  .first_step {
+    background: url(<%= asset_path "static/first.png" %>) 0px 0px no-repeat;
+  }
+  .second_step {
+    background: url(<%= asset_path "static/second.png" %>) 0px 0px no-repeat;
+  }
+  .first_description, .second_description {
+    margin: 0px 9px;
+    padding: 0px 25px 35px 25px;
+    line-height: 22px;
+  }
+  .second_description {
+
+  }
+  .total_stats {
+    background: url(<%= asset_path "static/right_dark_bg.png" %>) 0px 0px repeat-x;
+    padding: 15px 25px;
+    height: 130px;
+    font-size: 10pt;
+    line-height: 35px;
+    .orange_big {
+      color: $orange;
+      font-size: 18pt;
+      letter-spacing: -1px;
+    }
+  }
+}
+
+}

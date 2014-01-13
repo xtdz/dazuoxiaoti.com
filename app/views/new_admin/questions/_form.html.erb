@@ -1,0 +1,68 @@
+<%= form_for [:new_admin,@question],:html => { :multipart => true } do |f|%>
+
+    <div class="order_number">
+        <table class="grid_order">
+            <tbody>
+                <tr height="35">
+                    <td class="td01"><b>*</b>问题:</td>
+                    <td>
+                       <%= f.text_field :title, :size=>60 %>
+                    </td>
+                </tr>
+                
+                <tr height="35">
+                    <td class="td01"><b>*</b>选项A：</td>
+                    <td>
+                       <%= f.text_field :c1, :size=>60 %>
+                    </td>
+                </tr>
+
+                <tr height="35">
+                    <td class="td01"><b>*</b>选项B：</td>
+                    <td>
+                       <%= f.text_field :c2, :size=>60 %>
+                    </td>
+                </tr>
+
+                 <tr height="35">
+                    <td class="td01"><b>*</b>选项C：</td>
+                    <td>
+                       <%= f.text_field :c3, :size=>60 %>
+                    </td>
+                </tr>
+                 <tr height="35">
+                    <td class="td01"><b>*</b>选项D：</td>
+                    <td>
+                       <%= f.text_field :c4, :size=>60 %>
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01"><b>*</b>答案（选择）：</td>
+                    <td>
+                       <%= f.radio_button :correct_index,0 %> A <%= f.radio_button :correct_index,1 %> B <%= f.radio_button :correct_index,2 %> C <%= f.radio_button :correct_index,3 %> D
+                    </td>
+                </tr>
+
+                 <tr height="35">
+                    <td class="td01"><b>*</b>所属题集：</td>
+                    <td>
+                      <%= select_tag(:question_set_id, options_for_select(QuestionSet.all.map{|q|[q.name,q.id]},:selected=>@question.question_set_ids.first), {:selected=> true})%>
+                    </td>
+                </tr>
+                <tr height="35">
+                    <td class="td01"><b>*</b>解释：</td>
+                    <td>
+                       <%= f.text_area :explanation, :cols=>100,:rows=>5%>
+                    </td>
+                </tr>
+
+                <tr height="35">
+                    <td class="td01"></td>
+                    <td>
+                    <input name="commit" value="修改" type="submit">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<% end -%>

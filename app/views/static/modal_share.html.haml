@@ -1,0 +1,7 @@
+.modal
+  .share
+    你可以分享下面的链接。你的好友们通过链接答题便可提升你的贡献值。
+    - if user_signed_in?
+      = text_field_tag :share_link, "http://#{request.host}/?in=share&referer_id=#{current_user.id}", :onclick => "$('#share_link').focus();$('#share_link').select();"
+    - else
+      = text_field_tag :share_link, "http://#{request.host}/?in=share", :onclick => "$('#share_link').focus();$('#share_link').select();"

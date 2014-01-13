@@ -1,0 +1,21 @@
+.columns
+  .user_left
+    .user_header
+      .type
+        小题大作用户登录
+    .edit
+      .box
+        - flash.each do |name, msg| 
+          .error= content_tag :div, msg, :id => "flash_#{name}"
+        = semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |form|
+          = form.inputs :email, :password
+          = form.buttons do
+            = form.commit_button :login, :button_html => {:class => "common_button"}
+          = form.check_box :remember_me
+          记住帐户
+        %br
+        = link_to '忘记密码？', new_user_password_path
+  .user_right
+    .text 您可以用以下方式登录
+    = render "users/sessions/login"
+  .clear

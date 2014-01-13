@@ -1,0 +1,45 @@
+<h1 class="title">
+ <span class="title_left">公告列表</span>
+  <span class="title_right">
+    <%= link_to "添加",new_new_admin_home_notice_path %>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">名称</th>
+            <th width="10%">链接</th>
+
+            <th width="10%">是否置顶</th>
+            <th width="10%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @notices.each do |notice| %>
+        <tr>
+            <td width="5%"><%= notice.id %> </td>
+            <td width="10%"><%= link_to notice.title %></td>
+            <td width="10%"><%= link_to notice.url %></td>
+            <td width="10%"><%= notice.is_top ? "Yes" : "No" %></td>
+            <td width="10%">
+              <%= link_to "修改", [:edit,:new_admin, notice], :title=>"修改", :class=>"delete" %>
+             
+              <%= link_to "删除", [:new_admin,notice], :method=>:delete, :title=>"删除", data: {:confirm=>"确定删除此条信息吗？"}, :class=>"delete" %>
+            </td>
+        </tr>
+      <% end -%>
+      <% if @notices.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @notices %>
+<%#=page_info(@categories)%>

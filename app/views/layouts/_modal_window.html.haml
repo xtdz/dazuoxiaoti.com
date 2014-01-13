@@ -1,0 +1,6 @@
+#boxes
+  #dialog.window
+    #partial
+      = render :partial => partial
+    = link_to "关掉", "#", :class=>"close", :onclick => "$('#mask, .window').hide();"
+  #mask{:onclick => "$('#mask, .window').hide();"}

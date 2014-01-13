@@ -1,0 +1,89 @@
+
+<h1 class="title">
+ <span class="title_left"><a href="/new_admin/question_sets">题目列表</a></span>
+  <span class="title_right">
+    <%= link_to "添加新题",new_new_admin_question_path %>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+<table class="search">
+    <tbody>
+        <tr>
+            <%= form_tag '', {:method=>:get} do %>
+            <td width="15%">
+              题目问题：
+              <%= text_field_tag "title", params[:title], :size=>10 %>
+            </td>
+            <td width="50%">
+                <label>
+                    <input type="submit" name="button" id="button" value="搜索" />
+                </label>
+            </td>
+            <% end -%>
+        </tr>
+    </tbody>
+</table>
+
+  <%= paginate @questions %>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+             <th width="5%">出题者</th>
+            <th width="8%">题集</th>
+            <th width="10%">问题</th>
+            <th width="10%">题目选项(红色为答案)</th>
+            <th width="10%">每项点击数</th>
+             <th width="10%">统计</th>
+            <th width="10%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @questions.each_with_index do |question,index| %>
+        <tr>
+            <td width="5%"><%= question.id %> </td>
+            <td width="5%"><%= question.try(:user).try("nickname") || question.user_id%> </td>
+            <td width="5%"><%= question.question_sets.map{|q|q.name}%> </td>
+            <td width="10%"><%= link_to question.title ,[:new_admin,question]%></td>
+            <td width="20%" style="padding-left:0px">
+            	    <ul>
+                       <%(1..4).to_a.each do |i|%>
+                         <li style="border-bottom:1px solid #DDDDDD; text-align:left; padding-left:10px;<%='color:red' if question.correct_index==i-1%>"><%=i%> : <%=question.send("c#{i}")%></li>
+                       <%end -%>
+                    </ul>
+            </td>
+            <%trace = question.question_trace%>
+            <td width="10%" style="padding-left:0px"><ul>
+                       <%(1..4).to_a.each do |i|%>
+                         <li style="border-bottom:1px solid #DDDDDD; text-align:left; padding-left:10px;"><%=i%> : <%=trace.send("c#{i}_click_num")%></li>
+                       <%end if !trace.blank? %>
+                 
+                    </ul>
+            </td>
+            <td width="10%" style="padding-left:0px">
+                  <ul>
+                      <li style="border-bottom:1px solid #DDDDDD; text-align:left; padding-left:10px;">回答正确数:<%=trace.try(:corrent_num)%></li>
+                      <li style="border-bottom:1px solid #DDDDDD; text-align:left;padding-left:10px;padding-top:10px ">跳过数:<%=trace.try(:skip_num)%></li>
+                     <li style=" text-align:left; padding-left:10px;">总数:<%=trace.try(:total_num)%></li>
+                     
+                  </ul>
+              </td>
+            <td width="10%">
+              <%= link_to "修改", [:edit,:new_admin, question], :title=>"修改", :class=>"delete" ,:target=>"blank"%>
+              <%= link_to "删除", [:new_admin,question], :method=>:delete, :title=>"删除", data: {:confirm=>"确定删除此条信息吗？"}, :class=>"delete" %>
+            </td>
+        </tr>
+      <% end -%>
+      <% if @questions.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @questions %>
+<%#=page_info(@categories)%>

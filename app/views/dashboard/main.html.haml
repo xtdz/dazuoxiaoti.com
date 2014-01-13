@@ -1,0 +1,36 @@
+.dashboard
+  .dashboard_left
+    = render :partial=>"dashboard_menu"
+    .project_list
+      - @participations.each_with_index do |participation,index|
+        .project
+          .project_wrapped
+            .project_image= image_tag project_image_path(participation.project,:main) if participation.project.present?
+            .screen
+            .project_overview
+              .label
+                .name= participation.project.name[0..9] if participation.project.try(:name)
+                .equation= participation.project.equation  if participation.project
+              .buttons
+                - if participation.project && participation.project .expired?
+                  - @path = past_project_path(participation.project) 
+                  %a.info{href: @path}
+                - else
+                  - @path = random_questions_path(:project_id => participation.project_id)
+                  %a.continue{href: @path}
+            .description
+              - @message = "你已经答对了#{participation.correct_count}道题目"
+              - @message1 = share_record_message participation.correct_count, participation.project
+              - if  participation.project_id.to_i == 14
+                -  @message = @message + "获得“宜农贷”5元助农卡#{participation.correct_count/20}张"
+              - else
+                - @message = @message + ",共助捐了#{participation.correct_count / participation.project.rate}#{participation.project.benefit.unit}#{participation.project.benefit.name}" if participation.correct_count / participation.project.rate>0
+              .last_participated
+                上次参与：#{participation.last_update}，分享到：
+                = render :partial => 'questions/new_social_link', :locals => {:message => @message1 , :path => @path,:i=>index,:project=>participation.project}
+              %span.share_title
+                = @message
+
+
+  .dashboard_right
+    = render :partial => 'users/info'

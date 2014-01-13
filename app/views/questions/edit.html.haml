@@ -1,0 +1,41 @@
+修改题目：
+%br
+%br
+= form_for(@question) do |f| 
+  %p
+    = f.label :题目
+    = f.text_field :title
+  %p
+    = f.label :选项a
+    = f.text_field :c1
+  %p
+    = f.label :选项b
+    = f.text_field :c2
+  %p
+    = f.label :选项c
+    = f.text_field :c3
+  %p
+    = f.label :选项d
+    = f.text_field :c4
+  %p
+    = f.label :正确选项
+    = f.text_field :correct_index
+  %p
+    = f.label :解释
+    = f.text_area :explanation
+  %p
+    = f.label :所属题集
+    - QuestionSet.all.each do |q|
+      = check_box_tag 'qs[]', q.id, @question.question_sets.include?(q)
+      = q.name
+  %p
+    = f.submit '更新'
+  %p
+    |
+  %p
+    |
+  %p
+    |
+%p
+  = button_to '删除此题', @question, :confirm => '确定删除 '+@question.title+' 吗？', :controller => :questions, :method => :delete
+    

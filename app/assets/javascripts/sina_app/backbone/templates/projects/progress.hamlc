@@ -1,0 +1,15 @@
+- if @project.get('id')
+  .progress
+    .progress_image#progress_image
+      %img{src: @project.get('progress_image_path')}
+    你为本活动答对了
+    %span.orange= @project.get('user_correct_count')
+    题，还差
+    %span.orange= @project.get('rate') - @project.get('user_correct_count')
+    题就可以独立助捐
+    %span.orange= Math.floor(@project.get('user_correct_count')/@project.get('rate')) + 1
+    = @project.get('benefit_unit') + @project.get('benefit_name') + "。"
+    .progress_bar_outter
+      .progress_bar_inner{:style => "width: #{Math.floor(@project.get('user_correct_count') % @project.get('rate') * 450 / @project.get('rate'))}px"}
+- else
+  Loading...

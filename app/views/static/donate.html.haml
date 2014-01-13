@@ -1,0 +1,15 @@
+- @nav_class = :about
+.columns(style="margin-top:60px")
+  .static_left
+    .static_links
+      .link= link_to '关于我们', about_us_path
+      .link= link_to '企业合作', donate_path, :class => 'selected'
+      .link= link_to '常见问题', faq_path
+      .link= link_to '联系我们', contact_path
+      .link= link_to '致谢', thanks_path
+  .static_right
+    .static_header
+      企业合作
+    .static_content
+      = render :partial => "static/donate_word"
+  .clear

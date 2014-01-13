@@ -1,0 +1,134 @@
+@import "common";
+
+.columns .question_right {
+float: right;
+width: 330px;
+zoom: 1.0;
+
+.tab {
+  font-size: 10pt;
+  color: $grey;
+  .project_tag {
+    font-size: 20px;
+    background-color: $orange;
+    color: $white;
+    line-height: 23px;
+    padding: 12px 10px 12px 20px;
+    .project_button {
+      height: 23px;
+      width: 80px;
+      float: right;
+      line-height:0px;
+    }
+  }
+}
+.project_tab {
+  .project_explanation {
+    padding: 15px 20px;
+  }
+  .project_numbers {
+    margin-top: 20px;
+    .project_coordinator {
+      text-align: center;
+      float:left;
+      width: 120px;
+      border: 1px solid #e5e5e5;
+      .coordinator_label {
+        background-color: $orange;
+        padding: 7px 0px;
+        color: $white;
+      }
+      .coordinator_logo {
+        padding: 10px 5px 0px 5px;
+        background: $white;
+      }
+      img {width: 110px}
+    }
+    .project_stats {
+      float:right;
+      .numbers {
+        color: $orange;
+        font-size: 18pt;
+        letter-spacing: -1px;
+      }
+      .stat_row {
+        height: 35px;
+        width: 175px;
+        line-height: 35px;
+        border-bottom: 1px solid #e5e5e5;
+        padding-right: 5px;
+      }
+    }
+  }
+}
+
+.question_tab {
+  .block_label {
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 12pt;
+    padding: 5px 0px;
+    margin: 20px 0px 15px 0px;
+    font-weight: bold;
+    color: $orange;
+    @include colored_link;
+    a {
+      float: right;
+      font-size: 10pt;
+      font-weight: normal;
+      line-height: 23px;
+    }
+  }
+  a.change_set {
+    float: right;
+    display: block;
+    width: 84px;
+    height: 27px;
+    background: url(<%= asset_path 'static/change_set.png'%>) no-repeat;
+  }
+  .block_content {
+    margin-bottom: 10px;
+    .set_image, .creater_image {
+    float: left;
+    margin-right: 10px;
+    img {
+      height: 61px;
+      width: 61px;
+      }
+    }
+    .set_description, .creater_description {
+    line-height: 22px;
+    padding-left: 71px;
+    }
+    .right_text {
+      float: right;
+    }
+    .creater_name {
+    color:#479bee;
+    font-size: 11pt;
+    }
+  }
+}
+
+.tab_menu {
+  margin-top: 30px;
+  border-top: 1px solid #ffa64d;
+  font-size: 9pt;
+  a.tab_label {
+    zoom: 1;
+    position: relative;
+    top: -1px;
+    display: block;
+    float: left;
+    line-height: 30px;
+    padding: 0px 10px;
+    color: $orange;
+  }
+  a.tab_label.selected {
+    background: $orange;
+    color: $white;
+    border: 1px solid $orange;
+    border-top: 0px;
+  }
+}
+
+}

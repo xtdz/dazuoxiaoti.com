@@ -1,0 +1,31 @@
+.project_tab.tab.displayed
+  .project_tag
+    - if on_question_page
+      .project_button
+        = link_to image_tag(asset_path("static/project_button.png"), :alt => '查看详情'), project_path(project), :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'project_detail', 'project_tab']);"
+    = project.equation
+  .project_explanation
+    = project.tagline
+  
+  .project_tongji(style="line-height:24px;text-align:center;font-size:14px;font-weight:bold;padding:7px;color:#666;")
+    %span.numbers.participation_count(style="color:#f80;font-size:22px;") #{project.participation_count}人
+    已参与 累计答对
+    %span.numbers.correct_count(style="color:#f80;font-size:22px;") #{project.correct_count}题
+
+  .project_numbers
+    .project_coordinator
+      .coordinator_label
+        爱心传送门
+      .coordinator_logo
+        %a.image{:href => "http://daaiqc.taobao.com/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
+          = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
+    .project_stats
+      .project_label(style="background-color: #FF8000;color:white;width:200px;padding:7px 0;text-align:center;")
+        您的人气，我来认领
+      .project_label(style="width:190px;margin-left:8px;padding:5px 0;font-size:12px")
+        网友十分热情的来答问题，也欢迎企业来认领高涨的爱心人气，为大爱清尘做出爱心支持。
+      .project_label(style="width:190px;text-align:center;padding:5px 0;font-size:14px")
+        %a(href="/donate")
+          = image_tag(asset_path("static/qiye.png"))
+     
+  .clear

@@ -1,0 +1,26 @@
+.question_bar
+  .category_btn
+    - if user_signed_in?
+      = link_to image_tag(asset_path("static/question/category_btn.png"), :title => "选择你感兴趣的题目类别", :alt => "选择你感兴趣的题目类别"), "#", :onclick => "$('div.category_drop').toggle()"
+    - else
+      登录后可选择题目类别
+  .type
+    调查问题
+  .share
+- if user_signed_in?
+  .category_drop
+    = render :partial => 'questions/categories', :locals => {:categories => @user.get_categories}
+.question= survey.title
+#solution
+  =form_tag(fillup_path(:project_id => @project.id), :method => "post", :class => "survey_form") do
+    %input#index{:type => "hidden", :name => "index", :value => 0}
+    %input{:type => "hidden", :name => "id", :value => survey.id}
+    .side
+      %a.skip{:href => random_questions_path(:project_id => @project.id)}
+    %table
+      %tbody
+        - @choices.each_with_index do |choice, index|
+          %tr{:height=>25}
+            %td{:width=>32}
+              .mark
+            %td= link_to choice, "#", :onclick=>"$.submit_survey(#{index})"

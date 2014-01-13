@@ -1,0 +1,9 @@
+.settings
+  - if !resource.authentication.nil? && resource.authentication.provider == 'tsina'
+    = link_to "撤销新浪绑定", user_registration_path, :method => :delete, :confirm => "解除绑定后用户资料将被删除"
+  - elsif !resource.authentication.nil? && resource.authentication.provider == 'renren'
+    = link_to "撤销人人绑定", user_registration_path, :method => :delete, :confirm => "解除绑定后用户资料将被删除"
+  - elsif !resource.authentication.nil? && resource.authentication.provider == 'tqq'
+    = link_to "撤销腾讯绑定", user_registration_path, :method => :delete, :confirm => "解除绑定后用户资料将被删除"
+  = link_to '修改密码', '#', :onclick => "$.UserEditPage.toggleEdit('password')"
+  = link_to '修改资料', '#', :onclick => "$.UserEditPage.toggleEdit('user_info')"

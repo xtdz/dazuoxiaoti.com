@@ -1,0 +1,6 @@
+.modal
+  .new_feedback_form
+    您要想对这道题报错，或者有任何的意见或评价，请写在下方：
+    = form_for([@question, @question.feedbacks.build], :remote => true) do |f|
+      = f.text_area :content, :value => "这道题有错。"
+      = f.submit "提交", :class => "common_button"

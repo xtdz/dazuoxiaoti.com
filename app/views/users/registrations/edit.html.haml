@@ -1,0 +1,28 @@
+.dashboard
+  .dashboard_left
+    = render :partial=>"dashboard/dashboard_menu"
+    .edit.user_info.visible
+      .title 修改资料
+      .box
+        = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+          = f.hidden_field :hidden, :value => 1
+          = f.input :nickname
+          = f.input :name
+          = f.buttons do
+            = f.commit_button "修改资料", :button_html => {:class => "common_button"}
+      .clear
+    .edit.password.hidden
+      .title 修改密码
+      .box
+        = semantic_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+          - if resource.encrypted_password.blank?
+            = f.input :email
+          = f.input :password
+          = f.input :password_confirmation
+          = f.buttons do
+            = f.commit_button "修改密码", :button_html => {:class => "common_button"}
+      .clear
+  .dashboard_right
+    = render "users/info"
+    = render "users/settings"
+  .clear

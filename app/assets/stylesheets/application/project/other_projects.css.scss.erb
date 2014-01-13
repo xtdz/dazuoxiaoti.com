@@ -1,0 +1,32 @@
+@import "common";
+
+.columns .project_left .other_projects, .columns .question_left .other_projects {
+  height: 80px;
+  border: 1px solid $orange;
+  color: white;
+  margin-top: 30px;
+  background: $white;
+  .label {
+    width: 85px;
+    height: 80px;
+    display: block;
+    float: left;
+    font-size: 10pt;
+    line-height: 80px;
+    padding-left: 15px;
+    background: url("<%= asset_path "static/other_bg.png" %>") 0px 0px no-repeat;
+  }
+  .other_project {
+    float: left;
+    height: 80px;
+    width: 100px;
+  }
+  .other_project_wrapped {
+    padding: 5px;
+    height: 65px;
+    overflow: hidden;
+    img {
+      height: 70px;
+    }
+  }
+}

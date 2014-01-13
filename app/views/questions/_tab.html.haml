@@ -1,0 +1,32 @@
+- if user_signed_in?
+  = render :partial => 'users/info_small'
+
+  - if @question_set
+    .block_label
+      所属题集
+    %a.change_set{href: question_sets_path, :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'change_set', 'question_tab']);"}
+    .block_content
+      .set_image
+        = image_tag asset_path(question_set_image_path @question_set),:height=>75, :alt => @question_set.name
+      .set_description
+        这道题出自#{@question_set.name}题集。#{@question_set.description}
+      .clear
+  .block_label
+    - if question.user.nil?
+      题目来源
+    - else
+      作者
+  .block_content
+    .creater_image
+      - if question.user && question.user.avatar_url
+        = image_tag question.user.avatar_url, :width => '61px', :alt => question.get_source["name"]
+      - else
+        = image_tag (question.get_source["upload_image_path"] || asset_path(question.get_source["image_path"])), :width => '61px', :alt => question.get_source["name"]
+    .creater_description
+      .creater_name= link_to question.get_source["name"], question.get_source["link"], :target => '_blank', :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'creater', 'question_tab']);"
+      = question.get_source["description"]
+    .clear
+- else
+  .block_label 用以下方式登录后会有更多功能
+  = render :partial => 'users/sessions/login'
+

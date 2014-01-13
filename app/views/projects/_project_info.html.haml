@@ -1,0 +1,24 @@
+= simple_form_for(@project, :html => { :multipart => true }) do |f|
+  %h3
+    基本信息
+  .p
+    = render partial: 'form_basic_info', locals: {form: f}
+
+  %h3
+    项目详情
+  .p
+    = render partial: 'form_project_info', locals: {form: f}
+
+  %h3
+    答题页
+  .p
+    = render partial: 'form_question', locals: {form: f}
+
+  %h3
+    分享信息
+  .p
+    = render partial: 'form_share', locals: {form: f}
+
+  .p
+    = f.input :hidden, label: '隐藏'
+    = f.submit

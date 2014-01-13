@@ -1,0 +1,42 @@
+<h1 class="title">
+ <span class="title_left">分类列表</span>
+  <span class="title_right">
+    <%= link_to "添加",new_new_admin_category_path %>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="10%">名称</th>
+            <th width="10%">状态</th>
+            <th width="10%">管理</th>
+        </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+            <td width="5%"><%= category.id %> </td>
+            <td width="10%"><%= link_to category.name %></td>
+            <td width="10%"><%= category.is_show ? "显示" : "隐藏" %></td>
+            <td width="10%">
+              <%= link_to "修改", [:edit,:new_admin, category], :title=>"修改", :class=>"delete" %>
+              <%= link_to "删除", [:new_admin,category], :method=>:delete, :title=>"删除", data: {:confirm=>"确定删除此条信息吗？"}, :class=>"delete" %>
+              <%= link_to "查看该分类下的题集","/new_admin/question_sets?category_id=#{category.id}", :class=>"delete" %>
+            </td>
+        </tr>
+      <% end -%>
+      <% if @categories.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @categories %>
+<%#=page_info(@categories)%>

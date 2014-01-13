@@ -1,0 +1,47 @@
+= stylesheet_link_tag "project_style"
+.columns
+  .question_left
+    .content
+      - if @project.project_kind.to_i==2
+        = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
+      - else
+        - if session[:show_share] and session[:show_share][current_project.id]
+          - session[:show_share].delete current_project.id
+          = render :partial => 'questions/share'
+        - elsif user_quota < 1
+          = render :partial => 'questions/finished'
+        - else
+          = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
+    = render :partial => 'projects/others', :locals => {:projects => @projects}
+  .question_right
+    = render :partial => @project.id==12 ? 'projects/new_tab' : 'projects/tab', :locals => {:project => @project, :on_question_page => true}
+    .question_tab.tab.hidden= render :partial => 'questions/tab', :locals => {:question => @question, :project => @project}
+    .tab_menu
+      = link_to '活动信息', "#", :name => ".project_tab", :class => "project_tab_label tab_label selected", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Project Tab', 'question_show']);"
+      = link_to '题目信息', "#", :name => ".question_tab", :class => "question_tab_label tab_label", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Question Tab', 'question_show']);"
+      .clear
+    - if @project.information
+      .information(style="font-size:12px;padding-top:5px;color:#666")
+        = @project.information
+      //%br
+      //%iframe(width="360" height="190" src="http://www.taobao.com/go/rgn/union/link_tmall.php?size=360x190&pid=mm_47354439_0_0" frameborder="0" marginheight="0" marginwidth="0" border="0" scrolling="no" name="alimamaifrm")
+    %br
+    :javascript
+      document.write('<a style="display:none!important" id="tanx-a-mm_47354439_4288126_14578514"></a>');
+      tanx_s = document.createElement("script");
+      tanx_s.type = "text/javascript";
+      tanx_s.charset = "gbk";
+      tanx_s.id = "tanx-s-mm_47354439_4288126_14578514";
+      tanx_s.async = true;
+      tanx_s.src = "http://p.tanx.com/ex?i=mm_47354439_4288126_14578514";
+      tanx_h = document.getElementsByTagName("head")[0];
+      if(tanx_h)tanx_h.insertBefore(tanx_s,tanx_h.firstChild);
+    .DescImage(style="margin:0px 0px -4px 0px;")
+      = image_tag(asset_path("static/jiantou.png"),:style=>"padding-left:50px")
+    .Description(style="border:1px solid #ee9400; width:100%; max-width:300px; background:#ee9400; color:#fff; font-size:12px; padding:5px 5px;")
+      为什么会有广告：小题尝试通过广告的方式获取资金，用这些资金捐赠更多项目。如果给你带来困扰，敬请谅解~
+      
+  .clear
+- if current_user
+  = render :partial => "jiathis"  , :locals => {:count => user_correct_count, :project => @project}
+

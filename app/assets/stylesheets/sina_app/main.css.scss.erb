@@ -1,0 +1,81 @@
+@import "common";
+
+.hidden {display:none}
+
+#intro {
+  zoom: 1.0;
+  position: relative;
+  height: 600px;
+  width: 760px;
+  background: url("<%= asset_path "static/sina_app/background.png" %>");
+
+  #total_participation_count, #total_item_count {
+    zoom: 1.0;
+    position: absolute;
+    top: 197px;
+    color: $white;
+    font-size: 20px;
+    width: 65px;
+    text-align: center;
+  }
+
+  #total_participation_count {
+    left: 190px;
+  }
+  #total_item_count {
+    left: 462px;
+  }
+
+  #description {
+    zoom: 1.0;
+    position:absolute;
+    top: 240px;
+    left: 200px;
+    color: #574733;
+    text-align: center;
+    width: 360px;
+    height: 200px;
+    font-size: 12px;
+    p {
+      padding: 3px;
+    }
+    a {
+      font-size: 14px;
+      color: #d66139;
+    }
+  }
+
+
+
+  a#start {
+    zoom: 1.0;
+    width: 130px;
+    height: 50px;
+    position: absolute;
+    background: url("<%= asset_path "static/sina_app/start.png" %>");
+    top: 510px;
+    left: 320px;
+  }
+}
+
+#container{
+  width: 740px;
+  min-height: 380px;
+  border: 10px solid $orange;
+}
+
+table.viewport {
+  tr {
+    height: 580px;
+  }
+  #left_column {
+    width: 550px;
+    vertical-align: top;
+  }
+  #right_column {
+    width: 190px;
+    background: #fffffa;
+    border-left: 1px solid #f2f2f2;
+    vertical-align: top;
+  }
+}

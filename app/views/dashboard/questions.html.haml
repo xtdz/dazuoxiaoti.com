@@ -1,0 +1,6 @@
+.dashboard
+  .dashboard_left
+    = render :partial=>"dashboard_menu"
+    = render :partial => 'pending_questions/list', :locals => {:pending_questions => @pending_questions, :accepted_questions => @accepted_questions, :rejected_questions => @rejected_questions}
+  .dashboard_right
+    = render :partial => 'users/info'

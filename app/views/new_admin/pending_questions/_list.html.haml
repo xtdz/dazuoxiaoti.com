@@ -1,0 +1,78 @@
+.sets_label 
+  已通过的题目：
+  .sets_button
+    = link_to image_tag(asset_path('static/create_question.png')), new_pending_question_path, :class => 'fancy'
+  .clear
+- if accepted_questions && !accepted_questions.empty?
+  .pending_question_table
+    %table{:style => "text-align:left;vertical-align:middle;"}
+      - accepted_questions.each_with_index do |p, index|
+        %tr
+          %td{:colspan => 4}
+            .pending_question_title
+              #{index+1}.
+              = p.title
+              = link_to '查看', question_path(p.token), :target => '_blank'
+        %tr
+          %td{:width => 150}
+            .correct_answer
+              #{p.correct_answer}(#{p.choice_count(p.correct_answer)})
+          - p.wrong_answers.each do |a|
+            %td{:width => 150}
+              #{a}(#{p.choice_count(a)})
+        %tr
+          %td{:colspan=>4}
+            .pending_question_explanation.last_row
+              - if p.explanation && !p.explanation.empty?
+                解释：
+                = p.explanation
+.sets_label 审核中的题目：
+.pending_question_table
+  %table{:style => "text-align:left;vertical-align:middle;"}
+    - pending_questions.each_with_index do |p, index|
+      %tr
+        %td{:colspan => 4}
+          .pending_question_title
+            #{index+1}.
+            = p.title
+      %tr
+        %td{:width => 150}
+          .correct_answer
+            = p.correct_answer
+        - p.wrong_answers.each do |a|
+          %td{:width => 150}
+            = a
+      %tr
+        %td{:colspan=>4}
+          .pending_question_explanation.last_row
+            - if p.explanation && !p.explanation.empty?
+              解释：
+              = p.explanation
+- if rejected_questions && !rejected_questions.empty?
+  .sets_label 未通过的题目：
+  .pending_question_table
+    %table{:style => "text-align:left;vertical-align:middle;"}
+      - rejected_questions.each_with_index do |p, index|
+        %tr
+          %td{:colspan => 4}
+            .pending_question_title
+              #{index+1}.
+              = p.title
+        %tr
+          %td{:width => 150}
+            .correct_answer
+              = p.correct_answer
+          - p.wrong_answers.each do |a|
+            %td{:width => 150}
+              = a
+        %tr
+          %td{:colspan=>4}
+            .pending_question_explanation
+              - if p.explanation && !p.explanation.empty?
+                解释：
+                = p.explanation
+        %tr
+          %td{:colspan=>4}
+            .pending_question_comment.last_row
+              决绝原因：
+            = p.comment          

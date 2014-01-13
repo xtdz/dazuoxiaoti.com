@@ -1,0 +1,29 @@
+<h1 class="title">
+ <span class="title_left"><a href="/new_admin/pending_questions/uploading">上传题集</a></span>
+  <span class="title_right">
+    <%= link_to "上传题集列表",new_admin_pending_questions_path %>
+  
+  </span>   
+</h1>
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+<table class="search">
+    <tbody>
+      <%=form_tag(import_new_admin_pending_questions_path, :method => "post", :multipart => true) do |f|%>
+        <tr> <td >上传：<%=file_field_tag('file')%></td></tr>
+        <tr><td>用户ID：<%=text_field_tag :user_id%></td></tr>
+         <tr><td>选择题集：<%=select('pending_question',:intended_for_set, QuestionSet.all.collect{|q|[q.name, q.id]}, {:selected => "62"})%></td></tr>
+        <tr><td><%#=f.select(:intended_for_set, QuestionSet.all.collect{|q|[q.name, q.id]}, {:selected => "62"})%>
+        </td></tr>
+         <tr>
+            <td>
+                <label>
+                    <input type="submit" name="button" id="button" value="上传题集" />
+                </label>
+            </td>
+            
+        </tr>
+        <% end -%>
+    </tbody>
+</table>

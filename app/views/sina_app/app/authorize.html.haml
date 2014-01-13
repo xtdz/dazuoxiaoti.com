@@ -1,0 +1,17 @@
+%body(onload="authLoad();")
+  :plain
+    <style>
+      body {
+        background: url("#{asset_path "static/sina_app/auth_bg.jpg"}") no-repeat;
+      }
+    </style>
+    <script src="http://tjs.sjs.sinajs.cn/t35/apps/opent/js/frames/client.js" language="JavaScript"></script>
+    <script>
+      function authLoad() {
+        App.AuthDialog.show({
+          client_id : '#{@app_key}',
+          redirect_uri : '#{@redirect_url}',
+          height: 120    //可选，默认距顶端120px
+        });
+      }
+    </script>

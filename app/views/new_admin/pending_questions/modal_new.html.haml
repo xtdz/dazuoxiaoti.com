@@ -1,0 +1,38 @@
+.modal
+  .new_pending_question
+    .title 我来出题，考考大家
+    = form_for(@pending_question, :remote => true)  do |f|
+      - if @pending_question.errors.any?
+        #error_explanation
+          %h2
+            = pluralize(@pending_question.errors.count, "error")
+            prohibited this question from being saved:
+        %ul
+          - @pending_question.errors.full_messages.each do |msg|
+            %li = msg
+      .question
+        = f.text_area :title, :value => "请输入你的题目。。。"
+      .answer_choices
+        .correct_choice
+          = f.label :正确选项
+          = f.text_field :c1, :value => "此选项为正确选项"
+        .clear
+        = f.label :其他选项1
+        = f.text_field :c2, :value => "此选项为错误选项"
+        .clear
+        = f.label :其他选项2
+        = f.text_field :c3, :value => "此选项为错误选项"
+        .clear
+        = f.label :其他选项3
+        = f.text_field :c4, :value => "此选项为错误选项"
+      .question_set_select
+        = f.label "所属题集（可不选）"
+        = select_tag(:intended_for_set, options_from_collection_for_select(QuestionSet.all, :id, :name), {:include_blank => true})
+      .explanation
+        = f.text_area :explanation, :placeholder => "请为答案给出一个解释吧"
+      = f.submit '提交'
+
+:javascript
+  $('.modal').ready(function() {
+    $('div.new_pending_question').trigger('loaded')
+  });

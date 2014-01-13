@@ -1,0 +1,79 @@
+<div style="text-align:center;color:green;">
+    <%= flash[:notice] %>
+</div>
+<table class="search">
+    <tbody>
+        <tr>
+            <%= form_tag '',{:method=>:get} do %>
+            <td width="15%">
+              卡号：
+              <%= text_field_tag "card", params[:user_id], :size=>10 %>
+            </td>
+           
+            <td width="30%">
+                <label>
+                    <input type="submit" name="button" id="button" value="搜索" />
+                </label>
+            </td>
+            <td>
+              <label>
+                    <a href="/new_admin/yixin_cards">查看全部</a>
+                </label>
+            </td>
+            <% end -%>
+        </tr>
+    </tbody>
+</table>
+<table class="grid">
+        <tr>
+            <td width="5%">累计上传卡数</td>
+            <td width="5%">已发放张数</td>
+            <td width="5%">已发放人数</td>
+            <td width="10%">剩余张数</td>
+           
+            
+        </tr>
+    <tbody>
+      
+        <tr>
+            <td width="5%"><%= @cards.total_count %> </td>
+            <td width="5%"><%= @send_cards %> </td>
+            <td width="5%"><%= @user_num %> </td>
+            <td width="5%"><%= @cards.total_count-@send_cards  %> </td>
+            
+            
+        </tr>
+    </tbody>
+</table>
+
+
+<table class="grid">
+    <thead>
+        <tr>
+            <th width="5%">ID</th>
+            <th width="5%">卡号</th>
+            <th width="5%">密码</th>
+            <th width="10%">是否发送</th>
+           
+            
+        </tr>
+    </thead>
+    <tbody>
+      <% @cards.each do |card| %>
+        <tr>
+            <td width="5%"><%= card.id  %> </td>
+            <td width="5%"><%= card.cards %> </td>
+            <td width="5%"><%= card.password %> </td>
+            <td width="5%"><%= card.user_id.blank? ? "否" : (card.try(:user).try(:name) ||  card.try(:user).try(:nickname)) %> </td>
+            
+            
+        </tr>
+      <% end -%>
+      <% if @cards.blank? %>
+        <tr>
+            <td colspan="6">暂无相关数据</td>
+        </tr>
+      <% end -%>
+    </tbody>
+</table>
+  <%= paginate @cards %>

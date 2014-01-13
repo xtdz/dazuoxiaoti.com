@@ -1,0 +1,157 @@
+// This file includes scss helpers that can be used throughout the site
+
+// Colors
+$white: #ffffff;
+
+$yellow_bg: #fffec5;
+
+$brown: #5c3712;
+$blue: #3493cc;
+$light_blue: #6ebfd5;
+$orange: #ff8000;
+$dark_grey: #4d4d4d;
+$grey: #8a857c;
+$black: #303030;
+$green: #32a957;
+
+$dark_blue_border: #117cb6;
+
+$dark_yellow: #ffd040;
+
+$grey2: #705f57;
+$light_grey: #c8c8c8;
+$lightest_grey: #f1f0e2;
+$grey_background: #f1f0f2;
+$grey_border: #f2f2f2;
+$grey_border2: #bdbdbd;
+
+// Dimensions
+$width: 940px;
+$col_height: 379px;
+$col_width: 30px;
+$col_padding: 5px;
+
+// Fonts
+$ms_yahei: 'Microsoft Yahei';
+$heiti: 'Heiti';
+
+// Mixins
+@mixin shadow($x: 0px, $y: 0px, $size: 5px, $color: #cccccc) {
+  -webkit-box-shadow: $x $y $size $color;
+  -moz-box-shadow: $x $y $size $color;
+  box-shadow: $x $y $size $color;
+  behavior: url(/PIE/PIE.htc);
+}
+
+@mixin rounded_corner($radius: 5px){
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+  behavior: url(/PIE/PIE.htc);
+}
+
+@mixin gradient($from, $to) {
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from($from), to($to));
+  background: -webkit-linear-gradient($from, $to);
+  background: -moz-linear-gradient($from, $to);
+  background: -ms-linear-gradient($from, $to);
+  background: -o-linear-gradient($from, $to);
+  background: linear-gradient($from, $to);
+  -pie-background: linear-gradient($from, $to);
+  behavior: url(/PIE/PIE.htc);
+}
+
+@mixin opacity($percent: 0.5){
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+ $percent * 100 +")";
+  filter: alpha(opacity = $percent * 100);
+  opacity: $percent;
+}
+
+@mixin colored_link($color: $blue, $colorv: $blue, $colorh: $blue) {
+  a {
+    color: $color;
+    &:visited { color: $colorv; }
+    &:hover { color: $colorh; }
+    text-decoration: none;
+  }
+}
+
+@mixin button($image, $height, $width) {
+  display: block;
+  width: $width;
+  height: $height;
+  background: url($image) no-repeat;
+  &:hover {
+    background-position: 0px 0px-($height);
+  }
+  &:active {
+    background-position: 0px 0px-($height * 2);
+  }
+}
+
+.common_button {
+  color: $white;
+  font-size: 12pt;
+  line-height: 20px;
+  border-left:8px solid $blue;
+  border-right:8px solid $blue;
+  border-top: 2px solid $light_blue;
+  border-bottom:2px solid $blue;
+  background: $blue;
+  cursor: pointer;
+  &:hover {
+    border-color: $light_blue;
+    background: $light_blue;
+  }
+}
+.clear {
+  line-height: 0px;
+  margin:0px;
+  padding:0px;
+  font-size:0px;
+  clear:both;
+}
+.error {
+  color: red;
+  text-align: center;
+  padding: 0px 0px 10px;
+}
+.notice {
+  color: #CC0000;
+  font-size: 14pt;
+  padding: 10px 20px 5px;
+  line-height: 27px;
+}
+
+.social_links {
+  padding: 0px 4px;
+  display: inline;
+  div {
+    display: inline;
+    width: 20px;
+  }
+}
+
+.hidden {display:none;}
+
+.ie_transparent_png {
+  behavior: url(/PNG/iepngfix.htc);
+}
+
+.button_to {
+  display: inline;
+  div {
+    display: inline;
+  }
+  input {
+    display: inline;
+    border: 0px;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    vertical-align: bottom;
+    background: transparent;
+    color: $blue;
+    cursor: pointer;
+    font-size: 10pt;
+  }
+}

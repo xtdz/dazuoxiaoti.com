@@ -1,0 +1,19 @@
+zh-cn:
+  formtastic:
+    titles:
+      user:
+        registration: "新用户注册"
+        login: "用户登录"
+    labels:
+      user:
+        email: "电子邮箱"
+        password: "密码"
+        password_confirmation: "确认密码"
+        nickname: "昵称"
+        name: "姓名"
+        remember_me: "记住账户"
+    hints:
+    placeholders:
+    actions:
+      register: "注册"
+      login: "登录"

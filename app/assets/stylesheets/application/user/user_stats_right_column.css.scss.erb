@@ -1,0 +1,166 @@
+@import "common";
+
+.user_stats {
+  color: $dark_grey;
+  font-size: 12pt;
+  .photo{
+    img {
+      height: 80px;
+      width: 80px;
+    }
+    float: left;
+    height: 80px;
+    width: 80px;
+    border: 1px $blue solid;
+    margin-right: 20px;
+  }
+  .info {
+    text-align: top;
+    .name {
+      line-height: 30px;
+      color: $brown;
+    }
+    .type {
+      font-size: 10pt;
+      line-height: 30px;
+    }
+    .settings_link {
+      font-size: 10pt;
+      display: inline;
+      line-height: 20px
+    }
+    .logout_link {
+      input {
+        font-size: 10pt;
+        height: 15px;
+      }
+      width: 95px;
+      text-align: right;
+      display: inline-block;
+      zoom: 1;
+      *display: inline;
+    }
+  }
+
+  .stats {
+    margin: 30px 0px 20px;
+    zoom: 1;
+    position: relative;
+    background: $white;
+    border: 1px solid $grey_border;
+    @include rounded_corner(2px);
+    @include gradient(#fcfcfc, #f4f4f4);
+    padding: 10px 0px;
+    line-height: 14px;
+    table {
+      td {
+        text-align: center;
+        width: 86px;
+      }
+      .bordered {
+        border-right: 1px solid $grey_border;
+      }
+      .labels {
+        line-height: 25px;
+        color: $brown;
+        font-size: 12pt;
+      }
+      .numbers {
+        line-height: 45px;
+        color: $orange;
+        font-size: 14pt;
+      }
+      .subscripts {
+        font-size: 10pt;
+      }
+    }
+    .answer_limit {
+      display: inline;
+      line-height: 13px;
+      vertical-align: bottom;
+    }
+  }
+
+  .badge_label {
+    line-height: 35px;
+    color: $orange;
+    border-bottom: 1px solid $grey_border;
+  }
+
+  .badges {
+    vertical-align: top;
+    line-height: 15px;
+    margin: 15px 0px;
+    padding-left: 2px;
+    color: $brown;
+  }
+
+  .question_mark {
+    height: 0px;
+    text-align:right;
+    position: relative;
+    z-index: 3;
+    left: 5px;
+    top: 25px;
+  }
+}
+
+.user_stats_small { 
+  .stats {
+    .photo{
+      img {
+        height: 80px;
+        width: 80px;
+      }
+      float: left;
+      height: 80px;
+      width: 80px;
+      margin-left: 10px;
+    }
+    zoom: 1;
+    position: relative;
+    background: $white;
+    border: 1px solid $grey_border;
+    @include rounded_corner(2px);
+    @include gradient(#fcfcfc, #f4f4f4);
+    padding: 10px 0px;
+    line-height: 14px;
+    table {
+      td {
+        text-align: center;
+        width: 86px;
+      }
+      .bordered {
+        border-right: 1px solid $grey_border;
+      }
+      .labels {
+        line-height: 25px;
+        color: $brown;
+        font-size: 12pt;
+      }
+      .numbers {
+        line-height: 45px;
+        color: $orange;
+        font-size: 14pt;
+        @include colored_link($orange, $orange, $orange);
+      }
+      .subscripts {
+        font-size: 10pt;
+      }
+    }
+    .answer_limit {
+      display: inline;
+      line-height: 13px;
+      vertical-align: bottom;
+    }
+  }
+}
+
+.dashboard .dashboard_right .settings {
+  padding: 10px 0px 0px 4px;
+  a {
+    font-size: 10pt;
+    display: block;
+    width: 100px;
+  }
+}

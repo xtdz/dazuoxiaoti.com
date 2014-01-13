@@ -1,0 +1,8 @@
+- if !projects.nil? && !projects.empty?
+  .other_projects
+    .label
+      其他活动
+    - projects.each do |proj|
+      .other_project
+        .other_project_wrapped
+          = link_to image_tag(asset_path("projects/#{proj.id}/small.jpg"), :alt => proj.name, :title => proj.name), project_path(proj) 

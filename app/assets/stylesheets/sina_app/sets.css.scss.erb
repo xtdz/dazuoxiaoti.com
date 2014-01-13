@@ -1,0 +1,41 @@
+@import 'common';
+
+.question_sets {
+  padding: 10px;
+  height: 390px;
+  overflow: scroll;
+  .question_set_narrow {
+    font-size: 10pt;
+    width: 250px;
+    float: left;
+    cursor: pointer;
+
+    .question_set_wrap {
+      height: auto;
+      padding: 10px;
+      height: 60px;
+    }
+
+    .question_set_hovered {
+      background: #e5f2ff;
+    }
+
+    .image {
+      float: left;
+      margin-left: 10px;
+    }
+
+    .name, .description{
+      padding-left: 10px;
+      font-size: 10pt;
+      color: #606060;
+      overflow: hidden;
+    }
+
+    .name {
+      color: $blue;
+      font-size: 12pt;
+      line-height: 24px;
+    }
+  }
+}

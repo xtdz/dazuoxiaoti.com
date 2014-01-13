@@ -1,0 +1,6 @@
+.question_set_narrow{id: "question_set_#{@question_set.get('id')}"}
+  .question_set_wrap
+    .image
+      %img{src: @question_set.get('image_path')}
+    .name= @question_set.get('name')
+    .description= @question_set.get('description')

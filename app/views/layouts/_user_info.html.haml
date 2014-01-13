@@ -1,0 +1,23 @@
+- if user_signed_in?
+  .user_controls  
+    .user_name
+      %a{href: '/dashboard/main', :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'to_main', 'header_click']);"}= current_user.nickname
+      .user_correct_count{:title => '答对题数'} #{current_user.correct_count}题
+    .control_links
+      .control_link= link_to '最近参与', '/dashboard/main'
+      .control_link= link_to '已出题目', '/dashboard/questions'
+      .control_link= button_to "退出", destroy_user_session_path, :method => :delete, :class => 'log_out'
+      .clear
+- else
+  .user_sign_in
+    %ul
+      %li.login 登录
+      %li
+        %a.link_auth{:href => user_omniauth_authorize_path(:tsina)}
+          = image_tag(asset_path('static/auth/sina_auth.png'),:class=>"auth")
+      %li
+        %a.link_auth{:href => user_omniauth_authorize_path(:tqq)}
+          = image_tag(asset_path('static/auth/qie32.png'),:class=>"auth", :width=>22, :height=>22)
+      %li
+        %a.link_auth{:href => user_omniauth_authorize_path(:renren)}
+          = image_tag(asset_path('static/auth/renren_auth.png'),:class=>"auth")

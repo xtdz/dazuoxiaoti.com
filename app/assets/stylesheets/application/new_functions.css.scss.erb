@@ -1,0 +1,93 @@
+@import "common";
+
+.help {
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1.0;
+  *display: inline;
+  width: 20px;
+  height: 20px;
+  *overflow: hidden;
+  a {
+    float: left;
+  }
+}
+
+.new_function {
+  display:block;
+  float: left;
+  z-index: 95;
+  position: relative;
+  width: 200px;
+  height: 0px;
+  margin-right: -200px;
+  top: -20px;
+  .notice_left_top {
+    background: url(<%=asset_path 'static/notice/bg_left_top.png' %>);
+    width:15px;
+    height:10px;
+  }
+  .notice_left_bottom {
+    background: url(<%=asset_path 'static/notice/bg_left_bottom.png' %>);
+    width:15px;
+    height:10px;
+  }
+  .notice_right_top {
+    background: url(<%=asset_path 'static/notice/bg_right_top.png' %>);
+    width:10px;
+    height:10px;
+  }
+  .notice_right_bottom {
+    background: url(<%=asset_path 'static/notice/bg_right_bottom.png' %>);
+    width:10px;
+    height:10px;
+  }
+  .notice_top {
+    background: url(<%=asset_path 'static/notice/bg_top.png' %>) repeat-x;
+    height:10px;
+  }
+  .notice_bottom {
+    background: url(<%=asset_path 'static/notice/bg_bottom.png' %>) repeat-x;
+    height:10px;
+  }
+  .notice_left {
+    background: url(<%=asset_path 'static/notice/bg_left.png' %>) repeat-y;
+    width:15px;
+  }
+  .notice_right {
+    background: url(<%=asset_path 'static/notice/bg_right.png' %>) repeat-y;
+    width:10px;
+  }
+  td.notice_center {
+    background: #ffcc33;
+    vertical-align: top;
+    width: 200px;
+    .close{
+      @include colored_link($black, $black, $black);
+      font-weight:bold;
+      padding:0px 0px 10px 0px;
+      font-size:9pt;
+      text-align:right;
+      line-height:5px;
+    }
+    .text {
+      padding: 0px 10px 15px 15px;
+      font-size:9pt;
+    }
+  }
+}
+
+.new_function.nf_0{
+  //left:83px;
+  //top:-48px;
+}
+.new_function.nf_1{
+  //left:83px;
+  //top:-100px;
+  .weburl {
+    width:100px;
+    font-size:8pt;
+    height:10px;
+    line-height:10px;
+  }
+}

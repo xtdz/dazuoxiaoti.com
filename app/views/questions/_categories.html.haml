@@ -1,0 +1,15 @@
+.form
+  = form_tag(update_category_path, :method => "post", :remote => true, :class => "category_form") do
+    %input#wanted{:type => "hidden", :name => "wanted", :value => true}
+    %input#id{:type => "hidden", :name => "id", :value => 0}
+    - Category.all.each do |c|
+      .category
+        - if categories.include?(c.id)
+          .selected= link_to c.name, "#", :onclick=>"$('div.spinner').show();$.submit_category(#{c.id}, false);"
+        - else
+          .unselected= link_to c.name, "#", :onclick=>"$('div.spinner').show();$.submit_category(#{c.id}, true)"
+.legend
+  .loader
+    .spinner= image_tag(asset_path("static/spinner.gif"), :alt => "加载中...")
+  .selected 选中
+  .unselected 未选

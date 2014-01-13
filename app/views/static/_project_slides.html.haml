@@ -1,0 +1,19 @@
+.project_block
+  - projects.each do |p|
+    = render :partial => 'projects/project_block', :locals => {project: p, show: default_project==p ? true : false}
+  - past_projects.each do |pp|
+    = render :partial => 'projects/past_project_block', :locals => {project: pp, show: false}
+  .project_slide_control
+    - projects.each do |p|
+      .project_slide_icon{class: default_project==p ? "selected" : ""}
+        = link_to image_tag(project_image_path(p, :main)), '#', name: '.block_'+p.id.to_s, class: 'project_icon'
+        .icon_frame
+    - past_projects.each do |p|
+      .project_slide_icon
+        = link_to image_tag(project_image_path(p, :main)), '#', name: '.block_'+p.id.to_s, class: 'project_icon'
+        .icon_frame
+          = link_to '已结束', '#', name: '.block_'+p.id.to_s, class: 'finished_label'
+    .project_slide_more
+      = link_to image_tag(asset_path('static/more.png')), projects_path
+    .clear
+  .clear

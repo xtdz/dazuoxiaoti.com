@@ -1,0 +1,2 @@
+module NewAdmin::AssetsHelper
+end

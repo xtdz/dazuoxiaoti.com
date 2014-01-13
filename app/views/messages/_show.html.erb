@@ -1,0 +1,20 @@
+<%=form_for Message.new,:url=>delete_messages_path,:html=>{:method=>"post",:class=>"message_form"}  do |f|%>
+<div class="content_nr">
+     <div class="message_name">
+      <input  type="hidden" name="msg_id[]" value="<%=@message.id%>" />
+         <strong><%=@message.title%></strong>
+ <br />
+         <time><%=@message.created_at.to_date%></time>
+      </div>
+    <div class="content_wen">
+      <p>
+       <%=raw @message.content%>
+      
+      </p>
+</div>
+<div class="inputdiv">
+  <a href="/messages"><input  type="button"  class="back" value="返回"/></a>
+  <input type="submit"  class="del" value="删除"/>
+</div>
+</div>
+<%end%>

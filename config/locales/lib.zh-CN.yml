@@ -1,0 +1,41 @@
+zh-cn:
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "由于发生了一个错误 %{model} 无法保存"
+          other: "%{count} 个错误使得 %{model} 无法保存"
+      messages:
+        inclusion: "不包含于列表中"
+        exclusion: "是保留关键字"
+        invalid: "是无效的"
+        confirmation: "与确认值不匹配"
+        accepted: "必须是可被接受的"
+        empty: "不能留空"
+        blank: "不能为空"
+        too_long: "过长（最长为 %{count} 个字符）"
+        too_short: "过短（最短为 %{count} 个字符）"
+        wrong_length: "长度非法（必须为 %{count} 个字符）"
+        taken: "已经被使用"
+        not_a_number: "不是数字"
+        not_a_date: "不是合法日期"
+        greater_than: "必须大于 %{count}"
+        greater_than_or_equal_to: "必须大于或等于 %{count}"
+        equal_to: "必须等于 %{count}"
+        less_than: "必须小于 %{count}"
+        less_than_or_equal_to: "必须小于或等于 %{count}"
+        odd: "必须为单数"
+        even: "必须为双数"
+        greater_than_start_date: "必须在起始日期之后"
+        not_same_project: "不属于同一个项目"
+        circular_dependency: "此关联将导致循环依赖"
+        cant_link_an_issue_with_a_descendant: "问题不能关联到它的子任务"
+
+
+  views:
+    pagination:
+      first: "首页"
+      last: "末页"
+      previous: "上一页"
+      next: "下一页"
+      truncate: "..."

@@ -1,0 +1,2 @@
+module NewAdmin::MessagesHelper
+end
