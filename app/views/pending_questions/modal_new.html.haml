@@ -29,7 +29,7 @@
         = f.label "所属题集（可不选）"
         = f.select(:intended_for_set, QuestionSet.all.collect{|q|[q.name, q.id]}, {:selected => "62"})
       .explanation
-        = f.text_area :explanation, :placeholder => "你可以为答案的作出解释"
+        = f.text_area :explanation, :placeholder => "请为答案给出一个解释吧"
       = f.submit '提交'
 
 :javascript

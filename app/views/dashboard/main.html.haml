@@ -5,7 +5,7 @@
       - @participations.each_with_index do |participation,index|
         .project
           .project_wrapped
-            .project_image= image_tag asset_path(participation.project.try(:image_path, :main))
+            .project_image= image_tag project_image_path(participation.project,:main) if participation.project.present?
             .screen
             .project_overview
               .label
