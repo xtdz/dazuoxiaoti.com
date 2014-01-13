@@ -19,12 +19,9 @@ group :test, :development do
   gem 'rvm-capistrano'
   gem 'rspec-rails'
   gem 'guard-livereload', '~> 0.3.1'
-<<<<<<< HEAD
-  gem 'twitter-bootstrap-rails'
   gem 'debugger'
-=======
-  #gem 'twitter-bootstrap-rails'
->>>>>>> shiguodong/master
+    #gem 'twitter-bootstrap-rails'
+
 end
 
 group :test do
@@ -56,12 +53,8 @@ gem 'kaminari'
 gem 'rails_kindeditor'
 gem 'mysql2'
 gem 'yaml_db'
-<<<<<<< HEAD
-gem 'spreadsheet'
 gem 'simple_form'
-=======
 gem 'spreadsheet',"0.8.5"
 gem 'capistrano','2.15.5'
 gem 'unicorn'
 gem 'pry'
->>>>>>> shiguodong/master
