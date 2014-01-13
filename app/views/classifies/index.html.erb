@@ -26,9 +26,8 @@ body{ background:#fffff0;}
                <input type="checkbox" class="submit_subscribe" value="<%=question_set.id%>" <%='disabled' unless user_signed_in?%>/>
                <img src="<%=question_set_image_path(question_set)%>" width="61" height="61" />
                <div>
-                 <h3><a href="#"><%=question_set.name[0..13]%></a></h3>
+                 <h3><%=link_to question_set.name[0..13],random_questions_path(:question_set => question_set.id)%></h3>
                  <p><%=question_set.description%></a></p>
-                 <p class="links" style="display:none"><%=link_to_if user_signed_in?, "单独回答此题集",random_questions_path(:question_set => question_set.id)%></p>
                </div>
             </li>
            </div>
@@ -41,7 +40,7 @@ body{ background:#fffff0;}
   <div class="hdflright">
     <div class="yxtjtop">
 	  <h2>已选题集</h2>
-	  <%=link_to "", random_questions_path%>
+	  <%=link_to "", random_questions_path(:question_set_random => 1)%>
 	  
 	</div>
  <div  class="hdflnrone yxnr">
@@ -52,9 +51,8 @@ body{ background:#fffff0;}
             <input type="checkbox" class="reset_subscribe" value="<%=question_set.id%>"/>
             <img src="<%=question_set_image_path(question_set)%>" width="61" height="61" />
             <div>
-                 <h3><a href="#"><%=question_set.name[0..13]%></a></h3>
+            	 <h3><%=link_to question_set.name[0..13],random_questions_path(:question_set => question_set.id)%></h3>
                  <p><%=question_set.description%></a></p>
-                 <p class="links" style="display:none"><%=link_to_if  user_signed_in?,"单独回答此题集",random_questions_path(:question_set => question_set.id)%></p>
             </div>
          </li>
         </div>
@@ -100,14 +98,8 @@ on_unsubscribe = function(context) {
 $('input.reset_subscribe').on('change', function() {
    return on_unsubscribe(this);
 });
-$('input.submit_subscribe').on('change', function() {
+return $('input.submit_subscribe').on('change', function() {
    return on_subscribe(this);
-});
-$('.question_set_narrow').live('mouseenter', function() {
-   return $(this).find(".links").show();
-});
-return $('.question_set_narrow').live('mouseleave', function() {
-    return $(this).find(".links").hide();
 });
 });
 }).call(this);

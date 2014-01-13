@@ -2,6 +2,7 @@ class AnswersController < ApplicationController
   before_filter :assign_project, :expire_project
 
   def create
+  	session.delete(:current_question)
     @question = Question.find(params[:question_id])
     @answer = Answer.new(params[:answer])
     if @question.valid_answer? @answer
