@@ -1,4 +1,5 @@
 class AuthenticationsController < ApplicationController
+	include Devise::Controllers::Rememberable
 
   def tsina
     auth = request.env["omniauth.auth"]
@@ -65,6 +66,7 @@ class AuthenticationsController < ApplicationController
         redirect_to root_path, :notice => t(:'session.failed_auth')
       end
     end
+    remember_me(@user)
   end
 
   def add_answers_to_user user

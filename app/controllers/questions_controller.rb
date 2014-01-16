@@ -66,24 +66,36 @@ class QuestionsController < ApplicationController
 
   def random
     # session_messenger.count_down decrements count_down everytime it's called
-    count_down = session_manager.count_down
-    question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-    session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
-    if user_signed_in?
-      return redirect_to_question_sets if current_user.question_sets.size==0
-      if count_down == 0 and session_manager.is_show_sponsored?
-        @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(params[:question_set])
-      else
-        @question = current_user.get_next_question(params[:question_set])
-      end
+		count_down = session_manager.count_down
+		question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
+		session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+		
+		current_question_set = session[:current_question_set]
+		if params.has_key?(:question_set)
+			session[:current_question_set] = params[:question_set]
+			current_question_set = params[:question_set]
+		elsif params.has_key?(:question_set_random)
+			session.delete(:current_question_set)
+		end
+			
+    if session.has_key?(:current_question) && params[:question_set].nil? && params[:question_set_random].nil?
+    	@question = session[:current_question]
     else
-      #return redirect_to_question_sets if params[:question_set].blank?
-      # 30% chance of getting sponsor_question if not signed in when count down reaches 0
-      if count_down == 0 #and session_manager.is_show_sponsored? and  rand() < 0.3
-        @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(params[:question_set], session_manager.answered_ids)
+      if user_signed_in?
+        if count_down == 0 
+          @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(current_question_set)
+        else
+          @question = current_user.get_next_question(current_question_set)
+        end
       else
-        @question = Question.random_question(params[:question_set], session_manager.answered_ids)
+        # 30% chance of getting sponsor_question if not signed in when count down reaches 0
+        if count_down == 0 and  rand() < 0.3
+          @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(current_question_set, session_manager.answered_ids)
+        else
+          @question = Question.random_question(current_question_set, session_manager.answered_ids)
+        end
       end
+      session[:current_question] = @question
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
       redirect_to_registration

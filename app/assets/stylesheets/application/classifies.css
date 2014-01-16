@@ -17,7 +17,6 @@
 .hdflnrtop{ background:#fdfd9c url(/images/yixuan-xtda_03.jpg) no-repeat center left; height:33px; width:560px;}
 .hdflnrone{ width:558px;border-right:#f8bb93 solid 1px; overflow:hidden; padding-bottom:30px;}
 .hdflnrone ul  li{ width:269px; height:92px; float:left; position:relative; padding-left:10px;}
-.hdflnrone ul  li:hover{ background:#e5f2ff}
 .hdflnrone ul  li input{ position:absolute; left:10px; top:40px;}
 .hdflnrone ul  li img{ display:block; float:left; margin:18px 10px 18px 28px; display:inline}
 .hdflnrone ul  li div{ float:left; height:60px; margin-top:18px; width:165px; }
@@ -30,7 +29,7 @@
 .hdflright{ float:left;width:238px; _overflow:hidden} 
 .yxtjtop { height:33px; width:238px; position:relative; background:#fdfd9c }
 .yxtjtop  h2{ position:absolute; background:url(/images/yixuan-xtda_09.jpg) no-repeat left; height:34px; width:150px;  font-size:16px; color:#ff8000; line-height:33px; left:-1px; padding-left:10px;}
-.yxtjtop a{ background:url(/images/yixuan-xtda_08.jpg) no-repeat center left; width:92px; height:33px; border:0; position:absolute; right:-1px; z-index:99999; cursor:pointer}
+.yxtjtop a{ background:url(/images/yixuan-xtda_10.jpg) no-repeat center left; width:92px; height:33px; border:0; position:absolute; right:-1px; z-index:99999; cursor:pointer}
 
 .yxnr{ width:238px; overflow:hidden}
 .yxnr h3{ margin-bottom:0px!important;}
