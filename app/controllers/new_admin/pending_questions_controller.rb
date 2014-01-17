@@ -102,7 +102,7 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
     @pending_question.state = '1'
     @pending_question.user_id=params["user_id"]
     create_question_from_pending_question(@pending_question)
-    @question_set = QuestionSet.find(params[:question_set_id])
+    @question_set = QuestionSet.find(params["pending_question"][:question_set_id])
     @question.user_id = @pending_question.user_id
     keyword = params[:keyword]
     if keyword and !keyword.strip.empty?
