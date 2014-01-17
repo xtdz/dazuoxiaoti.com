@@ -36,16 +36,19 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
   end
 
   def edit
+
+    session_manager.current_url=request.referer || new_admin_questions_path
+
     @question = Question.find(params[:id])
   end
 
   def update
     @question = Question.find(params[:id])
-
     respond_to do |format|
       if @question.update_attributes(params[:question]) 
+        @question.question_sets.delete_all
         @question.question_sets<<(QuestionSet.find params["question_set_id"]) unless @question.question_set_ids.include? params["question_set_id"]
-        format.html { redirect_to new_admin_questions_path, notice: '修改成功' }
+        format.html { redirect_to session_manager.current_url, notice: '修改成功' }
         format.json { render json: @question, status: :created, location: @question }
       else
         format.html { render action: "new" }
