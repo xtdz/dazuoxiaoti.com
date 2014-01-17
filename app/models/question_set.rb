@@ -8,6 +8,8 @@ class QuestionSet < ActiveRecord::Base
   validates :upload_image,:presence => true,:on=>"create"
   validates :name, :uniqueness => true
 
+  default_scope order("id desc")
+
 
   has_attached_file :upload_image
 
