@@ -18,10 +18,9 @@
         .question_set_narrow{id: "question_set_#{qs.id}"}
           .question_set_wrap
             .image= image_tag question_set_image_path(qs)
-            .name= qs.name
+            .name
+              %a{href: random_questions_path(:question_set => qs.id)}= qs.name
             .description= qs.description
-            .links
-              %a{href: random_questions_path(:question_set => qs.id)} 单独回答此题集
 
     = render :partial => "static/notice"
   .project_right

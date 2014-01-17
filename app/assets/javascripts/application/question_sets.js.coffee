@@ -40,6 +40,7 @@ jQuery ($) ->
     on_subscribe(this)
   )
 
+###
   $('.question_set_narrow').live('mouseenter', ->
     $(this).children('.question_set_wrap').addClass('question_set_hovered')
   )
@@ -47,4 +48,5 @@ jQuery ($) ->
   $('.question_set_narrow').live('mouseleave', ->
     $(this).children('.question_set_wrap').removeClass('question_set_hovered')
   )
+###
 
