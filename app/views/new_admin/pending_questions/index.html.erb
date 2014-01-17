@@ -101,7 +101,7 @@
               <td width="10%"><%= form_tag( accept_new_admin_pending_question_path(question), :method => "post", :remote => true) do |f|%>
                  <ul>
                     <li><label> 关键词:</label><%=text_field_tag :keyword,question.keyword,:size=>23%></li>
-                    <li><label> 选题集:</label><%= select("pending_question","question_set_id", QuestionSet.all.collect{|q|[q.name,q.id]}, {:selected=>question.intended_set_id })%></li>
+                    <li><label> 选题集:</label><%= select("pending_question","question_set_id", QuestionSet.all.collect{|q|[q.name,q.id]}, {:selected=>question.intended_for_set })%></li>
                      <li><label>用户ID:</label><%=text_field_tag :user_id,question.user_id%></li>
                      <li><%=submit_tag "通过", :confirm => "你确定此操作吗？？？", :class => "btn btn-success"%></li>
                      
