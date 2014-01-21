@@ -79,10 +79,11 @@ class QuestionsController < ApplicationController
     else
       #return redirect_to_question_sets if params[:question_set].blank?
       # 30% chance of getting sponsor_question if not signed in when count down reaches 0
+      question_set = params[:question_set] || QuestionSet::DEFAULT_SET.to_s
       if count_down == 0 #and session_manager.is_show_sponsored? and  rand() < 0.3
-        @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(params[:question_set], session_manager.answered_ids)
+        @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(question_set, session_manager.answered_ids)
       else
-        @question = Question.random_question(params[:question_set], session_manager.answered_ids)
+        @question = Question.random_question(question_set, session_manager.answered_ids)
       end
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?

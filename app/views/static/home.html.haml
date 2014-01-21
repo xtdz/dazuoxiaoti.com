@@ -21,7 +21,7 @@
             .name= qs.name
             .description= qs.description
             .links
-              %a{href: random_questions_path(:question_set => qs.id)} 单独回答此题集
+              = link_to_if user_signed_in?, "单独回答此题集",random_questions_path(:question_set => qs.id)
 
     = render :partial => "static/notice"
   .project_right
