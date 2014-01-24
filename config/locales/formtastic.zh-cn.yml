@@ -3,7 +3,7 @@ zh-cn:
     titles:
       user:
         registration: "新用户注册"
-        login: "用户登录"
+        login: "用户登陆"
     labels:
       user:
         email: "电子邮箱"
@@ -16,4 +16,4 @@ zh-cn:
     placeholders:
     actions:
       register: "注册"
-      login: "登录"
+      login: "登陆"

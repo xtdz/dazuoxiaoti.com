@@ -46,7 +46,6 @@ module Dazuoxiaoti
     config.assets.version = '1.0'
   end
 end
-I18n.enforce_available_locales = false
 
 
 ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|

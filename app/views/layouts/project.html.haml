@@ -15,7 +15,7 @@
     = render :partial => "layouts/nav"
     .wrap
       %div{id: "project_wrap_#{current_project.id}"}
-        - if current_project.id < 19
+        - if current_project.id < 22
           .project_header
             = render partial: "layouts/legacy/header"
         - else

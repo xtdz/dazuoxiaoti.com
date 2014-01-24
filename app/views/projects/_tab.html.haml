@@ -9,15 +9,25 @@
   .project_numbers
     .project_coordinator
       .coordinator_label
-        - if project.id==14 
-          助农卡提供方
-        - elsif project.id==18
-          执行协助方
-        - else
+        - if project.tab_show_num==0 
+          捐赠提供方
+          //助农卡提供方
+        - elsif project.tab_show_num==1
           捐赠接收方
+          //执行协助方
+        - else
+          = project.customed_name
+          //捐赠接收方
       .coordinator_logo
-        %a.image{:href => project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
-          = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
+        - if project.tab_show_num==0
+          %a.image{:href => project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
+            = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
+        - elsif project.tab_show_num==1
+          %a.image{:href => project.benefit.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
+            = image_tag(organization_image_path(project.benefit), :alt => project.benefit.name)
+        - else 
+          %a.image{:href => project.customed_url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
+            = image_tag(project.upload_image_customed.url, :alt => project.customed_name)
     .project_stats
       .stat_row
         %span.numbers.participation_count #{project.participation_count}人

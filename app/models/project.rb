@@ -16,6 +16,7 @@ class Project < ActiveRecord::Base
   has_attached_file :upload_image_about
   has_attached_file :upload_image_small
   has_attached_file :upload_image_banner
+  has_attached_file :upload_image_customed
 
   has_attached_file :upload_image_share_question1
   has_attached_file :upload_image_share_question2
@@ -29,7 +30,7 @@ class Project < ActiveRecord::Base
   end
 
   def item_count
-    correct_count / rate
+    (correct_count / rate ) * unit_rate
   end
 
   def assister(oid)

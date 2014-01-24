@@ -5,7 +5,7 @@ zh-cn:
     not_finished: "此项目还未结束。"
   user:
     session:
-      login: "登录"
+      login: "登陆"
       logout: "退出"
       remember_me: "记住用户"
       failed: "账户或者密码错误"

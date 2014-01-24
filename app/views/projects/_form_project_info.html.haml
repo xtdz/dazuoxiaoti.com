@@ -7,7 +7,7 @@
 = form.input :description, label: '项目描述', as: :text
 = form.input :tagline, label: '一句话', as: :text
 = form.input :upload_image_about, label: '介绍图(项目信息页面)', as: :file
-
+= form.input :tab_show_num, label: '答题页活动显示信息（0 -> 捐赠方， 1 -> 接收方， 2 -> 自定义）'
 %h4
   捐赠方
 
@@ -25,11 +25,17 @@
   = coordinator.input :upload_image, label: 'Logo图片', as: :file
   = coordinator.input :url, label: '网站链接'
   = coordinator.input :description, label: '简介', as: :text
-
+%h4
+  自定义
+= form.input :customed_name, label: '名字'
+= form.input :upload_image_customed, label: 'Logo图片', as: :file
+= form.input :customed_url, label: '网站链接'
+= form.input :customed_description, label: '简介', as: :text
 %h4
   物资详情
 
 = form.simple_fields_for :benefit do |benefit|
   = benefit.input :cost, label: '价值'
   = benefit.input :upload_image, label: '物资图片', as: :file
+  = benefit.input :unit_url, label: '物资图片链接'
   = benefit.input :description, label: '简介', as: :text

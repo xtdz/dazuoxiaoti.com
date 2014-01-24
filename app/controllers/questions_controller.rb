@@ -8,7 +8,6 @@ class QuestionsController < ApplicationController
   def show
     session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
-
     if !@question.nil?
       @question_set = @question.question_sets.first
       render_question
@@ -66,36 +65,26 @@ class QuestionsController < ApplicationController
 
   def random
     # session_messenger.count_down decrements count_down everytime it's called
-		count_down = session_manager.count_down
-		question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-		session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
-		
-		current_question_set = session[:current_question_set]
-		if params.has_key?(:question_set)
-			session[:current_question_set] = params[:question_set]
-			current_question_set = params[:question_set]
-		elsif params.has_key?(:question_set_random)
-			session.delete(:current_question_set)
-		end
-			
-    if session.has_key?(:current_question) && params[:question_set].nil? && params[:question_set_random].nil?
-    	@question = session[:current_question]
-    else
-      if user_signed_in?
-        if count_down == 0 
-          @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(current_question_set)
-        else
-          @question = current_user.get_next_question(current_question_set)
-        end
+    count_down = session_manager.count_down
+    question_set_params_string = params[:question_set].nil? ? '' : '&question_sets='+params[:question_set]
+    session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+    if user_signed_in?
+      if count_down == 0 
+        @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(params[:question_set])
       else
-        # 30% chance of getting sponsor_question if not signed in when count down reaches 0
-        if count_down == 0 and  rand() < 0.3
-          @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(current_question_set, session_manager.answered_ids)
+        @question = current_user.get_next_question(params[:question_set])
+      end
+    else
+      # 30% chance of getting sponsor_question if not signed in when count down reaches 0
+      if count_down == 0 and  rand() < 0.3
+        @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(params[:question_set], session_manager.answered_ids)
+      else
+        if params[:question_set].nil?
+          @question = Question.random_question([20],session_manager.answered_ids)
         else
-          @question = Question.random_question(current_question_set, session_manager.answered_ids)
+          @question = Question.random_question(params[:question_set], session_manager.answered_ids)
         end
       end
-      session[:current_question] = @question
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
       redirect_to_registration
@@ -129,7 +118,6 @@ class QuestionsController < ApplicationController
 
   def render_question
     if @question.is_sponsored?
-      session_manager.set_show_sponsored
       @name = t('question.sponsor_category')
     else
       @suggested_question_sets = QuestionSet.order('id DESC').limit(5)
@@ -147,9 +135,8 @@ class QuestionsController < ApplicationController
   end
 
   def redirect_to_registration
-    session_manager.current_url= "/questions/random?project_id=#{@project.id}"
     respond_to do |format|
-      format.html { redirect_to new_user_registration_path + '?fr=q', notice: "您已经答对10道题，请您点击下方的新浪微博、人人账号、腾讯微博登录，方可继续答题，登录后还会有更多功能，感谢您的参与！期待您来贡献更多正能量！" }
+      format.html { redirect_to new_user_registration_path + '?fr=q', notice: "您已经答对10道题，请您点击下方的新浪微博、人人账号、腾讯微博登陆，方可继续答题，登陆后还会有更多功能，感谢您的参与！期待您来贡献更多正能量！" }
       format.js {render :js => "window.location = '/questions/random?project_id=#{@project.id}'"}
     end
   end
@@ -163,10 +150,9 @@ class QuestionsController < ApplicationController
 
   #TODO: redirect to question_sets instead
   def redirect_to_question_sets
-
     respond_to do |format|
-      format.html { redirect_to classifies_path,notice: "请您选择一些题集进行答题!" }
-      format.js {render :js => "window.location = '/classifies'"}
+      format.html { redirect_to question_sets_path }
+      format.js {render :js => "window.location = '/question_sets'"}
     end
   end
 
