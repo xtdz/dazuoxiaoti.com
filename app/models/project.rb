@@ -29,7 +29,7 @@ class Project < ActiveRecord::Base
   end
 
   def item_count
-    correct_count / rate
+    (correct_count / rate) * benefit.unit_rate
   end
 
   def assister(oid)

@@ -1,6 +1,7 @@
 = form.input :name, label: '项目名称'
-= form.input :rate, label: '题目换算标准'
+= form.input :rate, label: '每答对题目(道)'
 = form.simple_fields_for :benefit do |benefit|
+  = benefit.input :unit_rate, label: '兑换'
   = benefit.input :unit, label: '单位'
-  = benefit.input :name, label: '名称'
+  = benefit.input :name, label: '物资名称'
 = form.input :upload_image_main, label: '首页活动图片', as: :file
