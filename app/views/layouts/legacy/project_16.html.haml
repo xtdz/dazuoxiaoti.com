@@ -15,7 +15,7 @@
     = render :partial => "layouts/nav"
     .wrap{style:"position:relative"}
       %div{id: "project_wrap_#{current_project.id}"}
-        %a{href: "http://e.weibo.com/yufoundation", target: "_blank",
+        %a{href: current_project.banner_url, target: "_blank",
           style: "display:block;width:940px;height:155px;position:absolute;top:-180px;"}
 
         .main{style: "margin-top: 230px;"}
