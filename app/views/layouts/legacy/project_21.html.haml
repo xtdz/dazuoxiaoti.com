@@ -11,15 +11,14 @@
       <script type="text/javascript" src="/PNG/iepngfix_tilebg.js"></script>
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body{style: "background: url('#{asset_path 'projects/14/wh.png'}') #fffff0 center 30px no-repeat;"}
+  %body{style: "background: url('#{current_project.upload_image_banner.url}') #fffff0 center 30px no-repeat;"}
     = render :partial => "layouts/nav"
     .wrap{style:"position:relative"}
       %div{id: "project_wrap_#{current_project.id}"}
         - if current_project.banner_url?
           %a{href: current_project.banner_url, target: "_blank",
             style: "display:block;width:940px;height:155px;position:absolute;top:-180px;"}
-        
-        .main{style: "margin-top: 230px;"}    
+        .main{style: "margin-top: 230px;"}
           = yield
         .footer
           小题大作 &copy; 2011-2012 |&nbsp;
