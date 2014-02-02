@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   has_many :updates
   has_many :users, :through => :participations
 
-  default_scope :order => 'created_at DESC'
+  default_scope :order => 'id DESC'
   
   accepts_nested_attributes_for :benefit, :sponsor, :coordinator
 
