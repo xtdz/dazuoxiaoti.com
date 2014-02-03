@@ -66,7 +66,6 @@ class QuestionsController < ApplicationController
   end
 
   def random
-    print "checkpoint A"
     # session_messenger.count_down decrements count_down everytime it's called
 		count_down = session_manager.count_down
 		question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
