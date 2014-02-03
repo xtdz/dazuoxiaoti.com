@@ -45,7 +45,10 @@
 .block_label
   = ([14,18].include? project.id) ? "物品详情" : "物资详情"
 .block_content
-  .left_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
+  - if project.benefit.unit_url?
+    .left_image= link_to image_tag(benefit_image_path(project.benefit), :alt => project.benefit.name), project.benefit.unit_url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Unit', 'project_show']);"
+  - else
+    .left_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
   - project.benefit.description.each_line do |line|
     %p
       :plain

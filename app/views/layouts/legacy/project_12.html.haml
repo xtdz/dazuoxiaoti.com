@@ -15,8 +15,9 @@
     = render :partial => "layouts/nav"
     .wrap{style:"position:relative"}
       %div{id: "project_wrap_#{current_project.id}"}
-        %a{href: "http://www.daaiqingchen.org/", target: "_blank",
-          style: "display:block;width:320px;height:100px;position:absolute;top:-90px;left:325px;"}
+        - if current_project.banner_url?  
+          %a{href: current_project.banner_url, target: "_blank",
+            style: "display:block;width:320px;height:100px;position:absolute;top:-90px;left:325px;"}
         .main{style: "margin-top: 200px;"}
           = yield
         .footer

@@ -5,8 +5,8 @@ class ProjectsController < ApplicationController
   before_filter :reset_current_url_to_root, :only => [:index, :show]
 
   def index
-    @projects = Project.find_all_ongoing.reverse
-    @past_projects = Project.find_all_expired.reverse
+    @projects = Project.find_all_ongoing
+    @past_projects = Project.find_all_expired
   end
 
   def show
@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     if @project.expired?
       redirect_to past_project_path(@project)
     end
-    @projects = Project.find_ongoing.reverse
+    @projects = Project.find_ongoing
     @projects.delete(@project)
   end
 
@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_layout
-    if params[:action] == "show" and [5,7,8,9,10,11,12,14,16,18].include?(params[:id].to_i)
+    if params[:action] == "show" and [5,7,8,9,10,11,12,14,16,18,21].include?(params[:id].to_i)
       "legacy/project_#{params[:id]}"
     else
       (["index", "list", "new"].include? params[:action]) ? "index" : "project"

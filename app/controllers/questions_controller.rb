@@ -88,11 +88,12 @@ class QuestionsController < ApplicationController
           @question = current_user.get_next_question(current_question_set)
         end
       else
+        default_question_set = QuestionSet::DEFAULT_SET.to_s
         # 30% chance of getting sponsor_question if not signed in when count down reaches 0
         if count_down == 0 and  rand() < 0.3
-          @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(current_question_set, session_manager.answered_ids)
+          @question = Question.by_sponsor(current_project.sponsor_id).random.first || Question.random_question(default_question_set, session_manager.answered_ids)
         else
-          @question = Question.random_question(current_question_set, session_manager.answered_ids)
+          @question = Question.random_question(default_question_set, session_manager.answered_ids)
         end
       end
       session[:current_question] = @question
@@ -171,7 +172,7 @@ class QuestionsController < ApplicationController
   end
 
   def project_layout
-    if [5,7,8,9,10,11,12,14,16,18].include? current_project.id
+    if [5,7,8,9,10,11,12,14,16,18,21].include? current_project.id
       "legacy/project_#{current_project.id}"
     else
       "project"

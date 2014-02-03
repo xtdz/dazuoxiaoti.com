@@ -13,6 +13,8 @@ class QuestionSet < ActiveRecord::Base
 
   has_attached_file :upload_image
 
+  DEFAULT_SET = 20
+
   def image_path
     if image_name
       "question_sets/#{image_name}"
