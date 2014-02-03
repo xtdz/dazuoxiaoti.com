@@ -50,6 +50,7 @@ class QuestionsController < ApplicationController
   end
 
   def skip
+    session[:current_question] = nil
     @question = Question.find(params[:id])
     @answer = @question.answers.new(:state => 2)
     QuestionTrace.record_answer(@question,nil,false)
@@ -65,6 +66,7 @@ class QuestionsController < ApplicationController
   end
 
   def random
+    print "checkpoint A"
     # session_messenger.count_down decrements count_down everytime it's called
 		count_down = session_manager.count_down
 		question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
@@ -77,10 +79,11 @@ class QuestionsController < ApplicationController
 		elsif params.has_key?(:question_set_random)
 			session.delete(:current_question_set)
 		end
-			
-    if session.has_key?(:current_question) && params[:question_set].nil? && params[:question_set_random].nil?
-    	@question = session[:current_question]
-    else
+		
+    if session[:current_question] && params[:question_set].nil? && params[:question_set_random].nil?
+    	@question = Question.find_by_id(session[:current_question])
+    end
+    if @question.nil?
       if user_signed_in?
         if count_down == 0 
           @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(current_question_set)
@@ -96,7 +99,7 @@ class QuestionsController < ApplicationController
           @question = Question.random_question(default_question_set, session_manager.answered_ids)
         end
       end
-      session[:current_question] = @question
+      session[:current_question] = @question.id
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
       redirect_to_registration

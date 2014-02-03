@@ -49,7 +49,15 @@ class Question < ActiveRecord::Base
       nil
     end
   end
-
+	
+  def find_by_id id
+    if id && id.is_a?(Integer) 
+      Question.where(:id => id).first
+    else
+      nil
+    end
+  end
+  
   def self.random_question question_set_id=nil, ids = []
     if question_set_id && !question_set_id.empty?
       question = self.from_set(question_set_id).not_in(ids).random.first
