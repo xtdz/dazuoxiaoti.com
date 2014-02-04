@@ -67,20 +67,20 @@ class QuestionsController < ApplicationController
 
   def random
     # session_messenger.count_down decrements count_down everytime it's called
-		count_down = session_manager.count_down
-		question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-		session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
-		
-		current_question_set = session[:current_question_set]
-		if params.has_key?(:question_set)
-			session[:current_question_set] = params[:question_set]
-			current_question_set = params[:question_set]
-		elsif params.has_key?(:question_set_random)
-			session.delete(:current_question_set)
-		end
+	count_down = session_manager.count_down
+	question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
+	session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+	
+	current_question_set = session[:current_question_set]
+	if params.has_key?(:question_set)
+	  session[:current_question_set] = params[:question_set]
+	  current_question_set = params[:question_set]
+	elsif params.has_key?(:question_set_random)
+	  session.delete(:current_question_set)
+	end
 		
     if session[:current_question] && params[:question_set].nil? && params[:question_set_random].nil?
-    	@question = Question.find_by_id(session[:current_question])
+    	@question = Question.find(session[:current_question])
     end
     if @question.nil?
       if user_signed_in?
