@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
   end
 
   def skip
-    session[:current_question] = nil
+  	session.delete(:current_question_id)
     @question = Question.find(params[:id])
     @answer = @question.answers.new(:state => 2)
     QuestionTrace.record_answer(@question,nil,false)
@@ -64,7 +64,7 @@ class QuestionsController < ApplicationController
       format.js   { random }
     end
   end
-
+  
   def random
     # session_messenger.count_down decrements count_down everytime it's called
 	count_down = session_manager.count_down
@@ -78,9 +78,10 @@ class QuestionsController < ApplicationController
 	elsif params.has_key?(:question_set_random)
 	  session.delete(:current_question_set)
 	end
-		
-    if session[:current_question] && params[:question_set].nil? && params[:question_set_random].nil?
-    	@question = Question.find(session[:current_question])
+	
+    @question = nil;
+    if session[:current_question_id] && params[:question_set].nil? && params[:question_set_random].nil?
+      @question = Question.find(session[:current_question_id])
     end
     if @question.nil?
       if user_signed_in?
@@ -98,7 +99,7 @@ class QuestionsController < ApplicationController
           @question = Question.random_question(default_question_set, session_manager.answered_ids)
         end
       end
-      session[:current_question] = @question.id
+      session[:current_question_id] = @question.id
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
       redirect_to_registration
