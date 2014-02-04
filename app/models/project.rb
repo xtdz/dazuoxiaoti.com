@@ -9,7 +9,7 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :participations
 
   accepts_nested_attributes_for :benefit, :sponsor, :coordinator
-
+  default_scope :order => 'id ASC'
   validates_presence_of :benefit, :coordinator, :sponsor, :rate, :limit
 
   has_attached_file :upload_image_main
