@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def assign_other_projects
-    @projects = Project.find_ongoing
+    @projects = Project.find_ongoing.reverse
     @projects.delete(@project)
   end
 

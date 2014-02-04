@@ -7,8 +7,6 @@ class Project < ActiveRecord::Base
   has_many :weibos
   has_many :updates
   has_many :users, :through => :participations
-
-  default_scope :order => 'id DESC'
   
   accepts_nested_attributes_for :benefit, :sponsor, :coordinator
   default_scope :order => 'id ASC'
