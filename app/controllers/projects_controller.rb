@@ -5,8 +5,8 @@ class ProjectsController < ApplicationController
   before_filter :reset_current_url_to_root, :only => [:index, :show]
 
   def index
-    @projects = Project.find_all_ongoing
-    @past_projects = Project.find_all_expired
+    @projects = Project.find_all_ongoing.reverse
+    @past_projects = Project.find_all_expired.reverse
   end
 
   def show
@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     if @project.expired?
       redirect_to past_project_path(@project)
     end
-    @projects = Project.find_ongoing
+    @projects = Project.find_ongoing.reverse
     @projects.delete(@project)
   end
 
