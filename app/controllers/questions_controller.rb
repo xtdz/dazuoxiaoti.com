@@ -50,6 +50,7 @@ class QuestionsController < ApplicationController
   end
 
   def skip
+  	session.delete(:current_question_id)
     @question = Question.find(params[:id])
     @answer = @question.answers.new(:state => 2)
     QuestionTrace.record_answer(@question,nil,false)
@@ -63,24 +64,26 @@ class QuestionsController < ApplicationController
       format.js   { random }
     end
   end
-
+  
   def random
     # session_messenger.count_down decrements count_down everytime it's called
-		count_down = session_manager.count_down
-		question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-		session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
-		
-		current_question_set = session[:current_question_set]
-		if params.has_key?(:question_set)
-			session[:current_question_set] = params[:question_set]
-			current_question_set = params[:question_set]
-		elsif params.has_key?(:question_set_random)
-			session.delete(:current_question_set)
-		end
-			
-    if session.has_key?(:current_question) && params[:question_set].nil? && params[:question_set_random].nil?
-    	@question = session[:current_question]
-    else
+	count_down = session_manager.count_down
+	question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
+	session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+	
+	current_question_set = session[:current_question_set]
+	if params.has_key?(:question_set)
+	  session[:current_question_set] = params[:question_set]
+	  current_question_set = params[:question_set]
+	elsif params.has_key?(:question_set_random)
+	  session.delete(:current_question_set)
+	end
+	
+    @question = nil;
+    if session[:current_question_id] && params[:question_set].nil? && params[:question_set_random].nil?
+      @question = Question.find(session[:current_question_id])
+    end
+    if @question.nil?
       if user_signed_in?
         if count_down == 0 
           @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(current_question_set)
@@ -96,7 +99,7 @@ class QuestionsController < ApplicationController
           @question = Question.random_question(default_question_set, session_manager.answered_ids)
         end
       end
-      session[:current_question] = @question
+      session[:current_question_id] = @question.id
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
       redirect_to_registration
