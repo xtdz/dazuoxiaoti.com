@@ -52,7 +52,7 @@ class Question < ActiveRecord::Base
   
   def self.random_question question_set_id=nil, ids = []
     if question_set_id && !question_set_id.empty?
-      question = self.from_set(question_set_id).not_in(ids).random.first
+      question = self.from_set(question_set_id).not_in(ids).first
     else
       question = self.from_set(20).not_in(ids).random.first
     end
