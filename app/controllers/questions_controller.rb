@@ -99,7 +99,9 @@ class QuestionsController < ApplicationController
           @question = Question.random_question(default_question_set, session_manager.answered_ids)
         end
       end
-      session[:current_question_id] = @question.id
+      if !@question.nil?
+        session[:current_question_id] = @question.id
+      end
     end
     if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
       redirect_to_registration
