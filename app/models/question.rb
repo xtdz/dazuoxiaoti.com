@@ -27,7 +27,7 @@ class Question < ActiveRecord::Base
 
   scope :by_sponsor, lambda { |sponsor_id| where(:sponsor_id => sponsor_id) }
 
-  scope :random, lambda { (c = count) > 0 ? offset(rand(c)).limit(1) : limit(0) }
+  scope :random, lambda { |question_count| (c = question_count) > 0 ? offset(rand(c)).limit(1) : limit(0) }
 
   scope :from_set, lambda {|question_set_id| joins(:question_sets).where(:question_sets => {:id => question_set_id})}
 
@@ -49,16 +49,19 @@ class Question < ActiveRecord::Base
       nil
     end
   end
-  
+
   def self.random_question question_set_id=nil, ids = []
     if question_set_id && !question_set_id.empty?
-      question = self.from_set(question_set_id).not_in(ids).first
+      question_count = self.from_set(question_set_id).not_in(ids).count
+      question = self.from_set(question_set_id).not_in(ids).random(question_count).first
     else
-      question = self.from_set(20).not_in(ids).first
+      question_count = self.from_set(20).not_in(ids).count
+      question = self.from_set(20).not_in(ids).random(question_count).first
     end
 
     if question.nil?
-      self.not_in(ids).random.first
+      question_count = self.not_in(ids).count
+      self.not_in(ids).random(question_count).first
     else
       question
     end
@@ -89,7 +92,7 @@ class Question < ActiveRecord::Base
       0.00
     end
   end
-
+  
   def shuffle
     choice = choices[correct_index]
     answers = choices.sort_by {rand}
