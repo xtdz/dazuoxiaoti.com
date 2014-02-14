@@ -1,6 +1,6 @@
 .question
   .skip_button
-    %a.skip.remote{:href => skip_question_path(@question.id, :question_set => params[:question_set], :project_id => params[:project_id])}
+    %a.skip.remote{:href => skip_question_path(@question.id, :project_id => params[:project_id])}
   = question.title
 .share
   .correct_rate
@@ -14,8 +14,6 @@
   = render :partial => 'social_links', :locals => {:message => @message, :path => @path}
 #solution
   = form_for([question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
-    - if params[:question_set] 
-      %input{:type => :hidden, :name => :question_set, :value => params[:question_set]}
     %input{:type => :hidden, :name => :project_id, :value => @project.id}
     %input#answer{:type => :hidden, :name => "answer[choice]", :value => ""}
     %input#index{:type => :hidden, :name => "index", :value => 0}
