@@ -2,14 +2,14 @@
 .columns(style="margin-top:60px")
   .static_left
     .static_links
-      .link= link_to '关于我们', about_us_path, :class => 'selected'
+      .link= link_to '项目介绍', about_us_path, :class => 'selected'
       .link= link_to '企业合作', donate_path
       .link= link_to '常见问题', faq_path
       .link= link_to '联系我们', contact_path
       .link= link_to '致谢', thanks_path
   .static_right
     .static_header
-      关于我们
+      项目介绍
     .static_content
       .description
         每个网民的力量微不足道，能为千千万万需要帮助的人奉献什么？
@@ -19,8 +19,8 @@
         怎样的公益参与，既能有效地利用零碎时间，又能创造真正的价值？
       .description
         “小题大作”微公益网站中国第一个趣味性公益问答网站，旨在解决上述种种现存的问题：通过简单、有趣、透明的方式让尽可能多的人能够参与公益、贡献爱心、 收获知识。
-      .image
-        = image_tag asset_path("static/chart.png"), :width => 510, :alt => "三方共赢的创新公益机制"
+      .image(align = "center")
+        = image_tag asset_path("static/chart.png"), :width => 350, :alt => "三方共赢的创新公益机制"
       .description
         我们提供了一个三方共赢模式，在这里：
       .description
