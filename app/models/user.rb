@@ -104,7 +104,8 @@ class User < ActiveRecord::Base
   end
 
   def get_next_sponsor_question(sponsor_id)
-    Question.by_sponsor(sponsor_id).for_user(self.id).random.first
+  	question_count = Question.by_sponsor(sponsor_id).for_user(self.id).count
+    Question.by_sponsor(sponsor_id).for_user(self.id).random(question_count).first
   end
 
   def feedback_for_question question
