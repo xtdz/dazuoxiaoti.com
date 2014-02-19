@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
 
   def create
   	session.delete(:current_question_id)
+  	session_manager.count_down
     @question = Question.find(params[:question_id])
     @answer = Answer.new(params[:answer])
     if @question.valid_answer? @answer
