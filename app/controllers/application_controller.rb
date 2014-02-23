@@ -54,7 +54,12 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
+  def require_mobile_admin
+    admin_ids = [798,50150,53148,54277,54365,54845]
+    if !user_signed_in? || !admin_ids.include?(current_user.id)
+      redirect_to root_path
+    end
+  end  
   def require_admin
     admin_ids = [-1, 798, 18, 962, 792, 9387, 30630, 10435]
     if !user_signed_in? || !admin_ids.include?(current_user.id)
