@@ -53,19 +53,19 @@ class Project < ActiveRecord::Base
 
 
   def self.find_all_ongoing
-    Project.where(["end_time > ? and `limit` > correct_count/rate and not hidden",Time.now])
+    Project.where(["end_time > ? and `limit` > correct_count and not hidden",Time.now])
   end
 
   def self.find_all_expired
-    Project.where(["(`limit` <= correct_count/rate or end_time < ? and not hidden)", Time.now])
+    Project.where(["(`limit` <= correct_count or end_time < ? and not hidden)", Time.now])
   end
 
   def self.find_ongoing(kind=1)
-    Project.where(["project_kind=? and end_time > ? and `limit` > correct_count/rate and not hidden",kind,Time.now])
+    Project.where(["project_kind=? and end_time > ? and `limit` > correct_count and not hidden",kind,Time.now])
   end
 
   def self.find_expired(kind=1)
-    Project.where(["project_kind=? and (`limit` <= correct_count/rate or end_time < ? and not hidden)", kind,Time.now])
+    Project.where(["project_kind=? and (`limit` <= correct_count or end_time < ? and not hidden)", kind,Time.now])
   end
 
   def image_path type
