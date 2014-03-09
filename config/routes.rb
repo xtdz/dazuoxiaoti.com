@@ -1,5 +1,13 @@
 Dazuoxiaoti::Application.routes.draw do
 
+  namespace :mobile do
+    resources :questions do
+      collection do
+        get :random
+      end
+      resources :answers, :feedbacks
+    end
+  end
   get "/question_sets" ,to: "classifies#index"
   resources :classifies 
   resources :messages,:only=>[:index,:show,:destroy] do
