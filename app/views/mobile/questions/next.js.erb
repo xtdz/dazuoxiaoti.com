@@ -1,0 +1,24 @@
+<%if params["project_id"].to_i==12%>
+$(".content").html('<%= escape_javascript(render :partial => 'question', :locals => {:question => @question, :choices => @choices}) %>');
+<%elsif params["project_id"].to_i!=12 and session[:show_share] and session[:show_share][current_project.id] %>
+  <%- session[:show_share].delete current_project.id %>
+  $(".content").html('<%= escape_javascript(render :partial => 'share') %>');
+<% elsif user_quota < 1 and params["project_id"].to_i!=12 %>
+  $(".content").html('<%= escape_javascript(render :partial => 'finished') %>');
+<% else %>
+  $(".content").html('<%= escape_javascript(render :partial => 'question', :locals => {:question => @question, :choices => @choices}) %>');
+<% end %>
+
+_gaq.push(['_trackPageview', '/questions/random']);
+$('div.tab.displayed').removeClass('displayed').addClass('hidden');
+$('div.project_tab').removeClass('hidden').addClass('displayed');
+$('a.tab_label.selected').removeClass('selected');
+$('a.project_tab_label').addClass('selected');
+$('.information').show();
+$("span.numbers.participation_count").html("<%= @project.participation_count %>" + "人");
+$("span.numbers.correct_count").html("<%= @project.correct_count %>" + "题");
+$("span.numbers.item_count").html("<%= get_item_count_and_unit(@project)%>");
+$(".question_tab").html('<%= escape_javascript(render :partial => 'tab', :locals => {:question => @question, :project => @project}) %>');
+<% if user_signed_in? %>
+  $('a.fancy').trigger('fancy');
+<% end %>

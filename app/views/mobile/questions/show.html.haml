@@ -1,0 +1,18 @@
+= stylesheet_link_tag "mobile_style"
+.columns
+  .question_left
+    .content
+      - if @project.project_kind.to_i==2
+        = render :partial => 'mobile/questions/question', :locals => {:question => @question, :choices => @choices}
+      - else
+        - if session[:show_share] and session[:show_share][current_project.id]
+          - session[:show_share].delete current_project.id
+          = render :partial => 'mobile/questions/share'
+        - elsif user_quota < 1
+          = render :partial => 'mobile/questions/finished'
+        - else
+          = render :partial => 'mobile/questions/question', :locals => {:question => @question, :choices => @choices}
+  .clear
+- if current_user
+  = render :partial => "jiathis"  , :locals => {:count => user_correct_count, :project => @project}
+
