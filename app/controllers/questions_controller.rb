@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   before_filter :assign_project, :expire_project, :assign_other_projects, :except => [:like, :search]
   before_filter :disable_robot_index, :only => [:show]
   before_filter :require_admin, :only => [:edit, :update, :search, :destroy]
-
+  before_filter :check_mobile
   def show
     session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
@@ -115,7 +115,11 @@ class QuestionsController < ApplicationController
       render_question
     end
   end
-
+  def check_mobile
+    if mobile? 
+      redirect_to '/mobile/questions/random'
+    end
+  end
   def like
     @question = Question.find(params[:id])
     @question.liked_count += 1
