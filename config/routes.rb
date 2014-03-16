@@ -2,11 +2,17 @@ Dazuoxiaoti::Application.routes.draw do
 
   namespace :mobile do
     resources :questions do
-      collection do
-        get :random
-      end
-      resources :answers, :feedbacks
+    member do
+      get 'skip'
+      get 'like'
     end
+    collection do
+      get 'random'
+      get 'shuffle_all'
+      get 'search'
+    end
+    resources :answers, :feedbacks
+  end
   end
   get "/question_sets" ,to: "classifies#index"
   resources :classifies 

@@ -87,9 +87,7 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-  def check_mobile
-     if request.user_agent =~ /Mobile|Blackberry|Android|iPhone/
-       redirect_to '/mobile'
-     end
+  def mobile?
+     request.user_agent =~ /Mobile|Blackberry|Android|iPhone/
   end
 end

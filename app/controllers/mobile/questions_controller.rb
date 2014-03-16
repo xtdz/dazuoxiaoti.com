@@ -2,7 +2,7 @@ class Mobile::QuestionsController < ApplicationController
   layout 'mobile/questions/question'
   before_filter :assign_project, :expire_project, :assign_other_projects
   def show
-    session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s
+    session_manager.current_url = 'questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
 
     if !@question.nil?
@@ -13,8 +13,25 @@ class Mobile::QuestionsController < ApplicationController
     end
   end
 
+  def skip
+    session.delete(:current_question_id)
+    @question = Question.find(params[:id])
+    @answer = @question.answers.new(:state => 2)
+    QuestionTrace.record_answer(@question,nil,false)
+    if user_signed_in?
+      current_user.add_answer_for_project @answer, current_project
+    else
+      session_manager.add_answer(@answer)
+    end
+    respond_to do |format|
+      format.html { redirect_to :action => :random}
+      format.js   { random }
+    end
+  end
+  
   def random
       # session_messenger.count_down decrements count_down everytime it's called
+    logger.info "\n\n\n\n\n\n\n"
     count_down = session_manager.count_down
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
@@ -27,9 +44,9 @@ class Mobile::QuestionsController < ApplicationController
       # 30% chance of getting sponsor_question if not signed in when count down reaches 0
       if count_down == 0 and  rand() < 0.3
         question_count = Question.by_sponsor(current_project.sponsor_id).count;
-        @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(current_question_set, session_manager.answered_ids)
+        @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(nil, session_manager.answered_ids)
       else
-        @question = Question.random_question(current_question_set, session_manager.answered_ids)
+        @question = Question.random_question(nil, session_manager.answered_ids)
       end
       if !@question.nil?
         session[:current_question_id] = @question.id

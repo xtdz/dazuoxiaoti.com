@@ -38,7 +38,7 @@
       %span.orange= user_correct_count/@project.rate + 1
       #{@project.benefit.unit}#{@project.benefit.short_name}。
       .progress_bar_outter
-        .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 450 / @project.rate}px"}
+        .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 100 / @project.rate}%"}
       .clear
     - elsif !([12,14].include? @project.id.to_i)
 

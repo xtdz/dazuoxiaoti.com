@@ -13,6 +13,3 @@
         - else
           = render :partial => 'mobile/questions/question', :locals => {:question => @question, :choices => @choices}
   .clear
-- if current_user
-  = render :partial => "jiathis"  , :locals => {:count => user_correct_count, :project => @project}
-
