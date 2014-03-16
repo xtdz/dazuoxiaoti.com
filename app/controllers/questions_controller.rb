@@ -51,6 +51,7 @@ class QuestionsController < ApplicationController
 
   def skip
   	session.delete(:current_question_id)
+  	session_manager.count_down
     @question = Question.find(params[:id])
     @answer = @question.answers.new(:state => 2)
     QuestionTrace.record_answer(@question,nil,false)
@@ -66,10 +67,11 @@ class QuestionsController < ApplicationController
   end
   
   def random
+	if !session[:count_down]
+	  session[:count_down] = 10
+	end
+	count_down = session[:count_down]
 
-  logger.info "TEst\n\n\n\n\n"
-    # session_messenger.count_down decrements count_down everytime it's called
-	count_down = session_manager.count_down
 	question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
 	session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
 	

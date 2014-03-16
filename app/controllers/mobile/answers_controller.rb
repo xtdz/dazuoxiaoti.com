@@ -2,7 +2,6 @@ class Mobile::AnswersController < ApplicationController
   before_filter :assign_project, :expire_project
 
   def create
-    logger.info "\n\nCHeckpoint A\n\n"
   	session.delete(:current_question_id)
     @question = Question.find(params[:question_id])
     @answer = Answer.new(params[:answer])

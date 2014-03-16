@@ -1,18 +1,18 @@
 Dazuoxiaoti::Application.routes.draw do
 
   namespace :mobile do
+    resources :home
     resources :questions do
-    member do
-      get 'skip'
-      get 'like'
+      member do
+        get 'skip'
+      end
+      collection do
+        get 'random'
+        get 'shuffle_all'
+      end
+      resources :answers, :feedbacks
     end
-    collection do
-      get 'random'
-      get 'shuffle_all'
-      get 'search'
-    end
-    resources :answers, :feedbacks
-  end
+    root :to =>"home#index"
   end
   get "/question_sets" ,to: "classifies#index"
   resources :classifies 

@@ -2,7 +2,7 @@ class Mobile::QuestionsController < ApplicationController
   layout 'mobile/questions/question'
   before_filter :assign_project, :expire_project, :assign_other_projects
   def show
-    session_manager.current_url = 'questions/random?project_id='+ @project.id.to_s
+    session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
 
     if !@question.nil?

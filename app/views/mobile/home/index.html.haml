@@ -1,0 +1,17 @@
+- if user_signed_in?
+  %strong= current_user.nickname
+  %a{:href => random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id])} 
+    = 'answer'
+- else
+  .user_sign_in
+    %ul
+      %li.login 登录
+      %li
+        %a.link_auth{:href => user_omniauth_authorize_path(:tsina)}
+          = image_tag(asset_path('static/auth/sina_auth.png'),:class=>"auth")
+      %li
+        %a.link_auth{:href => user_omniauth_authorize_path(:tqq)}
+          = image_tag(asset_path('static/auth/qie32.png'),:class=>"auth", :width=>22, :height=>22)
+      %li
+        %a.link_auth{:href => user_omniauth_authorize_path(:renren)}
+          = image_tag(asset_path('static/auth/renren_auth.png'),:class=>"auth")
