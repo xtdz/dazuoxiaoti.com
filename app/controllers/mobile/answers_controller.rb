@@ -10,7 +10,7 @@ class Mobile::AnswersController < ApplicationController
       @answer.correct = @question.correct_answer == @answer.choice
       @selected_index = @question.choices.index(@answer.choice)
       if user_signed_in?
-        current_user.add_answer_for_project @answer, current_project, session_manager.referer
+        current_user.add_answer_for_project @answer, current_project, session_manager.referer, true
       else
       #  binding.pry
         if session_manager.referer
@@ -20,8 +20,9 @@ class Mobile::AnswersController < ApplicationController
             @participation.increment_contribution
           end
         end
+        #logger.info "answer"+@answer.question_id.to_s+"\n\n\n\n\n\n\n\n\n\n"
         session_manager.add_answer @answer
-      end
+      end 
       @choices = @question.choices
       @linked_question = ""
       last_string = @question.title

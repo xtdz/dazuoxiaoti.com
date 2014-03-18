@@ -1,7 +1,6 @@
 Dazuoxiaoti::Application.routes.draw do
 
   namespace :mobile do
-    resources :home
     resources :questions do
       member do
         get 'skip'
@@ -12,6 +11,7 @@ Dazuoxiaoti::Application.routes.draw do
       end
       resources :answers, :feedbacks
     end
+    resources :home
     root :to =>"home#index"
   end
   get "/question_sets" ,to: "classifies#index"

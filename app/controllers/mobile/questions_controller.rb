@@ -19,7 +19,7 @@ class Mobile::QuestionsController < ApplicationController
     @answer = @question.answers.new(:state => 2)
     QuestionTrace.record_answer(@question,nil,false)
     if user_signed_in?
-      current_user.add_answer_for_project @answer, current_project
+      current_user.add_answer_for_project @answer, current_project, true
     else
       session_manager.add_answer(@answer)
     end
@@ -30,8 +30,11 @@ class Mobile::QuestionsController < ApplicationController
   end
   
   def random
+    #logger.info "start" + "\n\n\n\n\n\n\n"
+    #session_manager.answered_ids.each do |x|
+    #    logger.info x.to_s + "\n\n\n\n\n\n"
+    #end
       # session_messenger.count_down decrements count_down everytime it's called
-    logger.info "\n\n\n\n\n\n\n"
     count_down = session_manager.count_down
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
@@ -41,12 +44,21 @@ class Mobile::QuestionsController < ApplicationController
       @question = Question.find(session[:current_question_id])
     end
     if @question.nil?
-      # 30% chance of getting sponsor_question if not signed in when count down reaches 0
-      if count_down == 0 and  rand() < 0.3
-        question_count = Question.by_sponsor(current_project.sponsor_id).count;
-        @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(nil, session_manager.answered_ids)
+      if user_signed_in?
+        if count_down == 0 
+          @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(nil)
+        else
+          @question = current_user.get_next_question(nil)
+        end
       else
-        @question = Question.random_question(nil, session_manager.answered_ids)
+        # default_question_set = QuestionSet::DEFAULT_SET.to_s
+        # 30% chance of getting sponsor_question if not signed in when count down reaches 0
+        if count_down == 0 and  rand() < 0.3
+          question_count = Question.by_sponsor(current_project.sponsor_id).count;
+          @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(nil, session_manager.answered_ids)
+        else
+          @question = Question.random_question(nil, session_manager.answered_ids)
+        end
       end
       if !@question.nil?
         session[:current_question_id] = @question.id

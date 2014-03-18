@@ -70,6 +70,9 @@ class QuestionsController < ApplicationController
 	if !session[:count_down]
 	  session[:count_down] = 10
 	end
+  session_manager.answered_ids.each do |x|
+      logger.info x
+  end
 	count_down = session[:count_down]
 
 	question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
