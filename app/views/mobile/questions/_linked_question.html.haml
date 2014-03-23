@@ -1,6 +1,0 @@
-- q.keywords.each do |k|
-  = q.title[0, q.title.index(k.name)]
-  %a{:href => "http://www.hudong.com/wiki/" + k.name, :target => "_blank", :class => "hudong"}
-    = k.name
-  = q.title[q.title.index(k.name)+k.name.length, q.title.length]
-

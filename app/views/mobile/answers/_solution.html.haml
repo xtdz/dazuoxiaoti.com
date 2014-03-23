@@ -1,7 +1,7 @@
 .question
   .skip_button
     %a.next.remote{:href => random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id])}
-  = @linked_question.html_safe
+  = @question.title
 .share
   .correct_rate
     正确率：#{@question.correct_rate}%

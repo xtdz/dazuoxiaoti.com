@@ -6,16 +6,3 @@ $(".content").html('<%= escape_javascript(render :partial => 'question', :locals
 <% else %>
   $(".content").html('<%= escape_javascript(render :partial => 'question', :locals => {:question => @question, :choices => @choices}) %>');
 <% end %>
-
-_gaq.push(['_trackPageview', 'answer/questions/random']);
-$('div.tab.displayed').removeClass('displayed').addClass('hidden');
-$('div.project_tab').removeClass('hidden').addClass('displayed');
-$('a.tab_label.selected').removeClass('selected');
-$('a.project_tab_label').addClass('selected');
-$('.information').show();
-$("span.numbers.participation_count").html("<%= @project.participation_count %>" + "人");
-$("span.numbers.correct_count").html("<%= @project.correct_count %>" + "题");
-$("span.numbers.item_count").html("<%= get_item_count_and_unit(@project)%>");
-<% if user_signed_in? %>
-  $('a.fancy').trigger('fancy');
-<% end %>

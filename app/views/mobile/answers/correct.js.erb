@@ -1,17 +1,1 @@
 $(".content").html("<%= escape_javascript(render :partial => 'solution', :locals => {:question => @question, :selected_index => @selected_index, :choices => @choices}) %>");
-$("span.numbers.participation_count").html("<%= @project.participation_count %>" + "人");
-$("span.numbers.correct_count").html("<%= @project.correct_count %>" + "题");
-$("span.numbers.item_count").html("<%= get_item_count_and_unit(@project)%>");
-$('div.tab.displayed').removeClass('displayed').addClass('hidden');
-$('div.question_tab').removeClass('hidden').addClass('displayed');
-$('a.tab_label.selected').removeClass('selected');
-$('a.question_tab_label').addClass('selected');
-$('.information').hide();
-<%- if user_signed_in? %>
-  $("div.user_correct_count").html("<%= current_user.correct_count %>" + "题");
-  $('a.fancy').trigger('fancy');
-<% end %>
-<%- if user_correct_count > 0 and user_correct_count % current_project.rate == 0 %>
-  <%- session[:show_share] ||= {}; session[:show_share][current_project.id] = true %>
-<% end %>
-
