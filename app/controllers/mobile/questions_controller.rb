@@ -1,6 +1,6 @@
 class Mobile::QuestionsController < ApplicationController
   layout 'mobile/questions/question'
-  before_filter :assign_project, :expire_project, :assign_other_projects
+  before_filter :assign_project, :expire_project, :assign_other_projects, :require_mobile_admin
   def show
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
@@ -30,12 +30,11 @@ class Mobile::QuestionsController < ApplicationController
   end
   
   def random
-    #logger.info "start" + "\n\n\n\n\n\n\n"
-    #session_manager.answered_ids.each do |x|
-    #    logger.info x.to_s + "\n\n\n\n\n\n"
-    #end
       # session_messenger.count_down decrements count_down everytime it's called
-    count_down = session_manager.count_down
+    if !session[:count_down]
+      session[:count_down] = 10
+    end
+    count_down = session[:count_down]
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
   
@@ -73,6 +72,7 @@ class Mobile::QuestionsController < ApplicationController
       render_question
     end
   end
+
   def render_question
     if @question.is_sponsored?
       session_manager.set_show_sponsored
@@ -92,11 +92,4 @@ class Mobile::QuestionsController < ApplicationController
     end
   end
 
-  def project_layout
-    if [5,7,8,9,10,11,12,14,16,18,21].include? current_project.id
-      "legacy/project_#{current_project.id}"
-    else
-      "project"
-    end
-  end
 end

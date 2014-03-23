@@ -45,15 +45,6 @@
       #{@project.benefit.unit}#{@project.benefit.short_name}.
     - else
       只凭您个人的力量很难,还是邀请您的好友一起来答题做公益吧! 
-      分享到：
-      - if @project.id==12
-        - @share_message = "【趣味微公益】我的爱心[心]爆棚了！刚刚在“小题大作微公益”网站参与趣味公益问答，支持@大爱清尘 ！目前累计答对#{user_correct_count}题。一[din推撞]个人[围观]的力量有限，快来帮帮我吧!"
-      - elsif @project.id==14
-        - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
-      - elsif @project.id.to_i == 18
-        - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对30题，小题大作微公益即向湖南鲁坑小学捐赠1两大米，用于学生营养餐项目，一起来帮助山里娃吃上健康午餐吧！"
-      - @paths = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
-      = render :partial => 'questions/social_buttom_links', :locals => {:message => @share_message , :path => @paths}
 
 
 

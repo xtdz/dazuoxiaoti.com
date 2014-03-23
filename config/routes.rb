@@ -7,11 +7,10 @@ Dazuoxiaoti::Application.routes.draw do
       end
       collection do
         get 'random'
-        get 'shuffle_all'
       end
       resources :answers, :feedbacks
     end
-    resources :home
+    resources :home, only: :index
     root :to =>"home#index"
   end
   get "/question_sets" ,to: "classifies#index"
