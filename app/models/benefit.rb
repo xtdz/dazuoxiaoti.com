@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Benefit < ActiveRecord::Base
   has_attached_file :upload_image
+  validates_attachment_content_type :upload_image, :content_type => ["image/jpg", "image/jpeg", "image/png"]
+
   def image_path
     "benefits/#{image_name}"
   end
