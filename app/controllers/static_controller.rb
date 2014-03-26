@@ -91,7 +91,7 @@ class StaticController < ApplicationController
     end
   end
   def check_mobile
-    if mobile?
+    if mobile? && mobile_admin?
       redirect_to '/mobile/home'
     end
   end

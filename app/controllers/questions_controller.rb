@@ -119,8 +119,8 @@ class QuestionsController < ApplicationController
     end
   end
   def check_mobile
-    if mobile?
-      redirect_to '/mobile/questions/random'
+    if mobile? && mobile_admin?
+      redirect_to '/mobile/home'
     end
   end
   def like

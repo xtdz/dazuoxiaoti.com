@@ -1,5 +1,5 @@
 class Mobile::AnswersController < ApplicationController
-  before_filter :assign_project, :expire_project, :require_mobile_admin, :check_mobile
+  before_filter :assign_project, :expire_project, :require_mobile_admin
 
   def create
   	session.delete(:current_question_id)
@@ -32,12 +32,6 @@ class Mobile::AnswersController < ApplicationController
       else
         format.js {render :file => "mobile/answers/wrong"}
       end
-    end
-  end
-
-  def check_mobile
-    if mobile?
-      redirect_to '/mobile/questions/random'
     end
   end
 
