@@ -46,7 +46,7 @@ class AnswersController < ApplicationController
   end
 
   def check_mobile
-    if mobile? && mobile_admin?
+    if from_mobile? && mobile_admin?
       redirect_to '/mobile/home'
     end
   end
