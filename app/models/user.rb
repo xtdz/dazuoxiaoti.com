@@ -51,18 +51,18 @@ class User < ActiveRecord::Base
     correct_count + answer_quota
   end
 
-  def increment(counter)
-    if counter == :correct_count
-      update_counters(:correct_count => 1, :answer_quota => -1)
+  def increment(counter, from_mobile = false)
+    if counter == :correct_count && !from_mobile
+          update_counters(:correct_count => 1, :answer_quota => -1)
     else
       update_counters(counter => 1)
     end
   end
 
-  def add_answer_for_project(answer, project, referer = nil)
+  def add_answer_for_project(answer, project, referer = nil, from_mobile = false)
     if valid_answer?(answer) and valid_project?(project)
       answers << answer
-      increment_counter project, answer.counter_name, referer
+      increment_counter project, answer.counter_name, referer, from_mobile
       if answer.counter_name == :correct_count
         Achievement.trigger(:participation, self, :project => project)
         Achievement.trigger(:completion, self, :project => project)
@@ -170,9 +170,9 @@ class User < ActiveRecord::Base
     end
   end
 
-  def increment_counter project, counter, referer = nil
+  def increment_counter project, counter, referer = nil, from_mobile = false
       participation = Participation.get_participation(self, project, referer)
-      increment counter
+      increment(counter,from_mobile)
       project.increment counter
       participation.increment_counter counter
   end
