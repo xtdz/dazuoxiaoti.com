@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
   
   def mobile_admin?
-    admin_ids = [798,50150,53148,54277,54365,54845]
+    admin_ids = [798,50150,53148,53685,54277,54365,54845]
     if(!user_signed_in? || !admin_ids.include?(current_user.id))
       false
     else 
@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-  def form_mobile?
+  def from_mobile?
      request.user_agent =~ /Mobile|Blackberry|Android|iPhone/
   end
 end
