@@ -22,6 +22,10 @@ class Project < ActiveRecord::Base
   has_attached_file :upload_image_share_finish1
   has_attached_file :upload_image_share_finish2
 
+  validates_attachment_content_type :upload_image_share_finish2,:upload_image_share_finish1,
+                                    :upload_image_share_question2,:upload_image_share_question1,
+                                    :upload_image_banner,:upload_image_small,:upload_image_about,
+                                    :upload_image_main, :content_type => ["image/jpg", "image/jpeg", "image/png"]
   def build_nested_models
     build_benefit unless benefit
     build_sponsor unless sponsor

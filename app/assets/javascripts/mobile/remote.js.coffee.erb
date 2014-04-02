@@ -1,0 +1,34 @@
+jQuery(($) ->
+  $(document).ready( ->
+    formatLink = (link, format) ->
+      arr = link.split("?")
+      link = arr[0]
+      params = arr[1] || ""
+      return link + "." + format + "?" + params
+
+    paramLink = (link, param) ->
+      arr = link.split("?")
+      link = arr[0]
+      if arr[1] == undefined
+        return link + "?" + param
+      else
+        return link + "?" + arr[1] + "&" + param
+
+    $('a.remote').live('click', ()->
+      $(this).html('<img src="<%= asset_path 'static/spinner.gif' %>"/>')
+      $.get(formatLink(this.href, "js"))
+      return false
+    )
+
+    $('a.fancy').live('fancy', ->
+      href = paramLink(this.href, "modal=true")
+      $(this).fancybox({
+        'type' : 'ajax',
+        'href' : href,
+      })
+    )
+
+    $('a.fancy').trigger('fancy')
+  )
+)
+

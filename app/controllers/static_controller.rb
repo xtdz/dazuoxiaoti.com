@@ -2,6 +2,7 @@ require 'nokogiri'
 class StaticController < ApplicationController
   before_filter :reset_current_url_to_root, :only => [:about_us, :faq, :contact, :thanks]
   before_filter :require_admin, :only => [:admin]
+  before_filter :check_mobile
   layout "index"
 
   def about_us
@@ -87,6 +88,11 @@ class StaticController < ApplicationController
     end
     respond_to do |format|
       format.json { render :json => @posts.to_json}
+    end
+  end
+  def check_mobile
+    if from_mobile? && mobile_admin?
+      redirect_to '/mobile/home'
     end
   end
 end

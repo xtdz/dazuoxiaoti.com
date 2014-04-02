@@ -1,0 +1,4 @@
+$(".content").html("<%= escape_javascript(render :partial => 'solution', :locals => {:question => @question, :selected_index => @selected_index, :choices => @choices}) %>");
+<%- if user_correct_count > 0 and user_correct_count % current_project.rate == 0 %>
+  <%- session[:show_share] ||= {}; session[:show_share][current_project.id] = true %>
+<% end %>

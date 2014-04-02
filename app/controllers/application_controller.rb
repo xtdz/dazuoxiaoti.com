@@ -54,12 +54,22 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  def require_mobile_admin
-    admin_ids = [798,50150,53148,54277,54365,54845]
-    if !user_signed_in? || !admin_ids.include?(current_user.id)
+  
+  def mobile_admin?
+    admin_ids = [798,50150,53148,53685,54277,54365,54845]
+    if(!user_signed_in? || !admin_ids.include?(current_user.id))
+      false
+    else 
+      true
+    end
+  end
+
+  def redirect_mobile_admin
+    if !mobile_admin?
       redirect_to root_path
     end
   end  
+
   def require_admin
     admin_ids = [-1, 798, 18, 962, 792, 9387, 30630, 10435]
     if !user_signed_in? || !admin_ids.include?(current_user.id)
@@ -87,9 +97,7 @@ class ApplicationController < ActionController::Base
       super
     end
   end
-  def check_mobile
-     if request.user_agent =~ /Mobile|Blackberry|Android|iPhone/
-       redirect_to '/mobile'
-     end
+  def from_mobile?
+     request.user_agent =~ /Mobile|Blackberry|Android|iPhone/
   end
 end
