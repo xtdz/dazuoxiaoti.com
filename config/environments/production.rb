@@ -45,7 +45,7 @@ Dazuoxiaoti::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
-  config.assets.precompile += ['bootstrap.css', 'project_style.css', 'sina_app.css', 'sina_app.js','admin.css','admin.js']
+  config.assets.precompile += ['bootstrap.css', 'project_style.css', 'sina_app.css', 'sina_app.js','admin.css','admin.js','mobile_style.css','mobile.js']
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
