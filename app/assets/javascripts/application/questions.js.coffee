@@ -12,12 +12,19 @@ jQuery ($) ->
     $(this).addClass('selected')
     return false
   )
-
+  
+  submit_flag = true
+  
   $.submit_answer = (value, index) ->
-    $('#answer').val(value)
-    $('#index').val(index)
-    $('.question_form').submit()
-
+    if submit_flag
+      $('#answer').val(value)
+      $('#index').val(index)
+      $('.question_form').submit()
+      submit_flag = false
+  
+  $.active_submit = () ->
+    submit_flag = true
+  
   $.submit_category = (id, wanted) ->
     $('#id').val(id)
     $('#wanted').val(wanted)
