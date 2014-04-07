@@ -3,7 +3,7 @@
 .block_label
   项目简介
 .block_content
-  .right_image= image_tag asset_path(project.image_path :about), :alt => project.name
+  .right_image= image_tag project_image_path(project, :about), :alt => project.name
   答题开始时间：#{project.start_time.strftime "%m月%d日"}
   %br
   :plain
