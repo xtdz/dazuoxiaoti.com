@@ -9,7 +9,7 @@ $(".content").html('<%= escape_javascript(render :partial => 'question', :locals
   $(".content").html('<%= escape_javascript(render :partial => 'question', :locals => {:question => @question, :choices => @choices}) %>');
 <% end %>
 
-$.active_submit();
+$.active_submit_answer();
 _gaq.push(['_trackPageview', '/questions/random']);
 $('div.tab.displayed').removeClass('displayed').addClass('hidden');
 $('div.project_tab').removeClass('hidden').addClass('displayed');
