@@ -21,7 +21,6 @@ jQuery ($) ->
       $('#index').val(index)
       $('.question_form').submit()
       submit_answer_flag = false
-      setTimeout($.active_submit_answer, 3000)
   
   $.active_submit_answer = () ->
     submit_answer_flag = true
