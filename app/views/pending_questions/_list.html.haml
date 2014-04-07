@@ -16,10 +16,10 @@
         %tr
           %td{:width => 150}
             .correct_answer
-              #{p.correct_answer}(#{p.choice_count(p.correct_answer)})
+              #{p.correct_answer}(#{p.question_statistics[p.correct_index]})
           - p.wrong_answers.each do |a|
             %td{:width => 150}
-              #{a}(#{p.choice_count(a)})
+              #{a}(#{p.question_statistics[p.choices.index(a)]})
         %tr
           %td{:colspan=>4}
             .pending_question_explanation.last_row
