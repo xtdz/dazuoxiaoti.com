@@ -37,7 +37,14 @@ class Mobile::QuestionsController < ApplicationController
     count_down = session[:count_down]
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
-  
+    
+    current_question_set = params[:question_set]
+    if current_question_set.nil?
+      current_question_set = session[:current_question_set]
+    else
+      session[:current_question_set] = current_question_set
+    end
+    
     @question = nil
     if session[:current_question_id] && params[:question_set].nil? && params[:question_set_random].nil?
       @question = Question.find(session[:current_question_id])
@@ -47,7 +54,7 @@ class Mobile::QuestionsController < ApplicationController
         if count_down == 0 
           @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(nil)
         else
-          @question = current_user.get_next_question(nil)
+          @question = current_user.get_next_question(current_question_set)
         end
       else
         # default_question_set = QuestionSet::DEFAULT_SET.to_s
@@ -66,7 +73,11 @@ class Mobile::QuestionsController < ApplicationController
 
     if @question.nil? #no more questions in dazuoxiaoti.com
       session_manager.notices << t('question.no_question')
-      redirect_to root_path
+      session[:current_question_set] = nil
+      respond_to do |format| #TODO
+        format.html { redirect_to root_path }
+        format.js { render :js => "window.location = ''" }
+      end
     else
       #@question_set = @question.question_sets.first
       render_question
@@ -91,5 +102,5 @@ class Mobile::QuestionsController < ApplicationController
       format.js {render :next}
     end
   end
-
+  
 end
