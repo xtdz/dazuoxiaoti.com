@@ -70,6 +70,12 @@ module ApplicationHelper
       else
         asset_path(project.image_path :about)
       end
+    when :small
+      if project.upload_image_small?
+        project.upload_image_small.url
+      else
+        asset_path(project.image_path :small)
+      end
     end
   end
 
