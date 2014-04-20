@@ -17,12 +17,13 @@ jQuery ($) ->
   
   $.submit_answer = (value, index) ->
     if submit_answer_flag
+      setTimeout($.activate_submit_answer, 3000)
       $('#answer').val(value)
       $('#index').val(index)
       $('.question_form').submit()
       submit_answer_flag = false
   
-  $.active_submit_answer = () ->
+  $.activate_submit_answer = () ->
     submit_answer_flag = true
   
   $.submit_category = (id, wanted) ->
