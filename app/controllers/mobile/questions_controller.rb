@@ -73,7 +73,11 @@ class Mobile::QuestionsController < ApplicationController
 
     if @question.nil? #no more questions in dazuoxiaoti.com
       session_manager.notices << t('question.no_question')
-      redirect_to :action => :random
+      session[:current_question_set] = nil
+      respond_to do |format| #TODO
+        format.html { redirect_to root_path }
+        format.js { render :js => "window.location = ''" }
+      end
     else
       #@question_set = @question.question_sets.first
       render_question
@@ -98,5 +102,5 @@ class Mobile::QuestionsController < ApplicationController
       format.js {render :next}
     end
   end
-
+  
 end
