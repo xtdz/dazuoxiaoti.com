@@ -101,6 +101,6 @@ class Project < ActiveRecord::Base
 
   def equation
     return "答题支持大爱清尘" if project_kind==2
-    @equestion ||= "#{rate}#{I18n.t 'question.equation'}1#{benefit.unit}#{benefit.short_name}"
+    @equestion ||= "#{rate}#{I18n.t 'question.equation'}#{benefit.unit_rate}#{benefit.unit}#{benefit.name}"
   end
 end
