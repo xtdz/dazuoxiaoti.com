@@ -70,6 +70,24 @@ module ApplicationHelper
       else
         asset_path(project.image_path :about)
       end
+    when :sina_poster
+      if project.upload_image_share_question1?
+        project.upload_image_share_question1.url
+      else
+        asset_path(project.image_path :sina_poster)
+      end
+    when :renren_poster
+      if project.upload_image_share_question1?
+        project.upload_image_share_question1.url
+      else
+        asset_path(project.image_path :renren_poster)
+      end
+    when :qq_poster
+      if project.upload_image_share_question1?
+        project.upload_image_share_question1.url
+      else
+        asset_path(project.image_path :qq_poster)
+      end
     end
   end
 
