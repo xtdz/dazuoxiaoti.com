@@ -2,7 +2,7 @@
 <div class='weibo_share_question_<%=i%>'>
 <script>
   //<![CDATA[
-    weibo_button('weibo_share_question_<%=i%>', '<%=message%>', '<%=path%>', '<%=asset_path project.try(:image_path, :sina_poster)%>', '')
+    weibo_button('weibo_share_question_<%=i%>', '<%=message%>', '<%=path%>', '<%=project_image_path(project, :sina_poster)%>', '')
   //]]>
 </script>
 
@@ -10,7 +10,7 @@
 <div class='renren_share_question_<%=i%>'>
 <script>
   //<![CDATA[
-    renren_button('renren_share_question_<%=i%>', '<%=message%>', '<%=path%>', '<%=asset_path project.try(:image_path, :sina_poster)%>', '')
+    renren_button('renren_share_question_<%=i%>', '<%=message%>', '<%=path%>', '<%=project_image_path(project, :sina_poster)%>', '')
   //]]>
 </script>
 
@@ -18,7 +18,7 @@
 <div class='qq_share_question_<%=i%>'>
 <script>
   //<![CDATA[
-    qq_button('qq_share_question_<%=i%>', '<%=message%>', '<%=path%>', '<%=asset_path project.try(:image_path, :sina_poster)%>', '')
+    qq_button('qq_share_question_<%=i%>', '<%=message%>', '<%=path%>', '<%=project_image_path(project, :sina_poster)%>', '')
   //]]>
 </script>
 
