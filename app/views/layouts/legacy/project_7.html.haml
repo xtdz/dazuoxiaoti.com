@@ -51,7 +51,4 @@
           =link_to "关于我们", about_us_path, :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'about_us', 'footer']);"
           &nbsp;|&nbsp;粤ICP备11013307号-3
 
-    :plain
-      <script type="text/javascript"/>
-        var uvOptions = {}; (function() { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/jnSv67HE9z0rG7kmxPRQ.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s); })();
-      </script>
+    = render :partial => "layouts/uservoice"
