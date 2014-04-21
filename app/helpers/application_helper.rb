@@ -70,7 +70,6 @@ module ApplicationHelper
       else
         asset_path(project.image_path :about)
       end
-<<<<<<< HEAD
     when :sina_poster
       if project.upload_image_share_question1?
         project.upload_image_share_question1.url
@@ -88,13 +87,12 @@ module ApplicationHelper
         project.upload_image_share_question1.url
       else
         asset_path(project.image_path :qq_poster)
-=======
+      end
     when :small
       if project.upload_image_small?
         project.upload_image_small.url
       else
         asset_path(project.image_path :small)
->>>>>>> d801b1e859d5268bcf226378af7815be574160ce
       end
     end
   end
