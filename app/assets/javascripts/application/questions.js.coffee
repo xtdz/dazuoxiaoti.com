@@ -102,7 +102,7 @@ window.qq_button = (cla, content, path, image_path, size) ->
   if (size == 'big')
     html += '<img src="http://mat1.gtimg.com/app/vt/images/share/b24.png" valign="middle" border="0" alt="" /></a>'
   else
-    html += '<img src="http://v.t.qq.com/share/images/s/weiboicon16.png" valign="middle" border="0" alt="" /></a>'
+    html += '<img src="http://mat1.gtimg.com/app/newvt/share/images/share_icon_2.png" valign="middle" border="0" alt="" /></a>'
   $("."+cla).html(html)
   document.getElementById('qq_button').onclick = () ->
     window.open(this.href)
