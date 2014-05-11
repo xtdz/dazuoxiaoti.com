@@ -2,7 +2,9 @@
   .other_projects
     .label
       其他活动
-    - projects.each do |proj|
+    - t = [projects.length - 1, 3].min
+    - projects.shuffle!
+    - for i in 0..t
       .other_project
         .other_project_wrapped
-          = link_to image_tag(project_image_path(proj,:small), :alt => proj.name, :title => proj.name), project_path(proj) 
+          = link_to image_tag(project_image_path(projects[i],:small), :alt => projects[i].name, :title => projects[i].name), project_path(projects[i])
