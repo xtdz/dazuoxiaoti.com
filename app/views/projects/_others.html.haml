@@ -5,4 +5,4 @@
     - projects.each do |proj|
       .other_project
         .other_project_wrapped
-          = link_to image_tag(asset_path("projects/#{proj.id}/small.jpg"), :alt => proj.name, :title => proj.name), project_path(proj) 
+          = link_to image_tag(project_image_path(proj,:small), :alt => proj.name, :title => proj.name), project_path(proj) 

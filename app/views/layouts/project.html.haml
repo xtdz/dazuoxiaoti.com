@@ -3,7 +3,7 @@
   %head
     %title
       = @title ? @title : "小题大作微公益"
-    %meta{:name => "keywords", :content => @metakeywords ? @metakeywords : "小题大作, 小题大做, 小题, 小题大做网, 网站, 微公益, 平台, 趣味问答, 公益, 答题, 捐物, 全民参与"}
+    %meta{:name => "keywords", :content => @metakeywords ? @metakeywords : "小题大作, 小题大做, 小题, 小题大做网, 网站, 微公益, 平台, 趣味问答, 公益, 答题, 捐物, 全民参与"} 
     %meta{:name => "description", :content => @metadescription ? @metadescription : "“小题大作”是中国第一个趣味性公益问答网站，（通过简单、有趣、透明的方式让尽可能多的人能够参与公益、贡献爱心、 收获知识）。用户每答对一定数量的趣味百科问题，就能使公益项目得到相应数额的物资捐助。捐赠物资不经过小题大作团队，直接由企业捐助方捐给项目。"}
     %meta{:name => "robots", :content => @metarobots ? @metarobots : "index,follow"}
     = stylesheet_link_tag    "application"
@@ -11,24 +11,18 @@
       <script type="text/javascript" src="/PNG/iepngfix_tilebg.js"></script>
     = javascript_include_tag "application"
     = csrf_meta_tags
-  %body{style: 'background: #fffff0;'}
+  %body{style: "background: url('#{current_project.upload_image_banner.url}') #fffff0 center 30px no-repeat;"}
     = render :partial => "layouts/nav"
-    .wrap
+    .wrap{style:"position:relative"}
       %div{id: "project_wrap_#{current_project.id}"}
-        - if current_project.id < 19
-          .project_header
-            = render partial: "layouts/legacy/header"
-        - else
-          .project_banner
-            = image_tag current_project.upload_image_banner.url
-        .main
+        - if current_project.banner_url?
+          %a{href: current_project.banner_url, target: "_blank",
+            style: "display:block;width:940px;height:155px;position:absolute;top:-180px;"}
+        .main{style: "margin-top: 230px;"}
           = yield
         .footer
           小题大作 &copy; 2011-2012 |&nbsp;
           =link_to "关于我们", about_us_path, :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'about_us', 'footer']);"
           &nbsp;|&nbsp;粤ICP备11013307号-3
 
-    :plain
-      <script type="text/javascript"/>
-        var uvOptions = {}; (function() { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/jnSv67HE9z0rG7kmxPRQ.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s); })();
-      </script>
+    = render :partial => "layouts/uservoice"

@@ -12,12 +12,20 @@ jQuery ($) ->
     $(this).addClass('selected')
     return false
   )
-
+  
+  submit_answer_flag = true
+  
   $.submit_answer = (value, index) ->
-    $('#answer').val(value)
-    $('#index').val(index)
-    $('.question_form').submit()
-
+    if submit_answer_flag
+      setTimeout($.activate_submit_answer, 3000)
+      $('#answer').val(value)
+      $('#index').val(index)
+      $('.question_form').submit()
+      submit_answer_flag = false
+  
+  $.activate_submit_answer = () ->
+    submit_answer_flag = true
+  
   $.submit_category = (id, wanted) ->
     $('#id').val(id)
     $('#wanted').val(wanted)
@@ -94,7 +102,7 @@ window.qq_button = (cla, content, path, image_path, size) ->
   if (size == 'big')
     html += '<img src="http://mat1.gtimg.com/app/vt/images/share/b24.png" valign="middle" border="0" alt="" /></a>'
   else
-    html += '<img src="http://v.t.qq.com/share/images/s/weiboicon16.png" valign="middle" border="0" alt="" /></a>'
+    html += '<img src="http://mat1.gtimg.com/app/newvt/share/images/share_icon_2.png" valign="middle" border="0" alt="" /></a>'
   $("."+cla).html(html)
   document.getElementById('qq_button').onclick = () ->
     window.open(this.href)

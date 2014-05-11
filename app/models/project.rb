@@ -86,6 +86,8 @@ class Project < ActiveRecord::Base
       "projects/#{id}/poster_1.jpg"
     when :qq_poster
       "projects/#{id}/poster_1.jpg"
+    when :small
+      "projects/#{id}/small.jpg"
     else
       ""
     end
