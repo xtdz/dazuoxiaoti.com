@@ -5,6 +5,10 @@
 .share
   .correct_rate
     正确率：#{@question.correct_rate}%
+    考考朋友，分享到:
+  - @message = share_question_message @question, @project
+  - @path = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+  = render :partial => 'mobile/questions/social_links', :locals => {:message => @message, :path => @path}
 #solution
   %a.remote{:href => random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id]), :onclick => "return false;"}
   - @question.choices.each_with_index do |choice, index|

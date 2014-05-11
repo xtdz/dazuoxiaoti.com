@@ -5,6 +5,10 @@
 .share
   .correct_rate
     正确率：#{@question.correct_rate}%
+    考考朋友，分享到:
+  - @message = share_question_message @question, @project
+  - @path = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+  = render :partial => 'mobile/questions/social_links', :locals => {:message => @message, :path => @path}
 #solution
   = form_for([:mobile, question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
     %input{:type => :hidden, :name => :project_id, :value => @project.id}

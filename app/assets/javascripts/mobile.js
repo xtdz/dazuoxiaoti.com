@@ -9,3 +9,4 @@
 //= require ga
 //= require mobile/questions
 //= require mobile/remote
+//= require application/questions
