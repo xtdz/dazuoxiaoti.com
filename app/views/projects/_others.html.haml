@@ -3,7 +3,8 @@
     .label
       其他活动
     - t = [projects.length - 1, 3].min
-    - projects.shuffle!
+    - if projects.length>4
+      - projects.shuffle!
     - for i in 0..t
       .other_project
         .other_project_wrapped
