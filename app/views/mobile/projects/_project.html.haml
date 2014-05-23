@@ -1,0 +1,71 @@
+.project_header
+  .start_button=link_to image_tag(asset_path('static/answer.png')), random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id])
+  = project.id==14 ? "宜农贷——她的命运因您而改变" : project.name
+.block_label
+  项目简介
+.block_content
+  .right_image= image_tag project_image_path(project, :about), :alt => project.name
+  答题开始时间：#{project.start_time.strftime "%m月%d日"}
+  %br
+  :plain
+    #{project.description}
+  .clear
+.block_label
+  - if project.id==14 
+    宜农贷简介
+  - elsif project.id==18
+    捐赠、接收与协助方简介
+  - else
+    捐赠与接收方简介
+
+.block_content
+  .left_image= link_to image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name), project.sponsor.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_show']);"
+  - project.sponsor.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+
+- if project.id!=14
+  .block_content
+    .right_image= link_to image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name), project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_show']);"
+    - project.coordinator.description.each_line do |line|
+      %p
+        :plain
+          #{line}
+    .clear
+- if project.id==18
+  .block_content
+    .left_image= link_to image_tag(organization_image_path(project.assister(44)), :alt => project.assister(44).name), project.assister(44).url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_show']);"
+    - project.assister(44).description.each_line do |line|
+      %p
+        :plain
+          #{line}
+    .clear
+.block_label
+  = ([14,18].include? project.id) ? "物品详情" : "物资详情"
+.block_content
+  - if project.benefit.unit_url?
+    .left_image= link_to image_tag(benefit_image_path(project.benefit), :alt => project.benefit.name), project.benefit.unit_url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Unit', 'project_show']);"
+  - else
+    .left_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
+  - project.benefit.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+.block_label
+  成果反馈时间
+.block_content
+  - if project.updates.empty?
+    小题大作会及时向您反馈本次项目的进行情况
+  - else
+    - project.updates.each do |update|
+      = update.content
+      %br
+    %br
+    - if project.feedback_image_count
+      - project.feedback_image_count.times do |i|
+        .feedback_image
+          = link_to image_tag(asset_path(project.feedback_image_path(i))), asset_path(project.feedback_image_path(i)), :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Image', 'Past_project', 'past_project_show']);"
+        %br

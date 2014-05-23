@@ -9,5 +9,5 @@
 //= require ga
 //= require fancybox
 //= require jquery/jquery.SuperSlide
-//= require_tree ./application
+//= require ./application/question_sets
 

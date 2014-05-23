@@ -10,12 +10,12 @@
 
 %h4
   捐赠方
-
-= form.simple_fields_for :sponsor do |sponsor|
-  = sponsor.input :name, label: '名字'
-  = sponsor.input :upload_image, label: 'Logo图片', as: :file
-  = sponsor.input :url, label: '网站链接'
-  = sponsor.input :description, label: '简介', as: :text
+/=form.input :sponsor,:as => :select,:collection => Organization.all.map{|o| [o.name,o.data]}
+/= form.simple_fields_for :sponsor do |sponsor|
+/  = sponsor.input :name, label: '名字'
+/  = sponsor.input :upload_image, label: 'Logo图片', as: :file
+/  = sponsor.input :url, label: '网站链接'
+/  = sponsor.input :description, label: '简介', as: :text
 
 %h4
   接收方

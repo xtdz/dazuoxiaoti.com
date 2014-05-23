@@ -1,0 +1,10 @@
+.columns
+  = render :partial => "layouts/mobile/mobile_nav"
+  .project_list_left
+    .projects_list
+      - @projects.each do |p|
+        .project_block
+          = render :partial => 'mobile/projects/project_block', :locals => {project: p, show: true}
+      - @past_projects.each do |pp|
+        .project_block
+          = render :partial => 'mobile/projects/past_project_block', :locals => {project: pp, show: true}

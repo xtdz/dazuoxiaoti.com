@@ -1,0 +1,8 @@
+- @nav_class = :past
+%div{:id => "project_theme_#{@project.id}"}
+.columns
+  - if flash[:notice]
+    .notice= flash[:notice]
+  .project_left
+    .project_info
+      = render :partial => "past_project", :locals => {:project => @project}

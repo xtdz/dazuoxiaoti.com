@@ -1,0 +1,109 @@
+// Place all the styles related to the layout here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "common";
+
+.wrap {
+  width: 320px;
+}
+.bwrap{
+  width: 100%;
+  top:-40px;
+  margin-top:20px;
+  padding:0px;
+ 
+}
+
+.main {
+}
+
+.project_banner {
+  position: relative;
+  top: 30px;
+  left: -25px;
+  height: 230px;
+  width: 1000px;
+  z-index: -100;
+}
+
+.project_header {
+  height: 120px;
+  text-align: left;
+  .logo {
+    width: 100px;
+    padding: 60px 0px 0px 40px;
+    float: left;
+  }
+  .spnsr_logo {
+    float: right;
+    margin-top: 40px;
+    width: 200px;
+    text-align: center;
+    height: 120px;
+    line-height: 120px;
+    img {
+      vertical-align: middle;
+    }
+  }
+}
+
+.header {
+  height: 160px;
+  text-align:center;
+  .logo {
+    padding-top: 60px;
+  }
+  .motto {
+    margin-top: 10px;
+  }
+}
+
+
+.top_nav,.index_nav{
+  zoom: 1.0;
+  #position: fixed;
+  z-index: 90;
+  width: 100%;
+  top: 0px;
+  height: 40px;
+  .wrap {
+    height: 100%;
+    width: 100%;
+    background: $orange 0px 0px repeat-x;
+    @include gradient( #ff9933, #ff8000);
+    @include opacity(0.9);
+    @include shadow(0px, 0px, 3px, #a0a0a0);
+    .left{
+      float:left;
+      height:100%;
+      width:33%;
+      .link{
+        width:100%;
+        height:100%;
+      }
+    }
+    .titles{
+      height:100%;
+      width:33%;
+      float:left;
+    }
+    .right{
+      height:100%;
+      width:33%;
+      text-align: right;
+      float:right;
+      .link{
+        width:100%;
+        height:100%;
+      
+      }
+    }
+  }
+}
+
+.columns {
+  clear: both;
+  padding-top: 2px;
+  width:265px;
+}
