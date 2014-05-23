@@ -10,8 +10,26 @@ Dazuoxiaoti::Application.routes.draw do
       end
       resources :answers, :feedbacks
     end
+    resources :projects do
+      collection do
+        get 'current'
+      end
+    end
+    get "/question_sets" ,to: "classifies#index"
+    resources :classifies 
+    resources :question_sets do
+      member do
+        get 'select'
+        get 'subscribe'
+        get 'unsubscribe'
+      end
+      collection do
+        get 'manage'
+      end
+    end
     resources :home, only: :index
-    root :to =>"home#index"
+    resources :past_projects, :organizations, :benefits
+    root :to =>"home#index2"
   end
   get "/question_sets" ,to: "classifies#index"
   resources :classifies 

@@ -1,0 +1,148 @@
+@import 'common';
+
+.question_sets {
+  width:500px;
+  .question_sets_left{
+    width: 50%;
+    float: left;
+  }
+
+  .question_sets_right{
+    width: 50%;
+    float: right;
+  }
+
+  .help_text {
+    font-size: 10pt;
+    height: 40px;
+    padding: 15px;
+    margin-bottom: 25px;
+    color: #606060;
+    background: #fcfcfc;
+    @include gradient(#fcfcfc, #f8f8f8);
+    @include shadow(0px, 0px, 5px, #f0f0f0);
+  }
+
+  .notice {
+    padding: 5px;
+    text-align: center;
+    background: #c0ffc0;
+    color: $brown;
+    font-size: 10pt;
+    margin: 10px 0px;
+  }
+
+  .sets_label {
+    font-size: 14pt;
+    line-height: 35px;
+    color: $orange;
+    border-bottom: 1px solid $grey_border;
+    margin-top: 20px;
+    .sets_button {
+      float:right;
+      line-height: 0px;
+      margin-top: -10px;
+      padding: 5px;
+    }
+  }
+
+  .question_set_table {
+    margin-bottom: 40px;
+  }
+
+  .question_set_narrow {
+    margin: 10px 0px 0px;
+    font-size: 10pt;
+    width: 290px;
+    float: left;
+
+    .question_set_wrap {
+      zoom: 1.0;
+      position: relative;
+      height: auto;
+      padding: 10px;
+      height: 61px;
+    }
+
+
+    input {
+      zoom: 1.0;
+      position: absolute;
+      top: 30px;
+      left: 10px;
+    }
+
+    .image {
+      float: left;
+      margin-left: 30px;
+      img {
+        height: 61px;
+        width: 61px;
+      }
+    }
+
+    .name, .description{
+      zoom: 1.0;
+      position: absolute;
+      left: 110px;
+      font-size: 10pt;
+      color: #606060;
+      overflow: hidden;
+      z-index: 15;
+    }
+
+    .description {
+      top: 35px;
+      height: 40px;
+    }
+
+    .name {
+      color: $blue;
+      font-size: 12pt;
+      line-height: 24px;
+    }
+    .links {
+      zoom: 1.0;
+      position: absolute;
+      left: 110px;
+      width: 180px;
+      bottom: 10px;
+      z-index: 10;
+      a {
+        color: $white;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .question_set {
+    margin: 15px 20px;
+    border-bottom: 1px solid $grey_border;
+    font-size: 10pt;
+    clear: both;
+    height: 90px;
+    .image {
+      float: left;
+    }
+    .name, .description{
+      margin: 0px 100px 0px 80px;
+      font-size: 10pt;
+      color: #606060;
+    }
+    .name {
+      color: $blue;
+      font-size: 12pt;
+      line-height: 24px;
+    }
+    .links {
+      float: right;
+      width: 80px;
+      text-align: right;
+      a {
+        display: block;
+        width: 80px;
+        text-align: right;
+      }
+    }
+  }
+}

@@ -9,3 +9,5 @@
 //= require ga
 //= require mobile/questions
 //= require mobile/remote
+//= require_tree ./mobile
+//= require_tree ./application

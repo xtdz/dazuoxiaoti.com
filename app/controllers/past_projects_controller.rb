@@ -1,11 +1,18 @@
 class PastProjectsController < ApplicationController
   layout :project_layout
+  before_filter :check_mobile
   before_filter :reset_current_url_to_root, :only => [:show]
 
   def show
     @project = Project.find(params[:id])
     if !@project.expired?
       redirect_to project_path(@project)
+    end
+  end
+  
+  def check_mobile
+    if from_mobile? && mobile_admin?
+      redirect_to '/mobile/past_projects'
     end
   end
 

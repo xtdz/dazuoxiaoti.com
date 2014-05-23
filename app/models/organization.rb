@@ -12,5 +12,7 @@ class Organization < ActiveRecord::Base
     end
   end
   
-  
+  def data
+    {"name" => name,"upload_image" => upload_image,"url" => url,"description" => description}
+  end
 end

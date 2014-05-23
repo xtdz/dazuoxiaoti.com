@@ -146,6 +146,13 @@ class Question < ActiveRecord::Base
      {"name" => name, "description" => description, "link" => link, "image_path" => image_path, "upload_image_path" => upload_image_path}
   end
 
+  def question_statistics
+    if(question_trace)
+      [question_trace.c1_click_num,question_trace.c2_click_num,question_trace.c3_click_num,question_trace.c4_click_num]
+    else
+      [0,0,0,0]
+    end
+  end
   def valid_answer? answer
     !answer.nil? and choices.include? answer.choice
   end

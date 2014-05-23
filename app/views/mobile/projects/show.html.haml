@@ -1,0 +1,11 @@
+.columns
+  - if flash[:notice]
+    .notice= flash[:notice]
+  .project_left
+    - if @project.project_kind==2
+      .project_info
+        = render :partial => "special", :locals => {:main_id => @project.id,:project=>@project}
+    - else
+      .project_info
+        = render :partial => @project, :locals => {:main_id => @project.id}
+      //= render :partial => 'projects/others', :locals => {:projects => @projects}

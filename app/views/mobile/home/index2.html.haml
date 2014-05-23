@@ -1,0 +1,30 @@
+= stylesheet_link_tag "mobile_style"
+%style{'type' => "text/css"}
+  \.ui-panel-inner {padding:0px;}
+%div{'data-role' => 'page'}
+  %div{'data-role' => 'panel', 'id' => 'mmypanel', 'style' => 'padding:0'}
+    .columns
+      = render :partial => "layouts/mobile/mobile_nav"
+      .project_list_left
+        .projects_list
+          - @projects.each do |p|
+            .project_block
+              = render :partial => 'mobile/projects/project_block', :locals => {project: p, show: true}
+          - @past_projects.each do |pp|
+            .project_block
+              = render :partial => 'mobile/projects/past_project_block', :locals => {project: pp, show: true}
+  %div{'data-role' => 'content', 'style' => 'padding: 0'}
+    .columns{'style' => 'width:100%;'}
+      .question_left
+        .content
+          - if @project.project_kind.to_i==2
+            = render :partial => 'mobile/questions/question', :locals => {:question => @question, :choices => @choices}
+          - else
+            - if session[:show_share] and session[:show_share][current_project.id]
+              - session[:show_share].delete current_project.id
+              = render :partial => 'mobile/questions/share'
+            - else
+              = render :partial => 'mobile/questions/question', :locals => {:question => @question, :choices => @choices}
+      .clear
+  %div{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' ,'id' => 'mmmypanel', 'style' => 'padding:0; float:right;'}
+    = render :partial => "mobile/classifies/index"

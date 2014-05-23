@@ -1,0 +1,30 @@
+.project_inner
+  .image
+    = link_to image_tag(asset_path("projects/"+project.id.to_s+"/square.jpg"), :alt => project.name), past_project_path(project)
+  .stats
+    .header_row
+      = link_to project.name, past_project_path(project)
+    .row
+      捐出物品:
+      - if project.benefit.cost 
+        价值#{project.benefit.cost}元的#{project.benefit.name}
+      %span.orange.big
+        = project.item_count
+      = project.benefit.unit
+    .row
+      参与人数:
+      %span.orange= project.participation_count
+    .row
+      答题数:
+      %span.orange= project.correct_count
+    .row 项目时间: #{project.start_time.strftime "%y年%m月%d日"}-#{project.end_time.strftime "%y年%m月%d日"}
+  .logos
+    %table
+      %tr
+        %td
+          = image_tag(organization_image_path(project.sponsor), :width => '100', :alt => project.sponsor.name)
+      %tr{:height=>15}
+      %tr
+        %td
+          = image_tag(organization_image_path(project.coordinator), :width => '100', :height =>'44', :alt => project.coordinator.name)
+  .clear
