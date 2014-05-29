@@ -1,7 +1,7 @@
 .project_header
   %a.back_button{:href => '#project_panel'}= image_tag(asset_path('static/left-arrow-yellow.png'))
   答题支持大爱清尘
-  .start_button=link_to image_tag(asset_path('static/answer.png')), random_mobile_questions_path(:question_set => params[:question_set], :project_id => project.id), :class => 'random_project_link_d', 'data-pid' => project.id
+  .start_button=link_to image_tag(asset_path('static/answer.png')), random_mobile_questions_path(:question_set => params[:question_set], :project_id => project.id), :class => 'random_question_link', 'data-pid' => project.id
 .block_label
   项目简介
 .block_content

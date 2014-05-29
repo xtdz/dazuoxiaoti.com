@@ -1,7 +1,7 @@
 %div{'data-role' => 'page', :id => 'pageone'}
   %div{'data-role' => 'panel', 'data-dismissible' => 'true', 'id' => 'project_panel', 'style' => 'padding:0; background: #fffff0'}
-    .columns
-      .project_list_left
+    #project_list
+      .columns.list
         .projects_list
           - @projects.each do |p|
             .project_block
@@ -9,7 +9,6 @@
           - @past_projects.each do |pp|
             .project_block
               = render :partial => 'mobile/projects/past_project_block', :locals => {project: pp, show: true}
-  #project_info_panel{'data-role' => 'panel', 'style' => 'padding:0; background: #fffff0'}
     #project_detail
   %div{'data-role' => 'content', 'style' => 'padding: 0; background: #fffff0'}
     #page_header{'style' => 'background: #ff6000; color: #fff; display: table'}
@@ -25,7 +24,7 @@
         %script
           $(document).on("pageinit","#pageone", function(){$.get('/mobile/questions/random.js')})
       .clear
-  %div{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' ,'id' => 'question_set_panel'}
+  %div{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' ,'id' => 'question_set_panel', 'style' => 'background: #fffff0'}
     -if user_signed_in?
       = render :partial => "mobile/home/user_info"
       = render :partial => "mobile/question_sets/list"

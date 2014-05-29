@@ -1,2 +1,3 @@
 $('#project_detail').html("<%= escape_javascript(render :partial => "mobile/projects/show")%>");
-$('#project_info_panel').panel('open');
+$.show_project_info();
+$('.back_button').click(function() {$.hide_project_info(); return false;});
