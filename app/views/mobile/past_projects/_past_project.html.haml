@@ -1,9 +1,10 @@
 .project_header
+  %a.back_button{:href => '#project_panel'}= image_tag(asset_path('static/left-arrow-yellow.png'))
   =project.name
 .block_label
   项目简介
 .block_content
-  .right_image= image_tag project_image_path(project, :about), :alt => project.name
+  .center_image= image_tag project_image_path(project, :about), :alt => project.name
   答题开始时间：#{project.start_time.strftime "%m月%d日"}
   %br
   :plain
@@ -12,14 +13,14 @@
 .block_label
   捐赠与接收方简介
 .block_content
-  .left_image= link_to image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name), project.sponsor.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'past_project_show']);"
+  .center_image= link_to image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name), project.sponsor.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'past_project_show']);"
   - project.sponsor.description.each_line do |line|
     %p
       :plain
         #{line}
   .clear
 .block_content
-  .right_image= link_to image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name), project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'past_project_show']);"
+  .center_image= link_to image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name), project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'past_project_show']);"
   - project.coordinator.description.each_line do |line|
     %p
       :plain
@@ -28,7 +29,7 @@
 .block_label
   物资详情
 .block_content
-  .left_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
+  .center_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
   - project.benefit.description.each_line do |line|
     %p
       :plain

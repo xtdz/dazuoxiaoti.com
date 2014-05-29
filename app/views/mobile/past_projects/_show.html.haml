@@ -1,6 +1,5 @@
-- @nav_class = :past
-%div{:id => "project_theme_#{@project.id}"}
 .columns
+  - @nav_class = :past
   - if flash[:notice]
     .notice= flash[:notice]
   .project_left

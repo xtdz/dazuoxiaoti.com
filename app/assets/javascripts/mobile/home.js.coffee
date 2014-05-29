@@ -4,17 +4,35 @@
 
 jQuery(($) ->
   $(document).ready( ->
+
     formatLink = (link, format) ->
       arr = link.split("?")
       link = arr[0]
       params = arr[1] || ""
       return link + "." + format + "?" + params
-
-    $('#project_link').live('click', ()->
+    
+    $('.random_project_link').live('click', ()->
       $.get(formatLink(this.href, "js"))
-      $('#mmypanel').panel("close")
+      setTimeout(()->
+        $('#project_panel').panel("close")
+      , 1000)
+      $(this).closest('.projects_list').find('.project_status').hide()
+      $(this).parent().parent().children('.project_status').show()
+      return false
+    )
+
+    $('.random_project_link_d').live('click', ()->
+      $.get(formatLink(this.href, "js"))
+      $('#project_info_panel').panel("close")
+      $(this).closest('#pageone').find('.projects_list .project_status').hide()
+      project_id = $(this).attr('data-pid')
+      $(this).closest('#pageone').find('#project_block_' + project_id + ' .project_status').show()
+      return false
+    )
+
+    $('.project_info_link').live('click', ()->
+      $.get(formatLink(this.href, "js"))
       return false
     )
   )
 )
-

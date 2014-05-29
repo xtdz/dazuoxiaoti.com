@@ -6,6 +6,7 @@ class QuestionSetsController < ApplicationController
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set
       current_user.question_sets << question_set
+      session[:current_question_set] = nil
       # session_manager.notices << t('question_set.subscribe') + question_set.name
     end
 
@@ -18,6 +19,7 @@ class QuestionSetsController < ApplicationController
   def unsubscribe
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set
+      session[:current_question_set] = nil
       # session_manager.notices << t('question_set.unsubscribe') + question_set.name
     end
     respond_to do |format|

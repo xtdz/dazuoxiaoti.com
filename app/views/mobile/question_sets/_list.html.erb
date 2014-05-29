@@ -1,0 +1,46 @@
+<div id="no_question_notice" style="text-align:center;display:none">你所选择的题集已经答空，请重新选择题集</div>
+<div data-role="collapsible-set" data-collapsed-icon="plus">
+	<%Category.shown.each do |c|%>
+		<div class="category" data-role="collapsible">
+			<h3><%=c.name%> (<span class="select_count"><%= @user_question_sets.reduce(0) {|sum, t| t.category_id == c.id ? sum + 1 : sum}%></span>/<%= QuestionSet.all.reduce(0) {|sum, t| t.category_id == c.id ? sum + 1 : sum}%>)</h3>
+			<ul data-role="listview" name="question-set-list">
+				<%c.question_sets.each do |question_set|%>
+					 <li class="question-set-item" name="question-set-<%=question_set.id%>" data-icon="false" data-qsid="<%=question_set.id%>">
+					 	<a href="#">
+							<img class="ui-li-thumbnail" src="<%=question_set_image_path(question_set)%>" width="61" height="61" style="margin:10px"/>
+							<h3 class="ui-li-heading"><%=question_set.name[0..13]%></h3>
+							<p class="ui-li-desc"><%=question_set.description%></p>
+							<img class="button-check" src="<%=asset_path('static/check.png')%>" style="display: <%=(@user_question_sets.include?(question_set)? 'initial': 'none')%>"/>
+						</a>
+					</li>
+		       <%end%>
+			</ul>
+		</div>
+	<%end%>
+</div>
+
+<script type="text/javascript">
+  (function() {
+jQuery(function($) {
+var on_subscribe, on_unsubscribe;
+$(".question-set-item").unbind('tap');
+$(".question-set-item").tap(function() {
+	selector = $(this).closest('.category').find('.select_count');
+	check = $(this).find('.button-check');
+	cnt = parseInt($(selector).html());
+	if (!$(check).is(":hidden")){
+		$.get('/mobile/question_sets/' + $(this).attr('data-qsid') + '/unsubscribe.js');
+		$(check).hide();
+		$(selector).html(cnt - 1);
+	}
+	else{
+		$.get('/mobile/question_sets/' + $(this).attr('data-qsid') + '/subscribe.js');
+		$(check).show();
+		$("#no_question_notice").hide();
+		$(selector).html(cnt + 1);
+	}
+});
+});
+}).call(this);
+
+</script>

@@ -4,6 +4,10 @@
   .project_overview
     .project_title
       = project.name
+    .project_ref
+      = link_to image_tag(asset_path('static/right-arrow-yellow.png')), mobile_past_project_path(project), :class => 'project_info_link'
+    .project_equation
+      活动已结束
     .project_buttons
-      %span.finished活动已结束
-      = link_to image_tag(asset_path('static/detail_blue.png')), mobile_past_project_path(project)
+      /%span.finished活动已结束
+      /= link_to image_tag(asset_path('static/detail_blue.png')), mobile_past_project_path(project)

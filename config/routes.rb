@@ -16,7 +16,6 @@ Dazuoxiaoti::Application.routes.draw do
       end
     end
     get "/question_sets" ,to: "classifies#index"
-    resources :classifies 
     resources :question_sets do
       member do
         get 'select'
@@ -29,7 +28,7 @@ Dazuoxiaoti::Application.routes.draw do
     end
     resources :home, only: :index
     resources :past_projects, :organizations, :benefits
-    root :to =>"home#index2"
+    root :to =>"home#index"
   end
   get "/question_sets" ,to: "classifies#index"
   resources :classifies 

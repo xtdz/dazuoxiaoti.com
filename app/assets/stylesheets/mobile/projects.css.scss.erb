@@ -1,27 +1,5 @@
 @import "common";
 
-.home_notice{margin:0px 0px 20px 0px;width: 590px;background:white;padding-top:5px;}
-.home_notice_title{width: 590px;border-bottom:1px solid #FF8000;margin-bottom:5px;}
-
-.block_label_low{color:red;padding:10px 0px;margin: 10px 30px;}
-.home_notice_title li{float:left;font-size:14px;color:#FF8000;font-weight:bold;padding-bottom:5px;}
-.xiaozhanxinwen{padding-left:20px}
-.more{padding-left:440px;}
-
-.notice_content ul{font-size:12px;padding:5px 0px 3px 20px;}
-.notice_content ul li{padding:5px 0px 3px 0px; width:295px;border-bottom:1px solid #ccc; }
-.home_notice .slideBox,.home_notice .notice_content{height:143px;border:0px solid #ddd; float:left;overflow:hidden;}
-.slideBox{ width:250px;  overflow:hidden; position:relative; border:0px solid #ddd; }
-.slideBox .hd{ height:15px; overflow:hidden; position:absolute; right:5px; bottom:5px; z-index:1; }
-.slideBox .hd ul{ overflow:hidden; zoom:1; float:left;  }
-.slideBox .hd ul li{ float:left; margin-right:2px;  width:15px; height:15px; line-height:14px; text-align:center; background:#fff; cursor:pointer; font-size:12px;}
-.slideBox .hd ul li.on{ background:#f00; color:#fff; }
-.slideBox .bd{ position:relative; height:100%; z-index:0;   }
-.slideBox .bd li{ zoom:1; vertical-align:middle; }
-.slideBox .bd img{ width:250px; height:145px; display:block;  }
-.notice_content{width:330px; height:143px;}
-
-
 .project_hd{ height:40px; line-height:40px; background:#FF9933; padding:0 20px; border-bottom:1px solid red;  position:relative;  }
 .project_hd ul{ float:left; position:absolute; left:20px;height:32px;}
 .project_hd ul li{ float:left; padding:0 15px; cursor:pointer;color:white;}
@@ -47,19 +25,27 @@ width: 100%;
   border: 1px solid #f0f0f0;
   padding-bottom: 40px;
   .project_header {
-    height: 68px;
+    height: 48px;
     font-size: 12pt;
     color: $black;
-    padding:5px 20px 5px 30px;
-    line-height: 68px;
+    padding:5px 20px 5px 56px;
+    line-height: 48px;
     background: url("<%= asset_path "static/project_header_bg.png" %>") 0px 0px repeat-x;
+    .back_button {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      img {
+        height: 28px;
+      }
+    }
     .start_button {
       float: right;
       margin-top: 10px;
     }
   }
   .block_label {
-    margin: 10px 30px;
+    margin: 10px 20px;
     border-bottom: 1px solid #e5e5e5;
     padding: 10px 0px;
     color: $orange;
@@ -68,8 +54,13 @@ width: 100%;
   }
   .block_content {
     line-height: 22px;
-    margin: 20px 30px 30px;
+    margin: 10px 20px 20px;
     img {width:140px;}
+    .center_image {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #e5e5e5;
+    }
     .left_image {
       float: left;
       padding: 10px;
@@ -96,7 +87,7 @@ width: 100%;
     width:95%;
     a {
       font-weight: bold;
-      padding:5px 0px 5px 25px;
+      #padding:5px 0px 5px 25px;
     }
   }
   .iframe {
@@ -132,9 +123,9 @@ width: 100%;
   margin: 0px 0px 10px;
   width: 100%;
   .project_block_wrapped {
-    height: 150px;
+    height: 120px;
     position: relative;
-    padding: 10px;
+    //padding: 10px;
   }
   .project_image {
     position: absolute;
@@ -142,8 +133,8 @@ width: 100%;
     overflow: hidden;
     height: 150px;
     img {
-      width: 245px;
-      height:100%;
+      width: 100%;
+      height:auto;
     }
   }
   .past_image {
@@ -151,34 +142,67 @@ width: 100%;
       @include opacity(0.3);
     }
   }
+  .project_status {
+  	z-index: 9999;
+  	position: absolute;
+  	//height: 20%;
+  	img {
+  		width: 50%;
+  	}
+  }
   .project_screen {
     position: absolute;
     background: $black;
-    height: 150px;
-    width: 45%;
-    right: 10px;
+    height: 40%;
+    width: 100%;
+    bottom: 0px;
     z-index: 20;
     @include opacity(0.5);
   }
   .project_overview {
     position: absolute;
-    right: 10px;
+    bottom: 0px;
     color: $white;
-    width: 45%;
+    width: 100%;
+    height: 40%;
     z-index: 30;
     .project_title {
-      font-size: 13px;
+      font-size: 0.7em;
       font-weight: bold;
-      line-height: 2.4em;
-      text-align: center;
+      line-height: 2.0em;
+      text-align: left;
+      padding: 0px 10px;
     }
+  	div.project_ref {
+  	  position: absolute;
+      height: 100%;
+  	  right: 8%;
+  	  top: 15%;
+      img {
+        width: auto;
+        height: 70%;
+      }
+    /* for text
+      font-size: 1.0em;
+      line-height: 100%;
+  	  text-shadow: none;
+      vertical-align: middle;
+  	  .ui-link {
+  	  	color: white; 
+  	  }
+      */
+  	}
     .project_equation {
-      font-size: 16px;
-      line-height: 2.4em;
-      margin: 0px 10px 10px 10px;
-      padding: 0px 15px;
+      font-size: 0.9em;
+      line-height: 1.3em;
+      vertical-align: middle;
+      margin: 0px 5px 5px 5px;
+      padding: 0px 5px;
+      height: 40%;
+      width: 65%;
       background: $orange;
     }
+    /*
     .project_buttons {
       width:100%;
       .finished {
@@ -193,147 +217,7 @@ width: 100%;
       }
       a { margin: 10px 10px 10px 10px; }
     }
-  }
-}
-
-.project_slide_control {
-  padding-bottom:10px;
-  .project_slide_icon {
-    zoom: 1.0;
-    position: relative;
-    float:left;
-    margin-left: 10px;
-    cursor: pointer;
-    @include opacity(0.5);
-    .icon_frame {
-      display: none;
-    }
-    a.project_icon{
-      overflow: hidden;
-      display: block;
-      width: 100px;
-      height: 70px;
-      img {
-        margin-left: -15px;
-        height: 70px;
-      }
-    }
-    a.finished_label {
-      zoom: 1.0;
-      position: absolute;
-      @include rounded_corner(2px);
-      font-size: 10pt;
-      color: $black;
-      background: $white;
-      bottom: 10px;
-      left: 5px;
-      line-height: 20px;
-      height: 20px;
-      width: 40px;
-      display: block;
-      z-index: 13;
-    }
-  }
-  .project_slide_icon.selected {
-    @include opacity(1);
-    .icon_frame {
-      display:block;
-      position: absolute;
-      z-index: 12;
-      border: 3px solid $blue;
-      height: 64px;
-      width: 94px;
-      top: 0px;
-      left: 0px;
-      line-height: 0px;
-    }
-  }
-  .project_slide_more {
-    float: left;
-    margin-left:10px;
-  }
-  a {
-    line-height: 0px;
-    vertical-align:top;
-  }
-}
-
-.question_set_list {
-  @include shadow(0px, 0px, 3px, #e0e0e0);
-  background-color: $white;
-  padding: 10px;
-  margin-top: 20px;
-  .question_set_narrow {
-    margin: 0px 0px 10px 0px;
-    font-size: 10pt;
-    zoom: 1.0;
-    display: inline-block;
-    width: 280px;
-    *display: inline;
-    .question_set_wrap {
-      zoom: 1.0;
-      position: relative;
-      height: auto;
-      padding: 10px;
-      height: 61px;
-      img {
-        height: 61px;
-        width: 61px;
-      }
-    }
-    .question_set_hovered {
-      background: #e5f2ff;
-      .description {display: none;}
-      .links {
-        z-index: 20;
-        background: #e5f2ff;
-        a {color: $blue;}
-      }
-    }
-    .image {
-      float: left;
-    }
-    .name, .description{
-      zoom: 1.0;
-      position: absolute;
-      left: 80px;
-      font-size: 10pt;
-      color: #606060;
-      overflow: hidden;
-      z-index: 15;
-    }
-    .description {
-      top: 35px;
-      height: 40px;
-    }
-    .name {
-      color: $blue;
-      font-size: 12pt;
-      line-height: 24px;
-    }
-    .links {
-      zoom: 1.0;
-      position: absolute;
-      left: 80px;
-      bottom: 10px;
-      z-index: 10;
-      a {
-        color: $white;
-        margin-right: 20px;
-      }
-    }
-  }
-  .question_set_bar {
-    font-size: 14pt;
-    color: $orange;
-    border-bottom: 2px solid $orange;
-    padding: 15px 10px;
-    margin-bottom: 15px;
-    a {
-      font-size: 10pt;
-      float: right;
-      line-height: 26px;
-    }
+    */
   }
 }
 
