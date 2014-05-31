@@ -1,11 +1,12 @@
 class QuestionSetsController < ApplicationController
   before_filter :authenticate_user!,:except=>[:index]
   before_filter :require_admin, :except => [:index, :subscribe, :unsubscribe]
-
+  before_filter :check_mobile, :only => [:index]
   def subscribe
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set
       current_user.question_sets << question_set
+      session[:current_question_set] = nil
       # session_manager.notices << t('question_set.subscribe') + question_set.name
     end
 
@@ -18,6 +19,7 @@ class QuestionSetsController < ApplicationController
   def unsubscribe
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set
+      session[:current_question_set] = nil
       # session_manager.notices << t('question_set.unsubscribe') + question_set.name
     end
     respond_to do |format|
@@ -52,6 +54,12 @@ class QuestionSetsController < ApplicationController
 
   def edit
     @question_set = QuestionSet.find(params[:id])
+  end
+
+  def check_mobile
+    if from_mobile? && mobile_admin?
+      redirect_to '/mobile/question_sets'
+    end
   end
 
   def update

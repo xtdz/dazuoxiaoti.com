@@ -1,0 +1,7 @@
+.columns
+  - @nav_class = :past
+  - if flash[:notice]
+    .notice= flash[:notice]
+  .project_left
+    .project_info
+      = render :partial => "past_project", :locals => {:project => @project}

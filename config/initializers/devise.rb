@@ -1,6 +1,6 @@
 require "omniauth-weibo-oauth2"
-require "omniauth-qq"
 require "omniauth-renren"
+require "omniauth/omniauth-tqq-oauth2"
 
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
@@ -206,7 +206,7 @@ Devise.setup do |config|
   config.omniauth :tsina_app, "748865031", "d4e70287e942b90dff63fe7c1e9387de", :name => :tsina_app, :strategy_class => OmniAuth::Strategies::Weibo
   config.omniauth :renren, "9af099d09af24b55b4b456c600cd9e43", "ee3aabe559af4732a60916b7c6a91005", :name => :renren, :strategy_class => OmniAuth::Strategies::Renren
   # config.omniauth :renren, "fed8cf178ecc41cc96c957f00797cdba", "d1ad2f54e3404a6baeee50ab1abbfcd7"
-  config.omniauth :tqq, "801076262", "994539ab94e413b02f3b96744de08820", :name => :tqq, :strategy_class => OmniAuth::Strategies::Tqq
+  config.omniauth :tqq, "801076262", "994539ab94e413b02f3b96744de08820", :name => :tqq, :strategy_class => OmniAuth::Strategies::Tqq2
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
