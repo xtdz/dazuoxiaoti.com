@@ -7,16 +7,30 @@
     正确率：#{@question.correct_rate}%
     考考朋友，分享到:
   - @message = share_question_message @question, @project
-  - @path = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+  - @path = "#{share_question_path @question.token, @project, current_user, 'question', @question_set}"
   = render :partial => 'mobile/questions/social_links', :locals => {:message => @message, :path => @path}
 #solution
-  = form_for([:mobile, question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
-    %input{:type => :hidden, :name => :project_id, :value => @project.id}
-    %input#answer{:type => :hidden, :name => "answer[choice]", :value => ""}
-    %input#index{:type => :hidden, :name => "index", :value => 0}
-  - @choices.each_with_index do |choice, index|
-    = link_to choice, "#", :onclick=>"$.submit_answer('#{choice}', #{index});return false;", :class => "choice"
-
+  - if !answered
+    = form_for([:mobile, question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
+      %input{:type => :hidden, :name => :project_id, :value => @project.id}
+      %input#answer{:type => :hidden, :name => "answer[choice]", :value => ""}
+      %input#index{:type => :hidden, :name => "index", :value => 0}
+    - @choices.each_with_index do |choice, index|
+      = link_to choice, "#", :onclick=>"$.submit_answer('#{choice}', #{index});return false;", :class => "choice"
+  - else 
+    %a.remote{:href => random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id]), :onclick => "return false;"}
+    - @question.choices.each_with_index do |choice, index|
+      .choice_row
+        .mark
+          -if question.correct_index == index
+            .correct
+          -elsif selected_index == index
+            .wrong
+        = choice
+    -if !question.explanation.empty?
+      .explanation
+        .ex_title= t(:'answer.explanation')
+        = question.explanation
 .progress
   - if false
   -else
