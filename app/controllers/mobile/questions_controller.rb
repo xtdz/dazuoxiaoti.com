@@ -1,6 +1,6 @@
 class Mobile::QuestionsController < ApplicationController
-  layout 'mobile/questions/question'
   before_filter :assign_project, :expire_project, :assign_other_projects, :redirect_mobile_admin
+  
   def show
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
@@ -70,13 +70,17 @@ class Mobile::QuestionsController < ApplicationController
         session[:current_question_id] = @question.id
       end
     end
-
-    if @question.nil? #no more questions in dazuoxiaoti.com
+    
+    if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
+      respond_to do |format|
+        format.js { render :need_login }
+      end
+    elsif @question.nil? #no more questions in dazuoxiaoti.com
       session_manager.notices << t('question.no_question')
       session[:current_question_set] = nil
-      respond_to do |format| #TODO
+      respond_to do |format|
         format.html { redirect_to root_path }
-        format.js { render :js => "window.location = ''" }
+        format.js { render :no_question }
       end
     else
       #@question_set = @question.question_sets.first
@@ -98,7 +102,7 @@ class Mobile::QuestionsController < ApplicationController
       @question_path = question_path @question.token
     end
     respond_to do |format|
-      format.html { render :show }
+      format.html { redirect_to root_path }
       format.js {render :next}
     end
   end

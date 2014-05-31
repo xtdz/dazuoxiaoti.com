@@ -1,0 +1,235 @@
+@import "common";
+
+.project_hd{ height:40px; line-height:40px; background:#FF9933; padding:0 20px; border-bottom:1px solid red;  position:relative;  }
+.project_hd ul{ float:left; position:absolute; left:20px;height:32px;}
+.project_hd ul li{ float:left; padding:0 15px; cursor:pointer;color:white;}
+.project_hd ul li a{color:white}
+.project_hd ul li.on{ height:40px;  background:#fff; border:1px solid #FF9933; border-bottom:1px solid #fff;font-weight:bold;color:#3493CC;}
+.project_hd ul li.on a{weight:bold;color:#3493CC;}
+
+.show{display:block;}
+.hidden{display:none;}
+
+.columns .project_left{
+float: left;
+width: 100%;
+
+.project_info {
+  background: $white;
+  color: $grey;
+  font-size: 10pt;
+  //@include shadow(0px, 0px, 3px, #e0e0e0);
+  border: 1px solid #f0f0f0;
+  padding-bottom: 40px;
+  .project_header {
+    height: 48px;
+    font-size: 12pt;
+    color: $black;
+    padding:5px 20px 5px 56px;
+    line-height: 48px;
+    background: url("<%= asset_path "static/project_header_bg.png" %>") 0px 0px repeat-x;
+    .back_button {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      img {
+        height: 28px;
+      }
+    }
+    .start_button {
+      float: right;
+      margin-top: 10px;
+    }
+  }
+  .block_label {
+    margin: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 0px;
+    color: $orange;
+    font-size: 12pt;
+    font-weight: bold;
+  }
+  .block_content {
+    line-height: 22px;
+    margin: 10px 20px 20px;
+    img {width:140px;}
+    .center_image {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #e5e5e5;
+    }
+    .left_image {
+      float: left;
+      padding: 10px;
+      border: 1px solid #e5e5e5;
+      line-height:0px;
+      margin-right: 15px;
+    }
+    .right_image {
+      float: right;
+      padding: 10px;
+      border: 1px solid #e5e5e5;
+      line-height:0px;
+      margin-left: 15px;
+    }
+    .feedback_image {
+      padding: 10px;
+      border: 1px solid #e5e5e5;
+      line-height:0px;
+      img{width:320px; }
+    }
+  }
+  .list {
+    height:21px;
+    width:95%;
+    a {
+      font-weight: bold;
+      #padding:5px 0px 5px 25px;
+    }
+  }
+  .iframe {
+    position:relative;
+    overflow:hidden;
+    padding: 15px;
+    height:500px;
+    background: $lightest_grey;
+    .iframe_tag {
+      display:none;
+      position:absolute;
+      margin:0px;
+    }
+    .iframe_ngo {
+      display:block;
+      position:absolute;
+      margin:0px;
+    }
+  }
+}
+}
+
+#project_panel .ui-panel-inner {
+  padding: 0 5px 0 0;
+  .columns.list {
+    padding: 16px 11px 16px 16px;
+  }
+}
+
+.button-check {
+  position: absolute;
+  right: 20px;
+  top: 25px;
+}
+
+.columns .projects_list{
+float: left;
+width: 100%;
+
+.project_block {
+  zoom: 1.0;
+  position: relative;
+
+  @include shadow(0px, 0px, 3px, #e0e0e0);
+  background-color: $white;
+  margin: 0px 0px 10px;
+  width: 100%;
+  .project_block_wrapped {
+    height: 120px;
+    position: relative;
+    //padding: 10px;
+  }
+  .project_image {
+    position: absolute;
+    z-index: 10;
+    overflow: hidden;
+    height: 150px;
+    img {
+      width: 100%;
+      height:auto;
+    }
+  }
+  .past_image {
+    img {
+      @include opacity(0.3);
+    }
+  }
+  .project_status {
+  	z-index: 9999;
+  	position: absolute;
+  	//height: 20%;
+  	img {
+  		width: 50%;
+  	}
+  }
+  .project_screen {
+    position: absolute;
+    background: $black;
+    height: 40%;
+    width: 100%;
+    bottom: 0px;
+    z-index: 20;
+    @include opacity(0.5);
+  }
+  .project_overview {
+    position: absolute;
+    bottom: 0px;
+    color: $white;
+    width: 100%;
+    height: 40%;
+    z-index: 30;
+    .project_title {
+      font-size: 0.7em;
+      font-weight: bold;
+      line-height: 2.0em;
+      text-align: left;
+      padding: 0px 10px;
+    }
+  	div.project_ref {
+  	  position: absolute;
+      width: 34px;
+      height: 100%;
+  	  right: 8%;
+  	  top: 15%;
+      img {
+        width: auto;
+        height: 70%;
+      }
+    /* for text
+      font-size: 1.0em;
+      line-height: 100%;
+  	  text-shadow: none;
+      vertical-align: middle;
+  	  .ui-link {
+  	  	color: white; 
+  	  }
+      */
+  	}
+    .project_equation {
+      font-size: 0.9em;
+      line-height: 1.3em;
+      vertical-align: middle;
+      margin: 0px 5px 5px 5px;
+      padding: 0px 5px;
+      height: 40%;
+      width: 65%;
+      background: $orange;
+    }
+    /*
+    .project_buttons {
+      width:100%;
+      .finished {
+        width:100%;
+        margin: 10px 10px 10px 30px;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      img { 
+        margin: 3px 10px 3px 12px;
+        height:34px;
+      }
+      a { margin: 10px 10px 10px 10px; }
+    }
+    */
+  }
+}
+
+}
