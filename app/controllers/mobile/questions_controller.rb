@@ -1,5 +1,6 @@
 class Mobile::QuestionsController < ApplicationController
   before_filter :assign_project, :expire_project, :assign_other_projects, :redirect_mobile_admin
+  
   def show
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]

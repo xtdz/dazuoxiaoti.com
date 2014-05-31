@@ -16,7 +16,7 @@ class Mobile::HomeController < ApplicationController
     @past_projects = Project.find_all_expired.reverse
 
     # question sets part
-  	@user_question_sets = current_user ? current_user.recent_sets : []
+    @user_question_sets = current_user ? current_user.recent_sets : []
     ids = @user_question_sets.map {|question_set| question_set.id}
     cond = []
     cond=["category_id=#{params['category_id']}"] if params["category_id"]
