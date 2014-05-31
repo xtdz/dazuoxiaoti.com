@@ -4,8 +4,12 @@
   .project_overview
     .project_title
       = project.name
-    .project_equation
-      = project.equation
+    - if project.id==25
+      .project_equation(style="background-color: #FF4000;")
+        = project.equation
+    - else
+      .project_equation
+        = project.equation
     .project_buttons
       = link_to image_tag(asset_path('static/begin.png')), random_questions_path(:project_id => project.id), :class => "button_left"
       = link_to image_tag(asset_path('static/detail.png')), project_path(project), :class => "button_right"
