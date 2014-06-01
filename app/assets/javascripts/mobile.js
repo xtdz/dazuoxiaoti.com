@@ -7,6 +7,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require ga
-//= require mobile/questions
-//= require mobile/remote
-//= require application/questions
+//= require_tree ./mobile

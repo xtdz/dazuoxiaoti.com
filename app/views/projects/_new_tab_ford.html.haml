@@ -1,20 +1,8 @@
 .project_tab.tab.displayed
   .project_tag
-    - if on_question_page
-      .project_button
-        = link_to image_tag(asset_path("static/project_button.png"), :alt => '查看详情'), project_path(project), :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'project_detail', 'project_tab']);"
     答题支持绿色行动
   .project_explanation
-    - if on_question_page
-      福特君不只卖汽车，还教你如何化身节水小达人，让你徜徉动物世界，并倾情向你提供雾霾天生存手册。只要参与答题，你可能就离环保达人近了一步。只要分享题目或答题成就，你就有机会获得独家福利——由福特中国赞助的创意礼品哦。
-    - else
-      问：如何能与@福特中国 一起，打造#更美好的世界#？答：偷偷告诉你一条捷径，那就是来小题大作答题！福特君在这里教你化身节水达人，还奉上雾霾天生存指南!而且分享答题成就，就可能获得小题君寄给你的福特项目独家福利哦。
-  - if on_question_page
-    .project_tongji(style="line-height:24px;text-align:center;font-size:14px;font-weight:bold;padding:7px;color:#666;")
-      %span.numbers.participation_count(style="color:#f80;font-size:22px;") #{project.participation_count}人
-      已参与 累计答对
-      %span.numbers.correct_count(style="color:#f80;font-size:22px;") #{project.correct_count}题
-
+    问：如何能与@福特中国 一起，打造#更美好的世界#？答：偷偷告诉你一条捷径，那就是来小题大作答题！福特君在这里教你化身节水达人，还奉上雾霾天生存指南!而且分享答题成就，就可能获得小题君寄给你的福特项目独家福利哦。
   .project_numbers
     .project_coordinator
       .coordinator_label
@@ -23,14 +11,10 @@
         %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
           = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
     .project_stats
-      - if on_question_page
-        .project_label(style="width:190px;margin-left:8px;padding:5px 0;font-size:12px")
-          福特更美好的世界”是福特中国为实现环境、企业和社区可持续发展而发起的企业社会责任项目。为创造更美好的环境，福特中国先后启动“福特汽车环保奖”和“绿色晋级”计划，持续支持草根环保力量。让人人都生活在一个更美好的世界，是福特中国一直以来努力的方向。
-      - else
-        .stat_row
-          %span.numbers.participation_count #{project.participation_count}人
-          已参与
-        .stat_row
-          累计答对
-          %span.numbers.correct_count #{project.correct_count}题
+      .stat_row
+        %span.numbers.participation_count #{project.participation_count}人
+        已参与
+      .stat_row
+        累计答对
+        %span.numbers.correct_count #{project.correct_count}题
   .clear
