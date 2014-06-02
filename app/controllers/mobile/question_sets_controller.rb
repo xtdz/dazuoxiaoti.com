@@ -11,7 +11,6 @@ class Mobile::QuestionSetsController < ApplicationController
     end
 
     respond_to do |format|
-      #format.html { redirect_to question_sets_path }
       format.js { render :js => ""}
     end
   end
@@ -22,7 +21,6 @@ class Mobile::QuestionSetsController < ApplicationController
       # session_manager.notices << t('question_set.unsubscribe') + question_set.name
     end
     respond_to do |format|
-      #format.html { redirect_to question_sets_path }
       format.js { render :js => ""}
     end
   end

@@ -11,7 +11,7 @@
               = render :partial => 'mobile/projects/past_project_block', :locals => {project: pp, show: true}
     #project_detail
   %div{'data-role' => 'content', 'style' => 'padding: 0; background: #fffff0'}
-    #page_header{'style' => 'background: #ff6000; color: #fff; display: table'}
+    .page_header{'style' => 'background: #ff6000; color: #fff; display: table'}
       %a.left_link.header_item{'href' => '#project_panel'}
         =image_tag asset_path('static/menu.png')
       %h3.title.header_item 小题大作
