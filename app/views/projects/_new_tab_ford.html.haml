@@ -8,8 +8,8 @@
       .coordinator_label
         活动伙伴
       .coordinator_logo
-        %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
-          = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
+        %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_tab']);"}
+          = image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name)
     .project_stats
       .stat_row
         %span.numbers.participation_count #{project.participation_count}人
