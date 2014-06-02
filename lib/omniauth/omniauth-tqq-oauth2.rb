@@ -26,22 +26,18 @@ module OmniAuth
         raw_info["openid"]
       }
 
-      info do
-        {
+      info do {
           :name        => raw_info['name'],
           :nickname    => raw_info['nick'],
           :email       => raw_info['email'],
           :location    => raw_info['location'],
           :image       => raw_info['head'],
           :description => raw_info['introduction']
-        }
-      end
+      } end
 
-      extra do
-        {
+      extra do {
           'raw_info' => raw_info
-        }
-      end
+      } end
 
       credentials do
         hash = {'token' => access_token.token}
