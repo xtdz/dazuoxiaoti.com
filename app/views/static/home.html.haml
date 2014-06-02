@@ -1,6 +1,5 @@
 .columns
   .project_list_left
-    = render :partial => "static/projects"
     .projects_slides
       = render :partial => "static/project_slides",:locals=>{:projects=>@projects,:default_project=>@default_project,:past_projects=>@past_projects}
     - if params[:v].to_i==1

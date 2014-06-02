@@ -1,5 +1,5 @@
 module QuestionsHelper
-  def tsina_question_path token, project, referer, page, question_set
+  def share_question_path token, project, referer, page, question_set
     if page == "question"
       from = :snq
     elsif page == "solution"

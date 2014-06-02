@@ -4,12 +4,22 @@
     .notice= flash[:notice]
   .project_left
     - if @project.project_kind==2
-      .project_info
-        = render :partial => "special", :locals => {:main_id => @project.id,:project=>@project}
+      - if @project.id==25
+        .project_info
+          = render :partial => "special_ford", :locals => {:main_id => @project.id,:project=>@project}
+      - else
+        .project_info
+          = render :partial => "special", :locals => {:main_id => @project.id,:project=>@project} 
     - else
       .project_info
         = render :partial => @project, :locals => {:main_id => @project.id}
       = render :partial => 'projects/others', :locals => {:projects => @projects}
   .project_right
-    = render :partial => @project.id==12 ? 'projects/new_tab' : 'tab', :locals => {:project => @project, :on_question_page => false}
+    - if @project.project_kind==2
+      - if @project.id==25
+        = render :partial => 'projects/new_tab_ford', :locals => {:project => @project, :on_question_page => false}
+      - else 
+        = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => false}
+    - else 
+      = render :partial => 'tab', :locals => {:project => @project, :on_question_page => false}
   .clear

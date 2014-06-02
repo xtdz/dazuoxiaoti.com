@@ -10,26 +10,12 @@
 
 %h4
   捐赠方
-
-= form.simple_fields_for :sponsor do |sponsor|
-  = sponsor.input :name, label: '名字'
-  = sponsor.input :upload_image, label: 'Logo图片', as: :file
-  = sponsor.input :url, label: '网站链接'
-  = sponsor.input :description, label: '简介', as: :text
+=form.association :sponsor
 
 %h4
   接收方
-
-= form.simple_fields_for :coordinator do |coordinator|
-  = coordinator.input :name, label: '名字'
-  = coordinator.input :upload_image, label: 'Logo图片', as: :file
-  = coordinator.input :url, label: '网站链接'
-  = coordinator.input :description, label: '简介', as: :text
+=form.association :coordinator
 
 %h4
   物资详情
-
-= form.simple_fields_for :benefit do |benefit|
-  = benefit.input :cost, label: '价值'
-  = benefit.input :upload_image, label: '物资图片', as: :file
-  = benefit.input :description, label: '简介', as: :text
+=form.association :benefit

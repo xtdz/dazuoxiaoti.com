@@ -1,1 +1,1 @@
-$(".content").html("<%= escape_javascript(render :partial => 'solution', :locals => {:question => @question, :selected_index => @selected_index, :choices => @choices}) %>");
+$(".content").html("<%= escape_javascript(render :partial => 'mobile/questions/question', :locals => {:question => @question, :selected_index => @selected_index, :choices => @choices, :answered => true}) %>");

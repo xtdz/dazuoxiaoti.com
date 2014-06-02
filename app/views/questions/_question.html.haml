@@ -10,7 +10,7 @@
     正确率：#{@question.correct_rate}%
   考考朋友，分享到:
   - @message = share_question_message @question, @project
-  - @path = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+  - @path = "#{share_question_path @question.token, @project, current_user, 'question', @question_set}"
   = render :partial => 'social_links', :locals => {:message => @message, :path => @path}
 #solution
   = form_for([question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
@@ -53,5 +53,5 @@
         - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
       - elsif @project.id.to_i == 16
         - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题。很难凭一个人的力量捐助1个@满天星公益 的儿童阅读推广计划，快来帮帮我吧！@与人公益基金会"
-      - @paths = "#{tsina_question_path @question.token, @project, current_user, 'question', @question_set}"
+      - @paths = "#{share_question_path @question.token, @project, current_user, 'question', @question_set}"
       = render :partial => 'social_buttom_links', :locals => {:message => @share_message , :path => @paths}
