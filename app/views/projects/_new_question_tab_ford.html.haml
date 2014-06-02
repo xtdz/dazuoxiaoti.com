@@ -15,8 +15,8 @@
       .coordinator_label
         活动伙伴
       .coordinator_logo
-        %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
-          = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
+        %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_tab']);"}
+          = image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name)
     .project_stats
       .project_label_content
         “福特更美好的世界”是福特中国为实现环境、企业和社区可持续发展而发起的企业社会责任项目。为创造更美好的环境，福特中国先后启动“福特汽车环保奖”和“绿色晋级”计划，持续支持草根环保力量。让人人都生活在一个更美好的世界，是福特中国一直以来努力的方向。
