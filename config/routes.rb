@@ -18,7 +18,7 @@ Dazuoxiaoti::Application.routes.draw do
     end
     resources :home, only: :index
     resources :projects, :past_projects
-    root :to =>"home#index"
+    root :to => "home#index"
   end
   
   get "/question_sets" ,to: "classifies#index"

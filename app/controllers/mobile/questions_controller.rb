@@ -30,7 +30,7 @@ class Mobile::QuestionsController < ApplicationController
   end
   
   def random
-      # session_messenger.count_down decrements count_down everytime it's called
+    # session_messenger.count_down decrements count_down everytime it's called
     if !session[:count_down]
       session[:count_down] = 10
     end
@@ -83,7 +83,6 @@ class Mobile::QuestionsController < ApplicationController
         format.js { render :no_question }
       end
     else
-      #@question_set = @question.question_sets.first
       render_question
     end
   end

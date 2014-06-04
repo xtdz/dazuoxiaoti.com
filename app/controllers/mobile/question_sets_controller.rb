@@ -7,7 +7,7 @@ class Mobile::QuestionSetsController < ApplicationController
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set
       current_user.question_sets << question_set
-      # session_manager.notices << t('question_set.subscribe') + question_set.name
+      session[:current_question_set] = nil
     end
 
     respond_to do |format|
@@ -18,7 +18,7 @@ class Mobile::QuestionSetsController < ApplicationController
   def unsubscribe
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set
-      # session_manager.notices << t('question_set.unsubscribe') + question_set.name
+      session[:current_question_set] = nil
     end
     respond_to do |format|
       format.js { render :js => ""}
