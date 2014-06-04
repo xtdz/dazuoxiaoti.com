@@ -31,7 +31,7 @@
     您为本活动答对了
     %span.orange= user_correct_count
     题。
-    - if @project.rate < 1000 && !([12,14].include? @project.id.to_i)
+    - if @project.rate < 1000 && !([12,14,25].include? @project.id.to_i)
       还差
       %span.orange= @project.rate - user_correct_count % @project.rate
       题就可以独立助捐
@@ -40,7 +40,7 @@
       .progress_bar_outter
         .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 100 / @project.rate}%"}
       .clear
-    - elsif !([12,14].include? @project.id.to_i)
+    - elsif !([12,14,25].include? @project.id.to_i)
 
       还差
       %span.orange= @project.rate - user_correct_count % @project.rate
@@ -56,6 +56,8 @@
         - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
       - elsif @project.id.to_i == 18
         - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对30题，小题大作微公益即向湖南鲁坑小学捐赠1两大米，用于学生营养餐项目，一起来帮助山里娃吃上健康午餐吧！"
+      - else
+        - @share_message = "#福特 更美好的世界# 【趣味微公益】刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题。答题可以做什么？化身节水小达人、徜徉动物世界、勇夺雾霾天生存手册。分享题目或答题成就，还有机会获得@福特中国 赞助的棒呆了的创意礼品噢！"
       - @paths = "#{share_question_path @question.token, @project, current_user, 'question', @question_set}"
       = render :partial => 'questions/social_buttom_links', :locals => {:message => @share_message , :path => @paths}
 
