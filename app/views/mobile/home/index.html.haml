@@ -1,5 +1,5 @@
-%div{'data-role' => 'page', :id => 'pageone'}
-  %div{'data-role' => 'panel', 'data-dismissible' => 'true', 'id' => 'project_panel', 'style' => 'padding:0; background: #fffff0'}
+#pageone{'data-role' => 'page'}
+  #project_panel{'data-role' => 'panel', 'style' => 'padding:0; background: #fffff0'}
     #project_list
       .columns.list
         .projects_list
@@ -24,7 +24,7 @@
         %script
           $(document).on("pageinit","#pageone", function(){$.get('/mobile/questions/random.js')})
       .clear
-  %div{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' ,'id' => 'question_set_panel', 'style' => 'background: #fffff0'}
+  #question_set_panel{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' , 'style' => 'background: #fffff0'}
     -if user_signed_in?
       = render :partial => "mobile/home/user_info"
       = render :partial => "mobile/question_sets/list"
