@@ -1,18 +1,32 @@
-- if user_signed_in?
-  %strong= current_user.nickname
-  %a{:href => random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id])} 
-    = 'answer'
-  =button_to "退出", destroy_user_session_path, :method => :delete
-- else
-  .user_sign_in
-    %ul
-      %li.login 登录
-      %li
-        %a.link_auth{:href => user_omniauth_authorize_path(:tsina)}
-          = image_tag(asset_path('static/auth/sina_auth.png'),:class=>"auth")
-      %li
-        %a.link_auth{:href => user_omniauth_authorize_path(:tqq)}
-          = image_tag(asset_path('static/auth/qie32.png'),:class=>"auth", :width=>22, :height=>22)
-      %li
-        %a.link_auth{:href => user_omniauth_authorize_path(:renren)}
-          = image_tag(asset_path('static/auth/renren_auth.png'),:class=>"auth")
+#pageone{'data-role' => 'page'}
+  #project_panel{'data-role' => 'panel', 'style' => 'padding:0; background: #fffff0'}
+    #project_list
+      .columns.list
+        .projects_list
+          - @projects.each do |p|
+            .project_block
+              = render :partial => 'mobile/projects/project_block', :locals => {project: p, show: true}
+          - @past_projects.each do |pp|
+            .project_block
+              = render :partial => 'mobile/projects/past_project_block', :locals => {project: pp, show: true}
+    #project_detail
+  %div{'data-role' => 'content', 'style' => 'padding: 0; background: #fffff0'}
+    .page_header{'style' => 'background: #ff6000; color: #fff; display: table'}
+      %a.left_link.header_item{'href' => '#project_panel'}
+        =image_tag asset_path('static/menu.png')
+      %h3.title.header_item 小题大作
+      %a.right_link.header_item{'href' => '#question_set_panel'}
+        =image_tag asset_path('static/gear.png')
+    .columns{'style' => 'width:100%; background: #fffff0'}
+      .question_left
+        .content
+          载入中，请稍后
+        %script
+          $(document).on("pageinit","#pageone", function(){$.get('/mobile/questions/random.js')})
+      .clear
+  #question_set_panel{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' , 'style' => 'background: #fffff0'}
+    -if user_signed_in?
+      = render :partial => "mobile/home/user_info"
+      = render :partial => "mobile/question_sets/list"
+    -else
+      = render :partial => "mobile/home/login"
