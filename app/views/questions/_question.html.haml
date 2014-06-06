@@ -28,7 +28,7 @@
     您为本活动答对了
     %span.orange= user_correct_count
     题。
-    - if @project.rate < 1000 && !([12,14,25,26].include? @project.id.to_i)
+    - if @project.rate < 1000 && !([12,14,25].include? @project.id.to_i)
       还差
       %span.orange= @project.rate - user_correct_count % @project.rate
       题就可以独立助捐
@@ -37,7 +37,7 @@
       .progress_bar_outter
         .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 450 / @project.rate}px"}
       .clear
-    - elsif !([12,14,25,26].include? @project.id.to_i)
+    - elsif !([12,14,25].include? @project.id.to_i)
 
       还差
       %span.orange= @project.rate - user_correct_count % @project.rate
