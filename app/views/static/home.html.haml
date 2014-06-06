@@ -18,10 +18,16 @@
           .question_set_wrap
             .image= image_tag question_set_image_path(qs)
             .name
-              %a{href: random_questions_path(:question_set => qs.id)}= qs.name
+            - if user_signed_in?
+              %a{href:random_questions_path(:question_set => qs.id)}= qs.name 
+            - else
+              .name=qs.name
+                  
+              
+             
             .description= qs.description
 
-    = render :partial => "static/notice"
+    //= render :partial => "static/notice"
   .project_right
     = render :partial => "static/add_follow"
     .introduction

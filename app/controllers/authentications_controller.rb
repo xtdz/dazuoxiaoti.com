@@ -33,8 +33,8 @@ class AuthenticationsController < ApplicationController
       'provider' => :tqq,
       'uid' => auth.uid,
       'user_info' => {
-        'image' => auth.extra.raw_info.data.head + "/100",
-        'username' => auth.extra.raw_info.data.nick
+        'image' => auth.extra.raw_info.head + "/100",
+        'username' => auth.extra.raw_info.nick
       }
     }
     common
