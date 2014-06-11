@@ -3,7 +3,7 @@
   %head
     %title
       = @title ? @title : "小题大作微公益"
-    %meta{:name => "viewport", :content => "width=device-width" }
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1" }
     %meta{:name => "keywords", :content => @metakeywords ? @metakeywords : "小题大作, 小题大做, 小题, 小题大做网, 网站, 微公益, 平台, 趣味问答, 公益, 答题, 捐物, 全民参与"} 
     %meta{:name => "description", :content => @metadescription ? @metadescription : "“小题大作”是中国第一个趣味性公益问答网站，（通过简单、有趣、透明的方式让尽可能多的人能够参与公益、贡献爱心、 收获知识）。用户每答对一定数量的趣味百科问题，就能使公益项目得到相应数额的物资捐助。捐赠物资不经过小题大作团队，直接由企业捐助方捐给项目。"}
     %meta{:name => "robots", :content => @metarobots ? @metarobots : "index,follow"}
@@ -12,8 +12,5 @@
       <script type="text/javascript" src="/PNG/iepngfix_tilebg.js"></script>
     = javascript_include_tag "mobile"
     = csrf_meta_tags
-  %body{style: "background: #fffff0 center no-repeat;margin:0px;"}
-    .wrap{style:"position:relative;width:320px"}
-      %div{style: "width: 100%"}
-        .main
-          = yield
+  = yield
+

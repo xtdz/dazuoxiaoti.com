@@ -1,0 +1,8 @@
+.login_partial
+  %p.login_notice 登录后会有更多功能
+  %a.auth{:href => user_omniauth_authorize_path(:tsina), :rel => "external"}
+    %img{:src => asset_path('static/auth/sina_auth.png'), :alt => "新浪登录"} 新浪登录
+  %a.auth{:href => user_omniauth_authorize_path(:renren), :rel => "external"}
+    %img{:src => asset_path('static/auth/renren_auth.png'), :alt => "人人登录"} 人人登录
+  %a.auth{:href => user_omniauth_authorize_path(:tqq), :rel => "external"}
+    %img{:src => asset_path('static/auth/qq_auth.png'), :alt => "腾讯登录"} 腾讯登录
