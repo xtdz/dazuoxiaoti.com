@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
     if @project.expired?
       redirect_to past_project_path(@project)
     end
-    @projects = Project.find_ongoing.reverse
+    @projects = Project.find_all_ongoing.reverse
     @projects.delete(@project)
   end
 

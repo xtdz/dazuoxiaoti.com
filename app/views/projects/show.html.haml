@@ -13,7 +13,7 @@
     - else
       .project_info
         = render :partial => @project, :locals => {:main_id => @project.id}
-      = render :partial => 'projects/others', :locals => {:projects => @projects}
+      = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .project_right
     - if @project.project_kind==2
       - if @project.id==25

@@ -7,7 +7,7 @@
   .project_left
     .project_info
       = render :partial => "past_project", :locals => {:project => @project}
-    = render :partial => 'projects/others', :locals => {:projects => @projects}
+    = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .project_right
     = render :partial => 'projects/tab', :locals => {:project => @project, :on_question_page => false}
   .clear

@@ -12,7 +12,7 @@
           = render :partial => 'questions/finished'
         - else
           = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
-    = render :partial => 'projects/others', :locals => {:projects => @projects}
+    = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .question_right
     - if @project.project_kind==2
       - if @project.id==25

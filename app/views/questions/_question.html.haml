@@ -32,7 +32,7 @@
       还差
       %span.orange= @project.rate - user_correct_count % @project.rate
       题就可以独立助捐
-      %span.orange= (user_correct_count/@project.rate + 1) * @project.benefit.unit_rate
+      %span.orange= (user_correct_count/@project.rate + 1) * @project.unit_rate
       #{@project.benefit.unit}#{@project.benefit.short_name}。
       .progress_bar_outter
         .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 450 / @project.rate}px"}
@@ -42,7 +42,7 @@
       还差
       %span.orange= @project.rate - user_correct_count % @project.rate
       题才能独立助捐
-      %span.orange= (user_correct_count/@project.rate + 1) * @project.benefit.unit_rate
+      %span.orange= (user_correct_count/@project.rate + 1) * @project.unit_rate
       #{@project.benefit.unit}#{@project.benefit.short_name}.
     - else
       只凭您个人的力量很难,还是邀请您的好友一起来答题做公益吧!
