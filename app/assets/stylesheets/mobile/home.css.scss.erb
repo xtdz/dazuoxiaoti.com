@@ -1,5 +1,56 @@
 @import "common";
 
+#question_page {
+  padding: 0;
+  background: #fffff0;
+
+  .page_header {
+    background: #ff6000;
+    color: #fff;
+    display: table;
+    height: 40px;
+    width: 100%;
+    .header_item {
+      display: table-cell;
+      vertical-align: middle;
+      height: 100%;
+      line-height: 100%;
+      padding: 10px;
+      img {
+        height: 30px;
+      }
+    }
+    .title {
+      width: 60%;
+      font-size: 1.4em;
+      vertical-align: middle;
+      text-align: center;
+      height: 100%;
+      line-height: 100%;
+    }
+    .left_link {
+      width: 20%;
+      text-align: left;
+    }
+    .right_link {
+      width: 20%;
+      text-align: right;
+    }
+  }
+}
+
+#question_set_panel {
+  background: #fffff0;
+
+  .no_question_notice {
+    text-align:center;
+    display:none;
+  }
+  .ui-li-thumbnail{
+    margin: 10px;
+  }
+}
+
 .login_partial{
   padding: 30px 30px 20px;
   .register {
@@ -144,36 +195,5 @@
     margin: 15px 0px;
     padding-left: 2px;
     color: $brown;
-  }
-}
-
-.page_header {
-  height: 40px;
-  width: 100%;
-  .header_item {
-    display: table-cell;
-    vertical-align: middle;
-    height: 100%;
-    line-height: 100%;
-    padding: 10px;
-    img {
-      height: 30px;
-    }
-  }
-  .title {
-    width: 60%;
-    font-size: 1.4em;
-    vertical-align: middle;
-    text-align: center;
-    height: 100%;
-    line-height: 100%;
-  }
-  .left_link {
-    width: 20%;
-    text-align: left;
-  }
-  .right_link {
-    width: 20%;
-    text-align: right;
   }
 }

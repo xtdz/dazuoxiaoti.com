@@ -36,15 +36,6 @@ jQuery(($) ->
       return false
     )
 
-    $('.back_button').live('click', ()->
-      $.hide_project_info()
-      return false
-    )
-    $('.back_button').click( ()->
-      $.hide_project_info()
-      return false
-    )
-
     $.show_project_info = () ->
       $('#project_list').hide(300)
       $('#project_detail').show(300)
@@ -52,5 +43,21 @@ jQuery(($) ->
     $.hide_project_info = () ->
       $('#project_detail').hide(300)
       $('#project_list').show(300)
+
+    $(".question-set-item").unbind('tap')
+    $(".question-set-item").tap( ()->
+      selector = $(this).closest('.category').find('.select_count')
+      check = $(this).find('.button-check')
+      cnt = parseInt($(selector).html())
+      if (!$(check).is(":hidden"))
+        $.get('/mobile/question_sets/' + $(this).attr('data-qsid') + '/unsubscribe.js')
+        $(check).hide()
+        $(selector).html(cnt - 1)
+      else
+        $.get('/mobile/question_sets/' + $(this).attr('data-qsid') + '/subscribe.js')
+        $(check).show()
+        $("#no_question_notice").hide()
+        $(selector).html(cnt + 1)
+    )
   )
 )

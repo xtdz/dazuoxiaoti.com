@@ -1,5 +1,4 @@
 class ClassifiesController < ApplicationController
- # before_filter :redirect_to_registration
   before_filter :check_mobile
   def index
     @user_question_sets = current_user ? current_user.recent_sets : []

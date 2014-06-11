@@ -1,5 +1,4 @@
 class Mobile::PastProjectsController < ApplicationController
-  before_filter :reset_current_url_to_root, :only => [:show]
   before_filter :redirect_mobile_admin
 
   def show

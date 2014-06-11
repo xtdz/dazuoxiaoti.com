@@ -1,15 +1,13 @@
 class Mobile::HomeController < ApplicationController
   before_filter :assign_project, :expire_project, :assign_other_projects, :redirect_mobile_admin, :only => [:index]
-  layout 'mobile/mobile'
+  layout 'mobile'
 
   def index
     # question part
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
     
-    unless params[:question_set].nil?
-      session[:current_question_set] = params[:question_set]
-    end
+    session[:current_question_set] = params[:question_set] if params[:question_set]
 
     # projects part
     @projects = Project.find_all_ongoing.reverse

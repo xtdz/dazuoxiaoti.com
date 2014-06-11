@@ -1,10 +1,9 @@
 class Mobile::QuestionSetsController < ApplicationController
-  layout 'mobile/mobile'
   before_filter :authenticate_user!,:except=>[:index]
   before_filter :redirect_mobile_admin
 
   def subscribe
-    if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
+    if params[:id] && (question_set = QuestionSet.find(params[:id]))
       current_user.question_sets.delete question_set
       current_user.question_sets << question_set
       session[:current_question_set] = nil
@@ -16,7 +15,7 @@ class Mobile::QuestionSetsController < ApplicationController
   end
 
   def unsubscribe
-    if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
+    if params[:id] && (question_set = QuestionSet.find(params[:id]))
       current_user.question_sets.delete question_set
       session[:current_question_set] = nil
     end

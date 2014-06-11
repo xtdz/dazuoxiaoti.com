@@ -1,5 +1,5 @@
 #pageone{'data-role' => 'page'}
-  #project_panel{'data-role' => 'panel', 'style' => 'padding:0; background: #fffff0'}
+  #project_panel{'data-role' => 'panel'}
     #project_list
       .columns.list
         .projects_list
@@ -10,21 +10,21 @@
             .project_block
               = render :partial => 'mobile/projects/past_project_block', :locals => {project: pp, show: true}
     #project_detail
-  %div{'data-role' => 'content', 'style' => 'padding: 0; background: #fffff0'}
-    .page_header{'style' => 'background: #ff6000; color: #fff; display: table'}
+  #question_page{'data-role' => 'content'}
+    .page_header
       %a.left_link.header_item{'href' => '#project_panel'}
         =image_tag asset_path('static/menu.png')
       %h3.title.header_item 小题大作
       %a.right_link.header_item{'href' => '#question_set_panel'}
         =image_tag asset_path('static/gear.png')
-    .columns{'style' => 'width:100%; background: #fffff0'}
+    .columns
       .question_left
         .content
           载入中，请稍后
         %script
           $(document).on("pageinit","#pageone", function(){$.get('/mobile/questions/random.js')})
       .clear
-  #question_set_panel{'data-role' => 'panel', 'data-position' => 'right', 'data-display' => 'reveal' , 'style' => 'background: #fffff0'}
+  #question_set_panel{'data' => {'role' => 'panel', 'position' => 'right'}}
     -if user_signed_in?
       = render :partial => "mobile/home/user_info"
       = render :partial => "mobile/question_sets/list"
