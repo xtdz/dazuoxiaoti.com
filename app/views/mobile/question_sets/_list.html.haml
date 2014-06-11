@@ -4,12 +4,8 @@
   - Category.shown.each do |c|
     .category{'data' => {'role' => 'collapsible'}}
       %h3
-        =c.name
-        (
-        %span.select_count= @user_question_sets.reduce(0) {|sum, t| t.category_id == c.id ? sum + 1 : sum}
-        \/
-        = QuestionSet.all.reduce(0) {|sum, t| t.category_id == c.id ? sum + 1 : sum}
-        )
+        = c.name
+        = select_total_ratio_str c
       #question-set-list{'data' => {'role' => 'listview'}}
         - c.question_sets.each do |question_set|
           %li.question-set-item{'data' => {'icon' => 'false', 'qsid' => "#{question_set.id}"}}
