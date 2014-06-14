@@ -5,7 +5,8 @@ class Mobile::HomeController < ApplicationController
   def index
     # question part
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-    session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+    question_url = '/mobile/questions/random.js?project_id='+ @project.id.to_s + question_set_params_string
+    @random_question_js = "$(document).on('pageinit', '#pageone', function(){$.get('#{question_url}')})"
     
     session[:current_question_set] = params[:question_set] if params[:question_set]
 

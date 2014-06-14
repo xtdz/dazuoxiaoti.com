@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   layout :project_layout
   before_filter :require_admin, :only => [:edit, :update, :create, :new]
   before_filter :reset_current_url_to_root, :only => [:index, :show]
-  before_filter :check_mobile, :only => [:index,:show]
   def index
     @projects = Project.find_all_ongoing.reverse
     @past_projects = Project.find_all_expired.reverse
@@ -38,12 +37,6 @@ class ProjectsController < ApplicationController
       if @project.update_attributes(params[:project])
         format.html  { redirect_to(edit_project_path(@project),:notice => 'Project was successfully updated.') }
       end
-    end
-  end
-
-  def check_mobile
-    if from_mobile? && mobile_admin?
-      redirect_to '/mobile/projects'
     end
   end
 

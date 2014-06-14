@@ -55,6 +55,12 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def check_mobile
+    if from_mobile? && mobile_admin?
+      redirect_to mobile_root_path({:question_set => params[:question_set], :project_id => params[:project_id]})
+    end
+  end
+
   def mobile_admin?
     admin_ids = [798,50150,53148,53685,54277,54365,54845,57334, 10435]
     if(!user_signed_in? || !admin_ids.include?(current_user.id))
