@@ -17,11 +17,12 @@
         .question_set_narrow{id: "question_set_#{qs.id}"}
           .question_set_wrap
             .image= image_tag question_set_image_path(qs)
-            .name
             - if user_signed_in?
-              %a{href:random_questions_path(:question_set => qs.id)}= qs.name 
+              .name
+                %a{href:random_questions_path(:question_set => qs.id)}=qs.name 
             - else
-              .name=qs.name
+              .name
+                =qs.name
                   
               
              
