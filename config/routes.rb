@@ -8,11 +8,19 @@ Dazuoxiaoti::Application.routes.draw do
       collection do
         get 'random'
       end
-      resources :answers, :feedbacks
+      resources :answers
+    end
+    resources :question_sets do
+      member do
+        get 'subscribe'
+        get 'unsubscribe'
+      end
     end
     resources :home, only: :index
-    root :to =>"home#index"
+    resources :projects, :past_projects
+    root :to => "home#index"
   end
+  
   get "/question_sets" ,to: "classifies#index"
   resources :classifies 
   resources :messages,:only=>[:index,:show,:destroy] do

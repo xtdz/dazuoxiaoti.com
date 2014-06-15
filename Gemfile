@@ -45,6 +45,7 @@ gem 'therubyracer'
 gem 'devise'  ,'2.2.3'               # authentication system
 gem 'rails-backbone'
 gem 'jquery-rails'
+gem 'jquery_mobile_rails', '~> 1.4.2'
 gem 'fancybox-rails'
 gem 'formtastic', '~> 2.0.0'
 gem 'haml', '~> 3.1.3'
