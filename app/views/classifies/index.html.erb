@@ -26,11 +26,13 @@ body{ background:#fffff0;}
                <input type="checkbox" class="submit_subscribe" value="<%=question_set.id%>"<%='disabled' unless user_signed_in?%>/>
                <img src="<%=question_set_image_path(question_set)%>" width="61" height="61" />
                <div>
-                 <%if user_signed_in?%>
-                   <%=link_to question_set.name[0..13], random_questions_path(:question_set => question_set.id)%>
-                 <%else%>
-                   <a><%=question_set.name[0..13]%></a>
-                  <%end%>
+                 <h3>
+                   <%if user_signed_in?%>
+                     <%=link_to question_set.name[0..13], random_questions_path(:question_set => question_set.id)%>
+                   <%else%>
+                     <%=question_set.name[0..13]%>
+                   <%end%>
+                 </h3>
                  <p><%=question_set.description%></a></p>
                </div>
             </li>
