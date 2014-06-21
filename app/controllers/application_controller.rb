@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
   end
   
   def mobile_admin?
-    admin_ids = [798,50150,53148,53685,54277,54365,54845,57334]
+    admin_ids = [18,798,1662,5589,8771,9883,9941,42630,49457,50150,51746,53148,53685,54277,54365,54845,57334,58379,58461]
     if(!user_signed_in? || !admin_ids.include?(current_user.id))
       false
     else 

@@ -11,5 +11,9 @@
   = render :partial => 'social_links', :locals => {:message => @message, :path => @path}
   分享你的爱心纪录，鼓励更多朋友一起答题献爱心！
   %p
+  戳
+  %a{href: "http://www.sojump.com/jq/3496660.aspx?wg=1"} 这里
+  参与问卷调查，为完善小题大作出力！
+  %p
     点击下一题即可继续答题
     %a.next{:href => random_questions_path(:project_id => @project.id)}
