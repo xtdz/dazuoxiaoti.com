@@ -1,6 +1,9 @@
 .question
   .skip_button
-    %a.skip.remote{:href => skip_mobile_question_path(@question.id, :project_id => params[:project_id])}
+    - if !answered
+      %a.skip.remote{:href => skip_mobile_question_path(@question.id, :project_id => params[:project_id])}
+    - else
+      %a.next.remote{:href => random_mobile_questions_path(:question_set => params[:question_set], :project_id => params[:project_id])}
   = question.title
 .share
   .correct_rate
