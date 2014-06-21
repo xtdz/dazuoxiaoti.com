@@ -90,9 +90,4 @@ class StaticController < ApplicationController
       format.json { render :json => @posts.to_json}
     end
   end
-  def check_mobile
-    if from_mobile? && mobile_admin?
-      redirect_to '/mobile/home'
-    end
-  end
 end

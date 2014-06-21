@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_filter :assign_project, :expire_project,:check_mobile
+  before_filter :assign_project, :expire_project
 
   def create
   	session.delete(:current_question_id)
@@ -42,12 +42,6 @@ class AnswersController < ApplicationController
       else
         format.js {render :file => "answers/wrong"}
       end
-    end
-  end
-
-  def check_mobile
-    if from_mobile? && mobile_admin?
-      redirect_to '/mobile/home'
     end
   end
 

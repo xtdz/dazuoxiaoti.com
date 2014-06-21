@@ -118,11 +118,6 @@ class QuestionsController < ApplicationController
       render_question
     end
   end
-  def check_mobile
-    if from_mobile? && mobile_admin?
-      redirect_to '/mobile/questions/random'
-    end
-  end
   def like
     @question = Question.find(params[:id])
     @question.liked_count += 1
