@@ -1,0 +1,23 @@
+.project_tab.tab.displayed
+  .project_tag
+    .project_button
+      = link_to image_tag(asset_path("static/project_button.png"), :alt => '查看详情'), project_path(project), :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'project_detail', 'project_tab']);"
+    =project.equation
+  .project_explanation
+    =project.tagline2
+  .project_tongji
+    %span.numbers.participation_count #{project.participation_count}人
+    已参与 累计答对
+    %span.numbers.correct_count #{project.correct_count}题
+
+  .project_numbers
+    .project_coordinator
+      .coordinator_label
+        =project.coordinator_label
+      .coordinator_logo
+        %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_tab']);"}
+          = image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name)
+    .project_stats
+      .project_label_content
+        =project.label_content
+  .clear

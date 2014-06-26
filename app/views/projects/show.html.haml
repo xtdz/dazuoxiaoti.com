@@ -7,9 +7,12 @@
       - if @project.id==25
         .project_info
           = render :partial => "special_ford", :locals => {:main_id => @project.id,:project=>@project}
-      - else
+      - elsif @project.id==12
         .project_info
           = render :partial => "special", :locals => {:main_id => @project.id,:project=>@project} 
+      - else
+        .project_info
+          = render :partial => "project_kind2",:locals => {:main_id => @project.id,:project=>@project} 
     - else
       .project_info
         = render :partial => @project, :locals => {:main_id => @project.id}
@@ -18,8 +21,10 @@
     - if @project.project_kind==2
       - if @project.id==25
         = render :partial => 'projects/new_tab_ford', :locals => {:project => @project, :on_question_page => false}
-      - else 
+      - elsif @project.id==12
         = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => false}
+      - else 
+        = render :partial => 'projects/tab_kind2', :locals => {:project => @project, :on_question_page => false}
     - else 
       = render :partial => 'tab', :locals => {:project => @project, :on_question_page => false}
   .clear

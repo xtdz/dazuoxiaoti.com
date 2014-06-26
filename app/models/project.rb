@@ -105,8 +105,10 @@ class Project < ActiveRecord::Base
     if project_kind==2
       if id==12 
         return"答题支持大爱清尘" 
-      else 
+      elsif id==25
         return"答题支持绿色行动"
+      else
+        return equation_string
       end
     end
     @equestion ||= "#{rate}#{I18n.t 'question.equation'}#{unit_rate}#{benefit.unit}#{benefit.name}"
