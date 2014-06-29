@@ -7,7 +7,7 @@
   .info
     .name= current_user.nickname
     .type= t current_user.type
-    .logout_link= button_to t(:'user.session.logout'), destroy_user_session_path, :method => :delete
+    .logout_link= button_to t(:'user.session.logout'), destroy_user_session_path, :method => :delete, :form => {"data-ajax" => "false"}
   .stats
     %table
       %tr
