@@ -12,7 +12,9 @@ jQuery(($) ->
       return link + "." + format + "?" + params
     
     $('#project_list .random_question_link').live('click', ()->
-      $.get(formatLink(this.href, "js"))
+      $.get(formatLink(this.href, "js"), ()->
+        $('#project_panel').panel("close")
+      )
       $(this).closest('.projects_list').find('.project_status').hide()
       $(this).parent().parent().children('.project_status').show()
       return false
