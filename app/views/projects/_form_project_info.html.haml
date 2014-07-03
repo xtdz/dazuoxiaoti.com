@@ -9,13 +9,16 @@
 = form.input :upload_image_about, label: '介绍图(项目信息页面)', as: :file
 
 %h4
+  项目类型二
+= form.input :coordinator_label, label: '捐赠方代称（合作伙伴 .etc）', as: :string
+= form.input  :equation_string, label: '兑换公式替代文字', as: :string
+= form.input  :tagline2, label: '答题页项目简介', as: :text
+= form.input  :label_content, label: '答题页项目宣传', as: :text
+
+%h4
   捐赠方
 =form.association :sponsor
 
 %h4
   接收方
 =form.association :coordinator
-
-%h4
-  物资详情
-=form.association :benefit

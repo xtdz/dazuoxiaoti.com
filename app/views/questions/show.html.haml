@@ -17,8 +17,10 @@
     - if @project.project_kind==2
       - if @project.id==25
         = render :partial => 'projects/new_question_tab_ford', :locals => {:project => @project}
-      - else 
+      - elsif @project.id==12
         = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => true}
+      - else
+        = render :partial => 'projects/question_tab_kind2', :locals => {:project => @project, :on_question_page => true}
     - else
       = render :partial => 'projects/tab', :locals => {:project => @project, :on_question_page => true}
     .question_tab.tab.hidden= render :partial => 'questions/tab', :locals => {:question => @question, :project => @project}
