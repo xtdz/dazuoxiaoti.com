@@ -1,5 +1,8 @@
 /*
  *= require_self
- *= require mobile/questions_left.css
+ *= require_tree ./mobile
+ *= require jquery.mobile
  *= require fancybox
+ *= require reset
+ *= require defaults
 */

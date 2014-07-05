@@ -10,9 +10,9 @@
     .type= t current_user.type
     .logout_link= button_to t(:'user.session.logout'), destroy_user_session_path, :method => :delete
 
-  .question_mark
-    = image_tag(asset_path('static/guide.jpg'), :width => 1, :height => 1, :style => 'border:0px;line-height:0px;margin-right:-9px;')
-    = link_to image_tag(asset_path('static/question_mark.gif')), guide_path, :class => 'fancy', :onclick=>"_gaq.push(['_trackEvent', 'Modal', 'Guide', 'info_guide']);"
+  /.question_mark
+  /  = image_tag(asset_path('static/guide.jpg'), :width => 1, :height => 1, :style => 'border:0px;line-height:0px;margin-right:-9px;')
+  /  = link_to image_tag(asset_path('static/question_mark.gif')), guide_path, :class => 'fancy', :onclick=>"_gaq.push(['_trackEvent', 'Modal', 'Guide', 'info_guide']);"
   .stats
     %table
       %tr

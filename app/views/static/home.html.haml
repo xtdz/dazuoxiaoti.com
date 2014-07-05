@@ -1,6 +1,5 @@
 .columns
   .project_list_left
-    = render :partial => "static/projects"
     .projects_slides
       = render :partial => "static/project_slides",:locals=>{:projects=>@projects,:default_project=>@default_project,:past_projects=>@past_projects}
     - if params[:v].to_i==1
@@ -18,11 +17,18 @@
         .question_set_narrow{id: "question_set_#{qs.id}"}
           .question_set_wrap
             .image= image_tag question_set_image_path(qs)
-            .name
-              %a{href: random_questions_path(:question_set => qs.id)}= qs.name
+            - if user_signed_in?
+              .name
+                %a{href:random_questions_path(:question_set => qs.id)}=qs.name 
+            - else
+              .name
+                =qs.name
+                  
+              
+             
             .description= qs.description
 
-    = render :partial => "static/notice"
+    //= render :partial => "static/notice"
   .project_right
     = render :partial => "static/add_follow"
     .introduction

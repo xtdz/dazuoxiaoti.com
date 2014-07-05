@@ -6,8 +6,10 @@ module ShareHelper
     message += " [a]#{question.choices[0]}"
     message += " [b]#{question.choices[1]}"
     message += " [c]#{question.choices[2]}"
-    message += " [d]#{@choices[3]}, "
-    if project.id < 12 or project.share_question_text.nil?
+    message += " [d]#{question.choices[3]}, "
+    if project.id == 25 
+      message = "#福特 更美好的世界# " + message + project.share_question_text
+    elsif project.id < 12 or project.share_question_text.nil?
       message += "一起来趣味答题捐#{@project.benefit.short_name}"
     else
       message += project.share_question_text

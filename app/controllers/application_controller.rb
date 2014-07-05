@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def assign_other_projects
-    @projects = Project.find_ongoing.reverse
+    @projects = Project.find_all_ongoing.reverse
     @projects.delete(@project)
   end
 
@@ -55,8 +55,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def check_mobile
+    if from_mobile? && mobile_admin?
+      redirect_to mobile_root_path({:question_set => params[:question_set], :project_id => params[:project_id]})
+    end
+  end
+
   def mobile_admin?
-    admin_ids = [798,50150,53148,53685,54277,54365,54845,57334]
+    admin_ids = [18,798,1662,5589,8771,9883,9941,42630,49457,50150,51746,53148,53685,54277,54365,54845,57334,58379,58461]
     if(!user_signed_in? || !admin_ids.include?(current_user.id))
       false
     else 

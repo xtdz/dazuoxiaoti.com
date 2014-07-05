@@ -1,7 +1,6 @@
 class QuestionSetsController < ApplicationController
   before_filter :authenticate_user!,:except=>[:index]
   before_filter :require_admin, :except => [:index, :subscribe, :unsubscribe]
-
   def subscribe
     if params[:id] && (question_set = QuestionSet.where(:id=>params[:id]).first)
       current_user.question_sets.delete question_set

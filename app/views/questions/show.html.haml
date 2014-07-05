@@ -12,9 +12,15 @@
           = render :partial => 'questions/finished'
         - else
           = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
-    = render :partial => 'projects/others', :locals => {:projects => @projects}
+    = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .question_right
-    = render :partial => @project.id==12 ? 'projects/new_tab' : 'projects/tab', :locals => {:project => @project, :on_question_page => true}
+    - if @project.project_kind==2
+      - if @project.id==25
+        = render :partial => 'projects/new_question_tab_ford', :locals => {:project => @project}
+      - else 
+        = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => true}
+    - else
+      = render :partial => 'projects/tab', :locals => {:project => @project, :on_question_page => true}
     .question_tab.tab.hidden= render :partial => 'questions/tab', :locals => {:question => @question, :project => @project}
     .tab_menu
       = link_to '活动信息', "#", :name => ".project_tab", :class => "project_tab_label tab_label selected", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Project Tab', 'question_show']);"

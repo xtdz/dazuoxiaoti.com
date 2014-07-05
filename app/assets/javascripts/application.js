@@ -10,4 +10,3 @@
 //= require fancybox
 //= require jquery/jquery.SuperSlide
 //= require_tree ./application
-

@@ -23,10 +23,16 @@ body{ background:#fffff0;}
            <%@featured_question_sets.each do |question_set|%>
            <div class="question_set_<%=question_set.id%> question_set_narrow">
              <li>
-               <input type="checkbox" class="submit_subscribe" value="<%=question_set.id%>" <%='disabled' unless user_signed_in?%>/>
+               <input type="checkbox" class="submit_subscribe" value="<%=question_set.id%>"<%='disabled' unless user_signed_in?%>/>
                <img src="<%=question_set_image_path(question_set)%>" width="61" height="61" />
                <div>
-                 <h3><%=link_to question_set.name[0..13],random_questions_path(:question_set => question_set.id)%></h3>
+                 <h3>
+                   <%if user_signed_in?%>
+                     <%=link_to question_set.name[0..13], random_questions_path(:question_set => question_set.id)%>
+                   <%else%>
+                     <%=question_set.name[0..13]%>
+                   <%end%>
+                 </h3>
                  <p><%=question_set.description%></a></p>
                </div>
             </li>
@@ -103,5 +109,4 @@ return $('input.submit_subscribe').on('change', function() {
 });
 });
 }).call(this);
-
 </script>

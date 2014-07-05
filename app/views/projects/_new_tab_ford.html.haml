@@ -1,0 +1,20 @@
+.project_tab.tab.displayed
+  .project_tag
+    答题支持绿色行动
+  .project_explanation
+    问：如何能与@福特中国 一起，打造#更美好的世界#？答：偷偷告诉你一条捷径，那就是来小题大作答题！福特君在这里教你化身节水达人，还奉上雾霾天生存指南!而且分享答题成就，就可能获得小题君寄给你的福特项目独家福利哦。
+  .project_numbers
+    .project_coordinator
+      .coordinator_label
+        活动伙伴
+      .coordinator_logo
+        %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_tab']);"}
+          = image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name)
+    .project_stats
+      .stat_row
+        %span.numbers.participation_count #{project.participation_count}人
+        已参与
+      .stat_row
+        累计答对
+        %span.numbers.correct_count #{project.correct_count}题
+  .clear
