@@ -5,14 +5,11 @@
     - else
       = image_tag asset_path('static/auth/default.jpg'), :alt => current_user.nickname
   .info
-    .name= current_user.nickname
-    .type= t current_user.type
+    %p.name= current_user.nickname
+    %p.stats
+      %span.labels 答对
+      %span.numbers= current_user.correct_count
+      %span.empty
+      %span.labels 排名
+      %span.numbers= current_user.rank.first  
     .logout_link= button_to t(:'user.session.logout'), destroy_user_session_path, :method => :delete, :form => {"data-ajax" => "false"}
-  .stats
-    %table
-      %tr
-        %td.labels.bordered 答对
-        %td.numbers.bordered.user_correct_count= current_user.correct_count
-      %tr
-        %td.labels 排名
-        %td.numbers= current_user.rank.first

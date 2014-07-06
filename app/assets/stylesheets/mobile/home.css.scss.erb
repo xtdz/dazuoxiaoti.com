@@ -99,8 +99,8 @@
 }
 
 .user_stats {
+  height: 100px;
   color: $dark_grey;
-  font-size: 12pt;
   .photo{
     img {
       height: 80px;
@@ -113,20 +113,29 @@
     margin-right: 20px;
   }
   .info {
-    text-align: top;
+    width: 150px;
+    position: absolute;
+    left: 110px;
     .name {
-      line-height: 30px;
+      font-size: 14pt;
+      line-height: 25px;
       color: $brown;
     }
-    .type {
-      font-size: 10pt;
+
+    .stats {
       line-height: 30px;
-    }
-    .settings_link {
       font-size: 10pt;
-      display: inline;
-      line-height: 20px
+      .labels {
+        color: $grey;
+      }
+      .numbers {
+        color: $orange;
+      }
+      .empty {
+        margin-right: 8px;
+      }
     }
+
     .logout_link {
       .ui-btn {
         padding-top: 5px;
@@ -136,50 +145,11 @@
         font-size: 10pt;
         height: 15px;
       }
-      width: 95px;
+      margin-top: 5px;
       text-align: right;
       display: inline-block;
       zoom: 1;
       *display: inline;
-    }
-  }
-
-  .stats {
-    margin: 30px 0px 20px;
-    zoom: 1;
-    position: relative;
-    background: $white;
-    border: 1px solid $grey_border;
-    @include rounded_corner(2px);
-    @include gradient(#fcfcfc, #f4f4f4);
-    padding: 10px 0px;
-    line-height: 14px;
-    table {
-      td {
-        text-align: center;
-        width: 86px;
-      }
-      .bordered {
-        border-right: 1px solid $grey_border;
-      }
-      .labels {
-        line-height: 25px;
-        color: $brown;
-        font-size: 12pt;
-      }
-      .numbers {
-        line-height: 45px;
-        color: $orange;
-        font-size: 14pt;
-      }
-      .subscripts {
-        font-size: 10pt;
-      }
-    }
-    .answer_limit {
-      display: inline;
-      line-height: 13px;
-      vertical-align: bottom;
     }
   }
 
