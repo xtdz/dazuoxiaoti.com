@@ -17,7 +17,7 @@ module ShareHelper
     message
   end
 
-  def share_record_message_contributed correct_count, project
+  def share_correct_count_for_donation_projects correct_count, project
     message = "【趣味微公益】最近在“小题大作”网站参与"
     message += "“#{project.name}”"
     message += "答题捐赠项目，"
