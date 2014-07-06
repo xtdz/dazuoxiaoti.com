@@ -20,7 +20,7 @@
                   %a.continue{href: @path}
             .description
               - @message = "你已经答对了#{participation.correct_count}道题目"
-              - @message1 = share_record_message participation.correct_count, participation.project
+              - @message1 = share_record_message_contributed participation.correct_count, participation.project
               - if  participation.project_id.to_i == 14
                 -  @message = @message + "获得“宜农贷”5元助农卡#{participation.correct_count/20}张"
               - else

@@ -8,7 +8,7 @@
     :plain
       目前用户每天有<span>50</span>次的答对限制。还请明天继续参与到我们的行动中来吧！
   您还可以点击
-  - @message = share_record_message user_correct_count, @project
+  - @message = share_record_message_contributed user_correct_count, @project
   - @path = "#{project_path(@project, :in => 'snf', :referer_id => current_user.id)}"
   = render :partial => 'social_links', :locals => {:message => @message, :path => @path}
   分享你的爱心纪录，鼓励更多朋友一起答题献爱心！
