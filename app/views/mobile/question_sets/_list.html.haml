@@ -13,7 +13,8 @@
               %img.ui-li-thumbnail{'src' => "#{question_set_image_path(question_set)}", 'width' => 61, 'height' => 61}
               %h3.ui-li-heading= question_set.name[0..13]
               %p.ui-li-desc= question_set.description
+              %img.left-icon{'src' => "#{asset_path('static/unchecked.png')}"}
               - if @user_question_sets.include?(question_set)
-                %img.button-check{'src' => "#{asset_path('static/check.png')}"}
+                %img.left-icon.button-check{'src' => "#{asset_path('static/checked.png')}"}
               - else
-                %img.button-check.hidden{'src' => "#{asset_path('static/check.png')}"}
+                %img.left-icon.button-check.hidden{'src' => "#{asset_path('static/checked.png')}"}
