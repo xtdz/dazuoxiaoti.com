@@ -8,10 +8,11 @@
 .share
   .correct_rate
     正确率：#{@question.correct_rate}%
-    考考朋友，分享到:
   - @message = share_question_message @question, @project
   - @path = "#{share_question_path @question.token, @project, current_user, 'question', @question_set}"
   = render :partial => 'mobile/questions/social_links', :locals => {:message => @message, :path => @path}
+  .fr
+    分享到:
 #solution
   - if !answered
     = form_for([:mobile, question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
