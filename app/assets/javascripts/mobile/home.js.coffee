@@ -61,5 +61,18 @@ jQuery(($) ->
         $("#no_question_notice").hide()
         $(selector).html(cnt + 1)
     )
+
+    $("#question_set_panel" ).on( "panelbeforeopen", ( event, ui ) ->
+      $('.right_link.header_item').addClass('opened')
+    )
+    $("#question_set_panel" ).on( "panelbeforeclose", ( event, ui ) ->
+      $('.right_link.header_item').removeClass('opened')
+    )
+    $("#project_panel" ).on( "panelbeforeopen", ( event, ui ) ->
+      $('.left_link.header_item').addClass('opened')
+    )
+    $("#project_panel" ).on( "panelbeforeclose", ( event, ui ) ->
+      $('.left_link.header_item').removeClass('opened')
+    )
   )
 )

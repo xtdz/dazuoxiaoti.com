@@ -5,7 +5,9 @@
   background: #fffff0;
 
   .page_header {
-    background: #ff6000;
+    background: linear-gradient(#F93, #FF8000);
+    opacity: 0.9;
+    background-color: #F93;
     color: #fff;
     display: table;
     height: 40px;
@@ -13,7 +15,6 @@
     .header_item {
       display: table-cell;
       vertical-align: middle;
-      height: 100%;
       line-height: 100%;
       padding: 10px;
       img {
@@ -21,20 +22,22 @@
       }
     }
     .title {
-      width: 60%;
+      width: 100%;
       font-size: 1.4em;
       vertical-align: middle;
       text-align: center;
+      text-shadow: none;
       height: 100%;
       line-height: 100%;
     }
     .left_link {
-      width: 20%;
-      text-align: left;
+      float: left;
     }
     .right_link {
-      width: 20%;
-      text-align: right;
+      float: right;
+    }
+    .opened {
+      background: none repeat scroll 0% 0% #FF6000;
     }
   }
 }
