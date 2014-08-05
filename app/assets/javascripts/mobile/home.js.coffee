@@ -46,8 +46,7 @@ jQuery(($) ->
       $('#project_detail').hide(300)
       $('#project_list').show(300)
 
-    $(".question-set-item").unbind('tap')
-    $(".question-set-item").tap( ()->
+    $(".question-set-item").click( ()->
       selector = $(this).closest('.category').find('.select_count')
       check = $(this).find('.button-check')
       cnt = parseInt($(selector).html())
