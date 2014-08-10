@@ -56,7 +56,8 @@ class ApplicationController < ActionController::Base
   end
   
   def check_mobile
-    if from_mobile? && mobile_admin?
+    return
+    if from_mobile?
       redirect_to mobile_root_path({:question_set => params[:question_set], :project_id => params[:project_id]})
     end
   end

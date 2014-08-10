@@ -1,6 +1,5 @@
 class Mobile::QuestionSetsController < ApplicationController
   before_filter :authenticate_user!,:except=>[:index]
-  before_filter :redirect_mobile_admin
 
   def subscribe
     if params[:id] && (question_set = QuestionSet.find(params[:id]))
