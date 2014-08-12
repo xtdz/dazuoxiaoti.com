@@ -1,5 +1,5 @@
 class Mobile::ProjectsController < ApplicationController
-  before_filter :assign_project, :expire_project, :assign_other_projects, :redirect_mobile_admin
+  before_filter :assign_project, :expire_project, :assign_other_projects
 
   def index
     @projects = Project.find_all_ongoing.reverse
