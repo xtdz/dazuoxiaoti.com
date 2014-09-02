@@ -29,7 +29,12 @@ class ApplicationController < ActionController::Base
 
   def expire_project
     if @project.expired?
-      @project = Project.find_ongoing.last
+      if @project.id == 26
+        @project = Project.find(28)
+        @project = Project.find_ongoing.last if @project.expired?
+      else
+        @project = Project.find_ongoing.last
+      end
     end
     if @project.nil?
       redirect_to root_path, :notice => "all projects finished."
