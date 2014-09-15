@@ -17,8 +17,8 @@
       %div{id: "project_wrap_#{current_project.id}"}
         .project_header
           .spnsr_logo
-            %a{href: current_project.sponsor.url}
-              %img{src: organization_image_path(current_project.sponsor), style:"width:200px"}
+            %a{href: current_project.common_data.sponsor.url}
+              %img{src: organization_image_path(current_project.common_data.sponsor), style:"width:200px"}
         .main{style: "margin-top: 0px;"}
           = yield
         .footer

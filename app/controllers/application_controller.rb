@@ -2,8 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :session_expiry, :assign_referer
 
+  def all_projects
+    (Project.all + Project2.all).sort_by{|p| p.created_at}
+  end
+  
+  def all_projects_on_going
+    (Project.find_all_ongoing + Project2.find_all_ongoing).sort_by{|p| p.created_at}
+  end
+
+  def all_projects_expired
+    (Project.find_all_expired + Project2.find_all_expired).sort_by{|p| p.created_at}
+  end
+
   def assign_project
     session_manager.current_project_id = params[:project_id]
+    session_manager.current_project_type = params[:project_type]
     @project ||= current_project
     if @project.nil?
       redirect_to root_path
@@ -11,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def assign_other_projects
-    @projects = Project.find_all_ongoing.reverse
+    @projects = all_projects_on_going.reverse
     @projects.delete(@project)
   end
 
@@ -24,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_project
-    @project ||= session_manager.current_project ? session_manager.current_project : Project.find_ongoing.last
+    @project ||= session_manager.current_project ? session_manager.current_project : all_projects_on_going.last
   end
 
   def expire_project

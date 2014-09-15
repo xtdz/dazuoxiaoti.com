@@ -5,4 +5,4 @@
     - projects.shuffle!.first(4).each do |proj|
       .other_project
         .other_project_wrapped
-          = link_to image_tag(project_image_path(proj,:small), :alt => proj.name, :title => proj.name), project_path(proj)
+          = link_to image_tag(project_image_path(proj,:small), :alt => proj.common_data.name, :title => proj.common_data.name), project_path(proj)

@@ -1,0 +1,29 @@
+.project_header
+  .start_button=link_to image_tag(asset_path('static/answer.png')), random_questions_path(:project_id => project2.id,:project_type => project2.class.to_s)
+  = project2.common_data.name
+.block_label
+  项目简介
+.block_content
+  .right_image= image_tag project_image_path(project2, :about), :alt => project2.common_data.name
+  答题开始时间：#{project2.common_data.start_time.strftime "%m月%d日"}
+  %br
+  :plain
+    #{project2.common_data.description}
+  .clear
+.block_label
+  活动伙伴介绍
+.block_content
+  .left_image= link_to image_tag(organization_image_path(project2.common_data.sponsor), :alt => project2.common_data.sponsor.name), project2.common_data.sponsor.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_show']);"
+  - project2.common_data.sponsor.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+.block_content
+  .right_image= link_to image_tag(organization_image_path(project2.common_data.coordinator), :alt => project2.common_data.coordinator.name), project2.common_data.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_show']);"
+  - project2.common_data.coordinator.description.each_line do |line|
+    %p
+      :plain
+        #{line}
+  .clear
+.clear

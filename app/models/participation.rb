@@ -58,8 +58,9 @@ class Participation < ActiveRecord::Base
 
   def self.get_participation_by_id user_id, project_id, referer_id = nil
     participation = Participation.user(user_id).project(project_id).first
+    @project = Project.find(project_id)
     if participation.nil?
-      Project.increment_counter :participation_count, :project_id
+      @proejct.increment :participation_count
       participation = Participation.create :user_id => user_id, :project_id => project_id, :referer_id => referer_id
     else
       participation

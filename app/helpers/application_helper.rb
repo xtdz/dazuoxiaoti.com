@@ -2,6 +2,10 @@
 module ApplicationHelper
   extend ActiveSupport::Memoizable
 
+  def all_projects
+    Project.all + Project2.all
+  end
+
   def user_correct_count
     if user_signed_in?
       current_participation ? current_participation.correct_count : 0
@@ -21,7 +25,7 @@ module ApplicationHelper
   def get_item_count_and_unit(project)
     return "" if project.id==12
     return YixinCard.where("user_id is not null").count.to_s+"张" if project.id==14
-    return project.item_count.to_s + project.benefit.unit.to_s
+    return project.item_count.to_s + project.common_data.benefit.unit.to_s
   end
 
   def user_contribution
@@ -34,24 +38,24 @@ module ApplicationHelper
 
   def total_participation_count
     total = 0
-    Project.all.each do |p|
-      total = total + p.participation_count
+    all_projects.each do |p|
+      total = total + p.common_data.participation_count
     end
     total
   end
 
   def total_correct_count
     total = 0
-    Project.all.each do |p|
-      total = total + p.correct_count
+    all_projects.each do |p|
+      total = total + p.common_data.correct_count
     end
     total
   end
 
   def total_items_count
     total = 0
-    Project.all.each do |p|
-      total = total + p.correct_count/p.rate
+    all_projects.each do |p|
+      total = total + p.common_data.correct_count/p.common_data.rate
     end
     total
   end
@@ -59,38 +63,38 @@ module ApplicationHelper
   def project_image_path(project, type)
     case type
     when :main
-      if project.upload_image_main?
-        project.upload_image_main.url
+      if project.common_data.upload_image_main?
+        project.common_data.upload_image_main.url
       else
         asset_path(project.image_path :main)
       end
     when :about
-      if project.upload_image_about?
-        project.upload_image_about.url
+      if project.common_data.upload_image_about?
+        project.common_data.upload_image_about.url
       else
         asset_path(project.image_path :about)
       end
     when :sina_poster
-      if project.upload_image_share_question1?
-        project.upload_image_share_question1.url
+      if project.common_data.upload_image_share_question1?
+        project.common_data.upload_image_share_question1.url
       else
         asset_path(project.image_path :sina_poster)
       end
     when :renren_poster
-      if project.upload_image_share_question1?
-        project.upload_image_share_question1.url
+      if project.common_data.upload_image_share_question1?
+        project.common_data.upload_image_share_question1.url
       else
         asset_path(project.image_path :renren_poster)
       end
     when :qq_poster
-      if project.upload_image_share_question1?
-        project.upload_image_share_question1.url
+      if project.common_data.upload_image_share_question1?
+        project.common_data.upload_image_share_question1.url
       else
         asset_path(project.image_path :qq_poster)
       end
     when :small
-      if project.upload_image_small?
-        project.upload_image_small.url
+      if project.common_data.upload_image_small?
+        project.common_data.upload_image_small.url
       else
         asset_path(project.image_path :small)
       end
@@ -123,7 +127,11 @@ module ApplicationHelper
 
   private
   def current_project
-    @project
+    if @project.nil? 
+      @project2
+    else
+      @project
+    end
   end
 
   def current_participation

@@ -3,7 +3,7 @@
     .projects_list
       - @projects.each do |p|
         .project_block
-          = render :partial => 'project_block', :locals => {project: p, show: true}
+          = render :partial => p.block_path, :locals => {project: p, show: true}
       - @past_projects.each do |pp|
         .project_block
           = render :partial => 'past_project_block', :locals => {project: pp, show: true}

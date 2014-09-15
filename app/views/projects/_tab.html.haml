@@ -5,7 +5,7 @@
         = link_to image_tag(asset_path("static/project_button.png"), :alt => '查看详情'), project_path(project), :onclick=>"_gaq.push(['_trackEvent', 'Internal', 'project_detail', 'project_tab']);"
     = project.equation
   .project_explanation
-    = project.tagline
+    = project.common_data.tagline
   .project_numbers
     .project_coordinator
       .coordinator_label
@@ -16,17 +16,17 @@
         - else
           捐赠接收方
       .coordinator_logo
-        %a.image{:href => project.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
-          = image_tag(organization_image_path(project.coordinator), :alt => project.coordinator.name)
+        %a.image{:href => project.common_data.coordinator.url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_tab']);"}
+          = image_tag(organization_image_path(project.common_data.coordinator), :alt => project.common_data.coordinator.name)
     .project_stats
       .stat_row
-        %span.numbers.participation_count #{project.participation_count}人
+        %span.numbers.participation_count #{project.common_data.participation_count}人
         已参与
       .stat_row
         累计答对
-        %span.numbers.correct_count #{project.correct_count}题
+        %span.numbers.correct_count #{project.common_data.correct_count}题
       .stat_row
-        = project.id==14 ? "发放助农卡" : "捐赠#{project.benefit.short_name}"
+        = project.id==14 ? "发放助农卡" : "捐赠#{project.common_data.benefit.short_name}"
         %span.numbers.item_count 
           =  get_item_count_and_unit(project)
           

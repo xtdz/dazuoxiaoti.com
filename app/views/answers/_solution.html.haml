@@ -31,22 +31,22 @@
     您为本活动答对了
     %span.orange= user_correct_count
     题。
-    - if @project.rate < 1000 && !([12,14,25].include? @project.id.to_i)
+    - if @project.common_data.rate < 1000 && !([12,14,25].include? @project.id.to_i)
       还差
-      %span.orange= @project.rate - user_correct_count % @project.rate
+      %span.orange= @project.common_data.rate - user_correct_count % @project.common_data.rate
       题就可以独立助捐
-      %span.orange= (user_correct_count/@project.rate + 1) * @project.unit_rate
-      #{@project.benefit.unit}#{@project.benefit.short_name}。
+      %span.orange= (user_correct_count/@project.common_data.rate + 1) * @project.common_data.unit_rate
+      #{@project.common_data.benefit.unit}#{@project.common_data.benefit.short_name}。
       .progress_bar_outter
-        .progress_bar_inner{:style => "width:#{user_correct_count % @project.rate * 100 / @project.rate}%"}
+        .progress_bar_inner{:style => "width:#{user_correct_count % @project.common_data.rate * 100 / @project.common_data.rate}%"}
       .clear
     - elsif !([12,14,25].include? @project.id.to_i)
 
       还差
-      %span.orange= @project.rate - user_correct_count % @project.rate
+      %span.orange= @project.common_data.rate - user_correct_count % @project.common_data.rate
       题才能独立助捐
-      %span.orange= (user_correct_count/@project.rate + 1) * @project.unit_rate
-      #{@project.benefit.unit}#{@project.benefit.short_name}.
+      %span.orange= (user_correct_count/@project.common_data.rate + 1) * @project.common_data.unit_rate
+      #{@project.common_data.benefit.unit}#{@project.common_data.benefit.short_name}.
     - else
       只凭您个人的力量很难,还是邀请您的好友一起来答题做公益吧! 
       分享到：

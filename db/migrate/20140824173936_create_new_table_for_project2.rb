@@ -6,9 +6,7 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   	  t.integer :incorrect_count , :default => 0
   	  t.integer :participation_count , :default => 0
   	  t.integer :limit , :default => 0
-  	  t.integer :rate , :default => 1
   	  t.integer :coordinator_id
-  	  t.integer :benefit_id
   	  t.integer :sponsor_id
   	  t.datetime :start_time
   	  t.datetime :end_time
@@ -22,7 +20,6 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   	  t.string :information
   	  t.string :share_question_text
   	  t.string :share_finish_text
-  	  t.integer :unit_rate , :default => 1
   	  t.string :banner_url
       t.has_attached_file :upload_image_main
       t.has_attached_file :upload_image_about
@@ -39,6 +36,7 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   		t.string :equation_string
   		t.string :tagline2
   		t.string :label_content
+      t.timestamps
   	end
   	CommonData.reset_column_information
   	Project2.reset_column_information
@@ -49,9 +47,7 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   		data.incorrect_count = p.incorrect_count
   		data.participation_count = p.participation_count
   		data.limit = p.limit
-  		data.rate = p.rate
   		data.coordinator_id = p.coordinator_id
-  		data.benefit_id = p.benefit_id
   		data.sponsor_id = p.sponsor_id
   		data.start_time = p.start_time
   		data.end_time = p.end_time
@@ -60,13 +56,14 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   		data.name = p.name
   		data.feedback_image_count = p.feedback_image_count
   		data.hidden = p.hidden
-  		data.sharable_id = p.id
   		if p.project_kind == 1
+        data.sharable_id = p.id
   			data.sharable_type = 'Project'
   		else
   			data.sharable_type = 'Project2'
+        p2 = Project2.create
+        data.sharable_id = p2.id
   		end
-  		data.unit_rate = p.unit_rate
   		data.banner_url = p.banner_url
   		data.upload_image_main = p.upload_image_main if p.upload_image_main.exists?
       data.upload_image_about = p.upload_image_about if p.upload_image_about.exists?

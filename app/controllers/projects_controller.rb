@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
   layout :project_layout
-  before_filter :require_admin, :only => [:edit, :update, :create, :new]
+  #before_filter :require_admin, :only => [:edit, :update, :create, :new]
   before_filter :reset_current_url_to_root, :only => [:index, :show]
   def index
-    @projects = Project.find_all_ongoing.reverse
-    @past_projects = Project.find_all_expired.reverse
+    @projects = all_projects_on_going.reverse
+    @past_projects = all_projects_expired.reverse
   end
 
   def show
@@ -22,12 +22,14 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.new(params[:project])
+    @project = Project.new
+    @project.common_data = CommonData.new(params[:common_data])
     @project.save && redirect_to(project_path(@project))
   end
 
   def edit
     @project = Project.find(params[:id])
+    @common_data = @project.common_data
     @project.build_nested_models
   end
 

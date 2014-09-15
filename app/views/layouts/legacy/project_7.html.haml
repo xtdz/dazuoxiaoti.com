@@ -17,7 +17,7 @@
       %div{id: "project_wrap_#{current_project.id}"}
         .project_header
           - show_progress = params[:controller] == 'questions'
-          - stage = (current_project.correct_count % current_project.rate) * 4 / current_project.rate
+          - stage = (current_project.common_data.correct_count % current_project.common_data.rate) * 4 / current_project.common_data.rate
           .supplies
             .school_supply{name: '.school_supply_text', class: 'selected'}
             .entertainment_supply{name: '.entertainment_supply_text', class: (!show_progress || stage > 0) ? 'selected' : ''}
@@ -36,14 +36,14 @@
               .text_title 文体用品:
               足球、篮球、排球、羽毛球、跳绳等
           .spnsr_logo
-            %img{src: asset_path(current_project.sponsor.image_path)}
+            %img{src: asset_path(current_project.common_data.sponsor.image_path)}
           - if show_progress
             .project_7_progress
               .progress_background
               .progress_text{class: "stage_#{stage}"}
                 .progress_text_wrapped
                   已答对
-                  %span.numbers.correct_count #{current_project.correct_count}题
+                  %span.numbers.correct_count #{current_project.common_data.correct_count}题
         .main
           = yield
         .footer

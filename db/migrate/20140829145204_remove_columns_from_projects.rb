@@ -4,10 +4,7 @@ class RemoveColumnsFromProjects < ActiveRecord::Migration
   	remove_column :projects, :correct_count
   	remove_column :projects, :incorrect_count
   	remove_column :projects, :participation_count
-  	remove_column :projects, :limit
-  	remove_column :projects, :rate
   	remove_column :projects, :coordinator_id
-  	remove_column :projects, :benefit_id
   	remove_column :projects, :sponsor_id
   	remove_column :projects, :start_time
   	remove_column :projects, :end_time
@@ -19,8 +16,8 @@ class RemoveColumnsFromProjects < ActiveRecord::Migration
   	remove_column :projects, :information
   	remove_column :projects, :share_question_text
   	remove_column :projects, :share_finish_text
-  	remove_column :projects, :unit_rate
   	remove_column :projects, :banner_url
+    remove_column :proejcts, :project_kind
     remove_attachment :projects, :upload_image_main
     remove_attachment :projects, :upload_image_about
     remove_attachment :projects, :upload_image_small

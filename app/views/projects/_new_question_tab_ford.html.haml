@@ -6,9 +6,9 @@
   .project_explanation
     福特君不只卖汽车，还教你如何化身节水小达人，让你徜徉动物世界，并倾情向你提供雾霾天生存手册。只要参与答题，你可能就离环保达人近了一步。只要分享题目或答题成就，你就有机会获得独家福利——由福特中国赞助的创意礼品哦。
   .project_tongji
-    %span.numbers.participation_count #{project.participation_count}人
+    %span.numbers.participation_count #{project.common_data.participation_count}人
     已参与 累计答对
-    %span.numbers.correct_count #{project.correct_count}题
+    %span.numbers.correct_count #{project.common_data.correct_count}题
 
   .project_numbers
     .project_coordinator
@@ -16,7 +16,7 @@
         活动伙伴
       .coordinator_logo
         %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_tab']);"}
-          = image_tag(organization_image_path(project.sponsor), :alt => project.sponsor.name)
+          = image_tag(organization_image_path(project.common_data.sponsor), :alt => project.common_data.sponsor.name)
     .project_stats
       .project_label_content
         “福特更美好的世界”是福特中国为实现环境、企业和社区可持续发展而发起的企业社会责任项目。为创造更美好的环境，福特中国先后启动“福特汽车环保奖”和“绿色晋级”计划，持续支持草根环保力量。让人人都生活在一个更美好的世界，是福特中国一直以来努力的方向。

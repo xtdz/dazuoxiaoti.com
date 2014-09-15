@@ -1,0 +1,17 @@
+.project_block_wrapped{class: show ? "displayed block_"+project2.id.to_s : "hidden block_"+project2.id.to_s, id: "project_block_"+project2.id.to_s}
+  .project_image= image_tag project_image_path(project2, :main)
+  .project_screen
+  .project_overview
+    .project_title
+      = project2.common_data.name
+    - if project2.id==25
+      .project_equation(style="background-color: #FF4000;")
+        = project2.equation_string
+    - else
+      .project_equation
+        = project2.equation_string
+    .project_buttons
+      = link_to image_tag(asset_path('static/begin.png')), random_questions_path(:project_id => project2.id), :class => "button_left"
+      = link_to image_tag(asset_path('static/detail.png')), project2_path(project2), :class => "button_right"
+  .clear
+

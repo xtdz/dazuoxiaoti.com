@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   before_filter :require_admin, :only => [:edit, :update, :search, :destroy]
   before_filter :check_mobile
   def show
-    session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s
+    session_manager.current_url = '/questions/random?project_id=' + @project.id.to_s + '&project_type=' + @project.class.to_s
     @question = Question.find_by_token params[:id]
 
     if !@question.nil?
@@ -72,7 +72,7 @@ class QuestionsController < ApplicationController
 	end
 	count_down = session[:count_down]
 	question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-	session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+	session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + '&project_type=' + @project.class.to_s + question_set_params_string
 	
 	current_question_set = session[:current_question_set]
 	if params.has_key?(:question_set)

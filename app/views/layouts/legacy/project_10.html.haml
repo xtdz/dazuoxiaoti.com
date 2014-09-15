@@ -17,7 +17,7 @@
       %div{id: "project_wrap_#{current_project.id}"}
         .project_header
           .spnsr_logo
-            %a{href: current_project.sponsor.url}
+            %a{href: current_project.common_data.sponsor.url}
               %img{src: (asset_path "projects/10/wh.png"), style:"width:200px"}
         .main{style: "margin-top: 0px;"}
           = yield

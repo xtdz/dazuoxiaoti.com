@@ -2,7 +2,7 @@
 .columns
   .question_left
     .content
-      - if @project.project_kind.to_i==2
+      - if @project.class.to_s == 'Project2'
         = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
       - else
         - if session[:show_share] and session[:show_share][current_project.id]
@@ -14,21 +14,22 @@
           = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
     = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .question_right
-    - if @project.project_kind==2
-      - if @project.id==25
-        = render :partial => 'projects/new_question_tab_ford', :locals => {:project => @project}
-      - else 
-        = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => true}
-    - else
-      = render :partial => 'projects/tab', :locals => {:project => @project, :on_question_page => true}
+    = render :partial => @project.tab_path(:on_question_page), :locals => {:project2 => @project}
+    /- if @project.common_data.project_kind==2
+    /  - if @project.id==25
+    /    = render :partial => 'projects/new_question_tab_ford', :locals => {:project => @project}
+    /  - else 
+    /    = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => true}
+    /- else
+    /  = render :partial => 'projects/tab', :locals => {:project => @project, :on_question_page => true}
     .question_tab.tab.hidden= render :partial => 'questions/tab', :locals => {:question => @question, :project => @project}
     .tab_menu
       = link_to '活动信息', "#", :name => ".project_tab", :class => "project_tab_label tab_label selected", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Project Tab', 'question_show']);"
       = link_to '题目信息', "#", :name => ".question_tab", :class => "question_tab_label tab_label", :onclick=>"_gaq.push(['_trackEvent', 'Click', 'Question Tab', 'question_show']);"
       .clear
-    - if @project.information
+    - if @project.common_data.information
       .information(style="font-size:12px;padding-top:5px;color:#666")
-        = @project.information
+        = @project.common_data.information
       //%br
       //%iframe(width="360" height="190" src="http://www.taobao.com/go/rgn/union/link_tmall.php?size=360x190&pid=mm_47354439_0_0" frameborder="0" marginheight="0" marginwidth="0" border="0" scrolling="no" name="alimamaifrm")
     %br

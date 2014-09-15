@@ -8,22 +8,42 @@ class SessionManager
     self.expires_at = Time.now + 1.week
   end
 
-  #TODO: the current_project logic currently causes no error, but it is messed up....
-  def current_project_id
-    session[:current_project_id] ||= current_project ? current_project.id : Project.find_ongoing.last.id
+  def all_projects_on_going
+    (Project.find_ongoing + Project2.find_ongoing).sort_by{|p| p.created_at}
   end
 
+  #TODO: the current_project logic currently causes no error, but it is messed up....
+  def current_project_id
+    session[:current_project_id] ||= current_project ? current_project.id : all_projects_on_going.last.id
+  end
+
+  def current_project_type
+    session[:current_project_type] ||= current_project ? current_project.class.to_s : all_projects_on_going.last.class.to_s
+  end
+
+  def current_project_type= type
+    session[:current_project_type] = type.to_s if type
+  end
+  
   def current_project_id= id
     session[:current_project_id] = id.to_i if id
   end
 
   def current_project
-    if session[:current_project_id]
-      Project.find(session[:current_project_id])
-    elsif signed_in?
-      current_user.most_recent_project
+    if session[:current_project_type] == "Project"
+      if session[:current_project_id]
+        Project.find(session[:current_project_id])
+      elsif signed_in?
+        current_user.most_recent_project
+      else
+        all_projects_on_going.last
+      end
     else
-      Project.find_ongoing.last
+      if session[current_project_id]
+        Project2.find(session[:current_project_id])
+      elsif signed_in?
+        all_projects_on_going.last
+      end  
     end
   end
 
@@ -50,6 +70,7 @@ class SessionManager
 
   def participations
     session[:participations] ||= {}
+    session[:participations][current_project_type] ||= {}
   end
 
   def current_project_answers
@@ -58,6 +79,7 @@ class SessionManager
 
   def answers
     session[:answers] ||= {}
+    session[:answers][current_project_type] ||= {}
   end
 
   def answered_ids

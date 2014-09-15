@@ -1,5 +1,4 @@
 Dazuoxiaoti::Application.routes.draw do
-
   namespace :mobile do
     resources :questions do
       member do
@@ -140,6 +139,7 @@ Dazuoxiaoti::Application.routes.draw do
         get 'random'
       end
     end
+    
     resources :projects do
       collection do
         get 'current'
@@ -152,8 +152,13 @@ Dazuoxiaoti::Application.routes.draw do
       end
     end
   end
-  
-  resources :projects, :past_projects, :organizations, :benefits, :question_sets, :feedbacks
+  resources :project2s do
+      resource :common_datum
+    end
+  resources :projects do
+      resource :common_datum
+    end
+  resources :past_projects, :organizations, :benefits, :question_sets, :feedbacks
   
   match 'fillup', :controller => 'surveys', :action => 'fillup'
   match 'update_category', :controller => 'categories', :action => 'update_categories_to_user'

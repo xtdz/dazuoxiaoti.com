@@ -28,9 +28,9 @@ class StaticController < ApplicationController
       QuestionSet.order('RAND()').limit([6, @question_sets.size].max - @question_sets.size)
     )
     kind= params[:v].to_i==1 ? 2 : 1
-    @projects = Project.find_all_ongoing.reverse
+    @projects = all_projects_on_going.reverse
     projects_count = @projects.count>5 ? 5 : @projects.count
-    @past_projects = Project.find_expired(kind).reverse.first(5 - projects_count)
+    @past_projects = all_projects_expired.reverse.first(5 - projects_count)
     @default_project = @projects.first
 
     #FOR BEIJING 4ZHONG

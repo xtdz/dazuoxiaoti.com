@@ -2,7 +2,7 @@
   - if flash[:notice]
     .notice= flash[:notice]
   .project_left
-    - if @project.project_kind==2
+    - if @project.common_data.project_kind==2
       - if @project.id==25
         .project_info
           = render :partial => "projects/special_ford", :locals => {:main_id => @project.id,:project=>@project}
