@@ -23,9 +23,9 @@ module ApplicationHelper
   end
 
   def get_item_count_and_unit(project)
-    return "" if project.id==12
+    return "" if project.id==12 or project.class.to_s == 'Project2'
     return YixinCard.where("user_id is not null").count.to_s+"张" if project.id==14
-    return project.item_count.to_s + project.common_data.benefit.unit.to_s
+    return project.item_count.to_s + project.benefit.unit.to_s
   end
 
   def user_contribution
@@ -54,8 +54,8 @@ module ApplicationHelper
 
   def total_items_count
     total = 0
-    all_projects.each do |p|
-      total = total + p.common_data.correct_count/p.common_data.rate
+    Project.all.each do |p|
+      total = total + p.common_data.correct_count/p.rate
     end
     total
   end
@@ -127,11 +127,7 @@ module ApplicationHelper
 
   private
   def current_project
-    if @project.nil? 
-      @project2
-    else
-      @project
-    end
+    @project
   end
 
   def current_participation

@@ -10,7 +10,6 @@ class Project2 < ActiveRecord::Base
 
   def build_nested_models
     build_common_data unless common_data
-    common_data.build_benefit unless common_data.benefit
     common_data.build_sponsor unless common_data.sponsor
     common_data.build_coordinator unless common_data.coordinator
   end
@@ -18,7 +17,7 @@ class Project2 < ActiveRecord::Base
   def increment(counter)
     super(counter)
     if persisted?
-      common_data.class.increment_counter(counter, id)
+      common_data.class.increment_counter(counter, common_data.id)
       #send_counter_message  counter
     end
   end
@@ -33,11 +32,11 @@ class Project2 < ActiveRecord::Base
 
 
   def self.find_all_ongoing
-    Project2.joins(:common_data).where(["common_data.end_time > ? and common_data.`limit` > ((common_data.correct_count/common_data.rate)*common_data.unit_rate) and not common_data.hidden",Time.now])
+    Project2.joins(:common_data).where(["common_data.end_time > ? and not common_data.hidden",Time.now])
   end
 
   def self.find_all_expired
-    Project2.joins(:common_data).where(["(common_data.`limit` <= ((common_data.correct_count/common_data.rate)*common_data.unit_rate) or common_data.end_time < ? and not common_data.hidden)", Time.now])
+    Project2.joins(:common_data).where(["common_data.end_time < ? and not common_data.hidden", Time.now])
   end
 
   def image_path type
@@ -61,6 +60,14 @@ class Project2 < ActiveRecord::Base
     end
   end
 
+  def isProject2?
+    true
+  end
+
+  def progress_bar_path
+    'questions/project2_progress_bar'
+  end
+  
   def tab_path page
     case page.to_sym
     when :on_question_page
@@ -71,7 +78,7 @@ class Project2 < ActiveRecord::Base
   end
 
   def block_path
-    "project2s/project_block"
+    "project2s/project2_block"
   end
 
   def feedback_image_path index

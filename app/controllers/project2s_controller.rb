@@ -1,39 +1,39 @@
 class Project2sController < ApplicationController
   layout :project_layout
-  #before_filter :require_admin, :only => [:edit, :update, :create, :new]
+  before_filter :require_admin, :only => [:edit, :update, :create, :new]
   before_filter :reset_current_url_to_root, :only => [:index, :show]
   
   def show
-    @project2 = Project2.find params[:id]
-    if @project2.expired?
+    @project = Project2.find params[:id]
+    if @project.expired?
       redirect_to past_project_path(@project)
     end
-    @project2s = Project2.find_all_ongoing.reverse
-    @project2s.delete(@project)
+    @projects = Project2.find_all_ongoing.reverse
+    @projects.delete(@project)
   end
 
   def new
-    @project2 = Project2.new
-    @project2.build_nested_models
+    @project = Project2.new
+    @project.build_nested_models
   end
 
   def create
-    @project2 = Project2.new(params[:project2])
-    @project2.common_data = CommonData.new(params[:common_data])
-    @project2.save
-    redirect_to(project2_path(@project2))
+    @project = Project2.new(params[:project2])
+    @project.common_data = CommonData.new(params[:common_data])
+    @project.save
+    redirect_to(project2_path(@project))
   end
 
   def edit
-    @project2 = Project2.find(params[:id])
-    @project2.build_nested_models
+    @project = Project2.find(params[:id])
+    @project.build_nested_models
   end
 
   def update
-    @project2 = Project2.find(params[:id])
+    @project = Project2.find(params[:id])
     respond_to do |format|
-      if @project2.update_attributes(params[:project2])
-        format.html  { redirect_to(edit_project2_path(@project2),:notice => 'Project was successfully updated.') }
+      if @project.update_attributes(params[:project2])
+        format.html  { redirect_to(edit_project2_path(@project),:notice => 'Project was successfully updated.') }
       end
     end
   end

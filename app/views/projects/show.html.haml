@@ -3,23 +3,9 @@
   - if flash[:notice]
     .notice= flash[:notice]
   .project_left
-    - if @project.project_kind==2
-      - if @project.id==25
-        .project_info
-          = render :partial => "special_ford", :locals => {:main_id => @project.id,:project=>@project}
-      - else
-        .project_info
-          = render :partial => "special", :locals => {:main_id => @project.id,:project=>@project} 
-    - else
-      .project_info
-        = render :partial => @project, :locals => {:main_id => @project.id}
-      = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
+    .project_info
+      = render :partial => @project, :locals => {:main_id => @project.id}
+    = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .project_right
-    - if @project.project_kind==2
-      - if @project.id==25
-        = render :partial => 'projects/new_tab_ford', :locals => {:project => @project, :on_question_page => false}
-      - else 
-        = render :partial => 'projects/new_tab', :locals => {:project => @project, :on_question_page => false}
-    - else 
-      = render :partial => 'tab', :locals => {:project => @project, :on_question_page => false}
+    = render :partial => 'tab', :locals => {:project => @project, :on_question_page => false}
   .clear

@@ -5,7 +5,6 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   	  t.integer :correct_count , :default => 0
   	  t.integer :incorrect_count , :default => 0
   	  t.integer :participation_count , :default => 0
-  	  t.integer :limit , :default => 0
   	  t.integer :coordinator_id
   	  t.integer :sponsor_id
   	  t.datetime :start_time
@@ -33,11 +32,14 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   	end
   	create_table :project2s do |t|
   		t.string :coordinator_label
-  		t.string :equation_string
+  		t.string :equation
   		t.string :tagline2
   		t.string :label_content
       t.timestamps
   	end
+    add_column :participations, :project2_id,:integer
+    add_column :weibos, :project2_id,:integer
+    add_column :updates, :project2_id,:integer
   	CommonData.reset_column_information
   	Project2.reset_column_information
   	Project.all.each do |p|
@@ -46,7 +48,6 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
   		data.correct_count = p.correct_count
   		data.incorrect_count = p.incorrect_count
   		data.participation_count = p.participation_count
-  		data.limit = p.limit
   		data.coordinator_id = p.coordinator_id
   		data.sponsor_id = p.sponsor_id
   		data.start_time = p.start_time
@@ -75,7 +76,6 @@ class CreateNewTableForProject2 < ActiveRecord::Migration
       data.upload_image_share_question2 = p.upload_image_share_question2 if p.upload_image_share_question2.exists?
   		data.sharable = p
   		data.save
-  		p.save
   	end
   end
 end

@@ -1,4 +1,4 @@
-<%if params["project_id"].to_i==12%>
+<%if params["project_id"].to_i==12 && params["project_type"] == "Project"%>
 $(".content").html('<%= escape_javascript(render :partial => 'question', :locals => {:question => @question, :choices => @choices}) %>');
 <%elsif params["project_id"].to_i!=12 and session[:show_share] and session[:show_share][current_project.id] %>
   <%- session[:show_share].delete current_project.id %>

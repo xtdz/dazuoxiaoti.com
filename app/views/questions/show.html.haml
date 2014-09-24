@@ -14,7 +14,7 @@
           = render :partial => 'questions/question', :locals => {:question => @question, :choices => @choices}
     = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .question_right
-    = render :partial => @project.tab_path(:on_question_page), :locals => {:project2 => @project}
+    = render :partial => @project.tab_path(:on_question_page), :locals => {:project => @project}
     /- if @project.common_data.project_kind==2
     /  - if @project.id==25
     /    = render :partial => 'projects/new_question_tab_ford', :locals => {:project => @project}

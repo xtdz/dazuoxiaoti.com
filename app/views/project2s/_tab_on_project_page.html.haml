@@ -1,20 +1,20 @@
 .project_tab.tab.displayed
   .project_tag
-    = project2.equation_string
+    = project.equation
   .project_explanation
-    = project2.common_data.tagline
+    = project.common_data.tagline
   .project_numbers
     .project_coordinator
       .coordinator_label
-        =project2.coordinator_label
+        =project.coordinator_label
       .coordinator_logo
         %a.image{:href => "http://www.fordgreen.com.cn/", :style=>"margin-top:10px",:target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Sponsor', 'project_tab']);"}
-          = image_tag(organization_image_path(project2.common_data.sponsor), :alt => project2.common_data.sponsor.name)
+          = image_tag(organization_image_path(project.common_data.sponsor), :alt => project.common_data.sponsor.name)
     .project_stats
       .stat_row
-        %span.numbers.participation_count #{project2.common_data.participation_count}人
+        %span.numbers.participation_count #{project.common_data.participation_count}人
         已参与
       .stat_row
         累计答对
-        %span.numbers.correct_count #{project2.common_data.correct_count}题
+        %span.numbers.correct_count #{project.common_data.correct_count}题
   .clear

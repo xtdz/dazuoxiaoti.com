@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   layout :project_layout
-  #before_filter :require_admin, :only => [:edit, :update, :create, :new]
+  before_filter :require_admin, :only => [:edit, :update, :create, :new]
   before_filter :reset_current_url_to_root, :only => [:index, :show]
   def index
     @projects = all_projects_on_going.reverse

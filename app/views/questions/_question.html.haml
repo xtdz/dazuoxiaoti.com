@@ -15,6 +15,7 @@
 #solution
   = form_for([question, question.answers.build], :remote => true, :html => {:class => "question_form"}) do |f|
     %input{:type => :hidden, :name => :project_id, :value => @project.id}
+    %input{:type => :hidden, :name => :project_type , :value => @project.class.to_s}
     %input#answer{:type => :hidden, :name => "answer[choice]", :value => ""}
     %input#index{:type => :hidden, :name => "index", :value => 0}
   - @choices.each_with_index do |choice, index|
@@ -22,38 +23,4 @@
   - if user_signed_in? && @project.id!=12
     %a.change_question_set{:href => classifies_path} 题目太难？换个你感兴趣的题集
 
-.progress
-  - if false
-  -else
-    您为本活动答对了
-    %span.orange= user_correct_count
-    题。
-    - if @project.common_data.rate < 1000 && !([12,14,25].include? @project.id.to_i)
-      还差
-      %span.orange= @project.common_data.rate - user_correct_count % @project.common_data.rate
-      题就可以独立助捐
-      %span.orange= (user_correct_count/@project.common_data.rate + 1) * @project.common_data.unit_rate
-      #{@project.common_data.benefit.unit}#{@project.common_data.benefit.short_name}。
-      .progress_bar_outter
-        .progress_bar_inner{:style => "width:#{user_correct_count % @project.common_data.rate * 450 / @project.common_data.rate}px"}
-      .clear
-    - elsif !([12,14,25].include? @project.id.to_i)
-
-      还差
-      %span.orange= @project.common_data.rate - user_correct_count % @project.common_data.rate
-      题才能独立助捐
-      %span.orange= (user_correct_count/@project.common_data.rate + 1) * @project.common_data.unit_rate
-      #{@project.common_data.benefit.unit}#{@project.common_data.benefit.short_name}.
-    - else
-      只凭您个人的力量很难,还是邀请您的好友一起来答题做公益吧!
-      分享到：
-      - if @project.id==12
-        - @share_message = "【趣味微公益】我的爱心[心]爆棚了！刚刚在“小题大作微公益”网站参与趣味公益问答，支持@大爱清尘 ！目前累计答对#{user_correct_count}题。一[din推撞]个人[围观]的力量有限，快来帮帮我吧!"
-      - elsif @project.id==14
-        - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题，每答对20题即获得5元@宜农贷 爱心助农卡，众人拾柴火焰高，一起帮贫困农户改变命运！"
-      - elsif @project.id.to_i == 16
-        - @share_message = "【趣味微公益】我今天爱心爆棚了！刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题。很难凭一个人的力量捐助1个@满天星公益 的儿童阅读推广计划，快来帮帮我吧！@与人公益基金会"
-      - else
-        - @share_message = "#福特 更美好的世界# 【趣味微公益】刚刚在“小题大作”网站参与了趣味公益问答，目前累计答对#{user_correct_count}题。答题可以做什么？化身节水小达人、徜徉动物世界、勇夺雾霾天生存手册。分享题目或答题成就，还有机会获得@福特中国 赞助的棒呆了的创意礼品噢！"
-      - @paths = "#{share_question_path @question.token, @project, current_user, 'question', @question_set}"
-      = render :partial => 'social_buttom_links', :locals => {:message => @share_message , :path => @paths}
+= render :partial => @project.progress_bar_path,:locals =>{:project => @project}

@@ -1,22 +1,22 @@
 # coding: utf-8
 class Project < ActiveRecord::Base
   has_one :common_data, :as => :sharable
+  belongs_to :benefit
   has_many :participations
   has_many :weibos
   has_many :updates
   has_many :users, :through => :participations
   default_scope :order => 'id ASC'
-  validates_presence_of :common_data
-
+  validates_presence_of :common_data,:benefit,:rate,:unit_rate,:limit
   def build_nested_models
     build_common_data unless common_data
-    common_data.build_benefit unless common_data.benefit
+    build_benefit unless benefit
     common_data.build_sponsor unless common_data.sponsor
     common_data.build_coordinator unless common_data.coordinator
   end
 
   def item_count
-    (common_data.correct_count / common_data.rate) * common_data.unit_rate
+    (common_data.correct_count / rate) * unit_rate
   end
 
   def assister(oid)
@@ -32,7 +32,7 @@ class Project < ActiveRecord::Base
 
   def expired?
     if common_data.end_time
-      common_data.end_time < Time.now || item_count >= common_data.limit
+      common_data.end_time < Time.now || item_count >= limit
     else
       false
     end
@@ -40,11 +40,11 @@ class Project < ActiveRecord::Base
 
 
   def self.find_all_ongoing
-    Project.joins(:common_data).where(["common_data.end_time > ? and common_data.`limit` > ((common_data.correct_count/common_data.rate)*common_data.unit_rate) and not common_data.hidden",Time.now])
+    Project.joins(:common_data).where(["common_data.end_time > ? and `limit` > ((common_data.correct_count/rate)*unit_rate) and not common_data.hidden",Time.now])
   end
 
   def self.find_all_expired
-    Project.joins(:common_data).where(["(common_data.`limit` <= ((common_data.correct_count/common_data.rate)*common_data.unit_rate) or common_data.end_time < ? and not common_data.hidden)", Time.now])
+    Project.joins(:common_data).where(["(`limit` <= ((common_data.correct_count/rate)*unit_rate) or common_data.end_time < ? and not common_data.hidden)", Time.now])
   end
 
   def image_path type
@@ -68,6 +68,14 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def isProject2
+    false
+  end
+  
+  def progress_bar_path
+    'questions/project_progress_bar'
+  end
+  
   def tab_path page
     'projects/tab'
   end
@@ -81,11 +89,11 @@ class Project < ActiveRecord::Base
   end
 
   def progress_path user_correct_count
-    common_data.benefit.progress_path user_correct_count, common_data.rate
+    benefit.progress_path user_correct_count, rate
   end
 
   def equation
-    @equestion ||= "#{common_data.rate}#{I18n.t 'question.equation'}#{common_data.unit_rate}#{common_data.benefit.unit}#{common_data.benefit.name}"
+    @equestion ||= "#{rate}#{I18n.t 'question.equation'}#{unit_rate}#{benefit.unit}#{benefit.name}"
   end
 
 end

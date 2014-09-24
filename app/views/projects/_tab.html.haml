@@ -26,7 +26,7 @@
         累计答对
         %span.numbers.correct_count #{project.common_data.correct_count}题
       .stat_row
-        = project.id==14 ? "发放助农卡" : "捐赠#{project.common_data.benefit.short_name}"
+        = project.id==14 ? "发放助农卡" : "捐赠#{project.benefit.short_name}"
         %span.numbers.item_count 
           =  get_item_count_and_unit(project)
           

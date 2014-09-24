@@ -14,7 +14,6 @@ class AnswersController < ApplicationController
     else
     #  binding.pry
       if session_manager.referer
-
         @participation = Participation.get_participation(session_manager.referer, @project)
         if @answer.correct?
           @participation.increment_contribution
@@ -37,7 +36,7 @@ class AnswersController < ApplicationController
     QuestionTrace.record_answer(@question,@selected_index,@answer.correct?)
     respond_to do |format|
       if @answer.correct?
-        @answer.analy_answer_for_card if params["project_id"].to_i==14
+        @answer.analy_answer_for_card if params["project_id"].to_i==14 && params["project_type"]=="Project"
         format.js {render :file => "answers/correct"}
       else
         format.js {render :file => "answers/wrong"}

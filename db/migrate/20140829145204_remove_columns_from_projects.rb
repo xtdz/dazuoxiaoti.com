@@ -17,7 +17,7 @@ class RemoveColumnsFromProjects < ActiveRecord::Migration
   	remove_column :projects, :share_question_text
   	remove_column :projects, :share_finish_text
   	remove_column :projects, :banner_url
-    remove_column :proejcts, :project_kind
+    remove_column :projects, :project_kind
     remove_attachment :projects, :upload_image_main
     remove_attachment :projects, :upload_image_about
     remove_attachment :projects, :upload_image_small

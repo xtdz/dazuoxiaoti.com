@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     (Project.find_all_expired + Project2.find_all_expired).sort_by{|p| p.created_at}
   end
 
+  def get_project type,id
+    type.constantize.find(id)
+  end
+
   def assign_project
     session_manager.current_project_id = params[:project_id]
     session_manager.current_project_type = params[:project_type]
@@ -98,8 +102,9 @@ class ApplicationController < ActionController::Base
 
   def add_answer_to_session(project, answer)
     session[:answers] ||= {}
-    session[:answers][project.id] ||= []
-    session[:answers][project.id] << answer.serialize
+    session[:answers][project.class.to_s] ||= {}
+    session[:answers][project.class.to_s][project.id] ||= []
+    session[:answers][project.class.to_s][project.id] << answer.serialize
   end
 
   def create_question_from_pending_question(p_q)

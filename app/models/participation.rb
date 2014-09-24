@@ -1,9 +1,10 @@
 class Participation < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
+  belongs_to :project2
   belongs_to :referer, :class_name => 'User'
 
-  %w(user project referer).each do |name|
+  %w(user project referer project2).each do |name|
     scope name, lambda {|id| where("#{name}_id" => id)}
   end
 
@@ -46,25 +47,40 @@ class Participation < ActiveRecord::Base
 
 
   def self.get_participation user, project, referer = nil
-    participation = Participation.user(user.id).project(project.id).first
-    if participation.nil?
-      project.increment :participation_count
-      participation = Participation.create :user => user, :project => project, :referer => referer
+    if project.isProject2?
+      participation = Participation.user(user.id).project2(project.id).first
+      if participation.nil?
+        project.increment :participation_count
+        participation = Participation.create :user => user, :project2 => project, :referer => referer
+      else
+        participation
+      end
     else
-      participation
+      participation = Participation.user(user.id).project(project.id).first
+      if participation.nil?
+        project.increment :participation_count
+        participation = Participation.create :user => user, :project => project, :referer => referer
+      else
+        participation
+      end
     end
   end
 
 
-  def self.get_participation_by_id user_id, project_id, referer_id = nil
-    participation = Participation.user(user_id).project(project_id).first
-    @project = Project.find(project_id)
-    if participation.nil?
-      @proejct.increment :participation_count
-      participation = Participation.create :user_id => user_id, :project_id => project_id, :referer_id => referer_id
-    else
-      participation
-    end
+  def self.get_participation_by_id user_id, project_id, project_type, referer_id = nil
+    
+    @project = project_type.constantize.find(project_id)
+    @user = User.find(user_id)
+    @referer = referer_id.nil? ? nil : User.find(referer_id)
+    Participation.get_participation user,project,referer
+    #participation = Participation.user(user_id).project(project_id).first
+    #@project = Project.find(project_id)
+    #if participation.nil?
+    #  @proejct.increment :participation_count
+    #  participation = Participation.create :user_id => user_id, :project_id => project_id, :referer_id => referer_id
+    #else
+    #  participation
+    #end
   end
 
   def last_update
@@ -82,6 +98,10 @@ class Participation < ActiveRecord::Base
 
   private
   def referer_participation
-    @referer_participation ||= Participation.get_participation_by_id referer_id, project_id
+    if project_id
+      @referer_participation ||= Participation.get_participation_by_id referer_id, project_id, "Project"
+    else
+      @referer_participation ||= Participation.get_participation_by_id referer_id, project_id, "Project2"
+    end
   end
 end

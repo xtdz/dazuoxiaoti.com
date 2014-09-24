@@ -4,8 +4,8 @@
     .notice= flash[:notice]
   .project_left
     .project_info
-      = render :partial => @project2, :locals => {:main_id => @project2.id}
-    = render :partial => 'projects/others', :locals => {:projects => @project2s[0,4]}
+      = render :partial => @project, :locals => {:main_id => @project.id}
+    = render :partial => 'projects/others', :locals => {:projects => @projects[0,4]}
   .project_right
-    = render :partial => 'tab_on_project_page', :locals => {:project2 => @project2, :on_question_page => false}
+    = render :partial => 'tab_on_project_page', :locals => {:project => @project, :on_question_page => false}
   .clear

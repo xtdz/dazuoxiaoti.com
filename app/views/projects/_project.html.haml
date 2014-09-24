@@ -36,8 +36,8 @@
     .clear
 - if project.id==18
   .block_content
-    .left_image= link_to image_tag(organization_image_path(project.common_data.assister(44)), :alt => project.common_data.assister(44).name), project.common_data.assister(44).url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_show']);"
-    - project.common_data.assister(44).description.each_line do |line|
+    .left_image= link_to image_tag(organization_image_path(project.assister(44)), :alt => project.assister(44).name), project.assister(44).url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Coordinator', 'project_show']);"
+    - project.assister(44).description.each_line do |line|
       %p
         :plain
           #{line}
@@ -45,11 +45,11 @@
 .block_label
   = ([14,18].include? project.id) ? "物品详情" : "物资详情"
 .block_content
-  - if project.common_data.benefit.unit_url?
-    .left_image= link_to image_tag(benefit_image_path(project.common_data.benefit), :alt => project.common_data.benefit.name), project.common_data.benefit.unit_url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Unit', 'project_show']);"
+  - if project.benefit.unit_url?
+    .left_image= link_to image_tag(benefit_image_path(project.benefit), :alt => project.benefit.name), project.benefit.unit_url, :target => "_blank", :onclick=>"_gaq.push(['_trackEvent', 'Outbound', 'Unit', 'project_show']);"
   - else
-    .left_image= image_tag benefit_image_path(project.common_data.benefit), :alt => project.common_data.benefit.name
-  - project.common_data.benefit.description.each_line do |line|
+    .left_image= image_tag benefit_image_path(project.benefit), :alt => project.benefit.name
+  - project.benefit.description.each_line do |line|
     %p
       :plain
         #{line}

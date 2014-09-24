@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :answers, :dependent => :destroy
   has_many :participations, :dependent => :destroy
   has_many :projects, :through => :participations
+  has_many :projects, :through => :participations
   has_many :feedbacks
   has_many :pending_questions
   has_many :questions

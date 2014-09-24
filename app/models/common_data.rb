@@ -3,15 +3,10 @@ class CommonData < ActiveRecord::Base
   belongs_to :sharable , :polymorphic => true
   belongs_to :coordinator, :class_name => 'Organization'
   belongs_to :sponsor, :class_name => 'Organization'
-  belongs_to :benefit
-  has_many :participations
-  has_many :weibos
-  has_many :updates
-  has_many :users, :through => :participations
   
-  accepts_nested_attributes_for :benefit, :sponsor, :coordinator
+  accepts_nested_attributes_for :sponsor, :coordinator
   default_scope :order => 'id ASC'
-  validates_presence_of :benefit, :coordinator, :sponsor, :rate, :limit
+  validates_presence_of :coordinator, :sponsor
 
   has_attached_file :upload_image_main
   has_attached_file :upload_image_about

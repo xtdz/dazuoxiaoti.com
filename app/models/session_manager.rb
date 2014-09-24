@@ -9,7 +9,7 @@ class SessionManager
   end
 
   def all_projects_on_going
-    (Project.find_ongoing + Project2.find_ongoing).sort_by{|p| p.created_at}
+    (Project.find_all_ongoing + Project2.find_all_ongoing).sort_by{|p| p.created_at}
   end
 
   #TODO: the current_project logic currently causes no error, but it is messed up....
@@ -30,7 +30,9 @@ class SessionManager
   end
 
   def current_project
-    if session[:current_project_type] == "Project"
+    if !session[:current_project_type]
+      all_projects_on_going.last
+    elsif session[:current_project_type] == "Project"
       if session[:current_project_id]
         Project.find(session[:current_project_id])
       elsif signed_in?
@@ -39,7 +41,7 @@ class SessionManager
         all_projects_on_going.last
       end
     else
-      if session[current_project_id]
+      if session[:current_project_id]
         Project2.find(session[:current_project_id])
       elsif signed_in?
         all_projects_on_going.last

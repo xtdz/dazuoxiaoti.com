@@ -11,7 +11,7 @@ $('.information').hide();
   $("div.user_correct_count").html("<%= current_user.correct_count %>" + "题");
   $('a.fancy').trigger('fancy');
 <% end %>
-<%- if user_correct_count > 0 and user_correct_count % current_project.common_data.rate == 0 %>
+<%- if !current_project.isProject2? and user_correct_count > 0 and user_correct_count % current_project.rate == 0%>
   <%- session[:show_share] ||= {}; session[:show_share][current_project.id] = true %>
 <% end %>
 
