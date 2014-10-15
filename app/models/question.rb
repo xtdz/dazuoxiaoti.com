@@ -86,7 +86,11 @@ class Question < ActiveRecord::Base
   end
 
   def correct_rate
-    "%.2f" % (question_trace.corrent_num * 100.0 / question_trace.total_num)
+    if question_trace.total_num != 0
+      "%.2f" % (question_trace.corrent_num * 100.0 / question_trace.total_num)
+    else 
+      "%.2f" % 0.00
+    end
   end
   
   def shuffle
