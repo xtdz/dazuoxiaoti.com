@@ -86,10 +86,10 @@ class Question < ActiveRecord::Base
   end
 
   def correct_rate
-    if answers.where("state = 0 OR state = 1").count != 0
-        "%.2f" % (answers.where("state = 1").count * 100.0 / answers.where(:state => [0, 1]).count)
-    else
-      0.00
+    if question_trace.total_num != 0
+      "%.2f" % (question_trace.corrent_num * 100.0 / question_trace.total_num)
+    else 
+      "%.2f" % 0.00
     end
   end
   
