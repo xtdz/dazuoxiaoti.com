@@ -14,7 +14,10 @@
     .page_header
       %a.left_link.header_item{'href' => '#project_panel'}
         =image_tag asset_path('static/menu.png')
-      %h3.title.header_item 小题大作
+      .title.header_item
+        %h3.guide_page_open 小题大作
+        .guide_page_icon.guide_page_open
+          =image_tag asset_path('static/mobile_guide/qmark.png');
       %a.right_link.header_item{'href' => '#question_set_panel'}
         =image_tag asset_path('static/gear.png')
     .columns
@@ -30,3 +33,15 @@
       = render :partial => "mobile/question_sets/list"
     -else
       = render :partial => "mobile/home/login"
+  #guide_page.hidden
+    #background
+    #project.item
+      .arrow= image_tag asset_path('static/mobile_guide/arrow.png');
+      .text= image_tag asset_path('static/mobile_guide/project.png');
+    #question_set.item
+      .arrow= image_tag asset_path('static/mobile_guide/arrow.png');
+      .text= image_tag asset_path('static/mobile_guide/question_set.png');
+    #intro.item
+      =image_tag asset_path('static/mobile_guide/intro.png')
+      #quit_btn
+        开始答题

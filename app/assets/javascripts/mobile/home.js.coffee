@@ -75,5 +75,12 @@ jQuery(($) ->
     $("#project_panel" ).on( "panelbeforeclose", ( event, ui ) ->
       $('.left_link.header_item').removeClass('opened')
     )
+
+    $(".guide_page_open").click( () ->
+      $("#guide_page").show();
+    )
+    $("#quit_btn").click( () ->
+      $("#guide_page").hide();
+    )
   )
 )
