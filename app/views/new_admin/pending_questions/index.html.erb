@@ -150,11 +150,17 @@ $(".check_go").click(function() {
     return;
    }
    var str = ""
+   var array_user_id = ""
+   var array_key_words = ""
+   var array_question_set_id = ""
    $("input[name='ids[]']:checked").each(function () {
       str +=  this.value +","
-                    //$('#show').append(this.value + "  ");
+      var tr = $(this).closest("tr")[0]
+      array_key_words += tr.getElementsByTagName("input")[7].value + ","
+      array_user_id += tr.getElementsByTagName("input")[8].value + ","
+      array_question_set_id +=tr.getElementsByTagName("select")[0].selectedOptions[0].value + ","
     });
-    $.post("/new_admin/pending_questions/batch_update",{ids: str},function(data){alert("批量操作成功!");location.reload();})
+    $.post("/new_admin/pending_questions/batch_update",{ids: str,keywords: array_key_words,user_ids: array_user_id,question_set_ids: array_question_set_id},function(data){alert("批量操作成功!");location.reload();})
   // $(".batch_update").submit();
 })
   </script>

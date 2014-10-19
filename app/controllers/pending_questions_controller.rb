@@ -75,7 +75,6 @@ class PendingQuestionsController < ApplicationController
     @pending_question.state = '1'
     create_question_from_pending_question(@pending_question)
     @question_set = QuestionSet.find(params[:question_set_id])
-    @question.user_id = @pending_question.user_id
     keyword = params[:keyword]
     if keyword and !keyword.strip.empty?
       keyword_id = get_keyword_id keyword
