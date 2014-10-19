@@ -2,8 +2,9 @@
 class NewAdmin::QuestionSetsController < NewAdmin::ApplicationController
   def index
   	con = []
-  	con.push("category_id=#{params['category_id']}") if params["category_id"]
-  	@sets = QuestionSet.includes(:category,:question_traces).where(con.join(" and  ")).page(params[:page]).per(15)
+    con.push("category_id=#{params['category_id']}") if params["category_id"]
+    con.push("name like '%#{params["name"]}%'") if params["name"]
+    @sets = QuestionSet.includes(:category,:question_traces).where(con.join(" and ")).page(params[:page]).per(15)
   
   end
 

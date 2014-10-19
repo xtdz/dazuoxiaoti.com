@@ -10,6 +10,23 @@
     <%= flash[:notice] %>
 </div>
 
+<table class="search">
+    <tbody>
+        <tr>
+            <%= form_tag '', {:method=>:get} do %>
+            <td width="15%">
+              题集搜索：
+              <%= text_field_tag "name", params[:name], :size=>10 %>
+            </td>
+            <td width="50%">
+                <label>
+                    <input type="submit" name="button" id="button" value="搜索" />
+                </label>
+            </td>
+            <% end -%>
+        </tr>
+    </tbody>
+</table>
 
 <table class="grid">
     <thead>
