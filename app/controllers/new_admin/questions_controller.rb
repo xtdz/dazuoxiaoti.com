@@ -107,7 +107,7 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to new_admin_questions_path }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end
