@@ -40,10 +40,12 @@ jQuery(($) ->
 
     $.show_project_info = () ->
       $('#project_list').hide(300)
+      $('#project_panel>.ui-panel-inner').animate({scrollTop: 0}, 300);
       $('#project_detail').show(300)
 
     $.hide_project_info = () ->
       $('#project_detail').hide(300)
+      $('#project_panel>.ui-panel-inner').animate({scrollTop: 0}, 300);
       $('#project_list').show(300)
 
     $(".question-set-item").click( ()->
