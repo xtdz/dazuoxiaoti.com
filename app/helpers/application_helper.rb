@@ -10,6 +10,19 @@ module ApplicationHelper
     end
   end
 
+  def type_string user
+    case user.type
+    when :'user.type.sina'
+      "新浪微博用户"
+    when :'user.type.renren'
+      "人人用户"
+    when :'user.type.qq'
+      "腾讯微博用户"
+    else :'user.type.dazuoxiaoti'
+      "小题大作用户"
+    end
+  end
+  
   def user_quota
     if user_signed_in?
       current_user.answer_quota
