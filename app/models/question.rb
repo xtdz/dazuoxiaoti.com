@@ -86,6 +86,12 @@ class Question < ActiveRecord::Base
   end
 
   def correct_rate
+
+    if question_trace.nil?
+      question_trace = QuestionTrace.find_or_initialize_by_question_id id
+      question_trace.save
+    end
+    
     if question_trace.total_num != 0
       "%.2f" % (question_trace.corrent_num * 100.0 / question_trace.total_num)
     else 
