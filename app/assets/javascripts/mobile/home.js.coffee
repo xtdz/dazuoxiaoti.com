@@ -40,14 +40,15 @@ jQuery(($) ->
 
     $.show_project_info = () ->
       $('#project_list').hide(300)
+      $('#project_panel>.ui-panel-inner').animate({scrollTop: 0}, 300);
       $('#project_detail').show(300)
 
     $.hide_project_info = () ->
       $('#project_detail').hide(300)
+      $('#project_panel>.ui-panel-inner').animate({scrollTop: 0}, 300);
       $('#project_list').show(300)
 
-    $(".question-set-item").unbind('tap')
-    $(".question-set-item").tap( ()->
+    $(".question-set-item").click( ()->
       selector = $(this).closest('.category').find('.select_count')
       check = $(this).find('.button-check')
       cnt = parseInt($(selector).html())
@@ -60,6 +61,26 @@ jQuery(($) ->
         $(check).show()
         $("#no_question_notice").hide()
         $(selector).html(cnt + 1)
+    )
+
+    $("#question_set_panel" ).on( "panelbeforeopen", ( event, ui ) ->
+      $('.right_link.header_item').addClass('opened')
+    )
+    $("#question_set_panel" ).on( "panelbeforeclose", ( event, ui ) ->
+      $('.right_link.header_item').removeClass('opened')
+    )
+    $("#project_panel" ).on( "panelbeforeopen", ( event, ui ) ->
+      $('.left_link.header_item').addClass('opened')
+    )
+    $("#project_panel" ).on( "panelbeforeclose", ( event, ui ) ->
+      $('.left_link.header_item').removeClass('opened')
+    )
+
+    $(".guide_page_open").click( () ->
+      $("#guide_page").show();
+    )
+    $("#quit_btn").click( () ->
+      $("#guide_page").hide();
     )
   )
 )

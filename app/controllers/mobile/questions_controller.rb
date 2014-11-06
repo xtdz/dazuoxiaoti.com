@@ -1,8 +1,8 @@
 class Mobile::QuestionsController < ApplicationController
-  before_filter :assign_project, :expire_project, :assign_other_projects, :redirect_mobile_admin
+  before_filter :assign_project, :expire_project, :assign_other_projects
   
   def show
-    session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s
+    session_manager.current_url = '/mobile?project_id='+ @project.id.to_s
     @question = Question.find_by_token params[:id]
 
     if !@question.nil?
@@ -34,7 +34,7 @@ class Mobile::QuestionsController < ApplicationController
     end
     count_down = session[:count_down]
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-    session_manager.current_url = 'mobile/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+    session_manager.current_url = '/mobile?project_id='+ @project.id.to_s + question_set_params_string
     
     current_question_set = params[:question_set]
     if current_question_set.nil?
@@ -61,7 +61,7 @@ class Mobile::QuestionsController < ApplicationController
           question_count = Question.by_sponsor(current_project.sponsor_id).count;
           @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(nil, session_manager.answered_ids)
         else
-          @question = Question.random_question(nil, session_manager.answered_ids)
+          @question = Question.random_question(current_question_set, session_manager.answered_ids)
         end
       end
       if !@question.nil?

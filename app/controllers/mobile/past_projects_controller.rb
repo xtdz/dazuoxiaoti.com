@@ -1,5 +1,4 @@
 class Mobile::PastProjectsController < ApplicationController
-  before_filter :redirect_mobile_admin
 
   def show
     @project = Project.find(params[:id])

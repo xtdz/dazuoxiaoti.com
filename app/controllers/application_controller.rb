@@ -29,7 +29,12 @@ class ApplicationController < ActionController::Base
 
   def expire_project
     if @project.expired?
-      @project = Project.find_ongoing.last
+      if @project.id == 26
+        @project = Project.find(28)
+        @project = Project.find_ongoing.last if @project.expired?
+      else
+        @project = Project.find_ongoing.last
+      end
     end
     if @project.nil?
       redirect_to root_path, :notice => "all projects finished."
@@ -56,7 +61,7 @@ class ApplicationController < ActionController::Base
   end
   
   def check_mobile
-    if from_mobile? && mobile_admin?
+    if from_mobile?
       redirect_to mobile_root_path({:question_set => params[:question_set], :project_id => params[:project_id]})
     end
   end

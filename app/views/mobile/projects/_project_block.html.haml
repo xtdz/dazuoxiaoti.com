@@ -2,12 +2,10 @@
   .project_status{:style => (project.id == current_project.id) ? '' : 'display:none'}
     =image_tag asset_path('static/selected.png')
   .project_image= link_to image_tag(project_image_path(project, :main)), random_mobile_questions_path(:question_set => params[:question_set], :project_id => project.id), :class => 'random_question_link'
-  .project_screen
-  .project_overview
-    .project_title
-      = project.name
-    .project_ref
-      = link_to image_tag(asset_path('static/right-arrow-yellow.png')), mobile_project_path(project), :class => 'project_info_link'
-    .project_equation
-      = project.equation
+  .project_title
+    = project.name
+  .project_equation
+    = project.equation
+  .project_ref
+    = link_to image_tag(asset_path('static/right-arrow.png')), mobile_project_path(project), :class => 'project_info_link'
   .clear

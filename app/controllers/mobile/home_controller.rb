@@ -1,5 +1,5 @@
 class Mobile::HomeController < ApplicationController
-  before_filter :assign_project, :expire_project, :assign_other_projects, :redirect_mobile_admin, :only => [:index]
+  before_filter :assign_project, :expire_project, :assign_other_projects, :only => [:index]
   layout 'mobile'
 
   def index

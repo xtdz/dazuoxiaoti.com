@@ -1,11 +1,5 @@
 .title 感谢您的参与！
 #finished
-  %p
-    - if @project.id.to_i==14
-      恭喜！您已经答对<span>#{user_correct_count}</span>题，获得“宜农贷”5元助农卡1张，请在站内信中查收卡号与密码。
-    - else
-      恭喜！你已经答对<span>#{user_correct_count}</span>题，为“#{current_project.name}”项目捐助了<span>#{user_correct_count/current_project.rate}</span>#{current_project.benefit.unit}#{current_project.benefit.name}。
-  现在可以点击
   - @message = share_correct_count_for_donation_projects user_correct_count, @project
   - @path = "#{project_path(@project, :in => 'snf', :referer_id => current_user.id)}"
   = render :partial => 'social_links', :locals => {:message => @message, :path => @path}

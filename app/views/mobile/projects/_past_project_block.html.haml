@@ -1,10 +1,8 @@
 .project_block_wrapped{class: show ? "displayed block_"+project.id.to_s : "hidden block_"+project.id.to_s, id: "project_block_"+project.id.to_s}
   .project_image.past_image= image_tag project_image_path(project, :main)
-  .project_screen
-  .project_overview
-    .project_title
-      = project.name
-    .project_ref
-      = link_to image_tag(asset_path('static/right-arrow-yellow.png')), mobile_past_project_path(project), :class => 'project_info_link'
-    .project_equation
-      活动已结束
+  .project_title
+    = project.name
+  .project_ref
+    = link_to image_tag(asset_path('static/right-arrow.png')), mobile_past_project_path(project), :class => 'project_info_link'
+  .project_equation
+    活动已结束

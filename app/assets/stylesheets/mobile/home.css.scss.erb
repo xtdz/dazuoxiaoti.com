@@ -5,7 +5,10 @@
   background: #fffff0;
 
   .page_header {
-    background: #ff6000;
+    position: relative;
+    background: linear-gradient(#F93, #FF8000);
+    opacity: 0.9;
+    background-color: #F93;
     color: #fff;
     display: table;
     height: 40px;
@@ -13,7 +16,6 @@
     .header_item {
       display: table-cell;
       vertical-align: middle;
-      height: 100%;
       line-height: 100%;
       padding: 10px;
       img {
@@ -21,20 +23,37 @@
       }
     }
     .title {
-      width: 60%;
+      width: 100%;
       font-size: 1.4em;
       vertical-align: middle;
       text-align: center;
+      text-shadow: none;
       height: 100%;
       line-height: 100%;
+
+      h3 {
+        display: inline-block;
+        position: relative;
+        left: 4px;
+      }
+
+      .guide_page_icon {
+        display: inline-block;
+        position: relative;
+        top: -10px;
+        img {
+          height: 12px;
+        }
+      }
     }
     .left_link {
-      width: 20%;
-      text-align: left;
+      float: left;
     }
     .right_link {
-      width: 20%;
-      text-align: right;
+      float: right;
+    }
+    .opened {
+      background: none repeat scroll 0% 0% #FF6000;
     }
   }
 
@@ -44,6 +63,7 @@
 }
 
 #question_set_panel {
+  text-shadow: none;
   background: #fffff0;
 
   #no_question_notice {
@@ -121,8 +141,8 @@
 }
 
 .user_stats {
+  height: 100px;
   color: $dark_grey;
-  font-size: 12pt;
   .photo{
     img {
       height: 80px;
@@ -135,20 +155,30 @@
     margin-right: 20px;
   }
   .info {
-    text-align: top;
+    width: 150px;
+    position: absolute;
+    left: 110px;
     .name {
-      line-height: 30px;
+      font-size: 14pt;
+      line-height: 25px;
       color: $brown;
     }
-    .type {
-      font-size: 10pt;
+
+    .stats {
       line-height: 30px;
-    }
-    .settings_link {
       font-size: 10pt;
-      display: inline;
-      line-height: 20px
+      .labels {
+        color: $grey;
+      }
+      .numbers {
+        color: $orange;
+      }
+      .empty {
+        width: 8px;
+        display: inline-block;
+      }
     }
+
     .logout_link {
       .ui-btn {
         padding-top: 5px;
@@ -158,50 +188,11 @@
         font-size: 10pt;
         height: 15px;
       }
-      width: 95px;
+      margin-top: 5px;
       text-align: right;
       display: inline-block;
       zoom: 1;
       *display: inline;
-    }
-  }
-
-  .stats {
-    margin: 30px 0px 20px;
-    zoom: 1;
-    position: relative;
-    background: $white;
-    border: 1px solid $grey_border;
-    @include rounded_corner(2px);
-    @include gradient(#fcfcfc, #f4f4f4);
-    padding: 10px 0px;
-    line-height: 14px;
-    table {
-      td {
-        text-align: center;
-        width: 86px;
-      }
-      .bordered {
-        border-right: 1px solid $grey_border;
-      }
-      .labels {
-        line-height: 25px;
-        color: $brown;
-        font-size: 12pt;
-      }
-      .numbers {
-        line-height: 45px;
-        color: $orange;
-        font-size: 14pt;
-      }
-      .subscripts {
-        font-size: 10pt;
-      }
-    }
-    .answer_limit {
-      display: inline;
-      line-height: 13px;
-      vertical-align: bottom;
     }
   }
 
@@ -218,4 +209,87 @@
     padding-left: 2px;
     color: $brown;
   }
+}
+
+#guide_page {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  z-index: 1000;
+  .item {
+    z-index: 1000;
+    .arrow {
+      width: 50px;
+      img {
+        width: 100%;
+      }
+    }
+    .text {
+      position: absolute;
+      width:  160px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+
+  #background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background-color: black;
+    opacity: 0.8;
+  }
+
+  #project {
+    position: fixed;
+    .text {
+      left: -5px;
+    }
+  }
+
+  #question_set {
+    position: fixed;
+    right: 0;
+    .text {
+      right: -5px;
+    }
+  }
+
+
+  #intro {
+    top: 50%;
+    position: absolute;
+    img {
+      width: 80%;
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+    #quit_btn {
+      display: inline-block;
+      text-align: center;
+      font-size: 20px;
+      height: 20px;
+      vertical-align: middle;
+      color: white;
+
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+
+      background-color: #FF6000;
+      width: 40%;
+      margin: 50px 25% 10px;
+      padding: 10px 5% 10px;
+    }
+  }
+}
+
+.ui-panel .ui-panel-inner {
+    overflow: auto;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    -webkit-overflow-scrolling: touch;
 }

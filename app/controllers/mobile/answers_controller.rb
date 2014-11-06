@@ -1,5 +1,5 @@
 class Mobile::AnswersController < ApplicationController
-  before_filter :assign_project, :expire_project, :redirect_mobile_admin
+  before_filter :assign_project, :expire_project
 
   def create
   	session.delete(:current_question_id)
