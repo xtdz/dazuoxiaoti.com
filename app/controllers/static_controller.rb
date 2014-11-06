@@ -23,7 +23,7 @@ class StaticController < ApplicationController
   def home
     @pics = Asset.order("is_top,id desc")
     @notices = HomeNotice.order("is_top,id desc")
-    @question_sets = QuestionSet.where(:is_hot => true).all
+    @question_sets = QuestionSet.where(:is_hot => true,:hidden => false).all
     @question_sets.concat(
       QuestionSet.order('RAND()').limit([6, @question_sets.size].max - @question_sets.size)
     )
