@@ -35,11 +35,17 @@ class Question < ActiveRecord::Base
 
   after_create :generate_token,:set_user_question_num
 
+  after_commit :generate_question_trace, on: :create
+
   def set_user_question_num
     if self.user
       self.user.set_question_num = self.user.set_question_num+1
       self.user.save
     end 
+  end
+
+  def generate_question_trace
+    QuestionTrace.create(question_id: id)
   end
 
   def find_by_token token
@@ -86,9 +92,6 @@ class Question < ActiveRecord::Base
   end
 
   def correct_rate
-    
-    question_trace = QuestionTrace.find_or_create_by_question_id id if question_trace.nil?
-    
     if question_trace.total_num != 0
       "%.2f" % (question_trace.corrent_num * 100.0 / question_trace.total_num)
     else 
