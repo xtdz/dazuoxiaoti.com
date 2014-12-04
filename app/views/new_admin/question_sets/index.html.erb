@@ -35,8 +35,9 @@
             <th width="10%">名称</th>
             <th width="10%">分类</th>
             <th width="5%">是否热门</th>
+            <th width="5%">是否隐藏</th>
             <th width="15%">数据统计</th>
-            <th width="20%">管理</th>
+            <th width="15%">管理</th>
         </tr>
     </thead>
     <tbody>
@@ -46,7 +47,7 @@
             <td ><%= link_to set.name ,[:new_admin,set]%></td>
             <td ><%= link_to_if set.category, set.try(:category).try(:name),new_admin_question_sets_path("category_id"=>set.category_id)  %></td>
             <td><%= set.is_hot ? "Yes" : "No" %></td>
-           
+            <td><%= set.hidden ? "Yes" : "No" %></td>
             <td>
                <ul>
                       <li style="border-bottom:1px solid #DDDDDD; text-align:left; padding-left:10px;color:red">回答正确数:<%=set. question_traces.map(&:corrent_num).sum%></li>
