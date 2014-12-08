@@ -82,5 +82,13 @@ jQuery(($) ->
     $("#quit_btn").click( () ->
       $("#guide_page").hide();
     )
+
+    setTimeout(() ->
+      $("img.lazy").each((i, d) ->
+        selector = $(d)
+        src = selector.data('original')
+        selector.attr('src', src)
+      )
+    , 5000)
   )
 )

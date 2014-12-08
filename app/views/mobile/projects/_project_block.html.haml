@@ -1,7 +1,8 @@
 .project_block_wrapped{class: show ? "displayed block_"+project.id.to_s : "hidden block_"+project.id.to_s, id: "project_block_"+project.id.to_s}
   .project_status{:style => (project.id == current_project.id) ? '' : 'display:none'}
     =image_tag asset_path('static/selected.png')
-  .project_image= link_to image_tag(project_image_path(project, :main)), random_mobile_questions_path(:question_set => params[:question_set], :project_id => project.id), :class => 'random_question_link'
+  .project_image
+    = link_to image_tag(data: {original: project_image_path(project, :main)}, class: 'lazy'), random_mobile_questions_path(:question_set => params[:question_set], :project_id => project.id), :class => 'random_question_link'
   .project_title
     = project.name
   .project_equation

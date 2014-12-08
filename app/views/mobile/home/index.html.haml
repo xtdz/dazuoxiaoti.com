@@ -24,8 +24,6 @@
       .question_left
         .content
           载入中，请稍后
-        %script
-          = @random_question_js.html_safe
       .clear
   #question_set_panel{'data' => {'role' => 'panel', 'position' => 'right'}}
     -if user_signed_in?

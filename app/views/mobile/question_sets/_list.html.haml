@@ -10,7 +10,7 @@
         - c.question_sets.each do |question_set|
           %li.question-set-item{'data' => {'icon' => 'false', 'qsid' => "#{question_set.id}"}}
             %a{'href' => '#'}
-              %img.ui-li-thumbnail{'src' => "#{question_set_image_path(question_set)}", 'width' => 61, 'height' => 61}
+              %img.ui-li-thumbnail.lazy{data: {original: "#{question_set_image_path(question_set)}"}, width: 61, height: 61 }
               %h3.ui-li-heading= question_set.name[0..13]
               %p.ui-li-desc= question_set.description
               %img.left-icon{'src' => "#{asset_path('static/question_set/unchecked.png')}"}
