@@ -1,7 +1,6 @@
 /*
  *= require_self
  *= require_tree ./mobile
- *= require jquery.mobile
  *= require fancybox
  *= require reset
  *= require defaults
