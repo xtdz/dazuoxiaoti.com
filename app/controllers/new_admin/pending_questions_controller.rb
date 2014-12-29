@@ -103,7 +103,6 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
     @pending_question.user_id=params["user_id"]
     create_question_from_pending_question(@pending_question)
     @question_set = QuestionSet.find(params["pending_question"][:question_set_id])
-    @question.user_id = @pending_question.user_id
     keyword = params[:keyword]
     if keyword and !keyword.strip.empty?
       keyword_id = get_keyword_id keyword
@@ -119,7 +118,31 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
 
   def batch_update
     ids = params["ids"].split(",")
+    keywords = params["keywords"].split(",")
+    user_ids = params["user_ids"].split(",")
+    question_set_ids = params["question_set_ids"].split(",")
+    length = ids.length
     PendingQuestion.update(ids,[{state: "1"}]*ids.size)
+    length.times do |index|
+      id = ids[index]
+      keyword = keywords[index]
+      user_id = user_ids[index]
+      question_set_id = question_set_ids[index]
+      pending_question = PendingQuestion.find(id)
+      pending_question.state = '1'
+      pending_question.keyword = keyword
+      pending_question.user_id = user_id
+      pending_question.intended_for_set = question_set_id
+      create_question_from_pending_question pending_question
+      question_set = QuestionSet.find(pending_question.intended_for_set)
+      if pending_question.keyword and !keyword.strip.empty?
+        keyword_id = get_keyword_id keyword
+        Contain.create(:question_id => @question.id, :keyword_id => keyword_id)
+      end
+      if pending_question.save && @question.save
+        @question.question_sets << question_set
+      end
+    end
     render :text=>"ok"
   end
 

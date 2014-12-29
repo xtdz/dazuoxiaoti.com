@@ -95,7 +95,7 @@ class ApplicationController < ActionController::Base
   end
 
   def create_question_from_pending_question(p_q)
-    @question = Question.new :title => p_q.title, :c1 => p_q.c1, :c2 => p_q.c2, :c3 => p_q.c3, :c4 => p_q.c4, :correct_index => p_q.correct_index, :explanation => p_q.explanation, :sponsor_id => 0
+    @question = Question.new :title => p_q.title, :c1 => p_q.c1, :c2 => p_q.c2, :c3 => p_q.c3, :c4 => p_q.c4, :correct_index => p_q.correct_index, :explanation => p_q.explanation, :sponsor_id => 0, :user_id => p_q.user_id
     @question.shuffle
   end
 
