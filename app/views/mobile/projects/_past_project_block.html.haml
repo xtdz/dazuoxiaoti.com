@@ -1,5 +1,6 @@
 .project_block_wrapped{class: show ? "displayed block_"+project.id.to_s : "hidden block_"+project.id.to_s, id: "project_block_"+project.id.to_s}
-  .project_image.past_image= image_tag project_image_path(project, :main)
+  .project_image.past_image
+    %img.lazy{ data: {original: project_image_path(project, :main)}}
   .project_title
     = project.name
   .project_ref

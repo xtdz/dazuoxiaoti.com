@@ -11,6 +11,8 @@
     /[if IE]
       <script type="text/javascript" src="/PNG/iepngfix_tilebg.js"></script>
     = javascript_include_tag "mobile"
+    %script
+      = @random_question_js
     = csrf_meta_tags
   = yield
 
