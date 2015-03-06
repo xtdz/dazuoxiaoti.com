@@ -122,7 +122,6 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
     user_ids = params["user_ids"].split(",")
     question_set_ids = params["question_set_ids"].split(",")
     length = ids.length
-    PendingQuestion.update(ids,[{state: "1"}]*ids.size)
     length.times do |index|
       id = ids[index]
       keyword = keywords[index]
@@ -132,7 +131,6 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
       pending_question.state = '1'
       pending_question.keyword = keyword
       pending_question.user_id = user_id
-      pending_question.intended_for_set = question_set_id
       create_question_from_pending_question pending_question
       question_set = QuestionSet.find(pending_question.intended_for_set)
       if pending_question.keyword and !keyword.strip.empty?
