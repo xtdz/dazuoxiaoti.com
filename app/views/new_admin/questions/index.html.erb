@@ -46,7 +46,11 @@
       <% @questions.each_with_index do |question,index| %>
         <tr>
             <td width="5%"><%= question.id %> </td>
-            <td width="5%"><%= question.try(:user).try("nickname") || question.user_id%> <%="|"+question.try(:sponsor).try(:name) if question.sponsor_id.to_i>0%></td>
+            <td width="5%">
+              <%= question.try(:user).try("nickname") || question.user_id%>
+              <%="|" + question.try(:sponsor).try(:name) if question.sponsor_id.to_i > 0%>
+              <%="|" + question.try(:project).try(:name) if question.project_id.to_i > 0%>
+            </td>
             <td width="5%"><%= question.question_sets.map{|q|q.name}%> </td>
             <td width="10%"><%= link_to question.title ,[:new_admin,question]%></td>
             <td width="20%" style="padding-left:0px">

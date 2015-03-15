@@ -32,11 +32,13 @@ zh-cn:
     explanation: "解释"
   question:
     sponsor_category: "捐赠方题目"
+    project_category: "项目题目"
     liked: "赞过"
     equation: "道题="
     no_question: "你所选择的题集已经被你答完了。你可以选择或收藏一些没有答完题集继续答题。"
     source: 
       sponsor: "这道题来自我们的合作方："
+      project: "这道题来自我们的项目："
       source_first_half: "这道题目是根据"
       source_second_half: "的内容编辑而成的。"
       xiaotidazuo_des: "这道题目来自小题大作团队的题目编辑们。"

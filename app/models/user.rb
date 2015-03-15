@@ -108,6 +108,11 @@ class User < ActiveRecord::Base
     Question.by_sponsor(sponsor_id).for_user(self.id).random(question_count).first
   end
 
+  def get_next_project_question(project_id)
+    question_count = Question.by_project(project_id).for_user(self.id).count
+    Question.by_project(project_id).for_user(self.id).random(question_count).first
+  end
+
   def feedback_for_question question
     feedback = feedbacks.where(:question_id => question.id).first
     if feedback.nil?

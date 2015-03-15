@@ -67,21 +67,21 @@ class QuestionsController < ApplicationController
   end
   
   def random
-	if !session[:count_down]
-	  session[:count_down] = 10
-	end
-	count_down = session[:count_down]
-	question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
-	session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
-	
-	current_question_set = session[:current_question_set]
-	if params.has_key?(:question_set)
-	  session[:current_question_set] = params[:question_set]
-	  current_question_set = params[:question_set]
-	elsif params.has_key?(:question_set_random)
-	  session.delete(:current_question_set)
-	  current_question_set = nil
-	end
+    if !session[:count_down]
+      session[:count_down] = 10
+    end
+    count_down = session[:count_down]
+    question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
+    session_manager.current_url = '/questions/random?project_id='+ @project.id.to_s + question_set_params_string
+
+    current_question_set = session[:current_question_set]
+    if params.has_key?(:question_set)
+      session[:current_question_set] = params[:question_set]
+      current_question_set = params[:question_set]
+    elsif params.has_key?(:question_set_random)
+      session.delete(:current_question_set)
+      current_question_set = nil
+    end
 	
     @question = nil
     if session[:current_question_id] && params[:question_set].nil? && params[:question_set_random].nil?
@@ -89,8 +89,8 @@ class QuestionsController < ApplicationController
     end
     if @question.nil?
       if user_signed_in?
-        if count_down == 0 
-          @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(current_question_set)
+        if count_down == 0
+          @question = current_user.get_next_project_question(current_project.id) || current_user.get_next_question(current_question_set)
         else
           @question = current_user.get_next_question(current_question_set)
         end
@@ -98,8 +98,8 @@ class QuestionsController < ApplicationController
         # default_question_set = QuestionSet::DEFAULT_SET.to_s
         # 30% chance of getting sponsor_question if not signed in when count down reaches 0
         if count_down == 0 and  rand() < 0.3
-          question_count = Question.by_sponsor(current_project.sponsor_id).count;
-          @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(current_question_set, session_manager.answered_ids)
+          question_count = Question.by_project(current_project.id).count
+          @question = Question.by_project(current_project.id).random(question_count).first || Question.random_question(current_question_set, session_manager.answered_ids)
         else
           @question = Question.random_question(current_question_set, session_manager.answered_ids)
         end
@@ -141,6 +141,8 @@ class QuestionsController < ApplicationController
     if @question.is_sponsored?
       session_manager.set_show_sponsored
       @name = t('question.sponsor_category')
+    elsif @question.is_project_question?
+      @name = t('question.project_category')
     else
       @suggested_question_sets = QuestionSet.order('id DESC').limit(5)
     end

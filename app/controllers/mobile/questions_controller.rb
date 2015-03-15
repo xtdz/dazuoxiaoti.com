@@ -49,8 +49,8 @@ class Mobile::QuestionsController < ApplicationController
     end
     if @question.nil?
       if user_signed_in?
-        if count_down == 0 
-          @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(nil)
+        if count_down == 0
+          @question = current_user.get_next_project_question(current_project.id) || current_user.get_next_question(current_question_set)
         else
           @question = current_user.get_next_question(current_question_set)
         end
@@ -58,8 +58,8 @@ class Mobile::QuestionsController < ApplicationController
         # default_question_set = QuestionSet::DEFAULT_SET.to_s
         # 30% chance of getting sponsor_question if not signed in when count down reaches 0
         if count_down == 0 and  rand() < 0.3
-          question_count = Question.by_sponsor(current_project.sponsor_id).count;
-          @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(nil, session_manager.answered_ids)
+          question_count = Question.by_project(current_project.id).count
+          @question = Question.by_project(current_project.id).random(question_count).first || Question.random_question(current_question_set, session_manager.answered_ids)
         else
           @question = Question.random_question(current_question_set, session_manager.answered_ids)
         end
@@ -88,6 +88,8 @@ class Mobile::QuestionsController < ApplicationController
     if @question.is_sponsored?
       session_manager.set_show_sponsored
       @name = t('question.sponsor_category')
+    elsif @question.is_project_question?
+      @name = t('question.project_category')
     else
       @suggested_question_sets = QuestionSet.order('id DESC').limit(5)
     end
