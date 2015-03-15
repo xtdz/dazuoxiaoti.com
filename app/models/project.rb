@@ -61,7 +61,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.find_all_expired
-    Project.where(["(`limit` <= ((correct_count/rate)*unit_rate) or end_time < ? and not hidden)", Time.now])
+    Project.where(["((`limit` <= ((correct_count/rate)*unit_rate) or end_time < ? ) and not hidden)", Time.now])
   end
 
   def self.find_ongoing(kind=1)
