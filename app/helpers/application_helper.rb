@@ -9,7 +9,7 @@ module ApplicationHelper
       session[:correct_count] ? session[:correct_count] : 0
     end
   end
-  
+
   def user_quota
     if user_signed_in?
       current_user.answer_quota
