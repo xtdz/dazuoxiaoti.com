@@ -23,8 +23,19 @@ class NewAdmin::PendingQuestionsController < NewAdmin::ApplicationController
 
   def update
        @pending_question = PendingQuestion.find params[:id]
-   
     if @pending_question.update_attributes(params["pending_question"])
+      if @pending_question.state == 1
+        create_question_from_pending_question @pending_question
+        @question_set = QuestionSet.find(params["question_set_id"])
+        keyword = @pending_question.keyword
+        if keyword and !keyword.strip.empty?
+          keyword_id = get_keyword_id keyword
+          Contain.create(:question_id => @question.id, :keyword_id => keyword_id)
+        end
+        if @pending_question.save && @question.save
+          @question.question_sets << @question_set
+        end
+      end
       respond_to do |format|
         format.html { redirect_to action: :index,notice: "通过成功" }
       end
