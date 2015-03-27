@@ -45,7 +45,11 @@ Dazuoxiaoti::Application.routes.draw do
       resources :home_notices
       resources  :assets
       resources :categories
-      resources :question_sets
+      resources :question_sets do
+        member do
+          get :export
+        end
+      end
       resources :questions do 
          collection do
             get :upload

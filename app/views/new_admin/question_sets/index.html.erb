@@ -61,6 +61,7 @@
               <%= link_to "修改", [:edit,:new_admin, set], :title=>"修改", :class=>"delete" %>
               <%= link_to "删除", [:new_admin,set], :method=>:delete, :title=>"删除", data: {:confirm=>"确定删除此条信息吗？"}, :class=>"delete" %>
               <%= link_to "查看该题集下的答题","/new_admin/questions?question_set_id=#{set.id}", :class=>"delete" %>
+              <%= link_to "导出题集",export_new_admin_question_set_path(:format => 'xls',:id => set.id),:class=>"delete"%>
             </td>
         </tr>
       <% end -%>
