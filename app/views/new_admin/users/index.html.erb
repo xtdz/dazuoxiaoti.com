@@ -29,7 +29,8 @@
             <th width="5%">ID</th>
             <th width="10%">用户名</th>
             <th width="10%">昵称</th>
-            
+            <th width="10%">用户来源</th>
+            <th width="10%">用户主页链接</th>>
         </tr>
     </thead>
     <tbody>
@@ -38,7 +39,8 @@
             <td width="5%"><%= user.id %> </td>
             <td width="10%"><%=user.name%></td>
             <td width="10%"><%= user.nickname %></td>
-           
+            <td width="10%"><%= I18n.t(user.type) %></td>
+            <td width="10%"><%= user.authentication.nil? ? "暂无" : link_to("访问主页",user.authentication.user_link)%></td>
         </tr>
       <% end -%>
       <% if @users.blank? %>
