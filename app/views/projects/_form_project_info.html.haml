@@ -10,12 +10,12 @@
 
 %h4
   捐赠方
-=form.association :sponsor
+=form.association :sponsor, :label_method => lambda {|r| "#{r.id} #{r.name}"}
 
 %h4
   接收方
-=form.association :coordinator
+=form.association :coordinator, :label_method => lambda {|r| "#{r.id} #{r.name}"}
 
 %h4
   物资详情
-=form.association :benefit
+=form.association :benefit, :label_method => lambda {|r| "#{r.id} #{r.name}"}
