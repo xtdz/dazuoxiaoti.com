@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_admin?
+    is_admin
+  end
+
   def rank
     count = User.count
     more_rank = User.count(:conditions=>"rank_score>#{self.rank_score}")
