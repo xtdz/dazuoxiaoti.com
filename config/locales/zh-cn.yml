@@ -55,3 +55,5 @@ zh-cn:
     minutes_ago: "分钟前"
     hours_ago: "小时前"
     days_ago: "天前"
+  new_admin:
+    login_required: "请先登陆"
