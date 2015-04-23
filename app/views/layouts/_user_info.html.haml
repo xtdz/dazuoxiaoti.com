@@ -11,7 +11,7 @@
 - else
   .user_sign_in
     %ul
-      %li.login 登录
+      %li.login 登录方式：
       %li
         %a.link_auth{:href => user_omniauth_authorize_path(:tsina)}
           = image_tag(asset_path('static/auth/sina_auth.png'),:class=>"auth")
