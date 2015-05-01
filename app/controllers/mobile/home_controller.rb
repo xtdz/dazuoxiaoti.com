@@ -12,7 +12,7 @@ class Mobile::HomeController < ApplicationController
 
     # projects part
     @projects = Project.find_all_ongoing.reverse
-    @past_projects = Project.find_all_expired.reverse
+    @past_projects = Project.find_all_expired.reverse_order.limit([2, 6 - @projects.count].max)
 
     # question sets part
     @user_question_sets = current_user ? current_user.recent_sets : []
