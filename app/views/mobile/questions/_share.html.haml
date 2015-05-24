@@ -1,7 +1,10 @@
 .title 感谢您的参与！
 #finished
   - @message = share_correct_count_for_donation_projects user_correct_count, @project
-  - @path = "#{project_path(@project, :in => 'snf', :referer_id => current_user.id)}"
+  - if current_user
+    - @path = "#{project_path(@project, :in => 'snf', :referer_id => current_user.id)}"
+  - else
+    - @path = "#{project_path(@project, :in => 'snf')}"
   = render :partial => 'mobile/questions/social_links', :locals => {:message => @message, :path => @path}
   分享你的爱心纪录，鼓励更多朋友一起答题献爱心！
   %p
