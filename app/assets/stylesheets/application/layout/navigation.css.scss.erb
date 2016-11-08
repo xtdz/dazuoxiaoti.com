@@ -71,17 +71,30 @@
   }
   .user_sign_in{
     float: left;
-    margin-top: 10px;
     font-size: 10pt;
-    .auth{background:#FF9933;margin-left:-8px;margin-bottom:5px;}
-    .login{color:white;padding-right:15px;font-size:weight;}
-    a{
-       &:hover{
-          background-color: transparent;
-        }
+    height: 40px;
+    line-height: 40px;
+    .link_auth {
+      display: inline-block;
+      height: 22px;
+      line-height: 22px;
+      padding: 3px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      &:hover {
+        cursor: pointer;
+        background-color: darken(#ff8000, 1);
+      }
+      .auth {
+        margin: 0;
+        vertical-align: middle;
+      }
     }
-
-
+    .login {
+      color:white;
+      padding-right:15px;
+      font-size:weight;
+    }
   }
   .control_links { 
     .control_link {
