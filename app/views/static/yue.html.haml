@@ -1,0 +1,66 @@
+= stylesheet_link_tag "project_style"
+
+= image_tag(asset_path('static/yuren/header.jpg'), :style => "width: 100%; margin: 50px 0 20px; border-radius: 10px;")
+
+.columns
+  - if flash[:notice]
+    .notice= flash[:notice]
+  .project_left
+    .project_info
+      .project_header
+        .start_button
+          %a.word{:href => "http://www.yu-e.org/home/user/login", :target => "_blank"}
+            我要申请
+        = "YU益资助专场"
+      .block_label
+        专场详情
+      .block_content
+        %b{:style => "font-weight: bold;"} 时间：
+        2016年12月12日至专场资金资助完毕为止。<br/>
+        %b{:style => "font-weight: bold;"} 申请金额：
+        每个项目不高于人民币2万元（最终资助金额以与人批复为准），专场总资金池为人民币10万元<br/>
+        %b{:style => "font-weight: bold;"} 申报方式：<br/>
+        （1）点击“我要申请”，登录/注册成为YU益平台机构用户，等待YU益管理员审批。<br/>
+        （2）审批通过后，选择：项目申请-专场项目-“小题大作资助专场”，根据指引提交项目所需材料。<br/>
+        （3）与人将于收齐申请材料后7个工作日内通知评审结果。<br/>
+        %b{:style => "font-weight: bold;"} 项目上线：
+        入围项目需按资助协议的约定开展活动，并在YU益平台发布，在活动执行期间，组织参加者报名并签到。<br/>
+        %b{:style => "font-weight: bold;"} 资金发放：
+        项目资金由与人公益基金会直接提供资助。<br/>
+        %b{:style => "font-weight: bold;"} 项目反馈：
+        获得项目资助的团队，需按约定在YU益平台提交项目反馈和活动成果。
+        .clear
+
+      .block_label
+        主办方介绍
+      .block_content
+        .left_image{:style => "border: none;"}= image_tag(asset_path('static/yuren/yuren.jpg'))
+        %b{:style => "font-weight: bold;"} YU益
+        %br
+        YU益（<a href="http://www.yu-e.org">www.yu-e.org</a>）是与人公益基金会开发，由PC、手机网页版和微信端组成，旨在为青年人参与公益提供一站式、整体化解决方案的网络平台。与人基金会寄望在不远的将来，每一个青年人，当想要了解及参与公益活动、提升公益能力、购买公益产品或捐助公益项目时，只需登录我们的PC网站、手机网站，或者关注微信公众号，就可以找到感兴趣的内容。
+        .clear
+
+      .block_label
+        = "如何提高申请成功率"
+      .block_content
+        本资助专场倾向支持全国青年践行的<b style="font-weight: bold;">创新公益</b>项目及广东省内的青年公益项目，优先资助由<b style="font-weight: bold;">广东省内</b>的青年团队执行的公益项目。<br/>
+        凡是符合以下三条中任意一条的项目，成功率更高哦：<br/>
+        （1）项目整体运营模式具有一定的创新型或原创性。<br/>
+        （2）项目聚焦此前罕有关注或较少组织关注的细分领域，如<b style="font-weight: bold;">文化保育、LGBT、动物保护</b>。<br/>
+        （3）将新技术嫁接在传统领域，为后者带来新局面和新活力。<br/>
+        .clear
+
+  .project_right
+    .project_tab.tab.displayed
+      .project_tag
+        公益无小题，YU益大作为！
+      .project_explanation{:style => "text-align: center; line-height: 24px; padding: 20px;"}
+        YU益联合小题大作微公益<br/>
+        为平均年龄28周岁以下的公益团队<br/>
+        致力于创新的公益项目<br/>
+        开通资助专场<br/>
+        想必信心满满的你一定不会错过！
+      =image_tag(asset_path('static/yuren/right.jpg'), :style => "width: 100%;")
+      .clear
+
+  .clear

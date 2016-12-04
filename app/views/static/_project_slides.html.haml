@@ -1,9 +1,23 @@
 .project_block
+  // yuren
+  .project_block_wrapped{class: "displayed block_yuren", id: "project_block_yuren", style: "cursor: pointer;", onclick: "location.href='#{yue_path}'"}
+    .project_image= image_tag asset_path('static/yuren/main.jpg')
+    .project_screen
+    .project_overview
+      .project_title
+        YU益资助专场
+      .project_equation
+        公益无小题，YU益大作为
+    .clear
+
   - projects.each do |p|
     = render :partial => 'projects/project_block', :locals => {project: p, show: default_project==p ? true : false}
   - past_projects.each do |pp|
     = render :partial => 'projects/past_project_block', :locals => {project: pp, show: false}
   .project_slide_control
+    .project_slide_icon{class: "selected"}
+      = link_to image_tag(asset_path('static/yuren/main.jpg')), '#', name: '.block_yuren', class: 'project_icon'
+      .icon_frame
     - projects.each do |p|
       .project_slide_icon{class: default_project==p ? "selected" : ""}
         = link_to image_tag(project_image_path(p, :main)), '#', name: '.block_'+p.id.to_s, class: 'project_icon'
