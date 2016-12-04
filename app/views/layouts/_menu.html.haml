@@ -2,25 +2,19 @@
   - case params[:controller]
   - when "projects"
     %li= link_to "活动", projects_path, :class => :selected
-   
     %li= link_to "题集", classifies_path
     %li= link_to "答题", random_questions_path
     -#%li= link_to "博客", "http://xiaotidazuoweigongyi.diandian.com/", html_options = {target:"_blank"}
-    %li(style='margin-right:20px')= link_to "关于我们", about_us_path
   - when "questions"
     %li= link_to "活动", projects_path
-  
     %li= link_to "题集", classifies_path
     %li= link_to "答题", random_questions_path, :class => :selected
     -#%li= link_to "博客", "http://xiaotidazuoweigongyi.diandian.com/", html_options = {target:"_blank"}
-    %li(style='margin-right:20px')= link_to "关于我们", about_us_path
   - when "question_sets", "classifies"
     %li= link_to "活动", projects_path
-
     %li= link_to "题集", classifies_path, :class => :selected
     %li= link_to "答题", random_questions_path
     -#%li= link_to "博客", "http://xiaotidazuoweigongyi.diandian.com/", html_options = {target:"_blank"}
-    %li(style='margin-right:20px')= link_to "关于我们", about_us_path
   - when "static"
     - case params[:action]
     - when "home"
@@ -29,16 +23,16 @@
       %li= link_to "题集", classifies_path
       %li= link_to "答题", random_questions_path
       -#%li= link_to "博客", "http://xiaotidazuoweigongyi.diandian.com/", html_options = {target:"_blank"}
-      %li(style='margin-right:20px')= link_to "关于我们", about_us_path
     -else
       %li= link_to "活动", projects_path
       %li= link_to "题集", classifies_path
       %li= link_to "答题", random_questions_path
       -#%li= link_to "博客", "http://xiaotidazuoweigongyi.diandian.com/", html_options = {target:"_blank"}
-      %li(style='margin-right:20px')= link_to "关于我们", about_us_path, :class => :selected
   - else
     %li= link_to "活动", projects_path
     %li= link_to "题集", classifies_path
     %li= link_to "答题", random_questions_path
     -#%li= link_to "博客", "http://xiaotidazuoweigongyi.diandian.com/", html_options = {target:"_blank"}
-    %li(style='margin-right:20px')= link_to "关于我们", about_us_path
+
+  %li= link_to "关于我们", about_us_path
+  %li(style='margin-right:20px')= link_to "YU益资助专场", yue_path
