@@ -174,6 +174,7 @@ Dazuoxiaoti::Application.routes.draw do
   match 'sizhong', :controller => 'static', :action => 'sizhong'
   match 'fuzhong', :controller => 'static', :action => 'fuzhong'
   match 'diandian', :controller => 'static', :action => 'diandian'
+  match 'yu-e', :controller => 'static', :action => 'yue'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

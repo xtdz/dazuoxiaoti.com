@@ -90,4 +90,7 @@ class StaticController < ApplicationController
       format.json { render :json => @posts.to_json}
     end
   end
+
+  def yue
+  end
 end
