@@ -29,9 +29,9 @@ class StaticController < ApplicationController
     )
     kind= params[:v].to_i==1 ? 2 : 1
     @projects = Project.find_all_ongoing.reverse
-    projects_count = @projects.count>5 ? 5 : @projects.count
-    @past_projects = Project.find_expired(kind).reverse.first(5 - projects_count)
-    @default_project = @projects.first
+    projects_count = @projects.count>4 ? 4 : @projects.count
+    @past_projects = Project.find_expired(kind).reverse.first(4 - projects_count)
+    @default_project = nil # @projects.first
 
     #FOR BEIJING 4ZHONG
     if current_user && current_user.email.match("sizhong.com")
