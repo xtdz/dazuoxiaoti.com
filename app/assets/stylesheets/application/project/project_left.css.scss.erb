@@ -203,6 +203,32 @@ width: 590px;
       }
       img { vertical-align: middle }
       a { margin: 10px 10px 0px 10px; }
+      .btn {
+        cursor: pointer;
+        width: 105px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        font-size: 18px;
+        border-radius: 3px;
+        display: inline-block;
+        transition: all .2s ease-in-out;
+        margin-top: 0;
+        &.blue {
+          color: white;
+          background-color: rgba(#2c85de, 0.9);
+          &:hover {
+            background-color: rgba(#1672c1, 0.9);
+          }
+        }
+        &.white {
+          color: #555;
+          background-color: rgba(#cccccc, 0.95);
+          &:hover {
+            background-color: rgba(#cccccc, 0.8);
+          }
+        }
+      }
     }
   }
 }

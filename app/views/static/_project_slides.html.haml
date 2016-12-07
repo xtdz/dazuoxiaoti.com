@@ -1,13 +1,16 @@
 .project_block
   // yuren
-  .project_block_wrapped{class: "displayed block_yuren", id: "project_block_yuren", style: "cursor: pointer;", onclick: "location.href='#{yue_path}'"}
-    .project_image= image_tag asset_path('static/yuren/main.jpg')
+  .project_block_wrapped{class: "displayed block_yuren", id: "project_block_yuren"}
+    .project_image= image_tag asset_path('static/yuren/slide.jpg')
     .project_screen
     .project_overview
       .project_title
-        YU益资助专场
+        YU益·小题大作资助专场
       .project_equation
         公益无小题，YU益大作为
+      .project_buttons
+        %a.btn.blue{:href => yue_path, :class => "button_left"} 查看详情
+        %a.btn.white{:href => "http://www.yu-e.org", :class => "button_right", :target => "_blank"} 访问YU益
     .clear
 
   - projects.each do |p|
@@ -16,7 +19,7 @@
     = render :partial => 'projects/past_project_block', :locals => {project: pp, show: false}
   .project_slide_control
     .project_slide_icon{class: "selected"}
-      = link_to image_tag(asset_path('static/yuren/main.jpg')), '#', name: '.block_yuren', class: 'project_icon'
+      = link_to image_tag(asset_path('static/yuren/slide.jpg')), '#', name: '.block_yuren', class: 'project_icon'
       .icon_frame
     - projects.each do |p|
       .project_slide_icon{class: default_project==p ? "selected" : ""}
