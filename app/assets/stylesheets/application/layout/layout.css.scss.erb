@@ -104,3 +104,26 @@ body {
   @include colored_link($grey, $grey, $grey);
   a { font-size:10pt;}
 }
+
+body.mobile {
+  .header {
+    background: linear-gradient(#ff9933, #ff8000);
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: white;
+    font-size: 20px;
+  }
+  .project_left {
+    width: auto;
+  }
+  .project_right {
+    display: none;
+  }
+  .footer {
+    margin-top: 0;
+    padding: 20px;
+  }
+}

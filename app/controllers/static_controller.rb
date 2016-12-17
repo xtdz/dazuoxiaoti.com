@@ -2,7 +2,7 @@ require 'nokogiri'
 class StaticController < ApplicationController
   before_filter :reset_current_url_to_root, :only => [:about_us, :faq, :contact, :thanks]
   before_filter :require_admin, :only => [:admin]
-  before_filter :check_mobile
+  before_filter :check_mobile, :except => [:yue]
   layout "index"
 
   def about_us
@@ -92,5 +92,8 @@ class StaticController < ApplicationController
   end
 
   def yue
+    if from_mobile?
+      render :yue, :layout => 'index_mobile'
+    end
   end
 end
