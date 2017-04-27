@@ -7,7 +7,7 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
   	elsif params["title"]
       @questions = Question.includes(:question_trace,:user).where("title like '%#{params[:title]}%'").page(params[:page])
     elsif params["show"]
-       @questions = Question.includes(:question_trace,:user).where("sponsor_id>0").page(params[:page])
+       @questions = Question.includes(:question_trace,:user).where("sponsor_id > 0 OR project_id > 0").page(params[:page])
     else 
   		@questions = Question.includes(:question_trace,:user).page(params[:page])
   	end  
@@ -62,7 +62,7 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
   end
   def upload_sponsor
    
-     begin
+    begin
       sheet =  Spreadsheet.open(params[:file].tempfile.path).worksheet(0)
     rescue
       redirect_to :action => 'upload'
@@ -85,7 +85,8 @@ class NewAdmin::QuestionsController < NewAdmin::ApplicationController
       question.title = row[0]
       question.explanation = row[5]
      # question.keyword = row[6]
-      question.sponsor_id = params["question"]["sponsor_id"]
+      question.sponsor_id = 0
+      question.project_id = params["question"]["project_id"]
       #question.intended_for_set = intended_for_set || 62
       question.user_id = params["user_id"] || current_user.try(:id)
       question.correct_index = 1

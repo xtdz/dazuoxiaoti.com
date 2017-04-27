@@ -1,29 +1,36 @@
 <h1 class="title">
- <span class="title_left"><a href="/new_admin/questions/uploading">上传题集</a></span>
+  <span class="title_left"><a href="/new_admin/questions/uploading">上传题集</a></span>
   <span class="title_right">
-    <%= link_to "查看题集列表",new_admin_questions_path(show: "sponsor") %>
+    <%= link_to "查看题集列表", new_admin_questions_path(show: "sponsor") %>
   
-  </span>   
+  </span>
 </h1>
 <div style="text-align:center;color:green;">
-    <%= flash[:notice] %>
+  <%= flash[:notice] %>
 </div>
 <table class="search">
-    <tbody>
-      <%=form_tag(upload_sponsor_new_admin_questions_path, :method => "post", :multipart => true) do |f|%>
-        <tr> <td >上传：<%=file_field_tag('file')%></td></tr>
-        <tr><td>用户ID：<%=text_field_tag :user_id%></td></tr>
-         <tr><td>选择题集：<%=select("question","intended_for_set", QuestionSet.all.collect{|q|[q.name, q.id]}, {:selected => "62"})%></td></tr>
-        <tr><td>组织：<%=select("question",:sponsor_id, Organization.all.collect{|q|[q.name, q.id]})%>
-        </td></tr>
-         <tr>
-            <td>
-                <label>
-                    <input type="submit" name="button" id="button" value="上传题集" />
-                </label>
-            </td>
-            
-        </tr>
-        <% end -%>
-    </tbody>
+  <tbody>
+  <%= form_tag(upload_sponsor_new_admin_questions_path, :method => "post", :multipart => true) do |f| %>
+      <tr>
+        <td>上传：<%= file_field_tag('file') %></td>
+      </tr>
+      <tr>
+        <td>用户ID：<%= text_field_tag :user_id %></td>
+      </tr>
+      <tr>
+        <td>选择题集：<%= select("question", "intended_for_set", QuestionSet.all.collect { |q| [q.name, q.id] }, {:selected => "62"}) %></td>
+      </tr>
+      <tr>
+        <td>项目：<%= select("question", :project_id, Project.all.collect { |q| [q.name, q.id] }) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label>
+            <input type="submit" name="button" id="button" value="上传题集"/>
+          </label>
+        </td>
+      </tr>
+  <% end -%>
+  </tbody>
 </table>

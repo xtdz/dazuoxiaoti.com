@@ -7,6 +7,7 @@ class Question < ActiveRecord::Base
   belongs_to :user
   has_one :question_trace
   belongs_to :sponsor, :class_name => "Organization", :foreign_key => "sponsor_id"
+  belongs_to :project, :class_name => 'Project', :foreign_key => 'project_id'
   has_many :answers, :dependent => :destroy
   has_many :contains, :dependent => :destroy
   has_many :keywords, :through => :contains
@@ -26,6 +27,8 @@ class Question < ActiveRecord::Base
   }
 
   scope :by_sponsor, lambda { |sponsor_id| where(:sponsor_id => sponsor_id) }
+
+  scope :by_project, lambda { |project_id| where(:project_id => project_id) }
 
   scope :random, lambda { |question_count| (c = question_count) > 0 ? offset(rand(c)).limit(1) : limit(0) }
 
@@ -123,6 +126,10 @@ class Question < ActiveRecord::Base
     return (sponsor_id > 0)
   end
 
+  def is_project_question?
+    project_id > 0
+  end
+
   def get_source
     if is_sponsored?
       name = sponsor.name
@@ -130,6 +137,12 @@ class Question < ActiveRecord::Base
       link = sponsor.url
       image_path = sponsor.image_path
       upload_image_path = sponsor.upload_image? ? sponsor.upload_image.url : nil
+    elsif is_project_question?
+      name = project.name
+      description = I18n.t("question.source.project") + project.name
+      link = Rails.application.routes.url_helpers.project_path(project)
+      image_path = project.image_path('small')
+      upload_image_path = nil
     elsif source
       name = source.name
       description = source.description
