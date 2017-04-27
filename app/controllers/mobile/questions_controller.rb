@@ -29,27 +29,38 @@ class Mobile::QuestionsController < ApplicationController
   end
   
   def random
+    if params[:project_id].to_i!=12 and session[:show_share] and session[:show_share][current_project.id]
+      session[:show_share].delete current_project.id
+      respond_to do |format|
+        format.js {render :share}
+      end
+    elsif session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
+      respond_to do |format|
+        format.js { render :need_login }
+      end
+    else
+      get_and_render_question
+    end
+  end
+
+  def get_and_render_question
     if !session[:count_down]
       session[:count_down] = 10
     end
     count_down = session[:count_down]
     question_set_params_string = params[:question_set].nil? ? '' : '&question_set='+params[:question_set]
     session_manager.current_url = '/mobile?project_id='+ @project.id.to_s + question_set_params_string
-    
-    current_question_set = params[:question_set]
-    if current_question_set.nil?
-      current_question_set = session[:current_question_set]
-    else
-      session[:current_question_set] = current_question_set
-    end
-    
+
+    session[:current_question_set] = params[:question_set] if params[:question_set]
+    current_question_set = session[:current_question_set]
+
     @question = nil
     if session[:current_question_id] && params[:question_set].nil? && params[:question_set_random].nil?
       @question = Question.find(session[:current_question_id])
     end
     if @question.nil?
       if user_signed_in?
-        if count_down == 0 
+        if count_down == 0
           @question = current_user.get_next_sponsor_question(current_project.sponsor_id) || current_user.get_next_question(nil)
         else
           @question = current_user.get_next_question(current_question_set)
@@ -58,7 +69,7 @@ class Mobile::QuestionsController < ApplicationController
         # default_question_set = QuestionSet::DEFAULT_SET.to_s
         # 30% chance of getting sponsor_question if not signed in when count down reaches 0
         if count_down == 0 and  rand() < 0.3
-          question_count = Question.by_sponsor(current_project.sponsor_id).count;
+          question_count = Question.by_sponsor(current_project.sponsor_id).count
           @question = Question.by_sponsor(current_project.sponsor_id).random(question_count).first || Question.random_question(nil, session_manager.answered_ids)
         else
           @question = Question.random_question(current_question_set, session_manager.answered_ids)
@@ -68,12 +79,8 @@ class Mobile::QuestionsController < ApplicationController
         session[:current_question_id] = @question.id
       end
     end
-    
-    if session[:correct_count] && session[:correct_count] > 9 && !user_signed_in?
-      respond_to do |format|
-        format.js { render :need_login }
-      end
-    elsif @question.nil? #no more questions in dazuoxiaoti.com
+
+    if @question.nil? #no more questions in dazuoxiaoti.com
       session_manager.notices << t('question.no_question')
       session[:current_question_set] = nil
       respond_to do |format|
